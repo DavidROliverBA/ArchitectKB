@@ -17,7 +17,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
 - **Powerful Navigation** - 12 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 8 core AI-assisted workflows for automation
+- **Claude Code Integration** - 9 core AI-assisted workflows for automation
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Example Content** - Rich examples showing best practices
@@ -118,7 +118,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 8 AI-assisted workflows
+│   ├── skills/             # 9 AI-assisted workflows
 │   ├── context/            # Domain-specific context (customize)
 │   └── vault-conventions.md
 ├── .obsidian/              # Obsidian configuration
@@ -300,7 +300,7 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes 8 core AI-assisted workflows accessible via Claude Code:
+This vault includes 9 core AI-assisted workflows accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -311,6 +311,7 @@ This vault includes 8 core AI-assisted workflows accessible via Claude Code:
 
 ### Document Processing
 - `/pdf-to-page <path>` - Convert PDF to Page note with docling (Sonnet or Opus analysis)
+- `/pptx-to-page <path>` - Convert PowerPoint to Page note (quick or visual mode)
 
 ### Quick Capture
 - `/task <title>` - Quick-create task with priority
@@ -322,7 +323,7 @@ This vault includes 8 core AI-assisted workflows accessible via Claude Code:
 
 **See** `.claude/skills/` directory for all skill definitions.
 
-**Note:** Additional skills can be added as needed. The framework supports 26+ workflows - these 8 cover core daily operations.
+**Note:** Additional skills can be added as needed. The framework supports 26+ workflows - these 9 cover core daily operations.
 
 ---
 
