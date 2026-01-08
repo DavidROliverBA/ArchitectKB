@@ -1,8 +1,9 @@
 # Obsidian Architect Vault Template: A Knowledge Management System for Solutions Architects
 
 **Published:** 2026-01-07
-**Author:** Your Name
-**Repository:** https://github.com/yourorg/obsidian-architect-vault-template
+**Updated:** 2026-01-08 (v1.1.0)
+**Author:** David Oliver
+**Repository:** https://github.com/DavidROliverBA/obsidian-architect-vault-template
 
 ---
 
@@ -35,6 +36,21 @@ Generic note-taking systems don't address our specific needs:
 This template is built from a real, production vault used daily by a Solutions Architect at a major airline. It's been refined through hundreds of projects, thousands of notes, and real-world architectural work.
 
 **It's not just theory—it's battle-tested.**
+
+---
+
+## See It In Action
+
+**New in v1.1.0:** The repository now includes 6 screenshots showing the vault in real use:
+
+1. **Dashboard Overview** - Your central command center with quick stats and navigation
+2. **Projects MOC** - Dynamic queries organizing projects by status and priority
+3. **ADR Example** - Complete Architecture Decision Record with full context
+4. **Knowledge Graph** - Visual representation of interconnected notes
+5. **Daily Note Workflow** - Yesterday/today/tomorrow structure with task tracking
+6. **Quality Dashboard** - Built-in health monitoring showing vault metrics
+
+These screenshots demonstrate the actual interface and workflows you'll use daily.
 
 ---
 
@@ -99,19 +115,46 @@ Pre-built navigation hubs powered by Dataview queries:
 
 ### 🤖 Claude Code Integration
 
-Pre-built AI workflows for common tasks:
+**11 pre-built AI workflows** for common tasks:
 
+**Daily Workflow:**
 ```
 /daily              # Create today's daily note
 /meeting Review     # Create meeting note with prompts
+```
+
+**Architecture Work:**
+```
 /adr GraphQL        # Guided ADR creation
+```
+
+**Document Processing:**
+```
+/pdf-to-page report.pdf        # Convert PDF with Sonnet/Opus analysis
+/pptx-to-page slides.pptx      # Convert PowerPoint (quick or visual mode)
+```
+
+**Visual Analysis (New in v1.1.0):**
+```
+/screenshot-analyze error.png  # OCR and visual inspection (3 Sonnet agents)
+/diagram-review architecture.png # Analyze diagrams and flowcharts (4 Sonnet agents)
+```
+
+**Quick Capture:**
+```
 /task Fix bug       # Quick task creation
 /person Jane Smith  # Add contact
 /weblink https://...# Save URL with AI summary
+```
+
+**Maintenance:**
+```
 /orphans            # Find unlinked notes
 ```
 
 Plus context files so Claude knows your projects, tech stack, team, and terminology.
+
+**The new visual analysis skills** use multiple Sonnet sub-agents working in parallel to extract components, analyze relationships, identify patterns, and detect technologies from screenshots and diagrams.
 
 ### 📚 Rich Example Content
 
@@ -429,7 +472,7 @@ Or use **individually** while following team standards documented in the vault.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourorg/obsidian-architect-vault-template.git
+   git clone https://github.com/DavidROliverBA/obsidian-architect-vault-template.git
    cd obsidian-architect-vault-template
    ```
 
@@ -438,15 +481,25 @@ Or use **individually** while following team standards documented in the vault.
    - File → Open Vault → Select directory
 
 3. **Install required plugins**
-   - Dataview (required for MOCs)
-   - Templater (required for templates)
+   - **[Dataview](https://github.com/blacksmithgu/obsidian-dataview)** - Required for MOC queries
+   - **[Templater](https://github.com/SilentVoid13/Templater)** - Required for templates
 
-4. **Open Dashboard**
-   - See the vault in action
+4. **Optional: Install document processing tools**
+   ```bash
+   pip3 install docling python-pptx    # For PDF/PPTX conversion
+   brew install poppler                # For PDF utilities (macOS)
+   ```
+
+5. **View the screenshots**
+   - Check `screenshots/` folder to see the vault in action
+   - See dashboard, MOCs, ADRs, graph view, daily notes
+
+6. **Open Dashboard**
+   - See the vault in action live
    - Explore example notes
    - Navigate MOCs
 
-5. **Create your first daily note**
+7. **Create your first daily note**
    - Type: `/daily` (or create manually)
    - Start capturing your day
 
@@ -622,11 +675,17 @@ Works well for 2-10 people. Larger teams may want separate vaults with shared st
 
 ### For This Project
 
+**Recent updates (v1.1.0):**
+- ✅ Screenshots showing vault in action
+- ✅ Visual analysis skills (screenshot-analyze, diagram-review)
+- ✅ Document processing skills (pdf-to-page, pptx-to-page)
+- ✅ Enhanced plugin documentation
+
 **Short term:**
-- Complete all 26 Claude Code skills
 - Create video tutorials
 - Build example use cases
 - Engage with community
+- Additional domain-specific skills
 
 **Long term:**
 - Minimal vs full variants
@@ -654,20 +713,26 @@ See **CONTRIBUTING.md** in the repository.
 ## Download
 
 **GitHub Repository:**
-https://github.com/yourorg/obsidian-architect-vault-template
+https://github.com/DavidROliverBA/obsidian-architect-vault-template
+
+**Latest Release:** [v1.1.0](https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.1.0)
 
 **What you'll get:**
 - Complete vault structure
 - 13 note templates
 - 20 example notes
 - 12 MOCs with Dataview queries
-- Claude Code integration
+- 11 Claude Code skills (including visual analysis)
+- 6 screenshots showing the vault in action
 - Comprehensive documentation
 
 **Requirements:**
-- Obsidian (free or paid)
-- Dataview plugin (free)
-- Templater plugin (free)
+- **Obsidian** (free or paid)
+- **Dataview plugin** (free) - Required
+- **Templater plugin** (free) - Required
+
+**Optional (for document processing):**
+- docling, python-pptx, poppler
 
 **License:** MIT (free to use, modify, share)
 
@@ -700,12 +765,14 @@ Your future self will thank you.
 
 ## About
 
-This template was created by extracting and generalizing patterns from a production vault used daily in a Solutions Architect role at a Fortune 500 company. It represents hundreds of hours of refinement based on real architectural work.
+This template was created by extracting and generalizing patterns from a production vault used daily in a Solutions Architect role at British Airways. It represents hundreds of hours of refinement based on real architectural work across cloud platforms, data systems, aircraft integration, and enterprise architecture.
 
-**Author:** [Your Name]
-**Email:** [Your Email]
-**GitHub:** https://github.com/yourname
-**Website:** https://yourwebsite.com
+**Author:** David Oliver
+**Role:** Solutions Architect, British Airways Operations & Engineering IT
+**GitHub:** https://github.com/DavidROliverBA
+
+**Version:** v1.1.0 (2026-01-08)
+**Original Release:** v1.0.0 (2026-01-07)
 
 **If this helps you, give it a star on GitHub and share it with fellow architects!** ⭐
 
