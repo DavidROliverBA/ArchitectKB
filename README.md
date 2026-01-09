@@ -555,17 +555,38 @@ This template is based on real-world Solutions Architecture practice at enterpri
 
 ## 🗺️ Roadmap
 
-**v1.1** (Planned):
-- Video walkthrough
-- More domain-specific MOC examples
-- Integration templates (Jira, ADO, GitHub)
-- Mobile optimization
+**v1.0.0** (Released 2026-01-07):
+- ✅ Initial release with metadata-driven framework
+- ✅ 11 Claude Code skills
+- ✅ Quality indicator system
+- ✅ 12 Maps of Content with Dataview queries
 
-**v1.2** (Future):
-- Obsidian Publish demo site
+**v1.1.0** (Released 2026-01-08):
+- ✅ Visual analysis skills (screenshot-analyze, diagram-review)
+- ✅ Document processing skills (pdf-to-page, pptx-to-page)
+- ✅ Parallel agent architecture with `context: fork` frontmatter
+- ✅ Screenshots and visual documentation
+
+**v1.2.0** (Released 2026-01-09):
+- ✅ Node.js automation infrastructure (validate.js, health-check.js, generate-graph.js)
+- ✅ 3 new vault maintenance skills (broken-links, weekly-summary, quality-report)
+- ✅ Comprehensive testing and quality baseline metrics established
+- ✅ 8 reusable analysis scripts generated (Python + Node.js)
+- ✅ Performance benchmarks: 50-200 notes/second
+
+**v1.3** (Planned):
+- Video walkthrough and tutorials
+- More domain-specific MOC examples
+- Mobile optimization and mobile-first workflows
+- Integration templates (Jira, ADO, GitHub Issues)
 - Community skill contributions
+
+**v2.0** (Future):
+- Obsidian Publish demo site
+- Historical quality trend tracking
 - Alternative theme support
-- Docker-based setup
+- Web dashboard for quality metrics
+- Docker-based setup for automation
 
 ---
 
