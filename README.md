@@ -17,7 +17,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
 - **Powerful Navigation** - 12 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 11 core AI-assisted workflows for automation
+- **Claude Code Integration** - 14 AI-assisted workflows + Node.js automation
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Example Content** - Rich examples showing best practices
@@ -124,11 +124,17 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 11 AI-assisted workflows
+│   ├── skills/             # 14 AI-assisted workflows
 │   ├── context/            # Domain-specific context (customize)
 │   └── vault-conventions.md
 ├── .obsidian/              # Obsidian configuration
-├── scripts/                # Python utility scripts
+├── scripts/                # Node.js automation + Python utilities
+│   ├── validate.js         # Frontmatter & link validation
+│   ├── health-check.js     # Vault health metrics
+│   ├── generate-graph.js   # Knowledge graph export
+│   ├── AUTOMATION.md       # Complete automation docs
+│   └── *.py                # Python scripts
+├── package.json            # Node.js automation scripts
 ├── [Root Directory]        # All content notes (metadata-driven)
 │   ├── Person notes (e.g., "Jane Smith.md")
 │   ├── Project notes (e.g., "Project - Cloud Migration.md")
@@ -306,11 +312,12 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes 11 core AI-assisted workflows accessible via Claude Code:
+This vault includes 14 AI-assisted workflows accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
 - `/meeting <title>` - Create meeting note with prompts
+- `/weekly-summary` - Generate comprehensive weekly summary (5 parallel sub-agents)
 
 ### Architecture Work
 - `/adr <title>` - Create new Architecture Decision Record
@@ -328,16 +335,18 @@ This vault includes 11 core AI-assisted workflows accessible via Claude Code:
 - `/person <name>` - Create person note (clean links without prefix)
 - `/weblink <url>` - Save URL with AI summary
 
-### Maintenance
+### Vault Maintenance
 - `/orphans` - Find notes with no backlinks
+- `/broken-links` - Comprehensive broken link detection (3 parallel Sonnet sub-agents)
+- `/quality-report` - Content quality analysis with scores (5 parallel Sonnet sub-agents)
 
 **See** `.claude/skills/` directory for all skill definitions.
-
-**Note:** Additional skills can be added as needed. The framework supports 26+ workflows - these 11 cover core daily operations.
 
 ---
 
 ## 📊 Quality Monitoring
+
+### Obsidian Dataview Dashboard
 
 Use `MOC - Vault Quality Dashboard.md` to monitor vault health:
 
@@ -348,10 +357,48 @@ Use `MOC - Vault Quality Dashboard.md` to monitor vault health:
 - **ADR Health** - Missing status/relationships
 - **Statistics** - Note distribution by type
 
+### Node.js Automation
+
+Professional-grade validation, health checks, and knowledge graph export:
+
+```bash
+# Install dependencies (one-time)
+npm install
+
+# Validate frontmatter and links
+npm run validate
+
+# Vault health metrics and quality score
+npm run health
+
+# Export knowledge graph (JSON)
+npm run graph
+
+# Run all checks
+npm run test
+```
+
+**Key Scripts:**
+- **validate.js** - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
+- **health-check.js** - Analyzes note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
+- **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualization
+
+**Output Formats:**
+- Console (colorized, human-readable)
+- JSON (programmatic access)
+- Markdown (reports and documentation)
+
+**Integration Examples:**
+- Pre-commit hooks (validate before commit)
+- CI/CD pipelines (GitHub Actions)
+- Weekly health reports (cron jobs)
+
+**See** `scripts/AUTOMATION.md` for complete documentation.
+
 **Recommended Review Cadence**:
-- **Weekly**: Check open tasks, active projects
-- **Monthly**: Review stale content (5-10 notes)
-- **Quarterly**: Comprehensive quality audit
+- **Weekly**: Check open tasks, active projects, run `npm run health`
+- **Monthly**: Review stale content (5-10 notes), fix broken links
+- **Quarterly**: Comprehensive quality audit, run `npm run test`
 
 ---
 

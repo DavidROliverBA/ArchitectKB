@@ -1,0 +1,49 @@
+{
+  "name": "obsidian-architect-vault-template",
+  "version": "1.0.0",
+  "description": "Obsidian vault template for Solutions Architects with automation scripts for validation, health checks, and knowledge graph generation",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "validate": "npm run validate:frontmatter && npm run validate:links",
+    "validate:frontmatter": "node scripts/validate.js --frontmatter",
+    "validate:links": "node scripts/validate.js --links",
+    "validate:all": "node scripts/validate.js --all",
+    "health": "node scripts/health-check.js",
+    "health:json": "node scripts/health-check.js --format json",
+    "health:markdown": "node scripts/health-check.js --format markdown",
+    "graph": "node scripts/generate-graph.js",
+    "graph:metrics": "node scripts/generate-graph.js --metrics",
+    "stats": "node scripts/health-check.js --format markdown > VAULT_STATS.md && echo 'Statistics exported to VAULT_STATS.md'",
+    "test": "npm run validate && npm run health",
+    "audit": "npm run validate:all && npm run health && npm run graph"
+  },
+  "keywords": [
+    "obsidian",
+    "knowledge-management",
+    "pkm",
+    "architecture",
+    "vault",
+    "zettelkasten",
+    "automation"
+  ],
+  "author": "Solutions Architecture Team",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "glob": "^10.3.10",
+    "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/obsidian-architect-vault-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/obsidian-architect-vault-template/issues"
+  },
+  "homepage": "https://github.com/yourusername/obsidian-architect-vault-template#readme"
+}

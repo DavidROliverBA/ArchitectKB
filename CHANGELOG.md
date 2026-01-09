@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-01-09
+
+### Added
+- **Node.js Automation Infrastructure** - Professional-grade vault validation, health checks, and knowledge graph export
+  - `package.json` with npm scripts for automation
+  - `scripts/validate.js` - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
+  - `scripts/health-check.js` - Analyzes vault health with comprehensive metrics and 0-100 quality score
+  - `scripts/generate-graph.js` - Exports knowledge graph structure to JSON for visualization
+  - `scripts/AUTOMATION.md` - Complete automation documentation with examples
+  - `VAULT_AUTOMATION_SETUP.md` - Quick start guide for new users
+- **3 New Claude Code Skills** for vault maintenance:
+  - `/broken-links` - Comprehensive broken link detection with fuzzy matching suggestions (3 parallel Sonnet sub-agents)
+  - `/weekly-summary` - Generate weekly summary from daily notes, meetings, tasks, ADRs, and projects (5 parallel sub-agents)
+  - `/quality-report` - Content quality analysis with readability, link density, metadata, structure, and freshness scores (5 parallel Sonnet sub-agents)
+- **Quality Scoring System** - Overall vault health score calculated from 5 dimensions: connectivity, freshness, quality, completeness
+- **Pre-commit Hook Templates** - Examples for git validation workflow
+- **CI/CD Integration Examples** - GitHub Actions workflows for automated quality checks
+
+### Changed
+- Updated README with Node.js automation section and revised skill count (11 → 14)
+- Updated `.gitignore` to exclude node_modules, automation outputs, and generated files
+- Updated `scripts/README.md` to document both Node.js and Python automation tools
+- Enhanced Quality Monitoring section in README with automation examples
+
+### Technical
+- Dependencies: chalk (v5.3.0), glob (v10.3.10), gray-matter (v4.0.3)
+- Node.js 18+ required for ES modules support
+- Exit codes for CI/CD integration (validate.js returns 0/1)
+- Multiple output formats: console, JSON, markdown
+
 ## [1.1.0] - 2026-01-08
 
 ### Added
@@ -36,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.0.0

@@ -4,39 +4,41 @@ title: Microservices vs Monolith Decision
 description: Initial decision to adopt microservices architecture (superseded by modular monolith approach)
 status: superseded
 category: architecture
-tags: [ADR, activity/architecture, domain/architecture-pattern, historical]
+tags:
+  - ADR
+  - activity/architecture
+  - domain/architecture-pattern
+  - historical
 created: 2024-03-01
 modified: 2025-06-15
-
-# Decision Makers
-deciders: [Architecture Team, Engineering Leadership]
+deciders:
+  - Architecture Team
+  - Engineering Leadership
 approvers:
-  - Former CTO
+  - CTO
   - Engineering Director
   - Technical Architect
-
-# Relationships
-relatedTo: ["[[Project - Legacy System Decommission]]"]
+relatedTo:
+  - "[[Project - Legacy System Decommission]]"
 supersedes: []
 dependsOn: []
-supersededBy: "ADR - Adopt Modular Monolith Architecture"  # Future ADR
-
-# Quality Indicators
+supersededBy: ADR - Adopt Modular Monolith Architecture
 confidence: medium
 freshness: stale
 source: primary
 verified: true
 reviewed: 2025-06-15
-
-# Context
 summary: Original decision to decompose monolithic application into microservices. Superseded after discovering premature decomposition led to operational complexity without corresponding benefits.
 assumptions:
   - Team has expertise to manage distributed systems
   - Benefits of microservices outweigh operational costs
   - Application domain boundaries are well understood
-stakeholders: [Development Teams, Operations, Architecture]
+stakeholders:
+  - Development Teams
+  - Operations
+  - Architecture
 project: "[[Project - Legacy System Decommission]]"
-externalRef: null
+externalRef:
 ---
 
 # ADR - Microservices vs Monolith Decision

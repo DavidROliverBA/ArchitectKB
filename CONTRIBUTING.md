@@ -13,7 +13,7 @@ If you find a problem with the template:
    - Clear, descriptive title
    - Detailed description of the problem
    - Steps to reproduce (if applicable)
-   - Expected vs actual behavior
+   - Expected vs actual behaviour
    - Your Obsidian version and OS
    - Screenshots (if helpful)
 

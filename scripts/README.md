@@ -1,15 +1,26 @@
 # Scripts
 
-This directory contains Python utilities for vault maintenance and automation.
+This directory contains automation utilities for vault maintenance and quality assurance.
 
 ## Overview
 
-These scripts help automate common vault maintenance tasks:
+Two types of automation are available:
+
+### Node.js Automation (Recommended)
+Modern TypeScript/JavaScript tools for validation, health checks, and knowledge graph export:
+- **validate.js** - Frontmatter and link validation
+- **health-check.js** - Vault health metrics and quality scores
+- **generate-graph.js** - Knowledge graph export
+
+**See [AUTOMATION.md](./AUTOMATION.md) for full Node.js documentation.**
+
+### Python Scripts
+Specialized utilities for batch operations and document processing:
 - File renaming and organization
-- Batch operations on notes
-- Frontmatter updates
-- Link management
-- Content extraction from documents
+- Batch frontmatter updates
+- PDF/PowerPoint conversion
+- Notion integration
+- Content extraction
 
 ## Requirements
 
@@ -395,6 +406,22 @@ Have a useful script? Contribute it!
 - Skip backups before batch operations
 - Run scripts without `--dry-run` first
 - Commit API keys or tokens to version control
+
+---
+
+## Node.js Automation
+
+For modern validation, health checks, and knowledge graph export, see:
+
+**[AUTOMATION.md](./AUTOMATION.md)** - Complete Node.js automation documentation
+
+Quick start:
+```bash
+npm install
+npm run validate    # Validate frontmatter and links
+npm run health      # Vault health metrics
+npm run graph       # Export knowledge graph
+```
 
 ---
 

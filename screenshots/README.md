@@ -151,14 +151,14 @@ This directory contains screenshots for the main README. To generate these scree
 ## Checklist
 
 Before committing screenshots:
-- [ ] All 6 screenshots captured
-- [ ] PNG format, optimized file size
-- [ ] Consistent theme across all screenshots
-- [ ] No personal/sensitive information visible
-- [ ] Dataview queries are rendered (not raw code)
-- [ ] High resolution (min 1920x1080)
-- [ ] Images linked correctly in main README.md
+- [x] All 6 screenshots captured
+- [x] PNG format, optimized file size
+- [x] Consistent theme across all screenshots
+- [x] No personal/sensitive information visible
+- [x] Dataview queries are rendered (not raw code)
+- [x] High resolution (min 1920x1080)
+- [x] Images linked correctly in main README.md
 
 ---
 
-**Note:** These screenshots should showcase the vault's features using the provided example content, not real organizational data.
+**Note:** These screenshots should showcase the vault's features using the provided example content, not real organisational data.
