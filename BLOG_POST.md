@@ -1,9 +1,11 @@
 # Obsidian Architect Vault Template: A Knowledge Management System for Solutions Architects
 
 **Published:** 2026-01-07
-**Updated:** 2026-01-08 (v1.1.0)
+**Updated:** 2026-01-10 (v1.3.0)
 **Author:** David Oliver
 **Repository:** https://github.com/DavidROliverBA/obsidian-architect-vault-template
+
+> **Latest Release:** See [BLOG_POST_v1.3.0.md](BLOG_POST_v1.3.0.md) for the v1.3.0 announcement with Incubator system, 32 skills, and research workflows.
 
 ---
 
@@ -715,14 +717,16 @@ See **CONTRIBUTING.md** in the repository.
 **GitHub Repository:**
 https://github.com/DavidROliverBA/obsidian-architect-vault-template
 
-**Latest Release:** [v1.1.0](https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.1.0)
+**Latest Release:** [v1.3.0](https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.3.0)
 
 **What you'll get:**
-- Complete vault structure
-- 13 note templates
-- 20 example notes
-- 12 MOCs with Dataview queries
-- 11 Claude Code skills (including visual analysis)
+- Complete vault structure with 9 directories
+- 15 note templates (including Incubator)
+- 20+ example notes
+- 13 MOCs with Dataview queries
+- 32 Claude Code skills
+- Incubator system for research ideas
+- Rules directory for reference
 - 6 screenshots showing the vault in action
 - Comprehensive documentation
 
@@ -771,8 +775,9 @@ This template was created by extracting and generalizing patterns from a product
 **Role:** Solutions Architect, British Airways Operations & Engineering IT
 **GitHub:** https://github.com/DavidROliverBA
 
-**Version:** v1.1.0 (2026-01-08)
+**Version:** v1.3.0 (2026-01-10)
 **Original Release:** v1.0.0 (2026-01-07)
+**See also:** [v1.3.0 Announcement](BLOG_POST_v1.3.0.md)
 
 **If this helps you, give it a star on GitHub and share it with fellow architects!** ⭐
 
