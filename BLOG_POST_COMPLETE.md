@@ -18,13 +18,13 @@ After 20 minutes of searching, you find fragments spread across four different s
 
 We make decisions that impact systems for years. We collaborate with dozens of stakeholders across multiple projects. We need to find information instantly—that ADR from six months ago, the context from a conversation last quarter, the rationale behind a technology choice that now needs revisiting.
 
-Generic note-taking tools don't solve this. They weren't designed for the unique cognitive demands of architecture work.
+Generic note-taking tools couldn't solve this. They weren't designed for the unique cognitive demands of architecture work.
 
 ---
 
 ## A Second Brain for Architecture Work
 
-The **Obsidian Architect Vault Template** is a production-ready knowledge management system specifically designed for Solutions Architects. It's not a theoretical framework—it's been battle-tested through hundreds of projects, thousands of notes, and years of real-world architectural work at a major airline.
+The **Obsidian Architect Vault Template** is a production-ready knowledge management system designed explicitly for Solutions Architects. It's not a theoretical framework—it's been battle-tested, which means it's still developing, but it is a state where I use it every day as my daily driver.
 
 **What makes it different:**
 
@@ -45,7 +45,7 @@ The **Obsidian Architect Vault Template** is a production-ready knowledge manage
 
 ### Why Metadata Beats Folders
 
-Traditional folder structures create a fundamental problem: a note can only exist in one place. Is a meeting about API Gateway Modernization a "meeting" or part of the "API Gateway" project? With folders, you choose one. With metadata, it's both.
+Traditional folder structures create a fundamental problem: a note can only exist in one place. Is a meeting about API Gateway Modernisation a "meeting" or part of the "API Gateway" project? With folders, you choose one. With metadata, it's both.
 
 **Every note has rich frontmatter:**
 
@@ -59,7 +59,7 @@ attendees:
   - "[[Jane Smith]]"
   - "[[Alex Johnson]]"
   - "[[Michael Torres]]"
-summary: Reviewed REST vs GraphQL options for new gateway layer
+Summary: Reviewed REST vs GraphQL options for new gateway layer
 tags: [activity/architecture, technology/api, domain/integration]
 ---
 ```
