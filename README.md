@@ -28,8 +28,6 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ## 📸 Screenshots
 
-> **Note:** Screenshots are currently placeholders. See `screenshots/README.md` for capture guidelines. Contributions welcome!
-
 ### Dashboard - Your Central Hub
 
 ![Dashboard Overview](screenshots/dashboard.png)
