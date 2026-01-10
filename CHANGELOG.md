@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-01-10
+
+### Added
+- **18 New Claude Code Skills** - Expanded from 14 to 32 total skills
+  - **Research & Discovery**: `/related`, `/summarize`, `/timeline`, `/find-decisions`
+  - **Engineering Management**: `/adr-report`, `/dpia-status`, `/project-snapshot`, `/project-status`
+  - **Maintenance**: `/vault-maintenance`, `/check-weblinks`, `/archive`, `/orphans`, `/rename`
+  - **Document Processing**: `/document-extract`, `/attachment-audit`, `/sync-notion`
+  - **Quick Capture**: `/youtube`, `/incubator`
+  - **Reference**: `todos` (guidelines for todo list usage)
+
+- **Incubator System** - New idea lifecycle for research and exploration
+  - `Incubator` note type with lifecycle states: seed → exploring → validated → accepted/rejected
+  - `IncubatorNote` note type for supporting research linked to ideas
+  - Controlled domain taxonomy: architecture, governance, tooling, security, data, documentation, process, ai, infrastructure
+  - `+Incubator/` folder structure with README guide
+  - `Incubator - MOC.md` with Dataview queries for tracking ideas by status and domain
+  - Templates: `+Templates/Incubator.md`, `+Templates/IncubatorNote.md`
+
+- **Rules Directory** - Modular reference documentation in `.claude/rules/`
+  - `frontmatter-reference.md` - Quick reference for all frontmatter fields by type
+  - `naming-conventions.md` - File and folder naming patterns
+  - `quality-patterns.md` - Quality indicators, relationships, and tag taxonomy
+
+- **Archive System** - Soft archiving for vault maintenance
+  - `/archive` skill for Project, Task, Page, Person note types
+  - `+Archive/` folder structure organised by type
+  - Archive metadata fields: `archived`, `archivedDate`, `archivedReason`
+
+- **Parallel Sub-Agent Architecture** - Many skills now use parallel Haiku or Sonnet agents for efficiency
+  - Skills marked with "uses sub-agents" launch concurrent Task agents
+  - Configurable model selection: `model: "haiku"` for quick tasks, `model: "sonnet"` for analysis
+
+### Changed
+- Updated README with new skill count (14 → 32) and Incubator documentation
+- Updated CLAUDE.md to document all new skills and conventions
+- Note types increased from 13 to 15 (added Incubator, IncubatorNote)
+- Enhanced skill categories with Engineering Management and Research sections
+
+### Technical
+- All new skills include `context: fork` frontmatter for parallel agent execution
+- Skills use consistent patterns for report generation and user prompts
+- Incubator integrates with existing Dataview query patterns
+
+---
+
+## [Unreleased]
+
 ### Tested
 - **Node.js Automation Infrastructure** - All automation scripts verified working
   - `npm install` - Successfully installed 52 packages with 0 vulnerabilities
@@ -110,7 +158,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.0.0

@@ -16,10 +16,11 @@ This is a **production-ready Obsidian vault template** designed specifically for
 ### ✨ Key Features
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
-- **Powerful Navigation** - 12 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 14 AI-assisted workflows + Node.js automation
+- **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
+- **Claude Code Integration** - 32 AI-assisted workflows + Node.js automation
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
+- **Incubator System** - Idea lifecycle for research and exploration
 - **Example Content** - Rich examples showing best practices
 - **Zero Lock-In** - Plain markdown files, works with any text editor
 
@@ -115,16 +116,20 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ```
 obsidian-architect-vault-template/
+├── +Archive/               # Soft-archived notes (organised by type)
 ├── +Attachments/           # All binary files (images, PDFs, docs)
 ├── +Daily/                 # Daily journal entries (organized by year)
 │   ├── 2026/
+│   └── README.md
+├── +Incubator/             # Research ideas and exploration
 │   └── README.md
 ├── +Meetings/              # All meeting notes
 │   └── README.md
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 14 AI-assisted workflows
+│   ├── skills/             # 32 AI-assisted workflows
+│   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customize)
 │   └── vault-conventions.md
 ├── .obsidian/              # Obsidian configuration
@@ -145,7 +150,7 @@ obsidian-architect-vault-template/
 └── README.md               # This file
 ```
 
-### Note Types (13 Total)
+### Note Types (15 Total)
 
 | Type | Prefix | Example | Purpose |
 |------|--------|---------|---------|
@@ -162,6 +167,8 @@ obsidian-architect-vault-template/
 | **AtomicNote** | `Atomic Note -` | `Atomic Note - SOLID.md` | Single-concept notes |
 | **Course** | `Course -` | `Course - Cloud Architecture.md` | Learning tracking |
 | **Zettel** | `Zettel -` | `Zettel - Research.md` | Personal notes |
+| **Incubator** | `Incubator -` | `Incubator - New Framework.md` | Research ideas |
+| **IncubatorNote** | `Incubator Note -` | `Incubator Note - Analysis.md` | Supporting research |
 
 ---
 
@@ -189,14 +196,15 @@ The Dashboard provides:
 5. **ADRs MOC** - Architecture decisions
 6. **Weblinks MOC** - External resources
 
-**Content & Organization** (3 MOCs):
+**Content & Organization** (4 MOCs):
 7. **Technology & Architecture MOC** - Tech platforms
 8. **Organisations MOC** - Vendors/partners
-9. **Vault Quality Dashboard** - Health monitoring
+9. **Incubator MOC** - Research ideas and exploration
+10. **Vault Quality Dashboard** - Health monitoring
 
 **Domain-Specific** (2 example MOCs):
-10. **Cloud Architecture MOC** - Example specialization
-11. **Data Platform MOC** - Example domain knowledge
+11. **Cloud Architecture MOC** - Example specialization
+12. **Data Platform MOC** - Example domain knowledge
 
 ---
 
@@ -312,7 +320,7 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes 14 AI-assisted workflows accessible via Claude Code:
+This vault includes **32 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -321,24 +329,48 @@ This vault includes 14 AI-assisted workflows accessible via Claude Code:
 
 ### Architecture Work
 - `/adr <title>` - Create new Architecture Decision Record
+- `/adr-report [period]` - ADR activity report (week/month/all)
+- `/find-decisions <topic>` - Find all decisions about a topic (sub-agents)
+
+### Engineering Management
+- `/project-status <project>` - Generate project status report (sub-agents)
+- `/project-snapshot [name]` - Quick status of all active projects
+- `/dpia-status [filter]` - DPIA compliance status across projects
+
+### Research & Discovery
+- `/related <topic>` - Find all notes mentioning a topic (sub-agents)
+- `/summarize <note>` - Summarise a note or set of notes
+- `/timeline <project>` - Chronological project history (sub-agents)
 
 ### Document Processing
 - `/pdf-to-page <path>` - Convert PDF to Page note with docling (Sonnet or Opus analysis)
 - `/pptx-to-page <path>` - Convert PowerPoint to Page note (quick or visual mode)
+- `/document-extract <path>` - Extract text from scanned documents/photos (Sonnet sub-agents)
+- `/attachment-audit` - Audit all vault attachments with visual analysis (Sonnet sub-agents)
+- `/sync-notion` - Sync meetings from Notion database
 
 ### Visual Analysis
-- `/screenshot-analyze <path>` - Analyze screenshots with OCR and visual inspection (3 Sonnet sub-agents)
-- `/diagram-review <path>` - Analyze architecture diagrams and technical drawings (4 Sonnet sub-agents)
+- `/screenshot-analyze <path>` - Analyse screenshots with OCR and visual inspection (3 Sonnet sub-agents)
+- `/diagram-review <path>` - Analyse architecture diagrams and technical drawings (4 Sonnet sub-agents)
 
 ### Quick Capture
 - `/task <title>` - Quick-create task with priority
 - `/person <name>` - Create person note (clean links without prefix)
 - `/weblink <url>` - Save URL with AI summary
+- `/youtube <url>` - Save YouTube video with transcript analysis
+- `/incubator <title>` - Quick-create incubator idea
 
 ### Vault Maintenance
-- `/orphans` - Find notes with no backlinks
+- `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
+- `/orphans` - Find notes with no backlinks (sub-agents)
 - `/broken-links` - Comprehensive broken link detection (3 parallel Sonnet sub-agents)
+- `/check-weblinks` - Test all weblink URLs for dead/redirected links (sub-agents)
+- `/archive <note>` - Soft archive a note (Project, Task, Page, Person)
+- `/rename <pattern>` - Batch rename files with link updates
 - `/quality-report` - Content quality analysis with scores (5 parallel Sonnet sub-agents)
+
+### Reference
+- `todos` - Guidelines for Claude Code todo list usage and best practices
 
 **See** `.claude/skills/` directory for all skill definitions.
 
@@ -574,7 +606,16 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ 8 reusable analysis scripts generated (Python + Node.js)
 - ✅ Performance benchmarks: 50-200 notes/second
 
-**v1.3** (Planned):
+**v1.3.0** (Released 2026-01-10):
+- ✅ 18 new Claude Code skills (32 total)
+- ✅ Incubator system for research ideas with lifecycle management
+- ✅ Rules directory with modular reference documentation
+- ✅ Archive system for soft-archiving notes
+- ✅ Engineering management skills (project-status, project-snapshot, dpia-status, adr-report)
+- ✅ Research & discovery skills (related, summarize, timeline, find-decisions)
+- ✅ Enhanced quick capture (youtube, incubator)
+
+**v1.4** (Planned):
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
 - Mobile optimization and mobile-first workflows
