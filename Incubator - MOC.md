@@ -3,7 +3,7 @@ type: MOC
 title: Incubator MOC
 scope: Idea incubation and research
 created: 2026-01-10
-modified: 2026-01-10
+modified: 2026-01-11
 tags:
   - moc
   - incubator
@@ -13,7 +13,7 @@ tags:
 
 Ideas being explored, researched, and validated before becoming formal deliverables.
 
-## By Status
+## Active Ideas
 
 ### Seeds (New Ideas)
 ```dataview
@@ -39,23 +39,35 @@ WHERE type = "Incubator" AND status = "validated"
 SORT modified DESC
 ```
 
+---
+
+## Archived Ideas
+
 ### Accepted (Graduated)
+
+Ideas that became deliverables. Located in `+Archive/Incubator/`.
+
 ```dataview
 TABLE outcome as "Became", domain as Domain
-FROM "+Incubator"
+FROM "+Archive/Incubator"
 WHERE type = "Incubator" AND status = "accepted"
 SORT modified DESC
 ```
 
 ### Rejected
+
+Ideas not pursued, kept for reference. Located in `+Archive/Incubator/`.
+
 ```dataview
 TABLE domain as Domain, modified as Rejected
-FROM "+Incubator"
+FROM "+Archive/Incubator"
 WHERE type = "Incubator" AND status = "rejected"
 SORT modified DESC
 ```
 
-## By Domain
+---
+
+## By Domain (Active Only)
 
 ### Architecture
 ```dataview
@@ -89,7 +101,11 @@ WHERE type = "Incubator" AND contains(domain, "ai")
 SORT status ASC, modified DESC
 ```
 
+---
+
 ## Research Notes
+
+IncubatorNotes remain in `+Incubator/` as they may support multiple ideas.
 
 ```dataview
 TABLE parent-ideas as "Supports", modified as Modified
@@ -98,17 +114,36 @@ WHERE type = "IncubatorNote"
 SORT modified DESC
 ```
 
-## Quick Stats
+---
 
-- **Total Ideas**: `$= dv.pages('"+Incubator"').where(p => p.type == "Incubator").length`
+## Statistics
+
+### Active Ideas
 - **Seeds**: `$= dv.pages('"+Incubator"').where(p => p.type == "Incubator" && p.status == "seed").length`
 - **Exploring**: `$= dv.pages('"+Incubator"').where(p => p.type == "Incubator" && p.status == "exploring").length`
 - **Validated**: `$= dv.pages('"+Incubator"').where(p => p.type == "Incubator" && p.status == "validated").length`
 
+### Archived
+- **Accepted**: `$= dv.pages('"+Archive/Incubator"').where(p => p.type == "Incubator" && p.status == "accepted").length`
+- **Rejected**: `$= dv.pages('"+Archive/Incubator"').where(p => p.type == "Incubator" && p.status == "rejected").length`
+
+---
+
 ## Quick Actions
 
-- [[+Incubator/README|Incubator Guide]] - How to use the incubator
-- Create new idea: Use `/incubator` skill or template
+- **New idea**: `incubator <title>` or create `Incubator - {{Title}}.md` with `status: seed`
+- **New research note**: `incubator note <title> for <idea>`
+- **Graduate idea**: `incubator graduate <idea>` - creates deliverable, archives idea
+- **Reject idea**: `incubator reject <idea>` - adds rationale, archives idea
+
+---
+
+## Archive Location
+
+| Status | Location |
+|--------|----------|
+| seed, exploring, validated | `+Incubator/` |
+| accepted, rejected | `+Archive/Incubator/` |
 
 ---
 

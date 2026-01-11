@@ -24,7 +24,9 @@ File and folder naming patterns for this Obsidian vault.
 | CodeSnippet | `CodeSnippet - {{Title}}.md` | root |
 | Incubator | `Incubator - {{Title}}.md` | +Incubator/ |
 | IncubatorNote | `Incubator Note - {{Title}}.md` | +Incubator/ |
-| FormSubmission | `Form - {{Type}} - {{Name}}.md` | root |
+| FormSubmission | `Form Submission - {{Type}} for {{Project}}.md` | root |
+| Policy | `Policy - {{Title}}.md` | +Sync/Policies/ |
+| Guardrail | `Guardrail - {{Title}}.md` | +Sync/Guardrails/ |
 
 ## General Rules
 
@@ -37,6 +39,7 @@ File and folder naming patterns for this Obsidian vault.
 
 ```
 +Archive/           # Soft-archived notes
+  Incubator/        # Graduated/rejected incubator ideas
   People/           # Archived people
   Projects/         # Archived projects
   Tasks/            # Archived tasks
@@ -50,6 +53,14 @@ File and folder naming patterns for this Obsidian vault.
 +Meetings/          # All meetings
 +PDFs/              # PDF storage
 +People/            # Person notes
++Sync/              # Synced governance content (read-only)
+  Policies/         # Synced policies
+  Guardrails/       # Synced guardrails
+    Architecture/   # Architecture guardrails
+    Technology/     # Technology guardrails
+  Org-ADRs/         # Organisational ADRs (synced from Confluence)
+  Process/          # Process documentation
+  _archived/        # Removed from Confluence
 +Templates/         # Note templates
 ```
 

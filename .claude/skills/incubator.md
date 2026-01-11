@@ -13,9 +13,11 @@ Manage the idea incubator - capture ideas quickly, add research, track lifecycle
 incubator <title>                     # Create new idea (no prompts)
 incubator <title> [domain]            # Create with domain(s)
 incubator note <title> for <idea>     # Create research note
-incubator list [filter]               # List ideas
+incubator list [filter]               # List ideas (active only)
+incubator list all                    # List including archived
 incubator status <idea> <status>      # Update status
-incubator graduate <idea>             # Graduate to deliverable
+incubator graduate <idea>             # Graduate to deliverable (→ archive)
+incubator reject <idea>               # Reject idea (→ archive)
 ```
 
 ## Examples
@@ -28,6 +30,7 @@ incubator list seed
 incubator list architecture
 incubator status Archiving exploring
 incubator graduate Vault Archiving
+incubator reject Outdated Approach
 ```
 
 ---
@@ -132,18 +135,21 @@ tags:
 
 ## List Ideas: `incubator list [filter]`
 
-Filter by status or domain. No filter = summary.
+Filter by status or domain. No filter = summary of active ideas.
 
-**Statuses:** seed, exploring, validated, accepted, rejected
+**Statuses:** seed, exploring, validated (active) | accepted, rejected (archived)
 **Domains:** architecture, governance, tooling, security, data, documentation, process, ai, infrastructure
 
-1. Read `+Incubator/` files with `type: Incubator`
-2. Filter and display as table:
+1. Read `+Incubator/` files with `type: Incubator` (default: active only)
+2. If `list all`: also read `+Archive/Incubator/`
+3. Filter and display as table:
 
 | Idea | Status | Domain | Modified |
 |------|--------|--------|----------|
 
-3. No filter = show count by status
+4. No filter = show count by status
+
+**Archive location:** Graduated and rejected ideas live in `+Archive/Incubator/`
 
 ---
 
@@ -158,11 +164,38 @@ Filter by status or domain. No filter = summary.
 
 ## Graduate: `incubator graduate <idea>`
 
-1. Fuzzy match idea
+1. Fuzzy match idea in `+Incubator/`
 2. Ask: "What should this become? (Project / ADR / Page / Task)"
 3. Create target note with context from idea
-4. Update idea: `status: accepted`, `outcome: [[New Note]]`
-5. Confirm: `Graduated to [[New Note]]`
+4. Update idea frontmatter:
+   - `status: accepted`
+   - `outcome: "[[New Note]]"`
+   - Add tag: `incubator/graduated`
+5. Move idea to `+Archive/Incubator/`
+6. Confirm: `Graduated to [[New Note]] and archived`
+
+**Example graduation:**
+```yaml
+# After graduation
+status: accepted
+outcome: "[[Page - Architecture as Code]]"
+tags:
+  - incubator/idea
+  - incubator/graduated
+```
+
+---
+
+## Reject: `incubator reject <idea>`
+
+1. Fuzzy match idea in `+Incubator/`
+2. Ask for one-line rejection reason
+3. Update idea frontmatter:
+   - `status: rejected`
+   - Add tag: `incubator/rejected`
+4. Add rejection rationale to note body
+5. Move idea to `+Archive/Incubator/`
+6. Confirm: `Rejected and archived [[Incubator - {{idea}}]]`
 
 ---
 

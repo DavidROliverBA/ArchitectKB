@@ -1,7 +1,7 @@
 ---
 type: Page
 title: Incubator Guide
-created: 2026-01-10
+created: 2026-01-09
 modified: 2026-01-10
 tags:
   - documentation
@@ -15,19 +15,20 @@ The Incubator is a space for capturing, developing, and validating ideas before 
 ## Philosophy
 
 - **Capture everything** - No idea is too small or speculative
-- **Never delete** - Rejected ideas are archived, not removed
+- **Archive, don't delete** - Graduated and rejected ideas move to `+Archive/Incubator/`
+- **Merge duplicates** - Overlapping ideas are merged (secondary deleted, content preserved)
 - **Link freely** - Connect to existing vault content to build context
 - **Graduate when ready** - Ideas become Projects, ADRs, Pages, or other tangible outputs
 
 ## Lifecycle
 
-| Status | Description | Next Step |
-|--------|-------------|-----------|
-| `seed` | Just captured, raw idea | Flesh out the problem statement |
-| `exploring` | Actively researching, gathering evidence | Validate feasibility |
-| `validated` | Research complete, recommendation formed | Decision to accept or reject |
-| `accepted` | Approved, transitioning to deliverable | Create target note, link, archive |
-| `rejected` | Not pursuing, kept for reference | Archive with rationale |
+| Status | Description | Next Step | Location |
+|--------|-------------|-----------|----------|
+| `seed` | Just captured, raw idea | Flesh out the problem statement | +Incubator/ |
+| `exploring` | Actively researching, gathering evidence | Validate feasibility | +Incubator/ |
+| `validated` | Research complete, recommendation formed | Decision to accept or reject | +Incubator/ |
+| `accepted` | Approved, deliverable created | Archive | +Archive/Incubator/ |
+| `rejected` | Not pursuing, kept for reference | Archive with rationale | +Archive/Incubator/ |
 
 ## Note Types
 
@@ -88,7 +89,7 @@ Use these values for the `domain` field:
 ### From Incubator to Vault
 Link freely using standard wiki-links:
 ```markdown
-This relates to [[Project - Alpha]] and involves [[AWS]] integration.
+This relates to [[Project - Caerus]] and involves [[SAP]] integration.
 ```
 
 ### From Vault to Incubator
@@ -115,16 +116,79 @@ To quickly capture a new idea:
 4. Add relevant domain tags
 5. Link to any related vault content
 
-Or use the `/incubator` skill.
+Or use the `/incubator` skill (coming soon).
+
+## Merging Ideas
+
+When two or more ideas overlap significantly, merge them:
+
+1. **Identify the primary idea** - Usually the broader or more developed one
+2. **Merge content** - Copy valuable sections from secondary idea(s) into primary
+3. **Add merge record** to primary idea:
+   ```markdown
+   ## Merged Ideas
+
+   *Merged from [[Incubator - Other Idea]] on YYYY-MM-DD*
+
+   [Brief summary of what was brought in]
+   ```
+4. **Delete the secondary idea(s)** - The merge record in the primary preserves history
+5. **Update any IncubatorNotes** - Change `parent-ideas` links to point to primary
+
+> **Key principle**: Unlike rejected ideas (kept for reference), merged ideas are deleted because their content lives on in the primary note. The merge record provides the audit trail.
+
+### When to Merge
+
+| Scenario | Action |
+|----------|--------|
+| Ideas are 70%+ overlapping | Merge into the broader one |
+| One idea is a sub-topic of another | Merge into the parent |
+| Ideas evolved to cover same ground | Merge into the more developed one |
+| Ideas are complementary but distinct | Keep separate, link via `relatedTo` |
 
 ## Graduating an Idea
 
 When an idea is `accepted`:
 
 1. Create the target deliverable (Project, ADR, Page, etc.)
-2. Update the idea's `outcome` field with a link to the new note
-3. Change status to `accepted`
-4. The idea remains in +Incubator as a record of the journey
+2. Update the idea's frontmatter:
+   - `status: accepted`
+   - `outcome: "[[Target Note]]"`
+   - Add tag: `incubator/graduated`
+3. Move the idea to `+Archive/Incubator/`
+4. Obsidian auto-updates all wiki-links
+
+**Frontmatter after graduation:**
+```yaml
+status: accepted
+outcome: "[[Page - My Deliverable]]"
+tags:
+  - incubator/idea
+  - incubator/graduated
+```
+
+### Rejecting an Idea
+
+When an idea is `rejected`:
+
+1. Update frontmatter:
+   - `status: rejected`
+   - `outcome: null` (or brief reason)
+   - Add tag: `incubator/rejected`
+2. Move to `+Archive/Incubator/`
+3. The rejection rationale lives in the note body
+
+## Archive Structure
+
+```
++Archive/
+└── Incubator/           # Graduated and rejected ideas
+    ├── Incubator - Vault Archiving Strategy.md    # accepted
+    ├── Incubator - Ralph Mode.md                  # accepted
+    └── Incubator - Some Rejected Idea.md          # rejected
+```
+
+> **Note:** IncubatorNotes (research) stay in `+Incubator/` as they may support multiple ideas and remain useful reference material.
 
 ## Finding Ideas
 

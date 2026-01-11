@@ -399,9 +399,11 @@ Use these controlled domain values:
 | `incubator <title>` | Create new idea (no prompts) |
 | `incubator <title> [domain]` | Create with domain keywords |
 | `incubator note <title> for <idea>` | Create research note |
-| `incubator list [filter]` | List by status or domain |
+| `incubator list [filter]` | List active ideas by status or domain |
+| `incubator list all` | Include archived (graduated/rejected) |
 | `incubator status <idea> <status>` | Update lifecycle status |
-| `incubator graduate <idea>` | Graduate to Project/ADR/Page |
+| `incubator graduate <idea>` | Graduate to Project/ADR/Page (archives idea) |
+| `incubator reject <idea>` | Reject with reason (archives idea) |
 
 ## Archive System
 
@@ -409,6 +411,7 @@ The Archive provides soft-deletion for completed or abandoned notes while preser
 
 ### When to Archive
 
+- Incubator ideas that are graduated or rejected
 - Projects that are completed or cancelled
 - Tasks that are done or no longer relevant
 - People who have left the organisation
@@ -425,6 +428,7 @@ The Archive provides soft-deletion for completed or abandoned notes while preser
 
 ```
 +Archive/
+├── Incubator/   # Graduated and rejected ideas
 ├── People/      # Former colleagues, contacts
 ├── Projects/    # Completed or cancelled projects
 ├── Tasks/       # Completed tasks (optional)
