@@ -9,7 +9,7 @@ type: Adr
 title: <% name %>
 description: # Brief one-line description
 status: draft  # draft | proposed | accepted | deprecated | superseded
-category: null  # technology | architecture | process | security | infrastructure
+adrType: null  # Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 tags: [ADR, architecture]
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
@@ -41,6 +41,16 @@ assumptions: []    # Key assumptions made in this decision
 stakeholders: []   # Who is impacted by this decision
 project: null      # Link to related project: "[[Project - Name]]"
 externalRef: null  # Optional: Link to external ticket (JIRA, ADO, GitHub Issue)
+
+# AI-Specific Fields (for AI_ADR type)
+aiProvider: null          # aws-bedrock | azure-openai | openai | google | anthropic | custom
+aiModel: null             # claude-3 | gpt-4 | llama | gemini | custom
+aiUseCase: null           # generation | classification | extraction | conversation | agents
+aiRiskLevel: null         # high | medium | low
+ethicsReviewed: false     # Has AI ethics been considered?
+biasAssessed: false       # Has bias/fairness been assessed?
+dataPrivacyReviewed: false # Has data privacy (DPIA) been considered?
+humanOversight: null      # full | partial | minimal | none
 ---
 
 # ADR - <% name %>
@@ -53,7 +63,7 @@ externalRef: null  # Optional: Link to external ticket (JIRA, ADO, GitHub Issue)
 
 **<% "Draft" %>** - <% tp.date.now("YYYY-MM-DD") %>
 
-**Category**: [technology | architecture | process | security | infrastructure]
+**ADR Type**: [Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR]
 
 **Workflow Progress:**
 1. ⏳ Draft ADR Content
@@ -194,6 +204,78 @@ externalRef: null  # Optional: Link to external ticket (JIRA, ADO, GitHub Issue)
 
 ### Audit and Traceability
 
+
+---
+
+## AI Considerations
+
+> **Note:** Complete this section for AI_ADR type decisions. Remove if not applicable.
+
+### AI Model Selection
+
+**Provider:** [AWS Bedrock | Azure OpenAI | OpenAI | Google | Anthropic | Custom]
+
+**Model:** [Specific model name and version]
+
+**Use Case:**
+- [ ] Text generation
+- [ ] Classification
+- [ ] Information extraction
+- [ ] Conversational AI
+- [ ] Agentic workflows
+- [ ] Other: ___
+
+### AI Risk Assessment
+
+**Risk Level:** [High | Medium | Low]
+
+| Risk Factor | Assessment | Mitigation |
+|-------------|------------|------------|
+| Data sensitivity | | |
+| Decision impact | | |
+| Autonomy level | | |
+| Reversibility | | |
+
+### Ethics and Bias
+
+**Ethics Review:**
+- [ ] Reviewed against AI ethics principles
+- [ ] Stakeholder impact assessed
+- [ ] Documented in: ___
+
+**Bias Assessment:**
+- [ ] Training data bias reviewed
+- [ ] Output bias testing completed
+- [ ] Fairness metrics defined
+- [ ] Documented in: ___
+
+### Data Privacy (AI-specific)
+
+- [ ] DPIA completed for AI data usage
+- [ ] Data minimisation applied
+- [ ] Consent mechanisms in place (if applicable)
+- [ ] Data retention aligned with AI lifecycle
+
+### Human Oversight
+
+**Oversight Level:** [Full | Partial | Minimal | None]
+
+**Human-in-the-loop points:**
+-
+
+**Escalation triggers:**
+-
+
+### Model Governance
+
+**Monitoring:**
+-
+
+**Retraining triggers:**
+-
+
+**Version control:**
+-
 
 ---
 

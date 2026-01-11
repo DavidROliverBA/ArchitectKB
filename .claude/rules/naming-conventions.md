@@ -24,6 +24,7 @@ File and folder naming patterns for this Obsidian vault.
 | CodeSnippet | `CodeSnippet - {{Title}}.md` | root |
 | Incubator | `Incubator - {{Title}}.md` | +Incubator/ |
 | IncubatorNote | `Incubator Note - {{Title}}.md` | +Incubator/ |
+| FormSubmission | `Form - {{Type}} - {{Name}}.md` | root |
 
 ## General Rules
 

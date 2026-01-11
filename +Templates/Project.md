@@ -15,6 +15,11 @@ priority: medium  # high | medium | low
 start-date: <% tp.date.now("YYYY-MM-DD") %>
 end-date: null  # Target completion date
 category: null  # Optional: Program/portfolio grouping (e.g., "Digital Transformation")
+
+# Transformation Classification
+transformationType: null  # modernisation | migration | greenfield | integration | decommission | uplift
+transformationScope: null  # enterprise | department | team | application
+aiInvolved: false  # Does this project involve AI/ML capabilities?
 ---
 
 # <% name %>

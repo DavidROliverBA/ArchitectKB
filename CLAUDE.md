@@ -71,6 +71,7 @@ Notes are identified by their `type` frontmatter field:
 | `MOC` | Maps of Content for navigation | root |
 | `Dashboard` | Dashboard views with aggregated queries | root |
 | `CodeSnippet` | Reusable code snippets and examples | root |
+| `FormSubmission` | Governance and compliance form tracking | root |
 
 ### Navigation
 
@@ -82,6 +83,7 @@ Use these Maps of Content (MOC) files to navigate:
 - **[[MOC - Meetings MOC]]** - Meeting history
 - **[[MOC - ADRs MOC]]** - Architecture Decision Records
 - **[[MOC - Vault Quality Dashboard]]** - Quality metrics and freshness tracking
+- **[[MOC - Form Submissions]]** - Governance form tracking
 
 ## Frontmatter Schema
 
@@ -119,7 +121,29 @@ status: active | paused | completed    # Simple string values
 priority: high | medium | low
 timeFrame: YYYY-MM-DD - YYYY-MM-DD
 collections: <program name>
+# Transformation Classification
+transformationType: modernisation | migration | greenfield | integration | decommission | uplift | null
+transformationScope: enterprise | department | team | application | null
+aiInvolved: false         # Does project involve AI/ML?
 ```
+
+**Transformation Types:**
+| Type | Description |
+|------|-------------|
+| `modernisation` | Upgrading existing systems to newer technologies |
+| `migration` | Moving systems between platforms (e.g., on-prem to cloud) |
+| `greenfield` | Building new capabilities from scratch |
+| `integration` | Connecting systems together |
+| `decommission` | Retiring legacy systems |
+| `uplift` | Security, performance, or compliance improvements |
+
+**Transformation Scope:**
+| Scope | Description |
+|-------|-------------|
+| `enterprise` | Organisation-wide impact |
+| `department` | Single department or business unit |
+| `team` | Single team impact |
+| `application` | Single application or service |
 
 **Task:**
 ```yaml
@@ -170,10 +194,10 @@ date: 'YYYY-MM-DD'
 ```yaml
 type: Adr
 status: proposed | accepted | deprecated | superseded
-adrType: Technology_ADR | Integration_ADR | Security_ADR | Data_ADR
+adrType: Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 description: <one-line description>
 project: "[[Project Name]]" | null
-jiraTicket: <JIRA-123> | null
+externalRef: <ticket reference> | null
 deciders: ["[[Person Name]]"]         # Who made the decision
 approvers: ["[[Person Name]]"]        # Who approved
 stakeholders: ["[[Person Name]]"]     # Who is affected
@@ -191,7 +215,25 @@ freshness: current | recent | stale
 source: primary | secondary | synthesis
 verified: true | false
 reviewed: YYYY-MM-DD
+
+# AI-Specific Fields (for AI_ADR type)
+aiProvider: aws-bedrock | azure-openai | openai | google | anthropic | custom | null
+aiModel: null             # Model name/version
+aiUseCase: generation | classification | extraction | conversation | agents | null
+aiRiskLevel: high | medium | low | null
+ethicsReviewed: false
+biasAssessed: false
+dataPrivacyReviewed: false
+humanOversight: full | partial | minimal | none | null
 ```
+
+**AI ADR Human Oversight Levels:**
+| Level | Description |
+|-------|-------------|
+| `full` | Human approval required for all AI outputs |
+| `partial` | Human review for high-impact decisions only |
+| `minimal` | Spot-check monitoring, automated escalation |
+| `none` | Fully autonomous (use with caution) |
 
 **Incubator (Research Idea):**
 ```yaml
@@ -205,6 +247,20 @@ outcome: null                 # Link to resulting deliverable when accepted
 ```yaml
 type: IncubatorNote
 parent-ideas: ["[[Incubator - Idea]]"]  # Can link to multiple ideas
+```
+
+**FormSubmission (Governance Forms):**
+```yaml
+type: FormSubmission
+formType: DPIA | SecurityReview | RiskAssessment | ChangeRequest | ComplianceCheck | Other
+status: draft | submitted | pending | approved | rejected | expired
+project: "[[Project Name]]" | null
+requestingTeam: null              # Team requiring the form
+submittedDate: YYYY-MM-DD | null
+responseDate: YYYY-MM-DD | null
+expiryDate: YYYY-MM-DD | null     # When approval expires
+referenceNumber: null             # External ticket reference
+attachments: []                   # Links to related files
 ```
 
 **OKR (Objectives and Key Results):**
@@ -406,6 +462,13 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/related <topic>` | Find all notes mentioning a topic (uses sub-agents) |
 | `/summarize <note>` | Summarise a note or set of notes |
 | `/timeline <project>` | Chronological project history (uses sub-agents) |
+| `/exec-summary <note>` | Generate non-technical executive summary |
+
+### Governance & Compliance
+| Command | Description |
+|---------|-------------|
+| `/form <type> <name>` | Quick-create form submission tracking note |
+| `/form-status [filter]` | Check status of form submissions |
 
 ### Maintenance
 | Command | Description |
@@ -520,6 +583,7 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 | MOC | `MOC - {{Title}}.md` | root | `MOC - Projects MOC.md` |
 | Dashboard | `Dashboard - {{Title}}.md` | root | `Dashboard - Dashboard.md` |
 | CodeSnippet | `CodeSnippet - {{Title}}.md` | root | `CodeSnippet - API Authentication.md` |
+| FormSubmission | `Form - {{Type}} - {{Name}}.md` | root | `Form - DPIA - Customer Portal.md` |
 | Page | `Page - {{Title}}.md` | root | `Page - Architecture Principles.md` |
 | Organisation | `Organisation - {{Name}}.md` | root | `Organisation - CloudVendor Inc.md` |
 | AtomicNote | `Atomic Note - {{Title}}.md` | root | `Atomic Note - CAP Theorem.md` |

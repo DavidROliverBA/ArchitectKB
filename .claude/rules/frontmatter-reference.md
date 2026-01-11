@@ -34,6 +34,10 @@ status: active | paused | completed
 priority: high | medium | low
 timeFrame: YYYY-MM-DD - YYYY-MM-DD
 collections: <program>
+# Transformation Classification
+transformationType: modernisation | migration | greenfield | integration | decommission | uplift | null
+transformationScope: enterprise | department | team | application | null
+aiInvolved: false         # Does project involve AI/ML?
 ```
 
 ### Meeting
@@ -50,10 +54,10 @@ collections: null         # "1:1", "Sprint"
 ```yaml
 type: Adr
 status: proposed | accepted | deprecated | superseded
-adrType: Technology_ADR | Integration_ADR | Security_ADR | Data_ADR
+adrType: Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 description: null
 project: null
-jiraTicket: null
+externalRef: null
 deciders: []
 approvers: []
 stakeholders: []
@@ -69,6 +73,15 @@ freshness: current | recent | stale
 source: primary | secondary | synthesis
 verified: false
 reviewed: null
+# AI-Specific Fields (for AI_ADR)
+aiProvider: aws-bedrock | azure-openai | openai | google | anthropic | custom | null
+aiModel: null             # Model name/version
+aiUseCase: generation | classification | extraction | conversation | agents | null
+aiRiskLevel: high | medium | low | null
+ethicsReviewed: false
+biasAssessed: false
+dataPrivacyReviewed: false
+humanOversight: full | partial | minimal | none | null
 ```
 
 ### Person
@@ -105,6 +118,20 @@ outcome: null
 ```yaml
 type: IncubatorNote
 parent-ideas: []          # ["[[Incubator - Idea]]"]
+```
+
+### FormSubmission
+```yaml
+type: FormSubmission
+formType: DPIA | SecurityReview | RiskAssessment | ChangeRequest | ComplianceCheck | Other
+status: draft | submitted | pending | approved | rejected | expired
+project: null             # "[[Project]]"
+requestingTeam: null      # Team requiring the form
+submittedDate: null       # YYYY-MM-DD
+responseDate: null        # YYYY-MM-DD
+expiryDate: null          # YYYY-MM-DD (when approval expires)
+referenceNumber: null     # External reference/ticket
+attachments: []           # Links to screenshots/PDFs
 ```
 
 ### OKR
