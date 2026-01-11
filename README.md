@@ -17,7 +17,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
 - **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 32 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 36 AI-assisted workflows + Node.js automation
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
@@ -130,7 +130,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 32 AI-assisted workflows
+│   ├── skills/             # 36 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customize)
 │   └── vault-conventions.md
@@ -322,7 +322,7 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes **32 AI-assisted workflows** accessible via Claude Code:
+This vault includes **36 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -349,6 +349,9 @@ This vault includes **32 AI-assisted workflows** accessible via Claude Code:
 - `/pptx-to-page <path>` - Convert PowerPoint to Page note (quick or visual mode)
 - `/document-extract <path>` - Extract text from scanned documents/photos (Sonnet sub-agents)
 - `/attachment-audit` - Audit all vault attachments with visual analysis (Sonnet sub-agents)
+
+### Sync & Integration
+- `/sync-governance` - Sync policies, guardrails, and org ADRs from Confluence (MCP)
 - `/sync-notion` - Sync meetings from Notion database
 
 ### Visual Analysis
@@ -704,7 +707,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Performance benchmarks: 50-200 notes/second
 
 **v1.3.0** (Released 2026-01-10):
-- ✅ 18 new Claude Code skills (32 total)
+- ✅ 18 new Claude Code skills (36 total with sync-governance)
 - ✅ Incubator system for research ideas with lifecycle management
 - ✅ Incubator archive workflow - graduated/rejected ideas move to `+Archive/Incubator/`
 - ✅ Graduate and reject commands with automatic archiving
