@@ -115,6 +115,10 @@ This is a **production-ready Obsidian vault template** designed specifically for
 ```
 obsidian-architect-vault-template/
 ├── +Archive/               # Soft-archived notes (organised by type)
+│   ├── Incubator/          # Graduated and rejected ideas
+│   ├── People/             # Former contacts
+│   ├── Projects/           # Completed/cancelled projects
+│   └── Tasks/              # Completed tasks
 ├── +Attachments/           # All binary files (images, PDFs, docs)
 ├── +Daily/                 # Daily journal entries (organized by year)
 │   ├── 2026/
@@ -356,7 +360,15 @@ This vault includes **32 AI-assisted workflows** accessible via Claude Code:
 - `/person <name>` - Create person note (clean links without prefix)
 - `/weblink <url>` - Save URL with AI summary
 - `/youtube <url>` - Save YouTube video with transcript analysis
-- `/incubator <title>` - Quick-create incubator idea
+
+### Incubator (Idea Lifecycle)
+- `incubator <title>` - Quick-create incubator idea
+- `incubator <title> [domain]` - Create with domain keywords
+- `incubator note <title> for <idea>` - Create research note
+- `incubator list [filter]` - List active ideas by status/domain
+- `incubator list all` - Include archived (graduated/rejected)
+- `incubator graduate <idea>` - Graduate to Project/ADR/Page (archives idea)
+- `incubator reject <idea>` - Reject with reason (archives idea)
 
 ### Vault Maintenance
 - `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
@@ -607,6 +619,8 @@ This template is based on real-world Solutions Architecture practice at enterpri
 **v1.3.0** (Released 2026-01-10):
 - ✅ 18 new Claude Code skills (32 total)
 - ✅ Incubator system for research ideas with lifecycle management
+- ✅ Incubator archive workflow - graduated/rejected ideas move to `+Archive/Incubator/`
+- ✅ Graduate and reject commands with automatic archiving
 - ✅ Rules directory with modular reference documentation
 - ✅ Archive system for soft-archiving notes
 - ✅ Engineering management skills (project-status, project-snapshot, dpia-status, adr-report)
