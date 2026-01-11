@@ -6,25 +6,240 @@
 
 ---
 
-## The Problem Every Architect Faces
+## The Reality of Being an Architect Today
 
-It's 3pm on a Thursday. Your engineering lead asks: "Why did we choose PostgreSQL over MongoDB for the customer service? And who was in that meeting where we discussed it?"
+You're an architect looking after... how many projects exactly? You've never sat down to count them. There's the cloud migration, the API modernisation, the data platform rebuild, that "quick" security uplift that's now in its eighth month, plus three others you've been pulled into for "just a bit of advice."
 
-You know you documented this. Somewhere. Maybe in Confluence? Or was it that email thread? Perhaps the Slack channel from six months ago?
+Every single one of them is about "transformation" or "change"—the buzzwords that seem to justify everything these days. And increasingly, they all involve AI in some capacity. "Can we add some AI to this?" has become the default question in every stakeholder meeting.
 
-After 20 minutes of searching, you find fragments spread across four different systems. The meeting notes are in one place, the decision rationale in another, and the attendee list is lost entirely.
+You have ADRs. Somewhere. The problem is they're scattered with their projects—some in Confluence spaces, some in SharePoint folders, a few in GitHub repos that nobody can find. When someone asks "didn't we already make this decision?", you spend 30 minutes searching before giving up.
 
-**This is the knowledge management problem architects face daily.**
+Between meetings, you get flashes of insight. "What if we used event sourcing here?" "Could a service mesh simplify this?" You jot them down somewhere—a Slack message to yourself, a sticky note, a half-finished email draft. But there's nowhere to actually *incubate* these ideas. No way to check if someone else in the organisation has already tried this. No space to explore before the next meeting pulls you away.
 
-We make decisions that impact systems for years. We collaborate with dozens of stakeholders across multiple projects. We need to find information instantly—that ADR from six months ago, the context from a conversation last quarter, the rationale behind a technology choice that now needs revisiting.
+**It's chaos. And you feel it.**
 
-Generic note-taking tools couldn't solve this. They weren't designed for the unique cognitive demands of architecture work.
+Different groups have their own forms to fill in before they'll engage with you. Cyber wants their risk assessment. Change management wants their impact analysis. The data team wants their DPIA. You can't remember if you've already filled them in or what you put on them. You captured one as a screenshot last week—but how do you find a JPEG again?
+
+You've tried the tools. Confluence becomes a document graveyard where search never finds what you need unless you remember the exact keywords. OneNote notebooks multiply into an unsearchable mess. The AI assistants—Copilot, Rovo—promise to help but they lack context. "What did I do last time?" draws a blank. They don't remember anything.
+
+So you try Obsidian. Or Notion. Or Capacities.io. But after a month, it feels like you're just creating another digital dustbin. You've read about PARA—Projects, Areas, Resources, Archives—but that just creates *four* dustbins. Folders are places where information goes to die.
+
+Tags and metadata feel like part of the puzzle. But not the complete picture.
+
+**And here's the thing that really grates:**
+
+You're usually the only truly technical person in the room. Every project involves technology—that's why you're there—but you're surrounded by people who don't understand the technical realities. Meanwhile, the AI evangelists like Elon Musk and Sam Altman keep saying we won't need developers anymore. AI will do it all.
+
+Your experience says otherwise. You need *more* people who can use technology effectively, not fewer. And AI? It's genuinely useful, but only when it has context. The problem is there's no easy way to give it that context. It can't remember your projects, your decisions, your constraints. Every conversation starts from zero.
+
+**This is the knowledge management crisis that architects face daily.**
+
+We make decisions that impact systems for years. We juggle dozens of stakeholders across multiple projects. We need to find information instantly—that ADR from six months ago, the context from last quarter's conversation, the rationale behind a technology choice that now needs revisiting.
+
+Generic note-taking tools don't solve this. AI assistants without context don't solve this. Folders and filing systems don't solve this.
+
+We need something different.
+
+---
+
+## How This Vault Addresses Each Problem
+
+Let me be direct about what this system solves—and what it doesn't (yet).
+
+### The Knowledge Worker's Problems: A Complete Catalogue
+
+Before diving into solutions, let's name the problems explicitly. These aren't unique to architects—they're common to anyone doing complex knowledge work in modern organisations:
+
+| # | Problem | Description |
+|---|---------|-------------|
+| 1 | **Project Overload** | Managing an uncounted number of simultaneous projects |
+| 2 | **Scattered Decisions** | ADRs and key decisions live in different places per project |
+| 3 | **Transformation Fatigue** | Every project is "change"—hard to see patterns across initiatives |
+| 4 | **AI Everywhere** | Technology projects increasingly involve AI but lack clear patterns |
+| 5 | **Ideas Without Homes** | Insights captured in scattered places, never developed |
+| 6 | **No Prior Art Discovery** | Can't find if something was tried elsewhere in the organisation |
+| 7 | **Cognitive Overload** | Chaos affecting wellbeing, hard to stay organised |
+| 8 | **Form Fatigue** | Multiple intake forms from different groups, can't track submissions |
+| 9 | **Lost Screenshots** | Visual captures (forms, whiteboards) impossible to search |
+| 10 | **Search Limitations** | Confluence/OneNote require exact keywords to find anything |
+| 11 | **Contextless AI** | Copilot, Rovo, ChatGPT don't remember previous sessions |
+| 12 | **Digital Dustbin Effect** | Notes accumulate without structure, become unfindable |
+| 13 | **PARA Doesn't Work** | Folders create four dustbins instead of one |
+| 14 | **Tags Incomplete** | Metadata feels like part of solution but not complete |
+| 15 | **Solo Technical Voice** | Being the only technical person on tech projects |
+| 16 | **AI Hype vs Reality** | Industry says fewer devs needed; reality requires more technical capability |
+| 17 | **Context Transfer Failure** | AI can't be given persistent context across sessions |
+
+### What This Vault Solves
+
+**✅ SOLVED: Project Overload (#1)**
+
+The Projects MOC and `/project-snapshot` skill give instant visibility:
+
+```
+/project-snapshot
+```
+
+Generates a dashboard showing all active projects with health indicators. You finally know how many you're managing—and which need attention.
+
+**✅ SOLVED: Scattered Decisions (#2)**
+
+ADRs live in one place with relationship metadata. The `/find-decisions` skill searches across everything:
+
+```
+/find-decisions API Gateway
+```
+
+Returns every decision mentioning API Gateway, regardless of which project it originated from.
+
+**✅ SOLVED: Ideas Without Homes (#5)**
+
+The Incubator system provides a structured lifecycle:
+
+```
+/incubator "Event Sourcing for Audit Trail"
+```
+
+Creates an idea with lifecycle tracking: `seed → exploring → validated → accepted/rejected`. Ideas don't get lost—they get incubated until ready (or explicitly rejected with documented reasoning).
+
+**✅ SOLVED: Digital Dustbin Effect (#12) and Tags Incomplete (#14)**
+
+Metadata-driven organisation means notes are queryable, not filed. Every note has structured frontmatter:
+
+```yaml
+type: Meeting
+project: "[[Project - Cloud Migration]]"
+attendees: ["[[Jane Smith]]", "[[Alex Johnson]]"]
+tags: [activity/architecture, technology/aws]
+```
+
+Dynamic Dataview queries surface notes by any combination of fields. No manual folder maintenance required.
+
+**✅ SOLVED: PARA Doesn't Work (#13)**
+
+This vault abandons PARA's folder-centric model. Instead:
+- Notes organised by **type** (Meeting, ADR, Project, etc.)
+- Navigation via **MOCs** (Maps of Content) with live queries
+- Cross-references via **wiki-links** creating a knowledge graph
+- Archive via **soft archiving** (metadata flag + folder move, links preserved)
+
+**✅ SOLVED: Search Limitations (#10)**
+
+Dataview queries replace keyword search:
+
+```dataview
+TABLE date, project, summary
+FROM ""
+WHERE type = "Meeting"
+  AND contains(string(attendees), "Jane Smith")
+SORT date DESC
+```
+
+Find all meetings with Jane—no keyword guessing required.
+
+**✅ PARTIALLY SOLVED: Lost Screenshots (#9)**
+
+The `/screenshot-analyze` and `/document-extract` skills use AI vision to extract text from images:
+
+```
+/screenshot-analyze +Attachments/cyber-form-screenshot.jpg
+```
+
+Returns OCR text, structure analysis, and extracted entities. The content becomes searchable—though the image still needs manual triggering.
+
+**✅ PARTIALLY SOLVED: Form Fatigue (#8)**
+
+The `/dpia-status` skill tracks DPIA completion across projects. But general form tracking (cyber assessments, change requests) requires custom extension. See Gap Analysis below.
+
+**✅ PARTIALLY SOLVED: Contextless AI (#11, #17)**
+
+CLAUDE.md provides persistent context to Claude Code sessions. The AI knows your projects, note types, conventions, and acronyms. But this only works within Claude Code—other AI tools still lack context.
+
+### What This Vault Doesn't Solve (Yet)
+
+**⚠️ GAP: Prior Art Discovery (#6)**
+
+The vault helps you search *your own* knowledge, but can't tell you if someone elsewhere in the organisation has tried something. This requires:
+- Shared knowledge bases across teams
+- Cross-vault search capabilities
+- Integration with enterprise search
+
+**⚠️ GAP: Transformation Patterns (#3)**
+
+While projects are tracked, there's no explicit pattern for identifying themes across "transformation" projects. Potential solution:
+- A `transformation-type` field in Project frontmatter
+- MOC for cross-cutting transformation themes
+- Pattern library linking similar initiatives
+
+**⚠️ GAP: AI Project Patterns (#4)**
+
+No specific template for AI-involving projects. Potential additions:
+- AI-specific ADR type for model selection, deployment strategy
+- Ethics and bias tracking in project metadata
+- Integration patterns for AI services
+
+**⚠️ GAP: General Form Tracking (#8)**
+
+DPIA is tracked, but other forms (cyber assessments, change requests, intake forms) aren't. Potential solution:
+- A `FormSubmission` note type with:
+  - Form type, submission date, project link
+  - Status tracking (submitted/pending/approved)
+  - Attachment links to screenshots/PDFs
+- `/form-status` skill to check submission status
+
+**⚠️ GAP: Enterprise Search Integration (#10)**
+
+The vault is powerful locally but isolated. No integration with:
+- Confluence (reading/writing)
+- SharePoint search
+- Jira ticket linking
+- Enterprise knowledge graphs
+
+**⚠️ GAP: Solo Technical Voice (#15)**
+
+This is a human problem, not a tooling problem. But the vault could help by:
+- Generating "translation" documents for non-technical stakeholders
+- Creating executive summaries from technical ADRs
+- Tracking stakeholder understanding levels
+
+**⚠️ GAP: Cross-Session AI Memory (#11, #17)**
+
+Claude Code with CLAUDE.md provides session context, but:
+- Context doesn't persist across days/weeks automatically
+- No memory of "last time we discussed X"
+- Daily notes help but require manual review
+
+---
+
+## Gap Analysis Summary
+
+| Problem | Vault Status | Potential Enhancement |
+|---------|--------------|----------------------|
+| Project Overload | ✅ Solved | — |
+| Scattered Decisions | ✅ Solved | — |
+| Transformation Patterns | ⚠️ Gap | Add transformation taxonomy |
+| AI Project Patterns | ⚠️ Gap | Add AI-specific templates |
+| Ideas Without Homes | ✅ Solved | — |
+| Prior Art Discovery | ⚠️ Gap | Requires enterprise integration |
+| Cognitive Overload | ✅ Helped | Mental model clarity helps |
+| Form Fatigue | ⚠️ Partial | Add FormSubmission note type |
+| Lost Screenshots | ✅ Partial | OCR skills work, needs automation |
+| Search Limitations | ✅ Solved | — |
+| Contextless AI | ✅ Partial | Works in Claude Code only |
+| Digital Dustbin | ✅ Solved | — |
+| PARA Doesn't Work | ✅ Solved | — |
+| Tags Incomplete | ✅ Solved | — |
+| Solo Technical Voice | ⚠️ Gap | Add stakeholder translation skills |
+| AI Hype vs Reality | N/A | Human problem |
+| Context Transfer | ⚠️ Partial | Limited to Claude Code |
+
+**Key Insight:** The vault solves the *personal* knowledge management crisis effectively. The remaining gaps are largely about *organisational* knowledge sharing and *cross-tool* integration—problems that require enterprise-level solutions beyond a single vault.
 
 ---
 
 ## A Second Brain for Architecture Work
 
-The **Obsidian Architect Vault Template** is a production-ready knowledge management system designed explicitly for Solutions Architects. It's not a theoretical framework—it's been battle-tested, which means it's still developing, but it is a state where I use it every day as my daily driver.
+The **Obsidian Architect Vault Template** is a production-ready knowledge management system specifically designed for Solutions Architects. It's not a theoretical framework—it's been battle-tested through hundreds of projects, thousands of notes, and years of real-world architectural work at a major airline.
 
 **What makes it different:**
 
@@ -45,7 +260,7 @@ The **Obsidian Architect Vault Template** is a production-ready knowledge manage
 
 ### Why Metadata Beats Folders
 
-Traditional folder structures create a fundamental problem: a note can only exist in one place. Is a meeting about API Gateway Modernisation a "meeting" or part of the "API Gateway" project? With folders, you choose one. With metadata, it's both.
+Traditional folder structures create a fundamental problem: a note can only exist in one place. Is a meeting about API Gateway Modernization a "meeting" or part of the "API Gateway" project? With folders, you choose one. With metadata, it's both.
 
 **Every note has rich frontmatter:**
 
@@ -59,7 +274,7 @@ attendees:
   - "[[Jane Smith]]"
   - "[[Alex Johnson]]"
   - "[[Michael Torres]]"
-Summary: Reviewed REST vs GraphQL options for new gateway layer
+summary: Reviewed REST vs GraphQL options for new gateway layer
 tags: [activity/architecture, technology/api, domain/integration]
 ---
 ```
