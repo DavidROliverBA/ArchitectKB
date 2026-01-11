@@ -1,6 +1,7 @@
 # The Obsidian Architect Vault: A Complete Knowledge Management System for Solutions Architects
 
 **Published:** 2026-01-10 (v1.3.0)
+**Updated:** 2026-01-11 (v1.4.0)
 **Author:** David Oliver
 **Repository:** [github.com/DavidROliverBA/obsidian-architect-vault-template](https://github.com/DavidROliverBA/obsidian-architect-vault-template)
 
@@ -147,9 +148,23 @@ The `/screenshot-analyze` and `/document-extract` skills use AI vision to extrac
 
 Returns OCR text, structure analysis, and extracted entities. The content becomes searchable—though the image still needs manual triggering.
 
-**✅ PARTIALLY SOLVED: Form Fatigue (#8)**
+**✅ SOLVED: Form Fatigue (#8)** *(New in v1.4.0)*
 
-The `/dpia-status` skill tracks DPIA completion across projects. But general form tracking (cyber assessments, change requests) requires custom extension. See Gap Analysis below.
+The FormSubmission system now tracks all governance forms:
+
+```
+/form DPIA "Customer Portal"
+/form SecurityReview "API Gateway"
+/form-status pending
+```
+
+Creates structured tracking notes with:
+- Form type (DPIA, SecurityReview, RiskAssessment, ChangeRequest, ComplianceCheck)
+- Status lifecycle (draft → submitted → pending → approved/rejected → expired)
+- Expiry date tracking with automatic alerts
+- Project and team linkage
+
+The MOC - Form Submissions dashboard shows forms requiring attention, expiring soon, and status by project.
 
 **✅ PARTIALLY SOLVED: Contextless AI (#11, #17)**
 
@@ -164,28 +179,47 @@ The vault helps you search *your own* knowledge, but can't tell you if someone e
 - Cross-vault search capabilities
 - Integration with enterprise search
 
-**⚠️ GAP: Transformation Patterns (#3)**
+**✅ SOLVED: Transformation Patterns (#3)** *(New in v1.4.0)*
 
-While projects are tracked, there's no explicit pattern for identifying themes across "transformation" projects. Potential solution:
-- A `transformation-type` field in Project frontmatter
-- MOC for cross-cutting transformation themes
-- Pattern library linking similar initiatives
+Projects now include transformation classification:
 
-**⚠️ GAP: AI Project Patterns (#4)**
+```yaml
+transformationType: modernisation | migration | greenfield | integration | decommission | uplift
+transformationScope: enterprise | department | team | application
+aiInvolved: false  # Flag for AI/ML projects
+```
 
-No specific template for AI-involving projects. Potential additions:
-- AI-specific ADR type for model selection, deployment strategy
-- Ethics and bias tracking in project metadata
-- Integration patterns for AI services
+This enables portfolio analysis—see all migrations, identify enterprise-wide transformations, or filter to AI projects. The Projects MOC includes sections for each transformation type.
 
-**⚠️ GAP: General Form Tracking (#8)**
+**✅ SOLVED: AI Project Patterns (#4)** *(New in v1.4.0)*
 
-DPIA is tracked, but other forms (cyber assessments, change requests, intake forms) aren't. Potential solution:
-- A `FormSubmission` note type with:
-  - Form type, submission date, project link
-  - Status tracking (submitted/pending/approved)
-  - Attachment links to screenshots/PDFs
-- `/form-status` skill to check submission status
+New `AI_ADR` type with dedicated fields for AI architecture decisions:
+
+```yaml
+adrType: AI_ADR
+aiProvider: aws-bedrock | azure-openai | openai | google | anthropic | custom
+aiModel: claude-3 | gpt-4 | llama | custom
+aiUseCase: generation | classification | extraction | conversation | agents
+aiRiskLevel: high | medium | low
+ethicsReviewed: false
+biasAssessed: false
+dataPrivacyReviewed: false
+humanOversight: full | partial | minimal | none
+```
+
+ADR template includes "AI Considerations" section with checklists for ethics review, bias assessment, data privacy, and model governance. Human oversight levels are clearly defined from "full" (human approval for all outputs) to "none" (fully autonomous).
+
+**✅ SOLVED: General Form Tracking (#8)** *(New in v1.4.0)*
+
+FormSubmission note type tracks all governance forms:
+
+```yaml
+type: FormSubmission
+formType: DPIA | SecurityReview | RiskAssessment | ChangeRequest | ComplianceCheck | Other
+status: draft | submitted | pending | approved | rejected | expired
+```
+
+Skills: `/form <type> <name>` creates tracking notes, `/form-status [filter]` generates status reports. MOC shows forms requiring attention and expiring approvals.
 
 **⚠️ GAP: Enterprise Search Integration (#10)**
 
@@ -195,12 +229,21 @@ The vault is powerful locally but isolated. No integration with:
 - Jira ticket linking
 - Enterprise knowledge graphs
 
-**⚠️ GAP: Solo Technical Voice (#15)**
+**✅ PARTIALLY SOLVED: Solo Technical Voice (#15)** *(New in v1.4.0)*
 
-This is a human problem, not a tooling problem. But the vault could help by:
-- Generating "translation" documents for non-technical stakeholders
-- Creating executive summaries from technical ADRs
-- Tracking stakeholder understanding levels
+The `/exec-summary` skill generates non-technical summaries from ADRs, Projects, or Pages:
+
+```
+/exec-summary "ADR - API Gateway Selection" exec
+/exec-summary "Project - Cloud Migration" manager
+```
+
+Translates technical content for different audiences:
+- `exec` - C-suite, board level (business impact, risk, cost)
+- `manager` - Department heads (operational impact, timeline, resources)
+- `stakeholder` - Project stakeholders (what changes, how affects them)
+
+Includes automatic translation of technical terms (API → "system connection", latency → "response time", etc.) and tone guidelines (active voice, short sentences, no unexplained acronyms).
 
 **⚠️ GAP: Cross-Session AI Memory (#11, #17)**
 
@@ -217,23 +260,23 @@ Claude Code with CLAUDE.md provides session context, but:
 |---------|--------------|----------------------|
 | Project Overload | ✅ Solved | — |
 | Scattered Decisions | ✅ Solved | — |
-| Transformation Patterns | ⚠️ Gap | Add transformation taxonomy |
-| AI Project Patterns | ⚠️ Gap | Add AI-specific templates |
+| Transformation Patterns | ✅ Solved (v1.4.0) | transformationType, transformationScope, aiInvolved |
+| AI Project Patterns | ✅ Solved (v1.4.0) | AI_ADR type with ethics/bias/oversight |
 | Ideas Without Homes | ✅ Solved | — |
 | Prior Art Discovery | ⚠️ Gap | Requires enterprise integration |
 | Cognitive Overload | ✅ Helped | Mental model clarity helps |
-| Form Fatigue | ⚠️ Partial | Add FormSubmission note type |
+| Form Fatigue | ✅ Solved (v1.4.0) | FormSubmission type, /form, /form-status |
 | Lost Screenshots | ✅ Partial | OCR skills work, needs automation |
 | Search Limitations | ✅ Solved | — |
 | Contextless AI | ✅ Partial | Works in Claude Code only |
 | Digital Dustbin | ✅ Solved | — |
 | PARA Doesn't Work | ✅ Solved | — |
 | Tags Incomplete | ✅ Solved | — |
-| Solo Technical Voice | ⚠️ Gap | Add stakeholder translation skills |
+| Solo Technical Voice | ✅ Partial (v1.4.0) | /exec-summary skill for translation |
 | AI Hype vs Reality | N/A | Human problem |
 | Context Transfer | ⚠️ Partial | Limited to Claude Code |
 
-**Key Insight:** The vault solves the *personal* knowledge management crisis effectively. The remaining gaps are largely about *organisational* knowledge sharing and *cross-tool* integration—problems that require enterprise-level solutions beyond a single vault.
+**Key Insight:** The vault now solves the *personal* knowledge management crisis comprehensively. v1.4.0 closed the major gaps around governance forms, transformation tracking, and AI architecture patterns. The remaining gaps are largely about *organisational* knowledge sharing and *cross-tool* integration—problems that require enterprise-level solutions beyond a single vault.
 
 ---
 
@@ -1500,15 +1543,15 @@ Follow `Page - Vault Setup Checklist.md`:
 
 **Repository:** https://github.com/DavidROliverBA/obsidian-architect-vault-template
 
-**Latest Release:** [v1.3.0](https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.3.0)
+**Latest Release:** [v1.4.0](https://github.com/DavidROliverBA/obsidian-architect-vault-template/releases/tag/v1.4.0)
 
 | Component | Count | Description |
 |-----------|-------|-------------|
 | Directories | 9 | Organised folder structure |
-| Note Templates | 15 | All note types covered |
+| Note Templates | 16 | All note types covered (incl. FormSubmission) |
 | Example Notes | 20+ | Realistic interconnected examples |
-| MOCs | 13 | Dynamic navigation hubs |
-| Claude Code Skills | 32 | AI-assisted workflows |
+| MOCs | 14 | Dynamic navigation hubs (incl. Form Submissions) |
+| Claude Code Skills | 35 | AI-assisted workflows |
 | Node.js Scripts | 3 | Automated quality checks |
 | Documentation Files | 8 | Comprehensive guides |
 
@@ -1564,6 +1607,7 @@ This template was created by extracting and generalising patterns from a product
 **GitHub:** [github.com/DavidROliverBA](https://github.com/DavidROliverBA)
 
 **Version History:**
+- **v1.4.0** (2026-01-11) — FormSubmission system, Transformation taxonomy, AI_ADR type, /exec-summary skill
 - **v1.3.0** (2026-01-10) — Incubator system, 18 new skills, rules directory
 - **v1.2.0** (2026-01-09) — Node.js automation, vault maintenance skills
 - **v1.1.0** (2026-01-08) — Visual analysis skills, screenshots
@@ -1577,4 +1621,4 @@ This template was created by extracting and generalising patterns from a product
 
 ---
 
-**Full Changelog:** https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...v1.3.0
+**Full Changelog:** https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...v1.4.0
