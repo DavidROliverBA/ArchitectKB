@@ -444,6 +444,93 @@ npm run test
 
 ---
 
+## 🔄 Sync & External Updates
+
+This vault supports syncing content from external sources and receiving updates from the template repository.
+
+### Syncing from Confluence (MCP)
+
+Use `/sync-governance` to pull policies, guardrails, and organisational ADRs from Confluence:
+
+```bash
+/sync-governance                    # Incremental sync (changes since last sync)
+/sync-governance --full             # Full sync (re-fetch everything)
+/sync-governance --check            # Check for updates without syncing
+/sync-governance --type policies    # Sync only policies
+/sync-governance --type guardrails  # Sync only guardrails
+/sync-governance --type adrs        # Sync only external ADRs
+```
+
+**What gets synced:**
+
+| Content Type | Confluence Source | Local Path |
+|--------------|-------------------|------------|
+| Policies | Pages with `governance-policy` label | `+Sync/Policies/` |
+| Guardrails | Pages in guardrail directories | `+Sync/Guardrails/` |
+| Organisational ADRs | Pages with `Approved_Architecture_ADR` label | `+Sync/Org-ADRs/` |
+
+**Prerequisites:**
+- Atlassian MCP plugin connected and authenticated
+- Configure source pages in `.claude/sync/manifest.json`
+
+**Benefits:**
+- **Offline access** to governance content during architecture work
+- **Cross-referencing** with local ADRs and projects
+- **AI-assisted analysis** when creating new designs
+- **Version tracking** to detect policy changes
+
+### Syncing from Notion
+
+Use `/sync-notion` to pull meetings from a Notion database:
+
+```bash
+/sync-notion                        # Sync all new/modified meetings
+/sync-notion --since 2026-01-01     # From specific date
+/sync-notion --dry-run              # Preview only, no changes
+```
+
+**Prerequisites:**
+- Notion API token configured
+- `scripts/notion_sync.py` script exists
+
+### Updating from Template Repository
+
+This vault is based on a GitHub template. To receive updates:
+
+**1. Add template as upstream remote (one-time):**
+```bash
+git remote add template https://github.com/DavidROliverBA/obsidian-architect-vault-template.git
+```
+
+**2. Fetch and review updates:**
+```bash
+git fetch template main
+git log HEAD..template/main --oneline  # See what's new
+```
+
+**3. Merge updates (carefully):**
+```bash
+git merge template/main --no-commit    # Merge without auto-commit
+# Review changes, resolve conflicts
+git commit -m "Merge template updates"
+```
+
+**What typically updates:**
+- `.claude/skills/` - New and improved AI workflows
+- `.claude/rules/` - Updated conventions and reference docs
+- `scripts/` - New automation scripts
+- `+Templates/` - Improved note templates
+- `package.json` - New npm automation scripts
+
+**What you should NOT merge:**
+- Your personal notes and content
+- Custom context files in `.claude/context/`
+- Your `.claude/sync/manifest.json`
+
+**Recommended cadence:** Check for template updates monthly.
+
+---
+
 ## 🛠️ Advanced Features
 
 ### Quality Indicators
