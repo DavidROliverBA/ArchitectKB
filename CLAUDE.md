@@ -545,6 +545,48 @@ These provide deeper detail than this main file - load when working on specific 
 
 Notes with `type: Zettel` and some `type: Page` notes may contain API keys, tokens, passwords, and credentials. **AI assistants should NEVER expose, copy, or transmit this sensitive information.**
 
+## Search Strategy
+
+**IMPORTANT:** This vault has a pre-computed knowledge graph index. Always query the graph BEFORE using Grep or find commands.
+
+### Graph-First Search Order
+
+1. **First: Query the graph index** (fast, structured)
+   ```bash
+   node scripts/graph-query.js --search "<term>"      # Keyword search
+   node scripts/graph-query.js --type <Type>          # Filter by type
+   node scripts/graph-query.js --type Adr --status proposed  # Combined filters
+   node scripts/graph-query.js --backlinks "<Note>"   # Find references
+   ```
+
+2. **Second: Use Grep** (only if graph doesn't have needed data)
+   - For content not in frontmatter
+   - For regex patterns
+   - For specific line content
+
+3. **Third: Use Glob** (for file patterns only)
+   - When you need specific file paths
+   - When searching by filename pattern
+
+### Common Graph Queries
+
+| Need | Graph Command |
+|------|---------------|
+| Find all ADRs | `node scripts/graph-query.js --type Adr` |
+| Active projects | `node scripts/graph-query.js --type Project --status active` |
+| High priority tasks | `node scripts/graph-query.js --type Task --priority high` |
+| Search for "kafka" | `node scripts/graph-query.js --search kafka` |
+| Orphaned notes | `node scripts/graph-query.js --orphans` |
+| Broken links | `node scripts/graph-query.js --broken-links` |
+| Notes linking to X | `node scripts/graph-query.js --backlinks "Project - Caerus"` |
+| Vault statistics | `node scripts/graph-query.js --stats` |
+
+### When to Skip the Graph
+
+- Searching inside code blocks or specific text patterns
+- Looking for content changes (use `git log -p`)
+- File operations (use Glob directly)
+
 ## Working with This Vault
 
 ### Linking Conventions
