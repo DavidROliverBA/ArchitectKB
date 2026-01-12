@@ -14,9 +14,12 @@
     "health:markdown": "node scripts/health-check.js --format markdown",
     "graph": "node scripts/generate-graph.js",
     "graph:metrics": "node scripts/generate-graph.js --metrics",
+    "graph:build": "node scripts/generate-graph-enhanced.js",
+    "graph:watch": "node scripts/graph-watcher.js",
+    "graph:query": "node scripts/graph-query.js",
     "stats": "node scripts/health-check.js --format markdown > VAULT_STATS.md && echo 'Statistics exported to VAULT_STATS.md'",
     "test": "npm run validate && npm run health",
-    "audit": "npm run validate:all && npm run health && npm run graph"
+    "audit": "npm run validate:all && npm run health && npm run graph:build"
   },
   "keywords": [
     "obsidian",
