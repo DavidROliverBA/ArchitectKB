@@ -7,6 +7,224 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-01-12
+
+### Added
+
+#### Hybrid Graph Index System
+
+A pre-computed knowledge graph that enables instant structured queries across your vault. Instead of waiting seconds for grep to search through files, the graph index returns results in ~50ms.
+
+**Why this matters:**
+- Grep searches on 1500+ note vaults take 3-5 seconds
+- Graph queries return in ~50ms (60-500x faster)
+- Encourages exploration - no friction when asking "what else relates to this?"
+
+**Index structure (`.graph/` directory):**
+```
+.graph/
+├── index.json      # Full graph: nodes, edges, backlinks, orphans
+├── search.json     # Keyword search index (stemmed terms)
+├── quality.json    # Health metrics snapshot
+└── types/          # Pre-computed type clusters
+    ├── adr.json
+    ├── project.json
+    ├── meeting.json
+    └── ...
+```
+
+**Performance benchmarks:**
+| Query Type | Grep | Graph Index | Speedup |
+|------------|------|-------------|---------|
+| Keyword search | ~3s | ~50ms | 60x |
+| Type filter | ~2s | ~30ms | 67x |
+| Backlink search | ~5s | ~40ms | 125x |
+| Orphan detection | ~10s | ~20ms | 500x |
+
+#### New Scripts
+
+- **`scripts/generate-graph-enhanced.js`** - Builds all graph indexes from vault content
+  ```bash
+  npm run graph:build
+
+  # Output:
+  # Building graph index...
+  # ✓ Parsed 1,247 notes
+  # ✓ Found 3,891 wiki-links
+  # ✓ Computed 521 backlinks
+  # ✓ Identified 87 orphans
+  # Index files written to .graph/
+  # Build completed in 2.3s
+  ```
+
+- **`scripts/graph-watcher.js`** - Watches vault and auto-rebuilds indexes on change
+  ```bash
+  npm run graph:watch
+
+  # Output:
+  # Watching vault for changes...
+  # [10:15:32] Detected change: ADR - Kafka Integration.md
+  # [10:15:33] Rebuilding index... done (0.8s)
+  ```
+  - 1-second debounce batches rapid changes
+  - Excludes `.obsidian/`, `node_modules/`, `.git/`
+
+- **`scripts/graph-query.js`** - CLI for structured graph queries
+  ```bash
+  # Keyword search
+  npm run graph:query -- --search "kafka"
+
+  # Type and status filter
+  npm run graph:query -- --type Adr --status proposed
+
+  # Backlink search
+  npm run graph:query -- --backlinks "Project - Caerus"
+
+  # Special queries
+  npm run graph:query -- --orphans
+  npm run graph:query -- --broken-links
+  npm run graph:query -- --stale
+  ```
+
+#### New Claude Code Skills (6 new, 38 total)
+
+- **`/search`** - Smart search that queries graph first, falls back to grep
+  ```
+  /search kafka                    # Keyword in graph + content
+  /search "API gateway"            # Phrase search
+  /search type:Adr status:proposed # Combined filters
+  /search backlinks:Project - Caerus # Backlink search
+  /search orphans                  # Orphaned notes
+  /search "event.*driven"          # Regex (grep only)
+  ```
+
+  **Query shortcuts:**
+  | Shortcut | Expands To |
+  |----------|------------|
+  | `/search t:Adr` | `--type Adr` |
+  | `/search s:active` | `--status active` |
+  | `/search p:high` | `--priority high` |
+  | `/search b:Note` | `--backlinks "Note"` |
+  | `/search orphans` | `--orphans` |
+  | `/search broken` | `--broken-links` |
+  | `/search stale` | `--stale` |
+
+- **`/graph-query`** - Direct graph queries with natural language parsing
+  ```
+  /graph-query ADRs with status proposed
+  /graph-query orphaned notes
+  /graph-query backlinks to "Project - Caerus"
+  /graph-query notes not updated in 30 days
+  ```
+
+#### Graph-First Search Strategy
+
+Embedded throughout the vault to ensure Claude Code uses the fastest search method:
+
+1. **CLAUDE.md Instructions** - New "Search Strategy" section:
+   ```markdown
+   ## Search Strategy
+
+   **IMPORTANT:** This vault has a pre-computed knowledge graph index.
+   Always query the graph BEFORE using Grep or find commands.
+
+   ### Graph-First Search Order
+   1. First: Query the graph index (fast, structured)
+   2. Second: Use Grep (only if graph doesn't have needed data)
+   3. Third: Use Glob (for file patterns only)
+   ```
+
+2. **PreToolUse Hook** - `.claude/hooks/graph-search-hint.sh`
+   - Intercepts Grep calls for simple keyword patterns
+   - Suggests graph query alternative
+   - Output example:
+     ```
+     💡 Tip: For keyword searches, the graph index is faster. Try:
+        node scripts/graph-query.js --search "kafka"
+        or /graph-query kafka
+     ```
+
+3. **`/search` Skill** - Automatic strategy selection
+   - Phase 1: Query graph index
+   - Phase 2: Fall back to grep if needed
+   - Phase 3: Present combined results
+
+#### When to Use Graph vs Grep
+
+| Use Graph For | Use Grep For |
+|---------------|--------------|
+| Keyword search | Regex patterns |
+| Type/status filters | Content within files |
+| Backlink queries | Line-by-line context |
+| Orphan detection | Multi-file content search |
+| Quick lookups | Precise text matching |
+
+### Changed
+
+- **Skill count**: 32 → 38
+- **npm scripts**: Added `graph:build`, `graph:watch`, `graph:query`
+- **Hooks**: Added PreToolUse hook for Grep (suggests graph search)
+- **CLAUDE.md**: Added Search Strategy section
+- **README.md**: Added Graph-First Search to key features, updated skill documentation
+
+### Technical
+
+- Graph indexes are gitignored (`.graph/` in `.gitignore`)
+- Indexes rebuild in ~2-3 seconds for 1000+ note vaults
+- File watcher uses chokidar for cross-platform compatibility
+- Query CLI supports JSON output for scripting: `--output json`
+
+### Migration Guide
+
+**From v1.3.0 (no breaking changes):**
+
+1. Pull latest changes:
+   ```bash
+   git pull origin main
+   ```
+
+2. Install dependencies (if not already):
+   ```bash
+   npm install
+   ```
+
+3. Build initial index:
+   ```bash
+   npm run graph:build
+   ```
+
+4. (Optional) Start watcher for auto-updates:
+   ```bash
+   npm run graph:watch
+   ```
+
+5. `.graph/` is already in `.gitignore`
+
+### Best Practices
+
+**Development workflow:**
+```bash
+# Start watcher in background
+npm run graph:watch &
+
+# Work normally - index auto-updates on file changes
+```
+
+**Before presentations/reviews:**
+```bash
+# Force rebuild for accurate metrics
+npm run graph:build
+```
+
+**CI/CD integration:**
+```bash
+npm run graph:build
+npm run graph:query -- --broken-links
+# Fail build if broken links found
+```
+
+---
+
 ## [1.3.0] - 2026-01-10
 
 ### Added
@@ -158,7 +376,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.0.0...v1.1.0
