@@ -17,7 +17,8 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
 - **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 37 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 38 AI-assisted workflows + Node.js automation
+- **Graph-First Search** - Pre-computed index for instant queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
@@ -322,7 +323,7 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes **37 AI-assisted workflows** accessible via Claude Code:
+This vault includes **38 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -373,6 +374,10 @@ This vault includes **37 AI-assisted workflows** accessible via Claude Code:
 - `incubator graduate <idea>` - Graduate to Project/ADR/Page (archives idea)
 - `incubator reject <idea>` - Reject with reason (archives idea)
 
+### Search & Discovery
+- `/search <query>` - Smart search: queries graph index first, falls back to grep
+- `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
+
 ### Vault Maintenance
 - `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
 - `/orphans` - Find notes with no backlinks (sub-agents)
@@ -416,8 +421,16 @@ npm run validate
 # Vault health metrics and quality score
 npm run health
 
-# Export knowledge graph (JSON)
-npm run graph
+# Build graph index (for fast queries)
+npm run graph:build
+
+# Query the graph index
+npm run graph:query -- --type Adr --status proposed
+npm run graph:query -- --search "kafka"
+npm run graph:query -- --orphans
+
+# Watch for changes and auto-rebuild
+npm run graph:watch
 
 # Run all checks
 npm run test
@@ -427,6 +440,9 @@ npm run test
 - **validate.js** - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
 - **health-check.js** - Analyzes note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
 - **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualization
+- **generate-graph-enhanced.js** - Builds pre-computed graph index for fast queries (outputs to `.graph/`)
+- **graph-query.js** - CLI for instant structured queries against the graph index
+- **graph-watcher.js** - File watcher for auto-rebuilding index on changes
 
 **Output Formats:**
 - Console (colorized, human-readable)
@@ -717,7 +733,14 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Research & discovery skills (related, summarize, timeline, find-decisions)
 - ✅ Enhanced quick capture (youtube, incubator)
 
-**v1.4** (Planned):
+**v1.4.0** (Released 2026-01-12):
+- ✅ **Hybrid Graph Index System** - Pre-computed indexes for instant queries
+- ✅ Graph-first search strategy with `/search` skill
+- ✅ PreToolUse hook for search optimization hints
+- ✅ `npm run graph:build`, `graph:watch`, `graph:query` commands
+- ✅ 38 total Claude Code skills
+
+**v1.5** (Planned):
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
 - Mobile optimization and mobile-first workflows
