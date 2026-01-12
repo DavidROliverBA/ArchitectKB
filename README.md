@@ -17,7 +17,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organization** - Notes organized by `type` field, not folders
 - **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 36 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 37 AI-assisted workflows + Node.js automation
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
@@ -130,7 +130,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 36 AI-assisted workflows
+│   ├── skills/             # 37 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customize)
 │   └── vault-conventions.md
@@ -322,7 +322,7 @@ See `+Meetings/README.md` for detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes **36 AI-assisted workflows** accessible via Claude Code:
+This vault includes **37 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
