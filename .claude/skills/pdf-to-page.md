@@ -18,7 +18,7 @@ Convert PDF documents into Page notes with extracted images saved as PNG files i
 
 ## Instructions
 
-This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and BA entity extraction.
+This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and entity extraction.
 
 ### Phase 1: PDF Loading & Validation
 
@@ -43,7 +43,7 @@ Options:
 
 **When to recommend each**:
 - **Sonnet**: Default choice. Fast, cost-effective, good for most documents
-- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive BA entity extraction is critical
+- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive entity extraction is critical
 
 Store the selection for use in Phase 3.
 
@@ -108,7 +108,7 @@ Launch **one agent** using the model selected in Phase 1.5:
 
 **Agent: Visual Analysis & BA Entity Extraction** (Sonnet or Opus based on selection)
 ```
-Task: Analyze PDF visually and extract BA-specific entities
+Task: Analyze PDF visually and extract relevant entities
 
 1. VISUAL ANALYSIS:
    - Read the PDF file (Claude can view PDFs visually)
@@ -119,10 +119,10 @@ Task: Analyze PDF visually and extract BA-specific entities
    - Count pages with significant visual content
 
 2. BA ENTITY EXTRACTION:
-   - Identify BA projects mentioned (Caerus, AXIA, 777X, MRO Pro, etc.)
-   - Find BA people and roles (architects, PMs, stakeholders)
-   - Identify BA systems and technologies (SAP, AWS, AMOS, etc.)
-   - Extract BA organizations (Boeing, SAP, Collins, Swiss-AS, etc.)
+   - Identify relevant projects mentioned (relevant projects and solutions)
+   - Find people and roles (architects, PMs, stakeholders)
+   - Identify your systems and technologies (SAP, AWS, relevant projects, etc.)
+   - Extract referenced organizations (relevant organizations and vendors)
    - Find dates, deadlines, milestones
    - Identify action items, decisions, recommendations
 
@@ -134,14 +134,14 @@ Task: Analyze PDF visually and extract BA-specific entities
 
 Return:
 - Image inventory with page numbers, descriptions, and suggested filenames
-- BA entity list (projects, people, systems, organizations)
+- entity list (projects, people, systems, organizations)
 - Document classification and topics
 - Action items and key dates
 ```
 
 **Why only 1 agent now?**
 - Docling already extracted the text structure (Phase 2)
-- Only need visual understanding and BA domain knowledge
+- Only need visual understanding and domain knowledge
 - 67% reduction in API costs (3 agents → 1 agent)
 - Faster processing time
 
@@ -164,7 +164,7 @@ For each image identified by the agent:
 
 2. **Save as PNG files** in `+Attachments/`:
    - Naming convention: `{pdf-basename} - Page {N} - {description}.png`
-   - Example: `AMOS Architecture - Page 3 - System Diagram.png`
+   - Example: `relevant projects Architecture - Page 3 - System Diagram.png`
    - Use descriptive names from Sonnet agent's visual analysis
 
 3. **Track all created files** for linking in the final Page note
@@ -249,19 +249,19 @@ processedWith: docling
 
 ### Projects Referenced
 
-{List from agent's BA entity extraction with [[Project]] links}
+{List from agent's entity extraction with [[Project]] links}
 
 ### People Mentioned
 
-{List from agent's BA entity extraction with [[Person]] links}
+{List from agent's entity extraction with [[Person]] links}
 
 ### Systems & Technologies
 
-{List from agent's BA entity extraction}
+{List from agent's entity extraction}
 
 ### Organizations Referenced
 
-{List from agent's BA entity extraction with [[Organisation]] links}
+{List from agent's entity extraction with [[Organisation]] links}
 
 ### Dates & Deadlines
 
@@ -325,7 +325,7 @@ After creation, provide user with:
 
 **Suggested Actions**:
 1. Review extracted content for accuracy
-2. Verify BA entity links are correct
+2. Verify entity links are correct
 3. Add additional tags if needed: {suggestions}
 4. Create tasks from action items: {task suggestions}
 5. Link to related projects: {suggestions}
@@ -405,7 +405,7 @@ pdftoppm -png -r 150 -f 3 -l 3 input.pdf output-prefix  # Page 3 only
 
 ### Performance Benchmarks
 
-Based on AMOS System Architecture & Roadmap (29 pages):
+Based on relevant projects System Architecture & Roadmap (29 pages):
 
 | Metric | Value |
 |--------|-------|
@@ -425,4 +425,4 @@ Based on AMOS System Architecture & Roadmap (29 pages):
 ## Example Workflow
 
 ```
-User: /pdf-to-page +Attachments/AMOS-Architecture-Overview.pdf
+User: /pdf-to-page +Attachments/relevant projects-Architecture-Overview.pdf

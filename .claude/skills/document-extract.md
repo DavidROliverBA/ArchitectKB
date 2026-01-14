@@ -161,4 +161,4 @@ After extraction, offer to:
 
 - Works with photos of whiteboards, handwritten notes, printed documents
 - PDF support for text extraction
-- Can recognise BA-specific terminology and systems
+- Can recognise-specific terminology and systems

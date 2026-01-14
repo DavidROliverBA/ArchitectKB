@@ -1,6 +1,6 @@
 # Sync Governance
 
-Synchronise policies, guardrails, and external ADRs from Confluence to the vault.
+Synchronise policies, guardrails, and external ADRs from your issue tracking system to the vault.
 
 ## Usage
 
@@ -15,7 +15,7 @@ Synchronise policies, guardrails, and external ADRs from Confluence to the vault
 
 ## Overview
 
-This skill pulls governance content from Confluence into the vault for:
+This skill pulls governance content from your issue tracking system into the vault for:
 - **Offline access** during architecture work
 - **Cross-referencing** with local ADRs and projects
 - **AI-assisted analysis** when creating new designs
@@ -29,15 +29,15 @@ This skill pulls governance content from Confluence into the vault for:
 
 ## Source Configuration
 
-The manifest defines what to sync from Confluence:
+The manifest defines what to sync from your issue tracking system:
 
-| Source | Confluence Query | Local Path |
+| Source | your issue tracking system Query | Local Path |
 |--------|------------------|------------|
 | Policies | `label = 'governance-policy'` | `+Sync/Policies/` |
 | Guardrails | `label = 'governance-guardrail'` OR pages in guardrail directories | `+Sync/Guardrails/` |
 | Organisational ADRs | `label = 'Approved_Architecture_ADR'` OR `label = 'Approved_Technology_Guardrail'` | `+Sync/Org-ADRs/` |
 
-### Key Confluence Spaces
+### Key your issue tracking system Spaces
 
 | Space | Key | Content |
 |-------|-----|---------|
@@ -72,14 +72,14 @@ For each source in manifest, use Atlassian MCP:
 
 ```javascript
 // Example: Find all architecture guardrails
-searchConfluenceUsingCql(
+searchyour issue tracking systemUsingCql(
   cloudId: "c1f0e5f8-ba19-4251-8d78-db300e0715bf",
   cql: "label = 'Approved_Architecture_Guardrail' AND type = 'page'",
   limit: 100
 )
 
 // Example: Find pages in guardrails directory
-getConfluencePageDescendants(
+getyour issue tracking systemPageDescendants(
   cloudId: "c1f0e5f8-ba19-4251-8d78-db300e0715bf",
   pageId: "65405808"  // Directory of Architecture Guardrails
 )
@@ -89,7 +89,7 @@ getConfluencePageDescendants(
 
 For each page returned:
 - Check if page ID exists in `manifest.pages`
-- Compare Confluence version number to stored version
+- Compare your issue tracking system version number to stored version
 - Categorise as: **new**, **updated**, or **unchanged**
 
 ### Step 4: Fetch Changed Content
@@ -97,7 +97,7 @@ For each page returned:
 For each new/updated page:
 
 ```javascript
-getConfluencePage(
+getyour issue tracking systemPage(
   cloudId: "c1f0e5f8-ba19-4251-8d78-db300e0715bf",
   pageId: "<page-id>",
   contentFormat: "markdown"
@@ -128,7 +128,7 @@ tags: [policy, synced, <derived tags>]
 ---
 
 > [!warning] Read-Only Sync
-> This content is synced from Confluence. Do not edit locally.
+> This content is synced from your issue tracking system. Do not edit locally.
 > Source: [<title>](<url>) | Version: <version> | Synced: <date>
 
 <converted markdown content>
@@ -153,12 +153,12 @@ tags: [guardrail, synced, <derived tags>]
 ---
 ```
 
-**Organisational ADR Note (synced from Confluence):**
+**Organisational ADR Note (synced from your issue tracking system):**
 ```yaml
 ---
 type: Adr
 title: <page title>
-status: <mirrors Confluence status: proposed | accepted | deprecated>
+status: <mirrors your issue tracking system status: proposed | accepted | deprecated>
 adrType: Architecture_ADR | Technology_ADR
 
 # Source/Provenance (synced)
@@ -204,9 +204,9 @@ tags: [adr, synced, <derived tags>]
 
 ### Step 7: Handle Deletions (Optional)
 
-Pages in manifest but not returned from Confluence:
+Pages in manifest but not returned from your issue tracking system:
 - Mark local file with `status: archived` in frontmatter
-- Add `archivedReason: "Removed from Confluence"`
+- Add `archivedReason: "Removed from your issue tracking system"`
 - Move to `+Sync/_archived/` or leave in place with warning
 
 ### Step 8: Generate Summary
@@ -229,7 +229,7 @@ Output sync results:
 
 **Updated:**
 - 📋 Policy - SAS1 Integration Standards (v2 → v3)
-  - [View in Confluence](https://...)
+  - [View in your issue tracking system](https://...)
 
 **New:**
 - 🚧 Guardrail - GR5 AI Model Governance
@@ -237,7 +237,7 @@ Output sync results:
 - 📐 External ADR - Bedrock Model Selection
 
 **Archived:**
-- 📐 ~~External ADR - Legacy API Pattern~~ (removed from Confluence)
+- 📐 ~~External ADR - Legacy API Pattern~~ (removed from your issue tracking system)
 
 ### Action Required
 - Review updated Policy - SAS1 for impact on current projects
@@ -342,7 +342,7 @@ On first run when no manifest exists:
    └── _archived/
    ```
 
-2. Create initial `manifest.json` with BA-specific sources
+2. Create initial `manifest.json` with relevant sources
 
 3. Perform full sync
 
@@ -363,4 +363,4 @@ On first run when no manifest exists:
 - [[Incubator - Architecture as Code]]
 - [[Incubator Note - Using Atlassian MCP for Policies]]
 - [[Incubator - How to Develop a Guardrail]]
-- [[Page - How an ADR becomes a Guardrail]] (synced from Confluence)
+- [[Page - How an ADR becomes a Guardrail]] (synced from your issue tracking system)

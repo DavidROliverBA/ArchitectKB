@@ -86,7 +86,7 @@ Can use note title, filename, or wiki-link format.
 
 8. **Create archive folder if needed**
    - Check if destination folder exists
-   - Create if missing (e.g., `mkdir -p "+Archive/Projects"`)
+   - Create if missing 
 
 9. **Move the file**
    - Use `git mv` to preserve history:
@@ -172,23 +172,23 @@ Claude:
 User: Y
 
 "Reason for archiving? (or skip)"
-User: Left BA June 2025
+User: Left organization June 2025
 
 Claude:
-- Adds archived: true, archivedDate, archivedReason: "Left BA June 2025"
+- Adds archived: true, archivedDate, archivedReason: "Left organization June 2025"
 - Moves to +Archive/People/Sarah Chen.md
 
 "Archived: Sarah Chen
 From: +People/
 To: +Archive/People/
-Reason: Left BA June 2025
+Reason: Left organization June 2025
 
 Note: Links like [[Sarah Chen]] in meeting notes will continue to work."
 ```
 
 ## Batch Archive
 
-For batch archiving (e.g., all completed tasks older than 3 months):
+For batch archiving :
 
 ```
 /archive batch tasks

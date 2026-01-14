@@ -45,7 +45,7 @@ If transcript unavailable, note this and proceed with description-only analysis.
 
 ### 2. Parse Chapter Markers
 
-If the description contains chapter timestamps (e.g., `00:00 - Introduction`), extract these as structured sections for the Page note.
+If the description contains chapter timestamps , extract these as structured sections for the Page note.
 
 ### 3. Analyse Content
 

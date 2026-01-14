@@ -13,7 +13,7 @@ Query the vault's knowledge graph index using natural language or structured que
 /graph-query high priority tasks
 /graph-query orphaned notes
 /graph-query broken links
-/graph-query backlinks to Project - Caerus
+/graph-query backlinks to Project - relevant projects
 /graph-query --type=Adr --status=accepted
 ```
 
@@ -59,7 +59,7 @@ Understand what the user is asking for. The query system supports:
 | `--status=` | Filter by status | `--status=proposed`, `--status=active` |
 | `--priority=` | Filter by priority | `--priority=high` |
 | `--search=` | Keyword search | `--search="kafka integration"` |
-| `--backlinks=` | Find notes linking to target | `--backlinks="Project - Caerus"` |
+| `--backlinks=` | Find notes linking to target | `--backlinks="Project - relevant projects"` |
 | `--orphans` | List orphaned notes | |
 | `--broken-links` | List broken wiki-links | |
 | `--stale` | List notes >6 months old | |
@@ -151,7 +151,7 @@ Found **8** orphaned notes (notes with no backlinks)
 
 ### Relationships
 ```
-/graph-query backlinks to Project - Caerus
+/graph-query backlinks to Project - relevant projects
 /graph-query orphaned notes
 /graph-query broken links
 ```

@@ -59,7 +59,7 @@ Task: Understand the purpose and context
 - Identify the workflow or process stage
 - Note any problems or issues visible
 - Assess what action might be needed
-- Connect to known BA systems if recognisable
+- Connect to known your systems if recognisable
 Return: Contextual interpretation with system identification
 ```
 
@@ -119,4 +119,4 @@ Return: Contextual interpretation with system identification
 
 - Sonnet provides superior visual analysis capabilities
 - Works with screenshots, UI mockups, error messages, dashboards
-- Can recognise BA systems like SAP, AMOS, Confluence, etc.
+- Can recognise your systems like SAP, relevant projects, your issue tracking system, etc.

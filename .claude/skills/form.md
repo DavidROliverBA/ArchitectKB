@@ -18,8 +18,8 @@ Quick-create a form submission tracking note.
 ## Usage
 
 ```
-/form DPIA Caerus
-/form CyberRisk "MRO Pro"
+/form DPIA relevant projects
+/form CyberRisk "relevant projects"
 /form TPRM Snap-On
 /form IAF "Dispax AI"
 /form ChangeRequest OpDef
@@ -143,10 +143,10 @@ tags: [form/{{formType | lowercase}}]
 
 ## Example Output
 
-After `/form DPIA Caerus`:
+After `/form DPIA relevant projects`:
 
 ```
-Created: Form Submission - DPIA for Caerus.md
+Created: Form Submission - DPIA for relevant projects.md
 
 Next steps:
 1. Fill in the summary and key information

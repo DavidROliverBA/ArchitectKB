@@ -19,8 +19,8 @@ Create a new meeting note in the Obsidian vault.
 
 ```
 /meeting Weekly Sync
-/meeting Caerus Review with Johann, Pat
-/meeting 777X Update for Project - 777-X EIS Programme
+/meeting relevant projects Review with Johann, Pat
+/meeting relevant projects Update for Project - 777-X EIS Programme
 ```
 
 ## Instructions
@@ -82,7 +82,7 @@ summary:
    - In body: bullet list with links
 
 5. For project:
-   - Format as wiki-link: `"[[Project - Caerus]]"`
+   - Format as wiki-link: `"[[Project - relevant projects]]"`
    - Match against existing project names if partial match given
 
 6. After creating, confirm and show the file path

@@ -12,7 +12,7 @@ Smart search that queries the graph index first, then falls back to grep if need
 /search kafka
 /search "API gateway"
 /search type:Adr status:proposed
-/search backlinks:Project - Caerus
+/search backlinks:Project - relevant projects
 ```
 
 ## Instructions

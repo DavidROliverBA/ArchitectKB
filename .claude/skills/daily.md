@@ -61,9 +61,9 @@ SORT time ASC
 
 Replace:
 - `{{DATE}}` with today's date (YYYY-MM-DD)
-- `{{DAY_NAME}}` with full day name (e.g., Monday)
-- `{{MONTH}}` with full month name (e.g., January)
-- `{{DAY_NUMBER}}` with day of month with ordinal (e.g., 5th)
+- `{{DAY_NAME}}` with full day name 
+- `{{MONTH}}` with full month name 
+- `{{DAY_NUMBER}}` with day of month with ordinal 
 - `{{YEAR}}` with 4-digit year
 
 5. After creating, confirm the file was created and show the path
