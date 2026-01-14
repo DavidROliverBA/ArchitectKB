@@ -12,7 +12,7 @@ Find all architecture decisions and choices related to a topic using sub-agents.
 /find-decisions <topic>
 /find-decisions Kafka
 /find-decisions authentication
-/find-decisions API integration
+/find-decisions SAP integration
 ```
 
 ## Instructions

@@ -122,11 +122,11 @@ When this skill is invoked:
 
 **Example 1:**
 User: `/adr-report week`
-Assistant: [Generates report for past 7 days showing new ADRs created]
+Assistant: [Generates report for past 7 days showing 3 new ADRs created for 777X and Dispax AI projects]
 
 **Example 2:**
 User: `/adr-report`
-Assistant: [Generates default 30-day report showing all ADR activity]
+Assistant: [Generates default 30-day report showing all ADR activity including Snap On ADR completion]
 
 **Example 3:**
 User: `/adr-report all`

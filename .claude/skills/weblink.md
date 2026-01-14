@@ -2,100 +2,101 @@
 context: fork
 ---
 
-# Weblink Capture Skill
+# /weblink
 
-Save a URL with AI-generated summary and analysis.
+Save a URL as a weblink note with analysis and summary.
+
+## Usage
+
+```
+/weblink <url>
+/weblink <url> <optional title>
+```
+
+## Examples
+
+```
+/weblink https://github.com/anthropics/claude-code
+/weblink https://aws.amazon.com/bedrock/ AWS Bedrock Service
+```
 
 ## Instructions
 
-When the user invokes `/weblink <url>` or asks to save a URL:
+1. **Fetch and analyse the URL**:
+   - Use WebFetch to retrieve the page content
+   - Extract: title, author, source/domain, main content
+   - **ALWAYS provide analysis** - this is mandatory, not optional
 
-1. **Fetch and analyze the URL**:
-   - Use WebFetch tool to retrieve content
-   - Extract: title, author, publication date, domain
-   - Generate: summary, key points, relevance
+2. **Generate analysis** (REQUIRED):
+   - Write a 2-3 sentence summary of what the resource is
+   - Extract 4-8 key points as bullet points
+   - Identify relevance to BA/Solutions Architecture work where applicable
+   - Note any technical details (technologies, integrations, versions)
 
-2. **Create the note**:
-   - Filename: `Weblink - [Title].md`
-   - Example: `Weblink - AWS Well-Architected Framework.md`
-   - Use template: `+Templates/Weblink.md`
+3. **Generate filename**: `Weblink - {{title}}.md`
 
-3. **Populate frontmatter**:
-   ```yaml
-   type: Weblink
-   title: "[Page Title]"
-   url: "[Full URL]"
-   domain: "[example.com]"
-   author: "[Author Name]"  # if available
-   source: "[Publication/Site Name]"
-   createdAt: [ISO timestamp from page]
-   created: YYYY-MM-DD
-   modified: YYYY-MM-DD
-   tags: [weblink, <inferred-topics>]
-   ```
+4. **Create weblink in vault root**:
 
-4. **Generate content sections**:
-   - **Summary**: 2-3 sentence overview in your own words
-   - **Key Points**: Bullet list of main takeaways
-   - **Relevance**: Why this is valuable for your work
-   - **Quotes**: Notable excerpts (if any)
-   - **Related**: Links to relevant vault notes (projects, ADRs, etc.)
+```markdown
+---
+type: Weblink
+title: {{title}}
+created: {{DATE}}
+modified: {{DATE}}
+tags: [{{relevant tags}}]
+url: {{url}}
+domain: {{domain}}
+author: {{author or null}}
+source: {{source name}}
+---
 
-5. **Suggest connections**:
-   - Search vault for related content
-   - Suggest linking from: relevant Project notes, ADRs, Page notes
-   - Suggest tags based on content
+# {{title}}
 
-## Example Interaction
+## Source
 
-**User:** `/weblink https://aws.amazon.com/architecture/well-architected/`
+- **URL:** {{url}}
+- **Author:** {{author}}
+- **Source:** {{source}}
 
-**Claude:**
-*Fetches and analyzes content*
+## Summary
 
-"Created weblink note at `Weblink - AWS Well-Architected Framework.md`.
+{{2-3 sentence summary of the resource}}
 
-**Summary:** AWS Well-Architected Framework provides architectural best practices across six pillars: operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability.
+## Key Points
 
-**Key Points:**
-- Framework for evaluating cloud architectures
-- Six pillars of well-architected workloads
-- Questions and best practices for each pillar
-- Regular reviews recommended
+- {{key point 1}}
+- {{key point 2}}
+- {{key point 3}}
+- {{...more as relevant}}
 
-**Suggested connections:**
-- Link from [[MOC - Cloud Architecture]]
-- Reference in [[Project - Cloud Migration]]
-- Related to [[ADR - Use Kubernetes for Container Orchestration]]
+## Relevance to BA
 
-Would you like me to add this link to any of these notes?"
+{{How this relates to BA work, if applicable. Remove section if not relevant.}}
 
-## When to Save Weblinks
+## Related
 
-**Save for:**
-- Valuable articles you'll reference multiple times
-- Official documentation for technologies you use
-- Best practices guides
-- Case studies relevant to your work
-- Research papers and technical deep dives
+- {{wiki-links to related notes in vault}}
+```
 
-**Don't Save:**
-- News articles (ephemeral content)
-- Resources you won't revisit
-- Content duplicated elsewhere
-- Simple Stack Overflow answers (copy code to notes instead)
+5. **Tag extraction**:
+   - Identify 2-5 relevant tags from content
+   - Use existing vault tags where possible (check other notes)
+   - Common tags: AWS, SAP, MCP, AI, architecture, integration, security
 
-## Integration with Vault
+6. **Find related notes**:
+   - Search vault for related topics
+   - Add wiki-links to relevant existing notes
+   - Consider: projects, technologies, people, other weblinks
 
-Explain to user:
-- **Reference in ADRs**: Support decisions with external sources
-- **Link from projects**: Add to project documentation
-- **Tag by topic**: Use hierarchical tags for organization
-- **Update regularly**: Check for dead links periodically
+7. **After creating**:
+   - Confirm creation with file path
+   - Show brief summary of what was saved
+   - Mention key relevance if applicable
 
-## Error Handling
+## Quality Standards
 
-- If URL is inaccessible, create note with basic info and note fetch failure
-- If WebFetch fails, create note with URL and prompt user to add content manually
-- Handle redirects gracefully
-- Sanitize title for filename
+- **Never** create a weblink without fetching and analysing the content first
+- **Always** include a meaningful summary (not just the page title)
+- **Always** extract key points - minimum 3, maximum 8
+- **Check** for existing related notes to link to
+- Use UK English throughout

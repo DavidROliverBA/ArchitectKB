@@ -4,7 +4,7 @@ context: fork
 
 # /youtube
 
-Save a YouTube video as a detailed weblink note with transcript analysis.
+Save a YouTube video as both a Weblink (quick reference) and a detailed Page (full analysis).
 
 ## Usage
 
@@ -16,128 +16,228 @@ Save a YouTube video as a detailed weblink note with transcript analysis.
 ## Examples
 
 ```
-/youtube https://www.youtube.com/watch?v=dQw4w9WgXcQ
+/youtube https://www.youtube.com/watch?v=0TpON5T-Sw4
 /youtube https://youtu.be/abc123 AWS re:Invent Keynote
 ```
 
 ## Prerequisites
 
-This skill requires the `youtube_transcript` MCP server. If not already added:
-```
-mcp-add youtube_transcript
-```
+This skill uses the MCP Docker YouTube tools:
+- `mcp__MCP_DOCKER__get_video_info` - Video metadata
+- `mcp__MCP_DOCKER__get_transcript` - Full transcript
 
 ## Instructions
 
-1. **Add MCP server if needed**:
-   - Check if youtube_transcript tools are available
-   - If not, add: `mcp-add youtube_transcript`
+### 1. Fetch Video Data
 
-2. **Fetch video information**:
-   - Use `get_video_info` to get title, channel, duration
-   - Use `get_transcript` to get full transcript text
-   - If transcript unavailable, note this in the output
+Use both tools in parallel:
+```
+mcp__MCP_DOCKER__get_video_info(url)
+mcp__MCP_DOCKER__get_transcript(url)
+```
 
-3. **Analyse the transcript** (REQUIRED):
-   - Write a 3-5 sentence summary of the video content
-   - Extract 5-10 key points/arguments made
-   - Identify the speaker(s) and their credentials if mentioned
-   - Note any technologies, frameworks, or tools discussed
-   - Identify relevance to your architecture work
+Extract:
+- Title, channel name, duration, upload date
+- Description (contains links, chapters)
+- Full transcript text
 
-4. **Generate filename**: `Weblink - Youtube - {{title}}.md`
+If transcript unavailable, note this and proceed with description-only analysis.
 
-5. **Create weblink in vault root**:
+### 2. Parse Chapter Markers
+
+If the description contains chapter timestamps (e.g., `00:00 - Introduction`), extract these as structured sections for the Page note.
+
+### 3. Analyse Content
+
+From the transcript, identify:
+- **Core thesis** - Main argument or purpose
+- **Key concepts** - Major ideas, frameworks, principles
+- **Actionable insights** - What viewers should do
+- **Technologies/tools** - Any mentioned tech stack
+- **Notable quotes** - 2-4 memorable statements
+- **Relevance to BA** - Architecture, governance, engineering work
+
+### 4. Create Weblink Note
+
+**Filename:** `Weblink - {{sanitised title}}.md`
+**Location:** Vault root
 
 ```markdown
 ---
 type: Weblink
 title: "{{title}}"
-created: {{DATE}}
-modified: {{DATE}}
-tags: [video, {{relevant tags}}]
 url: {{youtube_url}}
 domain: youtube.com
-author: {{channel name}}
-source: YouTube
-duration: {{duration if available}}
+createdAt: {{ISO timestamp}}
+created: {{DATE}}
+modified: {{DATE}}
+tags: [video, {{3-5 relevant tags}}]
 ---
 
 # {{title}}
 
-## Source
-
-- **URL:** {{url}}
-- **Channel:** {{channel name}}
-- **Duration:** {{duration}}
+**Channel:** {{channel name}}
+**Duration:** {{duration}}
+**Published:** {{upload date}}
 
 ## Summary
 
-{{3-5 sentence summary of the video content and main thesis}}
+{{3-5 sentence summary of video content and main thesis}}
 
-## Key Points
+## Key Topics
 
-- {{key argument/point 1}}
-- {{key argument/point 2}}
-- {{...continue for all major points}}
+- {{topic 1}}
+- {{topic 2}}
+- {{topic 3}}
 
-## Speaker
+## Links
 
-{{Brief bio of speaker if mentioned in video, or note if unknown}}
+- **Video:** {{url}}
+- **Channel:** {{channel URL if extractable}}
+- **Resources:** {{any links from description}}
+
+## Related
+
+- [[Page - {{title}} - Full Analysis]]
+```
+
+### 5. Create Page Note (Full Analysis)
+
+**Filename:** `Page - {{sanitised title}} - Full Analysis.md`
+**Location:** Vault root
+
+```markdown
+---
+type: Page
+title: "{{title}} - Full Analysis"
+created: {{DATE}}
+modified: {{DATE}}
+tags: [video, activity/research, {{topic tags}}]
+confidence: high
+freshness: current
+source: secondary
+verified: true
+reviewed: {{DATE}}
+summary: {{one-line summary}}
+---
+
+# {{title}} - Full Analysis
+
+**Source:** [[Weblink - {{title}}]]
+**Author:** {{channel name}}
+**Duration:** {{duration}}
+
+## Core Thesis
+
+{{1-2 paragraphs explaining the main argument or purpose}}
+
+## Key Concepts
+
+### {{Concept 1 Name}}
+
+{{Explanation with context}}
+
+### {{Concept 2 Name}}
+
+{{Explanation with context}}
+
+{{Continue for major concepts}}
+
+## Actionable Insights
+
+1. {{Insight 1}}
+2. {{Insight 2}}
+3. {{Insight 3}}
+
+## Technologies/Tools Mentioned
+
+| Tool | Purpose |
+|------|---------|
+| {{tool 1}} | {{what it does}} |
+| {{tool 2}} | {{what it does}} |
 
 ## Notable Quotes
 
-> "{{memorable quote 1}}"
+> "{{quote 1}}"
 
-> "{{memorable quote 2}}"
+> "{{quote 2}}"
 
-## Technologies/Concepts Mentioned
+## Relevance to BA Work
 
-- {{technology or concept 1}}
-- {{technology or concept 2}}
+{{How this relates to Solutions Architecture, BA projects, or current work. Remove if not applicable.}}
 
-## Relevance
+## Chapter Summary
 
-{{How this relates to your work, architecture, or current projects. Remove section if not relevant.}}
+{{If chapters available, list each with 1-2 sentence summary}}
 
 ## Transcript
 
 <details>
 <summary>Full Transcript (click to expand)</summary>
 
-{{full transcript text, cleaned up for readability}}
+{{full transcript, cleaned for readability with paragraph breaks}}
 
 </details>
 
-## Related
+## Related Notes
 
-- {{wiki-links to related notes}}
+- {{wiki-links to related vault notes}}
+
+## Resources
+
+- {{Links from video description}}
 ```
 
-6. **Transcript formatting**:
-   - Clean up line breaks for readability
-   - Preserve paragraph structure where natural breaks occur
-   - Keep speaker changes clear if multiple speakers
+### 6. Transcript Formatting
 
-7. **Tag extraction**:
-   - Always include `video` tag
-   - Add 3-6 topic-relevant tags
-   - Use existing vault tags where possible
+- Add paragraph breaks at natural pauses
+- Clean up filler words where excessive
+- Preserve speaker changes if multiple speakers
+- Keep chapter markers if present
 
-8. **Find related notes**:
-   - Search vault for related topics, people, technologies
-   - Add wiki-links to relevant existing notes
+### 7. Tag Selection
 
-9. **After creating**:
-   - Confirm creation with file path
-   - Show brief summary of video content
-   - Highlight key relevance if applicable
+**Always include:** `video`
+
+**Topic tags (choose 3-5):**
+- `ai`, `automation`, `productivity` for AI/productivity content
+- `technology/{{tech}}` for specific technologies
+- `activity/research` for learning content
+- `domain/{{area}}` for business domains
+
+### 8. Find Related Notes
+
+Search vault for:
+- Similar topics or technologies
+- Related projects
+- People mentioned
+- Previous videos from same channel
+
+Add wiki-links in Related section.
+
+### 9. Completion
+
+Report:
+- Both file paths created
+- Brief summary of video content
+- Key relevance if applicable
+- Channel name for reference
 
 ## Quality Standards
 
-- **Always** fetch and analyse the transcript - never create without it
-- **Always** provide a meaningful summary (not just the video title)
-- **Always** extract key points - minimum 5 for substantive videos
-- **Include** notable quotes that capture the speaker's main arguments
-- **Preserve** the full transcript in a collapsible section for reference
-- Use UK English throughout
+- **Always** fetch transcript - never create without attempting
+- **Always** create BOTH Weblink and Page notes
+- **Always** link them together bidirectionally
+- **Provide** meaningful analysis, not just metadata
+- **Extract** minimum 3 key concepts for substantive videos
+- **Include** full transcript in collapsible section
+- **Use** UK English throughout
+- **Sanitise** titles for filenames (remove special characters)
+
+## Example Output
+
+For a 30-minute productivity video:
+- `Weblink - Building a Second Brain with AI.md` (quick reference)
+- `Page - Building a Second Brain with AI - Full Analysis.md` (detailed breakdown)
+
+Both linked together for easy navigation.

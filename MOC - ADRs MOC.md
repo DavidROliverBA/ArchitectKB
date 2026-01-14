@@ -1,599 +1,307 @@
 ---
 type: MOC
 title: ADRs MOC
-created: 2026-01-07
-modified: 2026-01-07
-tags: [moc, adr, architecture, decisions]
+description: Map of Content for all Architecture Decision Records organized by status, relationships, and projects
+created: 2025-01-05
+modified: 2026-01-14
+tags: [MOC, navigation, ADR]
+
+# Quality Indicators
+confidence: high
+freshness: current
+source: primary
+verified: true
+reviewed: 2026-01-14
+summary: Central navigation for all Architecture Decision Records showing proposed, accepted, and deprecated decisions with relationships and project links
+keywords: [ADR, architecture, decisions, governance, MOC]
 ---
 
-# 📐 ADRs MOC
+# ADRs MOC
 
-> **Architecture Decision Records - Track significant technical decisions**
+**Purpose:** Central directory of all Architecture Decision Records (ADRs) documenting key architectural decisions across British Airways projects. Navigate by status, relationships, or project context.
 
-Last Updated: 2026-01-07
+**Quick Navigation:** [All ADRs](#all-adrs) | [By Status](#adrs-by-status) | [By Type](#adrs-by-type) | [AI ADRs](#ai-adrs) | [Statistics](#adr-statistics)
 
----
-
-## Overview
-
-This MOC provides comprehensive views of Architecture Decision Records (ADRs) to track the evolution of technical decisions and architectural patterns.
-
-**What are ADRs?**
-Architecture Decision Records document significant architectural and technical decisions, including context, options considered, and rationale. They create an immutable record of why decisions were made.
-
-**Quick Links:**
-- [[Dashboard - Dashboard]] - Back to main dashboard
-- [[Page - Architecture Principles]] - Decision-making framework
-- [[MOC - Projects MOC]] - View ADRs by project
-
----
-
-## 🎯 ADRs by Status
-
-### Proposed (Pending Approval)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  category as "Category",
-  project as "Project",
-  created as "Created"
-FROM ""
-WHERE type = "Adr" AND status = "proposed"
-SORT created DESC
-```
-
-**Action Required:** Review and approve or reject these ADRs.
-
-### Accepted (In Force)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  category as "Category",
-  project as "Project",
-  modified as "Last Updated"
-FROM ""
-WHERE type = "Adr" AND status = "accepted"
-SORT modified DESC
-```
-
-**Current Standards:** These ADRs represent active architectural decisions.
-
-### Draft (In Progress)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  category as "Category",
-  project as "Project",
-  created as "Created"
-FROM ""
-WHERE type = "Adr" AND status = "draft"
-SORT created DESC
-```
-
-**In Development:** These ADRs are being written and refined.
-
-### Deprecated (Replaced)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  category as "Category",
-  project as "Project",
-  modified as "Deprecated Date"
-FROM ""
-WHERE type = "Adr" AND status = "deprecated"
-SORT modified DESC
-```
-
-### Superseded (Historical)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  category as "Category",
-  project as "Project",
-  modified as "Superseded Date"
-FROM ""
-WHERE type = "Adr" AND status = "superseded"
-SORT modified DESC
-```
-
-**Historical Record:** These ADRs document past decisions and lessons learned.
+**Total ADRs:** `$= dv.pages("").where(p => p.type == "Adr").length`
 
 ---
 
-## 🏷️ ADRs by Category
+## ADR Statistics
 
-### Technology Decisions
+| Metric | Count |
+|--------|-------|
+| **Total ADRs** | `$= dv.pages("").where(p => p.type == "Adr").length` |
+| **Draft** | `$= dv.pages("").where(p => p.type == "Adr" && p.status == "draft").length` |
+| **Proposed** | `$= dv.pages("").where(p => p.type == "Adr" && p.status == "proposed").length` |
+| **Accepted** | `$= dv.pages("").where(p => p.type == "Adr" && p.status == "accepted").length` |
+| **Deprecated** | `$= dv.pages("").where(p => p.type == "Adr" && p.status == "deprecated").length` |
+| **Superseded** | `$= dv.pages("").where(p => p.type == "Adr" && p.status == "superseded").length` |
+| **With Quality Metadata** | `$= dv.pages("").where(p => p.type == "Adr" && p.confidence != null).length` |
+| **With Relationships** | `$= dv.pages("").where(p => p.type == "Adr" && p.relatedTo?.length > 0).length` |
 
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  project as "Project",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND category = "technology"
-SORT status ASC, modified DESC
-```
+### By ADR Type
 
-**Scope:** Technology selections (databases, languages, frameworks, tools)
-
-### Architecture Patterns
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  project as "Project",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND category = "architecture"
-SORT status ASC, modified DESC
-```
-
-**Scope:** Architectural patterns and system design decisions
-
-### Process & Governance
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND category = "process"
-SORT status ASC, modified DESC
-```
-
-**Scope:** Development processes, workflows, governance
-
-### Security
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  project as "Project",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND category = "security"
-SORT status ASC, modified DESC
-```
-
-**Scope:** Security architecture, policies, authentication/authorization
-
-### Infrastructure
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  project as "Project",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND category = "infrastructure"
-SORT status ASC, modified DESC
-```
-
-**Scope:** Infrastructure, deployment, operations, cloud architecture
+| Type | Count |
+|------|-------|
+| **Technology_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "Technology_ADR").length` |
+| **Architecture_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "Architecture_ADR").length` |
+| **Integration_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "Integration_ADR").length` |
+| **Security_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "Security_ADR").length` |
+| **Data_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "Data_ADR").length` |
+| **AI_ADR** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "AI_ADR").length` |
+| **Untyped** | `$= dv.pages("").where(p => p.type == "Adr" && !p.adrType).length` |
 
 ---
 
-## 🎯 ADRs by Project
-
-### Cloud Migration
+## All ADRs
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND contains(project, "Cloud Migration")
-SORT status ASC, modified DESC
-```
-
-### API Gateway Modernization
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND contains(project, "API Gateway")
-SORT status ASC, modified DESC
-```
-
-### Legacy System Decommission
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND contains(project, "Legacy System")
-SORT status ASC, modified DESC
-```
-
-### Unassigned to Project
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND (project = null OR project = "")
-SORT status ASC, modified DESC
-```
-
-**Note:** These may be organization-wide standards not specific to a project.
-
----
-
-## 🔗 ADR Relationships
-
-### ADRs with Dependencies
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  dependsOn as "Depends On"
-FROM ""
-WHERE type = "Adr" AND dependsOn != null AND dependsOn != []
-SORT status ASC
-```
-
-**Dependency Chain:** These ADRs build on other decisions.
-
-### ADRs That Supersede Others
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  supersedes as "Supersedes"
-FROM ""
-WHERE type = "Adr" AND supersedes != null AND supersedes != []
-SORT status ASC
-```
-
-**Decision Evolution:** Track how decisions change over time.
-
-### ADRs with Related Decisions
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  relatedTo as "Related To"
-FROM ""
-WHERE type = "Adr" AND relatedTo != null AND relatedTo != []
-SORT status ASC
-```
-
-**Decision Network:** See how decisions interconnect.
-
----
-
-## 📊 Quality Indicators
-
-### High Confidence ADRs
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  verified as "Verified"
-FROM ""
-WHERE type = "Adr" AND confidence = "high"
-SORT status ASC, modified DESC
-```
-
-**Authoritative:** These decisions are well-validated and proven.
-
-### Medium Confidence ADRs
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  verified as "Verified"
-FROM ""
-WHERE type = "Adr" AND confidence = "medium"
-SORT status ASC, modified DESC
-```
-
-**Moderate Certainty:** Monitor these decisions for validation.
-
-### Low Confidence ADRs
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  verified as "Verified"
-FROM ""
-WHERE type = "Adr" AND confidence = "low"
-SORT status ASC, modified DESC
-```
-
-**Uncertain:** These decisions may need revisiting as we learn more.
-
----
-
-## 📅 Recent Activity
-
-### Recently Created (Last 90 Days)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  created as "Created"
-FROM ""
-WHERE type = "Adr" AND created >= date(today) - dur(90 days)
-SORT created DESC
-```
-
-### Recently Updated (Last 30 Days)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr" AND modified >= date(today) - dur(30 days)
-SORT modified DESC
-```
-
----
-
-## 🔍 ADR Quality Checks
-
-### ADRs Without Categories
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  created as "Created"
-FROM ""
-WHERE type = "Adr" AND (category = null OR category = "")
-SORT created DESC
-```
-
-**Action:** Categorize for better organization and filtering.
-
-### ADRs Without Confidence Ratings
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  created as "Created"
-FROM ""
-WHERE type = "Adr" AND (confidence = null OR confidence = "")
-SORT created DESC
-```
-
-**Action:** Add confidence ratings for quality tracking.
-
-### Stale ADRs (Not Reviewed in 12+ Months)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  reviewed as "Last Reviewed"
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  tags AS "Tags",
+  file.ctime AS "Created"
 FROM ""
 WHERE type = "Adr"
-  AND status = "accepted"
-  AND reviewed < date(today) - dur(365 days)
-SORT reviewed ASC
-```
-
-**Action:** Review these ADRs - are they still valid and current?
-
----
-
-## 📊 ADR Statistics
-
-### Status Distribution
-
-```dataview
-TABLE WITHOUT ID
-  status as "Status",
-  length(rows) as "Count"
-FROM ""
-WHERE type = "Adr"
-GROUP BY status
-SORT status ASC
-```
-
-### Category Distribution
-
-```dataview
-TABLE WITHOUT ID
-  category as "Category",
-  length(rows) as "Count"
-FROM ""
-WHERE type = "Adr"
-GROUP BY category
-SORT length(rows) DESC
-```
-
-### ADRs by Year
-
-```dataview
-TABLE WITHOUT ID
-  dateformat(created, "yyyy") as "Year",
-  length(rows) as "ADRs Created"
-FROM ""
-WHERE type = "Adr" AND created != null
-GROUP BY dateformat(created, "yyyy")
-SORT dateformat(created, "yyyy") DESC
+SORT file.ctime DESC
 ```
 
 ---
 
-## 📝 ADR Best Practices
+## ADRs by Status
 
-### When to Create an ADR
+### Proposed ADRs
 
-**Create an ADR for:**
-- Technology selections (databases, frameworks, languages)
-- Architectural patterns (microservices, event-driven, etc.)
-- Security decisions (authentication methods, encryption)
-- Major infrastructure choices (cloud providers, deployment strategies)
-- Process changes affecting technical work
-
-**Don't Create an ADR for:**
-- Trivial implementation details
-- Decisions easily reversed
-- Personal coding preferences
-- Temporary solutions
-
-### ADR Writing Guide
-
-**Essential Sections:**
-1. **Context** - Why is this decision needed?
-2. **Decision** - What did we decide?
-3. **Rationale** - Why did we choose this?
-4. **Consequences** - What are the impacts?
-5. **Alternatives** - What else did we consider?
-
-**Optional Sections:**
-- Compliance requirements
-- Implementation approach
-- Risks and mitigations
-- Cost analysis
-- Performance implications
-
-**Template:** Use `+Templates/ADR.md` for consistent structure.
-
-### ADR Lifecycle
-
-1. **Draft** - ADR being written
-2. **Proposed** - ADR complete, awaiting approval
-3. **Accepted** - ADR approved and in force
-4. **Deprecated** - Decision no longer recommended but still in use
-5. **Superseded** - Decision replaced by newer ADR
-
-### Review Process
-
-**Before Approval:**
-- Technical review by architecture team
-- Stakeholder review (affected teams)
-- Security review if applicable
-- Cost approval if significant budget impact
-
-**After Approval:**
-- Communicate decision to affected teams
-- Update related documentation
-- Link from relevant projects
-- Set review date (typically 6-12 months)
-
----
-
-## 🔗 Decision Tracing
-
-### Find Decisions About...
-
-**Kubernetes:**
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category"
+  link(file.link, title) AS "ADR",
+  file.ctime AS "Created",
+  tags AS "Tags"
 FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "Kubernetes") OR contains(tags, "kubernetes"))
-SORT status ASC
+WHERE type = "Adr" AND (status = "proposed" OR contains(status, "Proposed") OR contains(status, "Draft"))
+SORT file.ctime DESC
 ```
 
-**Databases:**
+### Accepted ADRs
+
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category"
+  link(file.link, title) AS "ADR",
+  file.ctime AS "Created",
+  tags AS "Tags"
 FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "Database") OR contains(title, "PostgreSQL") OR contains(title, "MySQL") OR contains(tags, "database"))
-SORT status ASC
+WHERE type = "Adr" AND (status = "accepted" OR contains(status, "Accepted") OR contains(status, "Approved"))
+SORT file.ctime DESC
 ```
 
-**APIs:**
+### Deprecated ADRs
+
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category"
+  link(file.link, title) AS "ADR",
+  file.ctime AS "Created",
+  tags AS "Tags"
 FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "API") OR contains(title, "GraphQL") OR contains(title, "REST"))
-SORT status ASC
+WHERE type = "Adr" AND (status = "deprecated" OR contains(status, "Deprecated") OR contains(status, "Superseded"))
+SORT file.ctime DESC
 ```
 
 ---
 
-## 🎯 Decision Timeline
+## ADRs by Type
 
-View how architectural decisions evolved chronologically:
+### Technology ADRs
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  created as "Created",
-  modified as "Updated"
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  project AS "Project"
 FROM ""
-WHERE type = "Adr"
-SORT created DESC
-LIMIT 20
+WHERE type = "Adr" AND adrType = "Technology_ADR"
+SORT status ASC, file.ctime DESC
+```
+
+### Architecture ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  project AS "Project"
+FROM ""
+WHERE type = "Adr" AND adrType = "Architecture_ADR"
+SORT status ASC, file.ctime DESC
+```
+
+### Integration ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  project AS "Project"
+FROM ""
+WHERE type = "Adr" AND adrType = "Integration_ADR"
+SORT status ASC, file.ctime DESC
+```
+
+### Security ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  project AS "Project"
+FROM ""
+WHERE type = "Adr" AND adrType = "Security_ADR"
+SORT status ASC, file.ctime DESC
+```
+
+### Data ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  project AS "Project"
+FROM ""
+WHERE type = "Adr" AND adrType = "Data_ADR"
+SORT status ASC, file.ctime DESC
 ```
 
 ---
 
-## Related
+## AI ADRs
 
-**Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[MOC - Projects MOC]] - ADRs by project
-- [[MOC - Technology & Architecture MOC]] - Technology standards
+ADRs specifically for AI/ML architecture decisions.
 
-**Reference:**
-- [[Page - Architecture Principles]] - Decision framework
-- [[Page - Tech Stack Overview]] - Approved technologies
-- Template: `+Templates/ADR.md`
+### AI ADR Statistics
 
-**Governance:**
-- Review ADRs monthly for new proposals
-- Quarterly review of accepted ADRs
-- Annual strategic architecture planning
-- Archive superseded ADRs for historical reference
+| Metric | Count |
+|--------|-------|
+| **Total AI ADRs** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "AI_ADR").length` |
+| **Ethics Reviewed** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "AI_ADR" && p.ethicsReviewed == true).length` |
+| **Bias Assessed** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "AI_ADR" && p.biasAssessed == true).length` |
+| **High Risk** | `$= dv.pages("").where(p => p.type == "Adr" && p.adrType == "AI_ADR" && p.aiRiskLevel == "high").length` |
 
-**Tips:**
-- Link ADRs from project notes
-- Reference ADRs in code comments (URL or title)
-- Share ADRs with affected teams after approval
-- Use ADRs in onboarding to explain "why we do things this way"
+### All AI ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  aiProvider AS "Provider",
+  aiModel AS "Model",
+  aiRiskLevel AS "Risk",
+  humanOversight AS "Oversight"
+FROM ""
+WHERE type = "Adr" AND adrType = "AI_ADR"
+SORT status ASC, file.ctime DESC
+```
+
+### AI ADRs by Provider
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  aiModel AS "Model",
+  aiUseCase AS "Use Case"
+FROM ""
+WHERE type = "Adr" AND adrType = "AI_ADR"
+GROUP BY aiProvider
+```
+
+### AI ADRs Requiring Attention
+
+ADRs missing ethics/bias review or with high risk level:
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  aiRiskLevel AS "Risk",
+  ethicsReviewed AS "Ethics",
+  biasAssessed AS "Bias"
+FROM ""
+WHERE type = "Adr" AND adrType = "AI_ADR"
+  AND (ethicsReviewed = false OR biasAssessed = false OR aiRiskLevel = "high")
+SORT aiRiskLevel ASC
+```
+
+---
+
+## ADRs by Tag
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  file.ctime AS "Created"
+FROM ""
+WHERE type = "Adr"
+SORT file.ctime DESC
+GROUP BY tags
+```
+
+---
+
+## Recently Created ADRs
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "ADR",
+  status AS "Status",
+  file.ctime AS "Created"
+FROM ""
+WHERE type = "Adr"
+SORT file.ctime DESC
+LIMIT 10
+```
+
+---
+
+## ADR Index
+
+### Project-Linked ADRs
+
+**Dispax AI:**
+- [[ADR - Dispax AI - AI Services]]
+- [[ADR - Dispax AI - Bedrock]]
+- [[ADR - Dispax AI - Redshift Access]] - Extended Booking agent data
+- [[ADR - KAMA Pattern - Dispax AI (SUPERSEDED)]]
+
+**Caerus:**
+- [[ADR - SAP to AWS Connectivity]]
+- [[ADR - SAP Data Product]]
+
+**777X EIS Programme:**
+- [[ADR - 777X GBST Virtualization on AWS EC2]]
+- [[ADR - 777X CSCT Local Deployment (Non-Virtualization)]]
+- [[ADR - Fleetlink Migration]]
+
+### Standalone ADRs
+
+ADRs not linked to a specific project:
+
+- [[ADR - ADR for Power Apps Integration]]
+- [[ADR - ADR for Seal Printing]]
+- [[ADR - KAMA (SUPERSEDED)]]
+
+---
+
+## Related MOCs
+
+- [[Dashboard - Dashboard]] - Main navigation hub
+- [[MOC - Projects MOC]] - Projects by status and priority
+- [[MOC - Technology & Architecture MOC]] - Technical platforms and architecture
+- [[MOC - Organisations MOC]] - Vendors and partners
+- [[MOC - Vault Quality Dashboard]] - Quality metrics and health
+- [[Page - Vault Maintenance Guide]] - Maintenance best practices
+
+---
+
+**MOC Version:** 2.0
+**Total ADRs:** `$= dv.pages("").where(p => p.type == "Adr").length`
+**Last Updated:** 2026-01-14
+**Purpose:** Architecture decision documentation and governance

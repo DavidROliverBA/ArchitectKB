@@ -1,7 +1,6 @@
 <%*
 const today = tp.date.now("YYYY-MM-DD");
-const year = tp.date.now("YYYY");
-await tp.file.move("+Daily/" + year + "/" + today);
+await tp.file.rename("" + today);
 _%>
 ---
 type: DailyNote
@@ -15,7 +14,6 @@ tags: [daily]
 
 ## Today's Focus
 
-<!-- Top 1-3 priorities for today -->
 -
 
 ## Tasks
@@ -34,8 +32,6 @@ WHERE type = "Task" AND due = date("<% tp.date.now("YYYY-MM-DD") %>") AND !compl
 
 ## Notes
 
-<!-- Meeting notes, discoveries, ideas, learnings -->
 
 ## Reflections
 
-<!-- End-of-day reflections, wins, challenges -->

@@ -10,13 +10,13 @@ title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-provider: # Course provider (Udemy, Coursera, etc.)
-url: # Course URL
-project: null  # Related project if applicable
-status: not-started  # not-started | in-progress | completed
-start-date: null
-end-date: null
-certificate: null  # Link to certificate when completed
+provider:
+url:
+project:
+status: not-started
+start-date:
+end-date:
+certificate:
 ---
 
 # <% name %>
@@ -30,49 +30,37 @@ certificate: null  # Link to certificate when completed
 
 ## Learning Objectives
 
-- Objective 1
-- Objective 2
-- Objective 3
+-
 
 ## Modules / Sections
 
-### Module 1: [Title]
+### Module 1:
 
 #### Key Points
 
-- Point 1
-- Point 2
+-
 
 #### Notes
 
-<!-- Notes from this module -->
-
-### Module 2: [Title]
+### Module 2:
 
 #### Key Points
 
-- Point 1
-- Point 2
+-
 
 #### Notes
-
-<!-- Notes from this module -->
 
 ## Key Takeaways
 
-- Takeaway 1
-- Takeaway 2
-- Takeaway 3
+-
 
 ## Action Items
 
-- [ ] Apply concept X to project Y
-- [ ] Research topic Z further
+- [ ]
 
 ## Resources
 
-- [[Related Note]]
-- [[Weblink - Resource]]
+-
 
 ## Certificate
 

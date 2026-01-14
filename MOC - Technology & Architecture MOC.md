@@ -3,471 +3,402 @@ type: MOC
 title: Technology & Architecture MOC
 created: 2026-01-07
 modified: 2026-01-07
-tags: [moc, technology, architecture, standards]
+tags: [MOC, navigation, technology, architecture]
 ---
 
-# 🛠️ Technology & Architecture MOC
+# Technology & Architecture MOC
 
-> **Technology stack, architectural patterns, and technical standards**
+> Central hub for technical architecture, platforms, and technology decisions at BA Engineering. Organizes knowledge across cloud platforms, data systems, integration patterns, and aviation-specific technologies.
 
-Last Updated: 2026-01-07
-
----
-
-## Overview
-
-This MOC serves as the hub for all technology and architecture-related content, including standards, ADRs, tech stack documentation, and architectural patterns.
-
-**Quick Links:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[Page - Architecture Principles]] - Core principles
-- [[Page - Tech Stack Overview]] - Approved technologies
-- [[MOC - ADRs MOC]] - Architecture decisions
+## Quick Navigation
+- [Cloud Platforms](#cloud-platforms)
+- [Data & Integration](#data--integration)
+- [Architecture Decisions](#architecture-decisions)
+- [Aviation & Aircraft Systems](#aviation--aircraft-systems)
+- [Integration Patterns & APIs](#integration-patterns--apis)
+- [Reference Documentation](#reference-documentation)
 
 ---
 
-## 📚 Core Documentation
+## Cloud Platforms
 
-### Standards & Principles
+### AWS (Amazon Web Services)
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Weblink") AND (
+  contains(title, "AWS") OR
+  contains(file.name, "AWS")
+)
+SORT type DESC, title ASC
+```
 
-- [[Page - Architecture Principles]] - Guiding principles for all decisions
-- [[Page - Tech Stack Overview]] - Approved technologies and tools
-- API Standards (create this page for your organization)
-- Security Standards (create this page for your organization)
-- Data Standards (create this page for your organization)
+**Key Resources:**
+- [[Page - AWS Account for AI Prototype is - 368608343696]]
+- [[Page - AWS Login]]
+- [[Page - Creating a Sandbox Account in AWS]]
+- [[Page - AWS and BA Account Share GitHub Repo]]
 
-### Architecture Documentation
+### SAP Ecosystem
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Weblink") AND (
+  contains(title, "SAP") OR
+  contains(file.name, "SAP")
+)
+SORT type DESC, title ASC
+```
 
-**Create these pages based on your needs:**
-- System Architecture Overview
-- Deployment Architecture
-- Network Architecture
-- Security Architecture
-- Data Architecture
-- Integration Architecture
+**Key Platforms:**
+- **SAP BTP** (Business Technology Platform) - Integration & extensions
+- **SAP Datasphere** - Data warehouse and analytics
+- **SAP S/4HANA** - ERP system
+
+**Key Resources:**
+- [[Page - SAP Datasphere Presentation 2026]]
+- [[Page - SAP to Olympus using Replication Flow]]
 
 ---
 
-## 🎯 Architecture Decisions
+## Data & Integration
+
+### Data Platforms
+
+#### ODIE (Olympus Data Integration Engine)
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Project") AND (
+  contains(title, "ODIE") OR
+  contains(title, "Olympus")
+)
+SORT type DESC, title ASC
+```
+
+#### SAP Datasphere
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "ADR") AND (
+  contains(title, "Datasphere") OR
+  contains(title, "DataSphere")
+)
+SORT title ASC
+```
+
+### Streaming & Messaging
+
+#### Kafka
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE type = "Page" AND contains(title, "Kafka")
+SORT title ASC
+```
+
+**Key Resources:**
+- [[Page - What is Kafka?]]
+
+---
+
+## Architecture Decisions
 
 ### All ADRs
+See [[MOC - ADRs MOC]] for complete Architecture Decision Records
 
+### Technology-Related ADRs
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  modified as "Updated"
+  link(file.link, title) AS "Decision",
+  status AS "Status"
 FROM ""
 WHERE type = "Adr"
-SORT status ASC, modified DESC
+SORT status ASC, title ASC
 ```
 
-**Full ADR Library:** See [[MOC - ADRs MOC]] for detailed views.
+**Key Decisions:**
+- [[ADR - SAP to AWS Connectivity]]
+- [[ADR - SAP Data Product]]
+- [[ADR - Dispax AI - Bedrock]]
+- [[ADR - Dispax AI - AI Services]]
 
-### Recent Architecture Decisions
+---
 
+## Aviation & Aircraft Systems
+
+### Electronic Flight Bag (EFB)
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category",
-  created as "Created"
+  link(file.link, title) AS "Resource",
+  type AS "Type"
 FROM ""
-WHERE type = "Adr" AND created >= date(today) - dur(90 days)
+WHERE (type = "Page" OR type = "Project") AND contains(title, "EFB")
+SORT type DESC, title ASC
+```
+
+**Key Resources:**
+- [[Page - 777X EFB MoC]]
+
+### 777X Programme
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Project" OR type = "Meeting") AND contains(title, "777")
+SORT type DESC, title ASC
+```
+
+**Key Projects:**
+- [[Project - 777-X EIS Programme]]
+
+### Aircraft Services & Systems
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE type = "Page" AND (
+  contains(title, "Aircraft") OR
+  contains(title, "Gatelink") OR
+  contains(title, "Fleetlink")
+)
+SORT title ASC
+```
+
+**Key Resources:**
+- [[Page - The Aircraft Service]]
+
+---
+
+## Integration Patterns & APIs
+
+### API Management
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Adr") AND (
+  contains(title, "API") OR
+  contains(title, "Integration")
+)
+SORT type DESC, title ASC
+```
+
+**Platforms:**
+- **Kong API Gateway** - Current standard
+- **SAP Integration Suite** - SAP-specific integrations
+- **Axway** - Legacy platform
+
+### Integration Projects
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Project",
+  status AS "Status"
+FROM ""
+WHERE type = "Project" AND (
+  contains(title, "Integration") OR
+  contains(title, "Caerus") OR
+  contains(title, "ODIE")
+)
+SORT status ASC, title ASC
+```
+
+**Key Projects:**
+- [[Project - Caerus]] - SAP to ODIE integration
+- [[Project - ODIE Programme]] - Data platform programme
+
+---
+
+## MRO & Engineering Systems
+
+### AMOS Platform
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "MOC") AND contains(title, "AMOS")
+SORT type DESC, title ASC
+```
+
+**Key Resources:**
+- [[MOC - AMOS Knowledge Base]]
+- [[Page - AMOS Gap Analysis for BA]]
+- [[Page - AMOS Product Roadmap]]
+- [[Page - AMOS Load and Performance Test Report]]
+- [[Page - AMOS Project Roles & Responsibilities]]
+- [[Page - AMOShub APIs Marketplace]]
+
+### MRO Pro
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Project") AND contains(title, "MRO")
+SORT type DESC, title ASC
+```
+
+**Key Projects:**
+- [[Project - MRO Pro Implementation]]
+
+---
+
+## AI & Machine Learning
+
+### AI/ML Platforms & Services
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  type AS "Type"
+FROM ""
+WHERE (type = "Page" OR type = "Project" OR type = "Adr") AND (
+  contains(title, "AI") OR
+  contains(title, "Bedrock") OR
+  contains(title, "Dispax")
+)
+SORT type DESC, title ASC
+```
+
+**Key Projects:**
+- [[Project - Dispax AI]]
+
+**Key Decisions:**
+- [[ADR - Dispax AI - Bedrock]]
+- [[ADR - Dispax AI - AI Services]]
+- [[ADR - KAMA Pattern - Dispax AI (SUPERSEDED)]]
+
+---
+
+## Reference Documentation
+
+### All Technical Pages
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Document",
+  created AS "Created"
+FROM ""
+WHERE type = "Page" AND (
+  contains(title, "Architecture") OR
+  contains(title, "System") OR
+  contains(title, "Technical") OR
+  contains(title, "Platform")
+)
 SORT created DESC
+LIMIT 30
 ```
 
----
-
-## 🏗️ By Technology Domain
-
-### Cloud & Infrastructure
-
-**ADRs:**
+### Technology Guides
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  modified as "Updated"
+  link(file.link, title) AS "Guide",
+  file.mtime AS "Updated"
 FROM ""
-WHERE type = "Adr"
-  AND (category = "infrastructure" OR contains(tags, "cloud") OR contains(tags, "kubernetes") OR contains(tags, "aws"))
-SORT status ASC, modified DESC
+WHERE type = "Page" AND (
+  contains(title, "What is") OR
+  contains(title, "How to") OR
+  contains(title, "Guide")
+)
+SORT file.mtime DESC
+LIMIT 20
 ```
 
-**Resources:**
-- [[Weblink - AWS Well-Architected Framework]]
-- AWS Documentation
-- Kubernetes best practices
+---
 
-**Pages to Create:**
-- Cloud Infrastructure Design
-- Kubernetes Patterns
-- Infrastructure as Code Standards
+## By Technology Domain
 
-### Databases & Data
-
-**ADRs:**
+### Programming & Development
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  modified as "Updated"
+  link(file.link, title) AS "Resource"
 FROM ""
-WHERE type = "Adr"
-  AND (contains(tags, "database") OR contains(tags, "postgresql") OR contains(tags, "data"))
-SORT status ASC, modified DESC
+WHERE type = "Page" AND (
+  contains(title, "Python") OR
+  contains(title, "Java") OR
+  contains(title, "Code")
+)
+SORT title ASC
 ```
 
-**Key Decision:**
-- [[ADR - Standardize on PostgreSQL]]
-
-**Pages to Create:**
-- Database Design Patterns
-- Data Modeling Standards
-- Backup & Recovery Procedures
-
-### APIs & Integration
-
-**ADRs:**
+### Security & Compliance
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  modified as "Updated"
+  link(file.link, title) AS "Resource",
+  type AS "Type"
 FROM ""
-WHERE type = "Adr"
-  AND (contains(tags, "api") OR contains(tags, "graphql") OR contains(tags, "integration"))
-SORT status ASC, modified DESC
+WHERE (type = "Page" OR type = "Project") AND (
+  contains(title, "Security") OR
+  contains(title, "Cyber") OR
+  contains(title, "Compliance") OR
+  contains(title, "PKI")
+)
+SORT type DESC, title ASC
 ```
 
-**Key Decisions:**
-- [[ADR - Adopt GraphQL for API Layer]]
+**Key Resources:**
+- [[Page - PKI (Public Key Infrastructure)]] - Certificate management and cryptography
 
-**Pages to Create:**
-- API Design Standards
-- Authentication & Authorization Patterns
-- API Versioning Strategy
+**Key Projects:**
+- [[Project - Cyber Uplift]]
 
-### Application Architecture
-
-**ADRs:**
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  modified as "Updated"
-FROM ""
-WHERE type = "Adr"
-  AND (contains(tags, "microservices") OR contains(tags, "architecture-pattern"))
-SORT status ASC, modified DESC
-```
-
-**Key Decisions:**
-- [[ADR - Use Kubernetes for Container Orchestration]]
-- [[ADR - Microservices vs Monolith Decision]]
-
-**Resources:**
-- [[Weblink - Martin Fowler on Microservices]]
+**Key Contacts:**
+- [[Aslam Patel]] - Production Owner Cyber Security, responsible for PKI environments
 
 ---
 
-## 🏷️ By Technology
+## Statistics
 
-### Kubernetes
-
-**ADRs:**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "Kubernetes") OR contains(tags, "kubernetes"))
-SORT status ASC
-```
-
-**Pages to Create:**
-- Kubernetes Deployment Patterns
-- Helm Chart Standards
-- Kubernetes Security Best Practices
-
-### PostgreSQL
-
-**ADRs:**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "PostgreSQL") OR contains(title, "Database") OR contains(tags, "postgresql"))
-SORT status ASC
-```
-
-**Pages to Create:**
-- PostgreSQL Tuning Guide
-- Database Migration Procedures
-- Query Optimization Patterns
-
-### GraphQL
-
-**ADRs:**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND (contains(title, "GraphQL") OR contains(tags, "graphql"))
-SORT status ASC
-```
-
-**Pages to Create:**
-- GraphQL Schema Design Guide
-- GraphQL Performance Optimization
-- GraphQL Security Patterns
+| Technology Area | Count |
+|----------------|-------|
+| **Total Tech Pages** | `$= dv.pages("").where(p => p.type == "Page").length` |
+| **Architecture ADRs** | `$= dv.pages("").where(p => p.type == "Adr").length` |
+| **Active Tech Projects** | `$= dv.pages("").where(p => p.type == "Project" && (p.status == "active" || p.status == null)).length` |
+| **AWS Resources** | `$= dv.pages("").where(p => (p.type == "Page" || p.type == "Weblink") && p.file.name.includes("AWS")).length` |
+| **SAP Resources** | `$= dv.pages("").where(p => (p.type == "Page" || p.type == "Weblink") && p.file.name.includes("SAP")).length` |
+| **AMOS Resources** | `$= dv.pages("").where(p => p.type == "Page" && p.file.name.includes("AMOS")).length` |
 
 ---
 
-## 📐 Architectural Patterns
-
-### Design Patterns in Use
-
-**Document these based on your architecture:**
-- Microservices patterns
-- Event-driven architecture
-- API gateway patterns
-- CQRS (Command Query Responsibility Segregation)
-- Saga pattern for distributed transactions
-- Circuit breaker pattern
-- Strangler fig pattern (legacy migration)
-
-### Anti-Patterns to Avoid
-
-**Learn from mistakes:**
-- [[ADR - Microservices vs Monolith Decision]] - Lessons on premature microservices
-- Distributed monolith
-- God classes/services
-- Shared mutable state
-- Tight coupling
-
----
-
-## 🔍 Technology Research
-
-### Active Research Projects
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  priority as "Priority",
-  status as "Status"
-FROM ""
-WHERE type = "Project"
-  AND (contains(title, "Research") OR contains(tags, "research"))
-SORT status ASC, priority ASC
-```
-
-### Emerging Technologies
-
-**Under Evaluation:**
-- Service Mesh (Istio, Linkerd)
-- Serverless patterns
-- Edge computing
-- AI/ML infrastructure
-
-**Pages to Create:**
-- Technology Radar (ThoughtWorks-style)
-- Proof of Concept Results
-- Technology Evaluation Framework
-
----
-
-## 📊 Technology Inventory
-
-### Tech Stack Summary
-
-**See:** [[Page - Tech Stack Overview]] for comprehensive documentation.
-
-**Quick Reference:**
-- **Cloud**: AWS (primary)
-- **Containers**: Docker + Kubernetes (EKS)
-- **Databases**: PostgreSQL (standard), DynamoDB, Redis
-- **Languages**: Python, TypeScript, Go
-- **Frontend**: React, React Native
-- **APIs**: REST (current), GraphQL (pilot)
-
-### Technology Adoption Lifecycle
-
-**Standard (Approved for All New Projects):**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND status = "accepted"
-  AND category = "technology"
-SORT file.name ASC
-```
-
-**Pilot (Limited Use with Approval):**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND status = "proposed"
-  AND category = "technology"
-SORT file.name ASC
-```
-
-**Deprecated (Maintenance Only):**
-```dataview
-LIST
-FROM ""
-WHERE type = "Adr"
-  AND (status = "deprecated" OR status = "superseded")
-  AND category = "technology"
-SORT file.name ASC
-```
-
----
-
-## 🎯 Architecture Projects
-
-### Infrastructure Projects
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority"
-FROM ""
-WHERE type = "Project"
-  AND (contains(tags, "infrastructure") OR contains(tags, "cloud") OR contains(tags, "domain/infrastructure"))
-SORT status ASC, priority ASC
-```
-
-### Platform Engineering
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority"
-FROM ""
-WHERE type = "Project"
-  AND (contains(category, "Platform") OR contains(tags, "platform"))
-SORT status ASC, priority ASC
-```
-
----
-
-## 📚 Learning Resources
-
-### Architecture Books
-
-**Recommended Reading:**
-- Building Microservices (Sam Newman)
-- Designing Data-Intensive Applications (Martin Kleppmann)
-- The Phoenix Project (Gene Kim, et al.)
-- Site Reliability Engineering (Google)
-- Domain-Driven Design (Eric Evans)
-
-### Online Resources
-
-**Essential Weblinks:**
-- [[Weblink - Martin Fowler on Microservices]]
-- [[Weblink - AWS Well-Architected Framework]]
-
-**Additional Resources:**
-- ThoughtWorks Technology Radar
-- AWS Architecture Center
-- CNCF Landscape
-- Microsoft Azure Architecture Center
-
-### Training & Certifications
-
-**Recommended Certifications:**
-- AWS Solutions Architect (Associate/Professional)
-- Certified Kubernetes Administrator (CKA)
-- Certified Kubernetes Application Developer (CKAD)
-
-**Internal Training:**
-- Architecture Office Hours (weekly)
-- Tech Talks (monthly)
-- Workshops (quarterly)
-
----
-
-## 🔧 Tools & Platforms
-
-### Development Tools
-
-**Standard Tooling:**
-- Version Control: GitHub
-- CI/CD: GitHub Actions, ArgoCD
-- IaC: Terraform
-- Containerization: Docker
-- API Testing: Postman, Insomnia
-- Load Testing: k6, JMeter
-
-### Monitoring & Observability
-
-**Observability Stack:**
-- Metrics: Prometheus + Grafana
-- Logging: CloudWatch Logs
-- Tracing: AWS X-Ray
-- APM: DataDog (limited use)
-- Dashboards: Grafana
-
-### Security Tools
-
-**Security Tooling:**
-- Dependency Scanning: Dependabot, Snyk
-- SAST: SonarQube
-- Secrets Management: AWS Secrets Manager
-- Vulnerability Scanning: Trivy
-
----
-
-## 📋 Standards & Checklists
-
-### Architecture Review Checklist
-
-**Create page for:**
-- Pre-implementation architecture review
-- Security review checklist
-- Performance review checklist
-- Cost review checklist
-- Operational readiness review
-
-### Definition of Done
-
-**Technical Standards:**
-- Code review completed
-- Unit tests (80%+ coverage)
-- Integration tests passing
-- Security scan clean
-- Documentation updated
-- ADR created (if applicable)
-
----
-
-## Related
-
-**Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[MOC - ADRs MOC]] - All architecture decisions
-- [[MOC - Projects MOC]] - Technology projects
+## Related MOCs
+- [[Dashboard - Dashboard]] - Main hub
+- [[MOC - Projects MOC]] - All projects
+- [[MOC - ADRs MOC]] - Architecture decisions
 - [[MOC - Weblinks MOC]] - External resources
+- [[MOC - AMOS Knowledge Base]] - AMOS platform details
+- [[MOC - Axia Programme]] - EWS Futures programme
 
-**Key Pages:**
-- [[Page - Architecture Principles]] - Decision framework
-- [[Page - Tech Stack Overview]] - Approved technologies
+---
 
-**Domain MOCs** (examples you can create):
-- [[MOC - Cloud Architecture]] - Cloud-specific patterns
-- [[MOC - Data Platform]] - Data engineering
-- [[MOC - Security Architecture]] - Security patterns
-- [[MOC - Mobile Architecture]] - Mobile app patterns
+## Usage Notes
+
+**For Claude Code:**
+- Use this MOC to discover technical context across domains
+- Cross-reference ADRs with their implementation projects
+- Find platform-specific documentation (AWS, SAP, AMOS)
+- Navigate aviation-specific systems (EFB, 777X, Aircraft)
+
+**Categories:**
+- **Cloud Platforms**: AWS and SAP ecosystem resources
+- **Data & Integration**: ODIE, Datasphere, Kafka, messaging
+- **Aviation Systems**: EFB, 777X, aircraft-specific technologies
+- **MRO Systems**: AMOS, MRO Pro, maintenance platforms
+- **AI/ML**: Bedrock, Dispax AI, generative AI projects
 
 **Maintenance:**
-- Review technology standards quarterly
-- Update tech stack documentation when changes occur
-- Archive deprecated technology ADRs
-- Keep learning resources current
+- New Pages/Projects automatically appear in relevant queries
+- Add technology-specific tags for better categorization
+- Link new ADRs to related technology sections
+- Update key resources list as documentation grows

@@ -172,16 +172,16 @@ Claude:
 User: Y
 
 "Reason for archiving? (or skip)"
-User: Left company June 2025
+User: Left BA June 2025
 
 Claude:
-- Adds archived: true, archivedDate, archivedReason: "Left company June 2025"
+- Adds archived: true, archivedDate, archivedReason: "Left BA June 2025"
 - Moves to +Archive/People/Sarah Chen.md
 
 "Archived: Sarah Chen
 From: +People/
 To: +Archive/People/
-Reason: Left company June 2025
+Reason: Left BA June 2025
 
 Note: Links like [[Sarah Chen]] in meeting notes will continue to work."
 ```

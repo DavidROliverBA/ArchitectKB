@@ -1,530 +1,361 @@
 ---
 type: MOC
 title: Projects MOC
-created: 2026-01-07
+description: Map of Content for all projects organized by status, priority, and timeframe
+created: 2025-01-05
 modified: 2026-01-07
-tags: [moc, projects, portfolio]
+tags: [MOC, navigation, projects]
+
+# Quality Indicators
+confidence: high
+freshness: current
+source: primary
+verified: true
+reviewed: 2026-01-07
+summary: Central navigation for all projects showing active, completed, and on-hold initiatives with priority and timeframe information
+keywords: [projects, portfolio, tracking, MOC, status]
 ---
 
-# 🎯 Projects MOC
+# Projects MOC
 
-> **Portfolio view of all projects and initiatives**
+**Purpose:** Central directory of all projects providing visibility into active initiatives, completed work, and projects on hold. Track progress across the BA engineering and digital transformation portfolio.
 
-Last Updated: 2026-01-07
+**Quick Navigation:** [Active](#active-projects) | [Completed](#completed-projects) | [On Hold](#projects-on-hold) | [By Priority](#projects-by-priority) | [By Transformation](#by-transformation-type) | [AI Projects](#ai-projects) | [Statistics](#project-statistics)
 
----
-
-## Overview
-
-This MOC provides comprehensive views of projects organized by status, priority, and category. Use this to understand the project portfolio and track progress across initiatives.
-
-**Quick Links:**
-- [[Dashboard - Dashboard]] - Back to main dashboard
-- [[MOC - Tasks MOC]] - View project tasks
-- [[MOC - ADRs MOC]] - View project architecture decisions
+**Total Projects:** `$= dv.pages("").where(p => p.type == "Project").length`
 
 ---
 
-## 🚀 Active Projects
+## Project Statistics
+
+| Metric | Count |
+|--------|-------|
+| **Total Projects** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true).length` |
+| **Active** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && (p.status == "active" || p.status == null)).length` |
+| **Completed** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.status == "completed").length` |
+| **On Hold** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && (p.status == "paused" || p.status == "on-hold")).length` |
+| **High Priority** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.priority == "high").length` |
+| **Archived** | `$= dv.pages("").where(p => p.type == "Project" && p.archived == true).length` |
+
+---
+
+## Active Projects
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  priority as "Priority",
-  start-date as "Started",
-  end-date as "Target End",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  priority AS "Priority",
+  timeFrame AS "Timeframe"
 FROM ""
-WHERE type = "Project" AND status = "active"
-SORT priority ASC, start-date DESC
+WHERE type = "Project" AND archived != true AND (status = "active" OR contains(status, "In Progress") OR status = null)
+SORT priority ASC, title ASC
 ```
 
-**Active Project Count:** Projects currently in execution
-
 ---
 
-## ⏸️ Paused Projects
+## Completed Projects
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  priority as "Priority",
-  start-date as "Started",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  timeFrame AS "Timeframe"
 FROM ""
-WHERE type = "Project" AND status = "paused"
+WHERE type = "Project" AND archived != true AND (status = "completed" OR contains(status, "Complete") OR contains(status, "Done"))
+SORT file.mtime DESC
+```
+
+---
+
+## Projects on Hold
+
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  priority AS "Priority"
+FROM ""
+WHERE type = "Project" AND archived != true AND (status = "on-hold" OR contains(status, "Hold") OR contains(status, "Paused"))
 SORT priority ASC
 ```
 
-**Note:** Review paused projects quarterly to decide: resume, cancel, or keep paused.
-
 ---
 
-## ✅ Completed Projects (Last 12 Months)
+## Projects by Priority
+
+### High Priority Projects
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  priority as "Priority",
-  start-date as "Started",
-  end-date as "Completed",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  timeFrame AS "Timeframe"
 FROM ""
-WHERE type = "Project"
-  AND status = "completed"
-  AND end-date >= date(today) - dur(365 days)
-SORT end-date DESC
+WHERE type = "Project" AND archived != true AND (priority = "high" OR contains(priority, "High"))
+SORT status ASC
 ```
 
-**Recent Completions:** Review for lessons learned and best practices.
-
----
-
-## 🔴 High Priority Projects
+### Medium Priority Projects
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  start-date as "Started",
-  end-date as "Target End",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  timeFrame AS "Timeframe"
 FROM ""
-WHERE type = "Project" AND priority = "high"
-SORT status ASC, start-date DESC
+WHERE type = "Project" AND archived != true AND (priority = "medium" OR contains(priority, "Medium"))
+SORT status ASC
 ```
 
----
-
-## 🟡 Medium Priority Projects
+### Low Priority Projects
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  start-date as "Started",
-  end-date as "Target End",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  timeFrame AS "Timeframe"
 FROM ""
-WHERE type = "Project" AND priority = "medium"
-SORT status ASC, start-date DESC
-```
-
----
-
-## 🟢 Low Priority Projects
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  start-date as "Started",
-  category as "Category"
-FROM ""
-WHERE type = "Project" AND priority = "low"
-SORT status ASC, start-date DESC
-```
-
----
-
-## 📁 Projects by Category
-
-### Digital Transformation
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project"
-  AND contains(category, "Digital Transformation")
-SORT status ASC, priority ASC
-```
-
-### Platform Engineering
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project"
-  AND contains(category, "Platform Engineering")
-SORT status ASC, priority ASC
-```
-
-### Research & Innovation
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project"
-  AND contains(category, "Research")
-SORT status ASC, priority ASC
-```
-
-### Technical Debt Reduction
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project"
-  AND contains(category, "Technical Debt")
-SORT status ASC, priority ASC
-```
-
-### Uncategorized Projects
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project" AND (category = null OR category = "")
-SORT status ASC, priority ASC
-```
-
----
-
-## 📊 Project Deep Dives
-
-### Cloud Migration
-
-**Project:** [[Project - Cloud Migration]]
-**Status:** Active | **Priority:** High
-
-**Recent Tasks:**
-```dataview
-TABLE WITHOUT ID
-  file.link as "Task",
-  completed as "Done",
-  priority as "Priority",
-  due as "Due"
-FROM ""
-WHERE type = "Task"
-  AND contains(project, "Cloud Migration")
-SORT completed ASC, priority ASC
-LIMIT 5
-```
-
-**Related Meetings:**
-```dataview
-TABLE WITHOUT ID
-  file.link as "Meeting",
-  date as "Date",
-  summary as "Summary"
-FROM ""
-WHERE type = "Meeting"
-  AND contains(project, "Cloud Migration")
-SORT date DESC
-LIMIT 5
-```
-
-**Architecture Decisions:**
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category"
-FROM ""
-WHERE type = "Adr"
-  AND contains(project, "Cloud Migration")
+WHERE type = "Project" AND archived != true AND (priority = "low" OR contains(priority, "Low"))
 SORT status ASC
 ```
 
 ---
 
-### API Gateway Modernization
+## By Transformation Type
 
-**Project:** [[Project - API Gateway Modernization]]
-**Status:** Active | **Priority:** Medium
+### Transformation Statistics
 
-**Recent Tasks:**
+| Type | Count |
+|------|-------|
+| **Modernisation** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "modernisation").length` |
+| **Migration** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "migration").length` |
+| **Greenfield** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "greenfield").length` |
+| **Integration** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "integration").length` |
+| **Decommission** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "decommission").length` |
+| **Uplift** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == "uplift").length` |
+| **Unclassified** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.transformationType == null).length` |
+
+### Modernisation Projects
+
+Upgrading existing systems to newer technologies or platforms.
+
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Task",
-  completed as "Done",
-  priority as "Priority",
-  due as "Due"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope",
+  aiInvolved AS "AI?"
 FROM ""
-WHERE type = "Task"
-  AND contains(project, "API Gateway")
-SORT completed ASC, priority ASC
-LIMIT 5
+WHERE type = "Project" AND archived != true AND transformationType = "modernisation"
+SORT status ASC, title ASC
 ```
 
-**Related Meetings:**
+### Migration Projects
+
+Moving systems between platforms (e.g., on-prem to cloud).
+
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Meeting",
-  date as "Date",
-  summary as "Summary"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope",
+  aiInvolved AS "AI?"
 FROM ""
-WHERE type = "Meeting"
-  AND contains(project, "API Gateway")
-SORT date DESC
-LIMIT 5
+WHERE type = "Project" AND archived != true AND transformationType = "migration"
+SORT status ASC, title ASC
 ```
 
-**Architecture Decisions:**
+### Greenfield Projects
+
+Building new capabilities from scratch.
+
 ```dataview
 TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  category as "Category"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope",
+  aiInvolved AS "AI?"
 FROM ""
-WHERE type = "Adr"
-  AND contains(project, "API Gateway")
-SORT status ASC
+WHERE type = "Project" AND archived != true AND transformationType = "greenfield"
+SORT status ASC, title ASC
 ```
 
----
+### Integration Projects
 
-## 📈 Project Statistics
-
-### Status Breakdown
+Connecting systems together.
 
 ```dataview
 TABLE WITHOUT ID
-  status as "Status",
-  length(rows) as "Count"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope",
+  aiInvolved AS "AI?"
 FROM ""
-WHERE type = "Project"
-GROUP BY status
-SORT status ASC
+WHERE type = "Project" AND archived != true AND transformationType = "integration"
+SORT status ASC, title ASC
 ```
 
-### Priority Distribution
+### Decommission Projects
+
+Retiring legacy systems.
 
 ```dataview
 TABLE WITHOUT ID
-  priority as "Priority",
-  length(rows) as "Count"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope"
 FROM ""
-WHERE type = "Project"
-GROUP BY priority
-SORT priority ASC
+WHERE type = "Project" AND archived != true AND transformationType = "decommission"
+SORT status ASC, title ASC
 ```
 
-### Projects by Start Year
+### Uplift Projects
+
+Security, performance, or compliance improvements.
 
 ```dataview
 TABLE WITHOUT ID
-  dateformat(start-date, "yyyy") as "Year",
-  length(rows) as "Projects Started"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationScope AS "Scope",
+  aiInvolved AS "AI?"
 FROM ""
-WHERE type = "Project" AND start-date != null
-GROUP BY dateformat(start-date, "yyyy")
-SORT dateformat(start-date, "yyyy") DESC
+WHERE type = "Project" AND archived != true AND transformationType = "uplift"
+SORT status ASC, title ASC
 ```
 
----
+### Unclassified Projects
 
-## 🎯 Project Health Dashboard
-
-### Projects Without End Dates
+Projects not yet categorised by transformation type.
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  priority AS "Priority"
 FROM ""
-WHERE type = "Project"
-  AND status = "active"
-  AND (end-date = null OR end-date = "")
-SORT priority ASC
-```
-
-**Action:** Active projects should have target end dates for planning.
-
-### Projects Without Tasks
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority"
-FROM ""
-WHERE type = "Project"
-  AND status = "active"
-  AND !contains(file.outlinks, "Task")
-SORT priority ASC
-```
-
-**Action:** Active projects need tasks for execution tracking.
-
-### Projects Without Recent Activity (90+ days)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  modified as "Last Updated"
-FROM ""
-WHERE type = "Project"
-  AND status = "active"
-  AND modified < date(today) - dur(90 days)
-SORT modified ASC
-```
-
-**Action:** Review these projects - are they truly active or should status change?
-
----
-
-## 📝 Project Management Tips
-
-### Project Lifecycle
-
-1. **Initiation**: Define objectives, stakeholders, success criteria
-2. **Planning**: Break down into tasks, set timeline, identify risks
-3. **Execution**: Work tasks, track progress, hold regular check-ins
-4. **Monitoring**: Review metrics, adjust plan as needed
-5. **Closure**: Document outcomes, lessons learned, celebrate wins
-
-### Best Practices
-
-**Project Setup:**
-- Clear, measurable objectives
-- Identified stakeholders and decision makers
-- Target timeline (even if approximate)
-- Success criteria defined upfront
-
-**During Execution:**
-- Weekly status updates
-- Link related tasks, meetings, ADRs
-- Document decisions and trade-offs
-- Regular stakeholder communication
-
-**Project Closure:**
-- Document lessons learned
-- Archive or transition deliverables
-- Celebrate team achievements
-- Update status to "completed"
-
-### Project Templates
-
-Use `+Templates/Project.md` to create new projects with consistent structure.
-
-**Recommended Sections:**
-- Overview and objectives
-- Key stakeholders
-- Timeline and milestones
-- Related tasks (auto-populated via Dataview)
-- Meetings (auto-populated via Dataview)
-- Architecture decisions (auto-populated via Dataview)
-- Notes and updates
-
----
-
-## 🔍 Cross-Project Views
-
-### All Project Tasks
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Task",
-  project as "Project",
-  priority as "Priority",
-  due as "Due",
-  completed as "Done"
-FROM ""
-WHERE type = "Task" AND project != null
-SORT project ASC, completed ASC, priority ASC
-```
-
-### All Project Meetings
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Meeting",
-  date as "Date",
-  project as "Project",
-  summary as "Summary"
-FROM ""
-WHERE type = "Meeting" AND project != null
-SORT date DESC
-LIMIT 20
-```
-
-### All Project ADRs
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "ADR",
-  status as "Status",
-  project as "Project",
-  category as "Category"
-FROM ""
-WHERE type = "Adr" AND project != null
-SORT status ASC, project ASC
+WHERE type = "Project" AND archived != true AND transformationType = null
+SORT status ASC, title ASC
 ```
 
 ---
 
-## 📅 Timeline View
+## AI Projects
 
-### Projects Started This Year (2026)
+Projects involving AI/ML capabilities.
 
-```dataview
-TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  start-date as "Started"
-FROM ""
-WHERE type = "Project"
-  AND start-date >= date(2026-01-01)
-SORT start-date DESC
-```
-
-### Projects Ending This Quarter
+| Metric | Count |
+|--------|-------|
+| **AI-Involved** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.aiInvolved == true).length` |
+| **Non-AI** | `$= dv.pages("").where(p => p.type == "Project" && p.archived != true && p.aiInvolved != true).length` |
 
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Project",
-  status as "Status",
-  priority as "Priority",
-  end-date as "Target End"
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  transformationType AS "Type",
+  transformationScope AS "Scope"
 FROM ""
-WHERE type = "Project"
-  AND end-date >= date(today)
-  AND end-date <= date(today) + dur(90 days)
-SORT end-date ASC
+WHERE type = "Project" AND archived != true AND aiInvolved = true
+SORT status ASC, title ASC
 ```
 
 ---
 
-## Related
+## All Projects
 
-**Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[MOC - Tasks MOC]] - Detailed task views
-- [[MOC - Meetings MOC]] - Project meetings
-- [[MOC - ADRs MOC]] - Project architecture decisions
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Project",
+  status AS "Status",
+  priority AS "Priority",
+  tags AS "Tags"
+FROM ""
+WHERE type = "Project" AND archived != true
+SORT title ASC
+```
 
-**Project Resources:**
-- [[Page - Architecture Principles]] - Decision-making framework
-- [[Page - Tech Stack Overview]] - Technology standards
-- Template: `+Templates/Project.md`
+---
 
-**Portfolio Management:**
-- Review project portfolio monthly
-- Align projects with strategic objectives
-- Balance capacity across priorities
-- Archive completed projects for reference
+## Project Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total Projects | `$= dv.pages("").where(p => p.type == "Project").length` |
+
+---
+
+## Project Index
+
+### Programmes & Major Initiatives
+
+- [[Project - 777-X EIS Programme]]
+- [[Project - Axia (was EWS Futures)]]
+- [[Project - ODIE Programme]]
+- [[Project - Project Elysium - HR System Replacement]]
+
+### Engineering & Aircraft Systems
+
+- [[Project - B777X 1 & 2 Gatelink and E-enabling Ground Systems]]
+- [[Project - B777X 6. CMS Design]]
+- [[Project - CAMO Adherence]]
+- [[Project - OpDef Upgrade]]
+
+### Data & Integration
+
+- [[Project - Caerus]]
+- [[Project - SAP BTP Workzone]]
+- [[Project - SAP MIgration to AWS]]
+
+### AI & Innovation
+
+- [[Project - Dispax AI]]
+- [[Project - North Star]]
+
+### Cyber & Compliance
+
+- [[Project - Cyber Uplift]]
+
+### Applications & Tools
+
+- [[Project - Digital Signage]]
+- [[Project - EHR Reporting]]
+- [[Project - Engineering Knowledge Management]]
+- [[Project - Line Station Time Recording]]
+- [[Project - Matterport Deployment]]
+- [[Project - MRO Pro Implementation]]
+- [[Project - Power Apps Roadmap]]
+- [[Project - Siemens Teamcenter X SaaS]]
+- [[Project - Snap On Tooling - v9 Upgrade]]
+- [[Project - Sparks - Logic Software - Ticketing System]]
+- [[Project - Supply Chain]]
+- [[Project - Time Link to IOMotion Migration]]
+
+### Teams
+
+- [[Project - BA Engineering - Agile Team 1]]
+
+### Other
+
+- [[Project - AI2 Migration to 2942]]
+
+---
+
+## Related MOCs
+
+- [[Dashboard - Dashboard]] - Main navigation hub
+- [[MOC - ADRs MOC]] - Architecture decisions
+- [[MOC - Technology & Architecture MOC]] - Technical platforms and architecture
+- [[MOC - Organisations MOC]] - Vendors and partners
+- [[MOC - Vault Quality Dashboard]] - Quality metrics and health
+- [[Page - Vault Maintenance Guide]] - Maintenance best practices
+- [[MOC - Axia Programme]] - EWS Futures programme
+- [[MOC - Engineering Projects]] - Engineering teams
+
+---
+
+**MOC Version:** 2.0
+**Total Projects:** `$= dv.pages("").where(p => p.type == "Project").length`
+**Last Updated:** 2026-01-07
+**Purpose:** Project portfolio tracking and visibility

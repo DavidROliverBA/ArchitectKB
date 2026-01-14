@@ -27,7 +27,7 @@ Translate technical architecture content for non-technical stakeholders. Useful 
 
 ```
 /exec-summary "ADR - API Gateway Selection"
-/exec-summary "Project - Cloud Migration" exec
+/exec-summary "Project - Dispax AI" exec
 /exec-summary "Page - Kafka Integration" manager
 ```
 

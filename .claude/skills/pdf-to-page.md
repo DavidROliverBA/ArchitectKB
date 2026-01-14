@@ -18,7 +18,7 @@ Convert PDF documents into Page notes with extracted images saved as PNG files i
 
 ## Instructions
 
-This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and entity extraction.
+This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and BA entity extraction.
 
 ### Phase 1: PDF Loading & Validation
 
@@ -38,12 +38,12 @@ Options:
   1. "Sonnet - Concise" (Recommended)
      Description: "Faster processing, concise overview. Best for straightforward documents."
   2. "Opus - Comprehensive"
-     Description: "Deeper analysis with detailed entity extraction. Best for complex technical documents."
+     Description: "Deeper analysis with detailed BA context. Best for complex technical documents."
 ```
 
 **When to recommend each**:
 - **Sonnet**: Default choice. Fast, cost-effective, good for most documents
-- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive entity extraction is critical
+- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive BA entity extraction is critical
 
 Store the selection for use in Phase 3.
 
@@ -99,16 +99,16 @@ with open(json_file, 'w', encoding='utf-8') as f:
     f.write(json_data)
 ```
 
-### Phase 3: Visual Analysis & Entity Extraction
+### Phase 3: Visual Analysis & BA Entity Extraction
 
 Launch **one agent** using the model selected in Phase 1.5:
 
 - **If Sonnet selected**: Use `model="sonnet"` - faster, concise analysis
 - **If Opus selected**: Use `model="opus"` - comprehensive, detailed analysis
 
-**Agent: Visual Analysis & Entity Extraction** (Sonnet or Opus based on selection)
+**Agent: Visual Analysis & BA Entity Extraction** (Sonnet or Opus based on selection)
 ```
-Task: Analyze PDF visually and extract domain-specific entities
+Task: Analyze PDF visually and extract BA-specific entities
 
 1. VISUAL ANALYSIS:
    - Read the PDF file (Claude can view PDFs visually)
@@ -118,11 +118,11 @@ Task: Analyze PDF visually and extract domain-specific entities
    - Assess image types (architecture diagrams, flowcharts, screenshots, photos, logos)
    - Count pages with significant visual content
 
-2. ENTITY EXTRACTION:
-   - Identify projects mentioned (reference vault context files)
-   - Find people and roles (architects, PMs, stakeholders, vendors)
-   - Identify systems and technologies (cloud platforms, databases, frameworks)
-   - Extract organizations (vendors, partners, consultancies)
+2. BA ENTITY EXTRACTION:
+   - Identify BA projects mentioned (Caerus, AXIA, 777X, MRO Pro, etc.)
+   - Find BA people and roles (architects, PMs, stakeholders)
+   - Identify BA systems and technologies (SAP, AWS, AMOS, etc.)
+   - Extract BA organizations (Boeing, SAP, Collins, Swiss-AS, etc.)
    - Find dates, deadlines, milestones
    - Identify action items, decisions, recommendations
 
@@ -134,20 +134,20 @@ Task: Analyze PDF visually and extract domain-specific entities
 
 Return:
 - Image inventory with page numbers, descriptions, and suggested filenames
-- Entity list (projects, people, systems, organizations)
+- BA entity list (projects, people, systems, organizations)
 - Document classification and topics
 - Action items and key dates
 ```
 
 **Why only 1 agent now?**
 - Docling already extracted the text structure (Phase 2)
-- Only need visual understanding and domain knowledge
+- Only need visual understanding and BA domain knowledge
 - 67% reduction in API costs (3 agents → 1 agent)
 - Faster processing time
 
 **Model selection impact**:
 - **Sonnet**: ~10 seconds agent time, cost-effective, good quality
-- **Opus**: ~30-60 seconds agent time, higher cost, comprehensive analysis with richer context
+- **Opus**: ~30-60 seconds agent time, higher cost, comprehensive analysis with richer BA context
 
 ### Phase 4: Image Extraction
 
@@ -164,8 +164,8 @@ For each image identified by the agent:
 
 2. **Save as PNG files** in `+Attachments/`:
    - Naming convention: `{pdf-basename} - Page {N} - {description}.png`
-   - Example: `System Architecture - Page 3 - Component Diagram.png`
-   - Use descriptive names from agent's visual analysis
+   - Example: `AMOS Architecture - Page 3 - System Diagram.png`
+   - Use descriptive names from Sonnet agent's visual analysis
 
 3. **Track all created files** for linking in the final Page note
 
@@ -249,19 +249,19 @@ processedWith: docling
 
 ### Projects Referenced
 
-{List from agent's entity extraction with [[Project]] links}
+{List from agent's BA entity extraction with [[Project]] links}
 
 ### People Mentioned
 
-{List from agent's entity extraction with [[Person]] links}
+{List from agent's BA entity extraction with [[Person]] links}
 
 ### Systems & Technologies
 
-{List from agent's entity extraction}
+{List from agent's BA entity extraction}
 
 ### Organizations Referenced
 
-{List from agent's entity extraction with [[Organisation]] links}
+{List from agent's BA entity extraction with [[Organisation]] links}
 
 ### Dates & Deadlines
 
@@ -312,7 +312,7 @@ After creation, provide user with:
 - `{image2.png}` - {description}
 - ...
 
-**Entities Identified**:
+**BA Entities Identified**:
 - Projects: {count} ({list})
 - People: {count} ({list})
 - Systems: {count} ({list})
@@ -325,7 +325,7 @@ After creation, provide user with:
 
 **Suggested Actions**:
 1. Review extracted content for accuracy
-2. Verify entity links are correct
+2. Verify BA entity links are correct
 3. Add additional tags if needed: {suggestions}
 4. Create tasks from action items: {task suggestions}
 5. Link to related projects: {suggestions}
@@ -366,7 +366,7 @@ pdfimages -png input.pdf output-prefix
 pdftoppm -png -r 150 -f 3 -l 3 input.pdf output-prefix  # Page 3 only
 ```
 
-**Fallback**: If extraction fails, use agent's visual descriptions
+**Fallback**: If extraction fails, use Sonnet agent's visual descriptions
 
 ### Image Quality
 
@@ -399,77 +399,30 @@ pdftoppm -png -r 150 -f 3 -l 3 input.pdf output-prefix  # Page 3 only
 - Consider processing only specific page ranges
 
 **Extraction Failures**:
-- If docling fails, fall back to manual workflow
+- If docling fails, fall back to old 3-agent workflow
 - Create Page note with manual instructions
 - Log error for debugging
 
 ### Performance Benchmarks
 
-Based on typical architecture document (29 pages):
+Based on AMOS System Architecture & Roadmap (29 pages):
 
 | Metric | Value |
 |--------|-------|
-| **Processing time** | ~25 seconds |
+| **Processing time** | 24.6 seconds |
 | **Throughput** | 0.85 seconds/page |
-| **First run** | ~40 seconds (includes model loading) |
-| **Subsequent runs** | ~25 seconds (models cached) |
+| **First run** | 41.1 seconds (includes model loading) |
+| **Subsequent runs** | 24.6 seconds (models cached) |
 | **Acceleration** | MPS (Metal Performance Shaders on Apple Silicon) |
 
 **Comparison with old workflow**:
 - Old: 30-60 seconds (3 Sonnet agents)
-- New with Sonnet: ~35 seconds total (25s docling + ~10s agent)
-- New with Opus: ~55-85 seconds total (25s docling + ~30-60s agent)
+- New with Sonnet: ~35 seconds total (24.6s docling + ~10s agent)
+- New with Opus: ~55-85 seconds total (24.6s docling + ~30-60s agent)
 - API cost: 67% reduction with Sonnet (1 agent vs 3 agents)
 - API cost: Higher with Opus, but more comprehensive analysis
 
 ## Example Workflow
 
 ```
-User: /pdf-to-page +Attachments/System-Architecture-Overview.pdf
-
-Claude: "I'll convert this PDF to a Page note with extracted images.
-
-What level of analysis do you want?
-1. Sonnet - Concise (Recommended) - Faster, good for most documents
-2. Opus - Comprehensive - Detailed analysis for complex technical docs
-
-→ User selects: Sonnet
-
-Processing PDF with docling...
-✓ Extracted 29 pages in 24.6 seconds
-✓ Detected 5 tables
-✓ Found 12 images
-
-Analyzing visually with Claude Sonnet...
-✓ Identified 8 architecture diagrams
-✓ Extracted key entities
-✓ Classified as 'Technical Specification'
-
-Creating Page note...
-✓ Extracted 8 PNG images to +Attachments/
-✓ Created 'Page - System Architecture Overview.md'
-
-Summary:
-- Processing time: 35 seconds total
-- Entities found: 3 projects, 5 people, 12 systems, 4 organizations
-- Action items: 6
-- Suggested tags: architecture, system-design, technical-spec
-
-Would you like me to create tasks from the 6 action items found?"
-```
-
-## Use Cases
-
-**Best for:**
-- Architecture specifications and technical documents
-- Meeting presentations with diagrams
-- Vendor documentation and RFPs
-- Training materials and guides
-- Compliance documents
-- Research papers with tables and figures
-
-**Not ideal for:**
-- Simple text documents (use direct copy/paste)
-- Very large PDFs >200 pages (process in chunks)
-- Highly visual documents with minimal text
-- Scanned documents with poor quality (though docling can handle OCR)
+User: /pdf-to-page +Attachments/AMOS-Architecture-Overview.pdf

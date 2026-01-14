@@ -10,9 +10,9 @@ title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-language: # Programming language
-source: # Where did this code come from?
-project: null  # Related project if applicable
+language:
+source:
+project:
 ---
 
 # <% name %>
@@ -35,10 +35,8 @@ What does this code do and when would you use it?
 
 ## Notes
 
-- Note 1
-- Note 2
+-
 
 ## Related
 
-- [[Related Snippet]]
-- [[Project - Name]]
+-

@@ -3,361 +3,244 @@ type: MOC
 title: Weblinks MOC
 created: 2026-01-07
 modified: 2026-01-07
-tags: [moc, weblinks, resources, references]
+tags: [MOC, navigation, weblinks]
 ---
 
-# 🔗 Weblinks MOC
+# Weblinks MOC
 
-> **Curated external resources and references**
+> Central navigation hub for all 157 external web resources including Confluence pages, Jira projects, technical documentation, and learning resources.
 
-Last Updated: 2026-01-07
-
----
-
-## Overview
-
-This MOC organizes saved web resources, articles, documentation, and external references. Use this as your personal library of valuable online content.
-
-**Quick Links:**
-- [[Dashboard - Dashboard]] - Back to main dashboard
-- [[MOC - Technology & Architecture MOC]] - Technical standards
+## Quick Navigation
+- [BA Internal Resources](#ba-internal-resources)
+- [Technical Documentation](#technical-documentation)
+- [Project Resources](#project-resources)
+- [Learning & Training](#learning--training)
+- [Tools & Platforms](#tools--platforms)
+- [Recently Added](#recently-added)
+- [All Weblinks](#all-weblinks)
 
 ---
 
-## 📚 All Weblinks
+## BA Internal Resources
 
+### Confluence Pages
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source",
-  created as "Saved"
+  link(file.link, title) AS "Page",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND contains(domain, "atlassian.net") AND contains(url, "wiki")
+SORT title ASC
+LIMIT 30
 ```
 
----
-
-## 🏷️ By Category/Tags
-
-### Architecture & Patterns
-
+### Jira Projects & Boards
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source"
+  link(file.link, title) AS "Project",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-  AND (contains(tags, "architecture") OR contains(tags, "patterns"))
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND contains(domain, "atlassian.net") AND (contains(url, "jira") OR contains(url, "browse"))
+SORT title ASC
+LIMIT 30
 ```
 
-### Microservices
-
+### ServiceNow & Internal Tools
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source"
+  link(file.link, title) AS "Resource",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-  AND contains(tags, "microservices")
-SORT created DESC
-```
-
-### Cloud & AWS
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source"
-FROM ""
-WHERE type = "Weblink"
-  AND (contains(tags, "aws") OR contains(tags, "cloud"))
-SORT created DESC
-```
-
-### Best Practices
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source"
-FROM ""
-WHERE type = "Weblink"
-  AND contains(tags, "best-practices")
-SORT created DESC
-```
-
-### Reference Documentation
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source"
-FROM ""
-WHERE type = "Weblink"
-  AND contains(tags, "reference")
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND (contains(title, "ServiceNow") OR contains(title, "SharePoint") OR contains(domain, "ba.com"))
+SORT title ASC
 ```
 
 ---
 
-## 👤 By Author
-
-### Martin Fowler
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Resource",
-  source as "Source",
-  created as "Saved"
-FROM ""
-WHERE type = "Weblink"
-  AND contains(author, "Fowler")
-SORT created DESC
-```
+## Technical Documentation
 
 ### AWS Documentation
-
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  source as "Source",
-  created as "Saved"
+  link(file.link, title) AS "AWS Resource",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-  AND contains(author, "AWS")
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND (contains(domain, "aws.amazon.com") OR contains(title, "AWS"))
+SORT title ASC
+```
+
+### SAP Resources
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "SAP Resource",
+  description AS "Description"
+FROM ""
+WHERE type = "Weblink" AND archived != true AND contains(title, "SAP")
+SORT title ASC
+```
+
+### API & Integration Documentation
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  description AS "Description"
+FROM ""
+WHERE type = "Weblink" AND archived != true AND (contains(title, "API") OR contains(title, "Integration"))
+SORT title ASC
 ```
 
 ---
 
-## 🌐 By Source
+## Project Resources
 
-### martinfowler.com
-
+### Project Caerus
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  created as "Saved"
+  link(file.link, title) AS "Resource",
+  url AS "Link"
 FROM ""
-WHERE type = "Weblink"
-  AND contains(source, "martinfowler.com")
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND contains(title, "Caerus")
+SORT title ASC
 ```
 
-### aws.amazon.com
-
+### AMOS & Axia Programme
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  created as "Saved"
+  link(file.link, title) AS "Resource",
+  url AS "Link"
 FROM ""
-WHERE type = "Weblink"
-  AND contains(source, "aws.amazon.com")
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND (contains(title, "AMOS") OR contains(title, "Axia"))
+SORT title ASC
 ```
 
----
-
-## 📅 Recently Saved
-
-### Last 30 Days
-
+### Snap-On & Tooling
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source",
-  created as "Saved"
+  link(file.link, title) AS "Resource",
+  url AS "Link"
 FROM ""
-WHERE type = "Weblink"
-  AND created >= date(today) - dur(30 days)
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND contains(title, "Snap")
+SORT title ASC
 ```
 
-### Last 90 Days
-
+### 777X & Aircraft Systems
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  author as "Author",
-  source as "Source",
-  created as "Saved"
+  link(file.link, title) AS "Resource",
+  url AS "Link"
 FROM ""
-WHERE type = "Weblink"
-  AND created >= date(today) - dur(90 days)
-SORT created DESC
+WHERE type = "Weblink" AND archived != true AND contains(title, "777")
+SORT title ASC
 ```
 
 ---
 
-## 🔗 Most Referenced
+## Learning & Training
 
-### Weblinks Linked from Other Notes
-
+### Courses & Tutorials
 ```dataview
 TABLE WITHOUT ID
-  file.link as "Resource",
-  length(file.inlinks) as "Referenced By",
-  source as "Source"
+  link(file.link, title) AS "Course",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-SORT length(file.inlinks) DESC
-LIMIT 15
+WHERE type = "Weblink" AND archived != true AND (contains(title, "Course") OR contains(title, "Tutorial") OR contains(title, "Learning") OR contains(title, "Training"))
+SORT title ASC
 ```
 
-**Highly Referenced:** These resources are frequently cited in your notes.
-
----
-
-## 📊 Weblink Statistics
-
-### Count by Source
-
+### AI & Technology Learning
 ```dataview
 TABLE WITHOUT ID
-  source as "Source",
-  length(rows) as "Weblinks Saved"
+  link(file.link, title) AS "Resource",
+  description AS "Description"
 FROM ""
-WHERE type = "Weblink"
-GROUP BY source
-SORT length(rows) DESC
-LIMIT 10
-```
-
-### Weblinks by Month
-
-```dataview
-TABLE WITHOUT ID
-  dateformat(created, "yyyy-MM") as "Month",
-  length(rows) as "Weblinks Saved"
-FROM ""
-WHERE type = "Weblink" AND created != null
-GROUP BY dateformat(created, "yyyy-MM")
-SORT dateformat(created, "yyyy-MM") DESC
-LIMIT 12
+WHERE type = "Weblink" AND archived != true AND (contains(title, "AI") OR contains(title, "GPT") OR contains(title, "Claude"))
+SORT title ASC
 ```
 
 ---
 
-## 📝 Weblink Management
+## Tools & Platforms
 
-### Saving Weblinks
+### Architecture & Design Tools
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Tool",
+  description AS "Description"
+FROM ""
+WHERE type = "Weblink" AND archived != true AND (contains(title, "Archi") OR contains(title, "Lucid") OR contains(title, "Design"))
+SORT title ASC
+```
 
-**When to Save:**
-- Valuable articles you'll reference multiple times
-- Official documentation for technologies you use
-- Best practices guides
-- Case studies relevant to your work
-- Research papers and technical deep dives
+### Development & Collaboration
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Tool",
+  domain AS "Domain"
+FROM ""
+WHERE type = "Weblink" AND archived != true AND (contains(title, "GitHub") OR contains(title, "Gitlab") OR contains(domain, "github.com"))
+SORT title ASC
+```
 
-**Don't Save:**
-- News articles (ephemeral content)
-- Resources you won't revisit
-- Content duplicated elsewhere
-- Simple Stack Overflow answers (copy code to notes instead)
+---
 
-**Template:** Use `+Templates/Weblink.md` for consistent format.
+## Recently Added
 
-### Weblink Fields
+### Last 20 Weblinks
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  domain AS "Domain",
+  file.ctime AS "Added"
+FROM ""
+WHERE type = "Weblink" AND archived != true
+SORT file.ctime DESC
+LIMIT 20
+```
 
-**Required:**
-- **Title** - Descriptive title
-- **URL** - Full URL to resource
-- **Source** - Website/publication name
+---
 
-**Optional:**
-- **Author** - Content creator
-- **Summary** - Brief description
-- **Key Points** - Main takeaways
-- **Quotes** - Notable excerpts
-- **Tags** - Categories for filtering
+## All Weblinks
 
-### Best Practices
+### By Domain
+```dataview
+TABLE WITHOUT ID
+  link(file.link, title) AS "Resource",
+  domain AS "Domain",
+  description AS "Description"
+FROM ""
+WHERE type = "Weblink" AND archived != true
+SORT domain ASC, title ASC
+```
 
-**Adding Context:**
-- Write summary in your own words
-- Extract key points relevant to your work
-- Note how it relates to your projects
-- Add personal insights or reflections
+### Statistics
+| Metric | Count |
+|--------|-------|
+| **Total Weblinks** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived != true).length` |
+| **Confluence Pages** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived != true && p.url && p.url.includes("wiki")).length` |
+| **Jira Links** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived != true && p.url && (p.url.includes("jira") || p.url.includes("browse"))).length` |
+| **AWS Resources** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived != true && p.url && p.url.includes("aws.amazon.com")).length` |
+| **Added This Month** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived != true && p.file.ctime >= dv.date("2026-01-01")).length` |
+| **Archived** | `$= dv.pages("").where(p => p.type == "Weblink" && p.archived == true).length` |
 
-**Organization:**
-- Tag by topic for filtering
-- Link from relevant project notes
-- Reference in ADRs when applicable
-- Group by author or source
+---
+
+## Related MOCs
+- [[Dashboard - Dashboard]] - Main hub
+- [[MOC - Projects MOC]] - All projects
+- [[MOC - Technology & Architecture MOC]] - Technical resources (to be created)
+- [[MOC - ADRs MOC]] - Architecture decisions
+
+---
+
+## Notes
+
+**Usage Tips:**
+- Use domain-based queries to find resources by source
+- Check "Recently Added" for newest discoveries
+- Confluence and Jira links provide direct access to work items
+- Technical documentation links are categorized by technology (AWS, SAP, APIs)
 
 **Maintenance:**
-- Periodically check for dead links
-- Update if content moves
-- Archive outdated resources
-- Remove duplicates
-
----
-
-## 🎯 Curated Collections
-
-### Essential Reading
-
-Must-read resources for architects:
-
-- [[Weblink - Martin Fowler on Microservices]]
-- [[Weblink - AWS Well-Architected Framework]]
-
-**Tip:** Create custom collections by creating a Page note and linking relevant weblinks.
-
-### Getting Started Guides
-
-Resources for new team members:
-
-```dataview
-LIST
-FROM ""
-WHERE type = "Weblink"
-  AND (contains(tags, "getting-started") OR contains(tags, "onboarding"))
-SORT created ASC
-```
-
----
-
-## 🔍 Quick Search
-
-**Common Searches:**
-- Find articles by keyword: Use Obsidian search
-- Articles by author: See "By Author" section
-- Recent saves: See "Recently Saved" section
-- Most referenced: See "Most Referenced" section
-
----
-
-## Related
-
-**Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[MOC - Technology & Architecture MOC]] - Tech stack documentation
-- [[MOC - ADRs MOC]] - Reference weblinks in ADRs
-
-**Integration:**
-- Link weblinks from project notes
-- Reference in ADRs to support decisions
-- Include in meeting notes when discussed
-- Add to daily notes when discovered
-
-**External Tools:**
-- Browser bookmarks: Import important ones here
-- Pocket/Instapaper: Migrate saved content
-- Notion: Export web clips as markdown
-
-**Tips:**
-- Use `/weblink` Claude skill to save URLs with AI-generated summaries
-- Include weblinks in literature review for projects
-- Create thematic weblink collections for specific topics
-- Share valuable resources with team in meeting notes
+- New weblinks are automatically included in queries
+- Consider adding descriptive tags to weblinks for better categorization
+- Review "Recently Added" monthly to ensure proper categorization

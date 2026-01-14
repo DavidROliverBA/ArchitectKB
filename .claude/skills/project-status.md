@@ -10,8 +10,8 @@ Generate a comprehensive status report for a project using sub-agents for effici
 
 ```
 /project-status <project name>
-/project-status Alpha
-/project-status API Gateway
+/project-status Caerus
+/project-status 777X
 ```
 
 ## Instructions

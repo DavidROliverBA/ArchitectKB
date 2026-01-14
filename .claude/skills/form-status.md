@@ -1,158 +1,139 @@
 ---
 skill: form-status
-description: Check status of form submissions across projects
+description: Check form submission status across projects
 context: fork
 arguments:
   - name: filter
-    description: Filter by status (pending, expired, all) or project name
+    description: Optional project name, form type, or "pending"/"overdue"
     required: false
 ---
 
 # /form-status Skill
 
-Generate a status report of form submissions across the vault.
+Show status of form submissions across projects.
 
 ## Usage
 
 ```
-/form-status                    # Show forms requiring attention
-/form-status pending            # All pending forms
-/form-status expired            # Expired approvals
-/form-status all                # All form submissions
-/form-status "Project Alpha"    # Forms for specific project
+/form-status                    # All forms summary
+/form-status pending            # Forms awaiting response
+/form-status overdue            # Forms past expected response
+/form-status Caerus             # Forms for specific project
+/form-status DPIA               # All DPIA submissions
+/form-status CyberRisk          # All Cyber Risk assessments
 ```
 
 ## Instructions
 
-1. **Search for all FormSubmission notes**:
+1. **Search for FormSubmission notes**:
    ```
-   Glob: **/Form - *.md
+   Glob pattern: **/Form Submission*.md
+   Also check: type = "FormSubmission" in frontmatter
    ```
 
-2. **Read frontmatter** from each to extract:
-   - `formType`
-   - `status`
-   - `project`
-   - `submittedDate`
-   - `responseDate`
-   - `expiryDate`
+2. **Extract metadata from each**:
+   - formType (DPIA, CyberRisk, ChangeRequest, TPRM, IAF, Other)
+   - status (draft, submitted, pending, approved, rejected, expired)
+   - project
+   - submittedDate
+   - responseDate
+   - expiryDate
+   - requestingTeam
 
-3. **Apply filter** based on argument:
-   - No filter / `attention`: Show pending + expiring soon
-   - `pending`: Status = submitted or pending
-   - `expired`: ExpiryDate < today
-   - `all`: All form submissions
-   - Other: Match against project name
+3. **Apply filter if provided**:
+   - "pending" = status is "submitted" or "pending"
+   - "overdue" = submittedDate > 30 days ago AND status not in [approved, rejected]
+   - Project name = matches project field
+   - Form type = matches formType field
 
-4. **Generate report** using format below
-
-## Report Format
-
-### Forms Requiring Attention
+4. **Generate report**:
 
 ```markdown
-## Form Submissions Status Report
+# Form Submission Status
 
-**Generated:** {date}
-**Filter:** {filter or "Attention Required"}
+**Generated**: {{date}}
+**Filter**: {{filter or "All"}}
 
----
-
-### ⚠️ Pending Review
-
-| Form | Type | Project | Submitted | Days Waiting |
-|------|------|---------|-----------|--------------|
-| [[Form - DPIA - Project]] | DPIA | [[Project]] | 2026-01-05 | 6 |
-
-### ⏰ Expiring Soon (30 days)
-
-| Form | Type | Project | Expires | Days Left |
-|------|------|---------|---------|-----------|
-| [[Form - Security - API]] | SecurityReview | [[Project]] | 2026-02-15 | 35 |
-
-### ❌ Expired
-
-| Form | Type | Project | Expired On |
-|------|------|---------|------------|
-| [[Form - Risk - Legacy]] | RiskAssessment | [[Project]] | 2025-12-01 |
-
----
-
-### Summary
+## Summary
 
 | Status | Count |
 |--------|-------|
 | Draft | X |
-| Submitted | X |
-| Pending | X |
+| Submitted/Pending | X |
 | Approved | X |
 | Rejected | X |
 | Expired | X |
-| **Total** | **X** |
 
----
+## By Form Type
 
-### By Form Type
+### DPIA (Data Protection Impact Assessment)
+| Project | Status | Submitted | Response | Reference |
+|---------|--------|-----------|----------|-----------|
+| [[Project]] | pending | 2026-01-05 | - | DPIA-123 |
 
-| Type | Pending | Approved | Total |
-|------|---------|----------|-------|
-| DPIA | X | X | X |
-| SecurityReview | X | X | X |
-| RiskAssessment | X | X | X |
-| ChangeRequest | X | X | X |
+### CyberRisk (Cyber Security Risk Assessment)
+| Project | Status | Submitted | Response | Reference |
+|---------|--------|-----------|----------|-----------|
+
+### TPRM (Third Party Risk Management)
+...
+
+### ChangeRequest
+...
+
+### IAF (Initial Assessment Form)
+...
+
+## Attention Required
+
+### Overdue (>30 days, no response)
+- [[Form Submission - DPIA for Caerus]] - submitted 2025-12-01 (41 days ago)
+
+### Expiring Soon (<30 days to expiry)
+- [[Form Submission - TPRM for MRO Pro]] - expires 2026-02-10
+
+### Drafts Not Submitted
+- [[Form Submission - CyberRisk for OpDef]] - created 2026-01-03
+
+## By Project
+
+### [[Project - Caerus]]
+- DPIA: approved (2025-11-15)
+- CyberRisk: pending (submitted 2026-01-05)
+- TPRM: draft
+
+### [[Project - MRO Pro]]
+...
 ```
 
-## Status Definitions
+## Form Types Reference
 
-| Status | Icon | Meaning |
-|--------|------|---------|
-| `draft` | 📝 | Being prepared |
-| `submitted` | 📤 | Sent for review |
-| `pending` | ⏳ | Under review |
-| `approved` | ✅ | Accepted |
-| `rejected` | ❌ | Not approved |
-| `expired` | ⏰ | Approval expired |
+| Type | Full Name | Requesting Team |
+|------|-----------|-----------------|
+| DPIA | Data Protection Impact Assessment | Data Privacy / Legal |
+| CyberRisk | Cyber Security Risk Assessment | Cyber Security |
+| TPRM | Third Party Risk Management | Procurement / Cyber |
+| IAF | Initial Assessment Form | Cyber Delivery Assurance |
+| ChangeRequest | Change Request / RFC | Change Management |
+| Other | Other intake forms | Various |
 
-## Expiry Warning Logic
+## Status Values
 
-- **Expiring soon**: ExpiryDate within 30 days of today
-- **Expired**: ExpiryDate before today
-- **Long wait**: Pending/submitted > 14 days
+| Status | Meaning |
+|--------|---------|
+| draft | Not yet submitted |
+| submitted | Sent, awaiting acknowledgement |
+| pending | Acknowledged, under review |
+| approved | Approved / passed |
+| rejected | Rejected / failed |
+| expired | Approval expired, needs renewal |
 
-## Example Output
+## Quick Create
 
-```markdown
-## Form Submissions Status Report
+If user mentions a form they need to track, offer to create:
 
-**Generated:** 2026-01-11
-**Filter:** Attention Required
-
----
-
-### ⚠️ Pending Review (2)
-
-| Form | Type | Project | Submitted | Days Waiting |
-|------|------|---------|-----------|--------------|
-| [[Form - DPIA - Customer Portal]] | DPIA | [[Project - Portal Redesign]] | 2026-01-05 | 6 |
-| [[Form - Security - API Gateway]] | SecurityReview | [[Project - API Platform]] | 2025-12-28 | 14 |
-
-### ⏰ Expiring Soon (1)
-
-| Form | Type | Project | Expires | Days Left |
-|------|------|---------|---------|-----------|
-| [[Form - Risk - Cloud Migration]] | RiskAssessment | [[Project - Cloud Migration]] | 2026-02-10 | 30 |
-
----
-
-### Summary
-
-| Status | Count |
-|--------|-------|
-| Draft | 3 |
-| Submitted | 1 |
-| Pending | 1 |
-| Approved | 8 |
-| Rejected | 1 |
-| Expired | 2 |
-| **Total** | **16** |
 ```
+/form <type> <project>
+```
+
+Example: `/form DPIA Caerus` creates `Form Submission - DPIA for Caerus.md`

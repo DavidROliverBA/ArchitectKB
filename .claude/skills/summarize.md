@@ -10,8 +10,8 @@ Summarize a note or set of notes.
 
 ```
 /summarize <note name>
-/summarize Meeting - 2025-01-05 Review
-/summarize all meetings about Alpha
+/summarize Meeting - 2025-01-05 Caerus Review
+/summarize all meetings about Axia
 /summarize last 5 meetings
 ```
 

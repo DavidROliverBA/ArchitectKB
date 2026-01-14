@@ -1,102 +1,156 @@
 ---
 skill: form
-description: Quick-create a form submission tracking note
+description: Quick-create a form submission note
 context: fork
 arguments:
   - name: type
-    description: Form type (DPIA, SecurityReview, RiskAssessment, ChangeRequest, ComplianceCheck)
+    description: Form type (DPIA, CyberRisk, TPRM, IAF, ChangeRequest, Other)
     required: true
-  - name: name
-    description: Form name or related project
+  - name: project
+    description: Project name (without "Project - " prefix)
     required: true
 ---
 
 # /form Skill
 
-Quick-create a form submission tracking note for governance and compliance forms.
+Quick-create a form submission tracking note.
 
 ## Usage
 
 ```
-/form DPIA "Project Alpha"
-/form SecurityReview "New API Gateway"
-/form RiskAssessment "Cloud Migration"
-/form ChangeRequest "Database Upgrade"
+/form DPIA Caerus
+/form CyberRisk "MRO Pro"
+/form TPRM Snap-On
+/form IAF "Dispax AI"
+/form ChangeRequest OpDef
 ```
 
 ## Instructions
 
-1. **Parse the arguments**:
-   - First argument: Form type (DPIA, SecurityReview, RiskAssessment, ChangeRequest, ComplianceCheck, Other)
-   - Second argument: Name/project reference (quote if contains spaces)
+1. **Parse arguments**:
+   - First word = formType
+   - Remaining = project name (handle quotes for multi-word)
 
-2. **Create the note** at `Form - {type} - {name}.md`
+2. **Validate formType** against allowed values:
+   - DPIA
+   - CyberRisk
+   - TPRM
+   - IAF
+   - ChangeRequest
+   - Other
 
-3. **Use this frontmatter**:
+3. **Find matching project** (fuzzy match):
+   - Search for `Project - *{{project}}*.md`
+   - If not found, ask user to confirm project name
+
+4. **Create form submission note**:
+
+   **Filename**: `Form Submission - {{formType}} for {{project}}.md`
+
+   **Location**: Root directory (same as other content notes)
+
+5. **Populate frontmatter**:
 
 ```yaml
 ---
 type: FormSubmission
-title: {type} - {name}
-formType: {type}
+title: "{{formType}} for {{project}}"
+formType: {{formType}}
 status: draft
-created: {today}
-modified: {today}
-tags: [FormSubmission, governance]
-
-# Submission Details
-project: null
-requestingTeam: null
+project: "[[Project - {{project}}]]"
+requestingTeam: {{lookup from table below}}
 submittedDate: null
 responseDate: null
 expiryDate: null
-
-# Reference
 referenceNumber: null
-externalLink: null
 attachments: []
+created: {{today}}
+modified: {{today}}
+tags: [form/{{formType | lowercase}}]
 ---
 ```
 
-4. **Add appropriate body content** based on form type:
-   - **DPIA**: Data categories checklist, processing activities
-   - **SecurityReview**: Security domains checklist, system details
-   - **RiskAssessment**: Risk category checklist, mitigations
-   - **ChangeRequest**: Change type, impact assessment, rollback plan
-   - **Other**: Generic form structure
+6. **Requesting team lookup**:
 
-5. **Return** the wiki-link to the created note: `[[Form - {type} - {name}]]`
+| formType | requestingTeam |
+|----------|----------------|
+| DPIA | Data Privacy |
+| CyberRisk | Cyber Security |
+| TPRM | Procurement |
+| IAF | Cyber Delivery Assurance |
+| ChangeRequest | Change Management |
+| Other | (ask user) |
 
-## Form Types
+7. **Generate body content**:
 
-| Type | Purpose |
-|------|---------|
-| `DPIA` | Data Protection Impact Assessment |
-| `SecurityReview` | Security architecture/system review |
-| `RiskAssessment` | Risk identification and mitigation |
-| `ChangeRequest` | Change management requests |
-| `ComplianceCheck` | Regulatory compliance verification |
-| `Other` | Other governance forms |
+```markdown
+# {{formType}} for {{project}}
 
-## Status Lifecycle
+## Form Details
+
+| Field | Value |
+|-------|-------|
+| **Form Type** | {{formType}} |
+| **Status** | draft |
+| **Project** | [[Project - {{project}}]] |
+| **Requesting Team** | {{requestingTeam}} |
+| **Submitted** | - |
+| **Response** | - |
+| **Reference** | - |
+
+## Summary
+
+<!-- Brief description of what this form submission covers -->
+
+## Key Information Provided
+
+<!-- Main points you included in the form -->
+
+- System/service name:
+- Data classification:
+- Third parties involved:
+- Key risks identified:
+
+## Attachments
+
+<!-- Link screenshots or PDFs of the submitted form here -->
+<!-- Example: ![[+Attachments/dpia-screenshot.png]] -->
+
+## Response / Outcome
+
+<!-- What was the result? Any conditions or follow-up required? -->
+
+## Notes
+
+<!-- Any additional context or follow-up actions -->
+```
+
+8. **Confirm creation** and remind user to:
+   - Fill in key information
+   - Update status when submitted
+   - Add attachment links to screenshots/PDFs
+   - Add reference number when received
+
+## Form Type Descriptions
+
+| Type | Purpose | Typical Questions |
+|------|---------|-------------------|
+| **DPIA** | Assess data protection risks for new processing | Personal data types, legal basis, retention, transfers |
+| **CyberRisk** | Evaluate cyber security risks | Architecture, controls, vulnerabilities, mitigations |
+| **TPRM** | Assess third-party vendor risks | Vendor security posture, data handling, contracts |
+| **IAF** | Initial cyber assessment for new projects | Scope, data, integrations, compliance requirements |
+| **ChangeRequest** | Request infrastructure/system changes | What, why, when, impact, rollback plan |
+
+## Example Output
+
+After `/form DPIA Caerus`:
 
 ```
-draft → submitted → pending → approved/rejected → expired
+Created: Form Submission - DPIA for Caerus.md
+
+Next steps:
+1. Fill in the summary and key information
+2. When you submit, update status to "submitted" and add submittedDate
+3. Add screenshots/PDFs to +Attachments/ and link them
+4. Add reference number when you receive acknowledgement
 ```
-
-| Status | Meaning |
-|--------|---------|
-| `draft` | Being prepared |
-| `submitted` | Sent to assessors |
-| `pending` | Under review |
-| `approved` | Accepted |
-| `rejected` | Not approved |
-| `expired` | Approval period ended |
-
-## Example
-
-**Input:** `/form DPIA "Customer Portal Redesign"`
-
-**Creates:** `Form - DPIA - Customer Portal Redesign.md`
-
-**Output:** Created [[Form - DPIA - Customer Portal Redesign]] - ready to complete DPIA details.

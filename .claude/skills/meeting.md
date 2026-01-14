@@ -1,78 +1,88 @@
 ---
 context: fork
+model: haiku
 ---
 
-# Meeting Note Skill
+# /meeting
 
-Create a meeting note with guided prompts.
+Create a new meeting note in the Obsidian vault.
+
+## Usage
+
+```
+/meeting <title>
+/meeting <title> with <attendees>
+/meeting <title> for <project>
+```
+
+## Examples
+
+```
+/meeting Weekly Sync
+/meeting Caerus Review with Johann, Pat
+/meeting 777X Update for Project - 777-X EIS Programme
+```
 
 ## Instructions
 
-When the user invokes `/meeting <title>` or asks to create a meeting note:
+1. Parse the command for:
+   - **title**: The meeting name (required)
+   - **attendees**: People mentioned after "with" (optional)
+   - **project**: Project mentioned after "for" (optional)
 
-1. **Gather information** (prompt user if not provided):
-   - Meeting title
-   - Date (default: today)
-   - Project (optional, link to Project note)
-   - Attendees (optional, list of Person note links)
+2. Generate filename: `Meeting - YYYY-MM-DD {{title}}.md`
+   - Use today's date
+   - Sanitize title (remove special characters)
 
-2. **Create the note**:
-   - Location: `+Meetings/Meeting - YYYY-MM-DD [Title].md`
-   - Example: `+Meetings/Meeting - 2026-01-07 Architecture Review.md`
-   - Use template: `+Templates/Meeting.md`
+3. Create the meeting note in the **+Meetings/** folder with this structure:
 
-3. **Populate frontmatter**:
-   ```yaml
-   type: Meeting
-   title: "[Title]"
-   date: 'YYYY-MM-DD'
-   created: YYYY-MM-DD
-   modified: YYYY-MM-DD
-   project: "[[Project Name]]"  # if provided
-   attendees: ["[[Person 1]]", "[[Person 2]]"]  # if provided
-   summary: null  # User fills after meeting
-   meetingType: null  # Optional: recurring meeting series
-   tags: [meeting]
-   ```
+```markdown
+---
+type: Meeting
+title: {{title}}
+created: {{DATE}}
+modified: {{DATE}}
+tags: []
+date: '{{DATE}}'
+project: {{project_link or null}}
+attendees: [{{attendee_links}}]
+summary:
+---
 
-4. **Structure the note** with sections:
-   - Attendees
-   - Agenda
-   - Discussion Notes
-   - Decisions Made
-   - Action Items
-   - Follow-up
+# {{title}}
 
-5. **Open the note** for user to complete
+## Attendees
 
-## Example Interaction
+{{attendee_list}}
 
-**User:** `/meeting Architecture Review`
+## Agenda
 
-**Claude:**
-"Creating meeting note for 'Architecture Review'.
+1.
 
-- Date: 2026-01-07 (today)
-- Project to link? (optional)
-- Attendees? (optional, separate with commas)"
+## Discussion Notes
 
-*User provides or skips*
 
-**Claude:**
-"Created meeting note at `+Meetings/Meeting - 2026-01-07 Architecture Review.md`.
 
-The note is ready with sections for agenda, discussion, decisions, and action items."
+## Action Items
 
-## Tips for Users
+- [ ]
 
-- **Link attendees**: Use Person notes like `[[Jane Smith]]`
-- **Link project**: Connect meeting to relevant project
-- **Add summary**: One-line summary after meeting for searchability
-- **Action items**: Use checkboxes `- [ ]` for tasks
-- **Create Task notes**: For important follow-ups, create formal Task notes
+## Decisions Made
 
-## Error Handling
+-
 
-- If +Meetings folder doesn't exist, create it
-- If template doesn't exist, create basic structure
-- Sanitize filename (remove special characters)
+## Follow-up
+
+-
+```
+
+4. For attendees:
+   - Format as wiki-links: `[[Name]]`
+   - In frontmatter: `["[[Adam Drozd]]", "[[Johann Fender]]"]`
+   - In body: bullet list with links
+
+5. For project:
+   - Format as wiki-link: `"[[Project - Caerus]]"`
+   - Match against existing project names if partial match given
+
+6. After creating, confirm and show the file path

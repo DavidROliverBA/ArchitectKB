@@ -12,7 +12,7 @@ Perform comprehensive analysis of architecture diagrams, flowcharts, and technic
 /diagram-review <image-path>
 /diagram-review +Attachments/architecture-diagram.png
 /diagram-review +Attachments/data-flow.png --type "C4"
-/diagram-review +Attachments/process-flow.png --project "Cloud Migration"
+/diagram-review +Attachments/process-flow.png --project "Caerus"
 ```
 
 ## Instructions
@@ -70,10 +70,10 @@ Return: Pattern analysis with architectural assessment
 Task: Identify technologies and integrations
 - Read the image file
 - Recognise technology logos and icons
-- Identify cloud services (AWS, Azure, GCP)
+- Identify cloud services (AWS, Azure, SAP)
 - Note databases, queues, APIs
 - Map external system integrations
-- Identify common enterprise platforms
+- Identify known BA systems (SAP EWS, AMOS, ODIE, etc.)
 Return: Technology inventory with integration points
 ```
 
@@ -160,67 +160,10 @@ Return: Technology inventory with integration points
 
 - [ ] {{action item based on analysis}}
 - [ ] {{documentation suggestion}}
-- [ ] {{review recommendation}}
 ```
 
-## Use Cases
-
-**Architecture Review:**
-- Analyze system architecture diagrams
-- Review C4 models and UML diagrams
-- Assess microservices architectures
-- Evaluate cloud infrastructure designs
-
-**Design Documentation:**
-- Extract components from vendor diagrams
-- Document existing system architectures
-- Create architecture inventories
-- Build technology catalogs
-
-**Decision Support:**
-- Identify architectural patterns
-- Spot potential issues or risks
-- Compare design alternatives
-- Support ADR creation
-
-**Integration Planning:**
-- Map external dependencies
-- Identify integration points
-- Document API contracts
-- Plan migration strategies
-
-## Diagram Types Supported
-
-**Architecture Diagrams:**
-- C4 Model (Context, Container, Component, Code)
-- System Context Diagrams
-- Deployment Diagrams
-- Infrastructure Diagrams
-
-**UML Diagrams:**
-- Component Diagrams
-- Sequence Diagrams
-- Class Diagrams
-- Deployment Diagrams
-
-**Process Diagrams:**
-- Flowcharts
-- BPMN Diagrams
-- Workflow Diagrams
-- Data Flow Diagrams
-
-**Technical Diagrams:**
-- Network Diagrams
-- Database ERDs
-- API Architecture
-- Integration Maps
-
-## Notes
+### Notes
 
 - Optimised for C4 diagrams, UML, flowcharts, and network diagrams
-- Can recognize common technologies and cloud services
-- Identifies architectural patterns and anti-patterns
+- Can recognise BA-specific systems and technologies
 - Useful for architecture reviews and documentation
-- Suggests improvements based on best practices
-- Links to related vault content automatically
-- Works with hand-drawn or tool-generated diagrams

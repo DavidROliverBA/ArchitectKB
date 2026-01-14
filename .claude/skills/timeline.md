@@ -10,9 +10,9 @@ Generate a chronological timeline for a project or topic using sub-agents.
 
 ```
 /timeline <project or topic>
-/timeline Alpha
-/timeline API Gateway
-/timeline Kubernetes migration
+/timeline Caerus
+/timeline 777X
+/timeline SAP migration
 ```
 
 ## Instructions

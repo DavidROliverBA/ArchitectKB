@@ -130,5 +130,6 @@ When executing this skill:
 
 ## Related
 
+- [[Page - Claude Code Skills Guide]] - Full skills documentation
 - `/orphans` - Find unlinked notes after renaming
 - `/broken-links` - Find broken links after renaming

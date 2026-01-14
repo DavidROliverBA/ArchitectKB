@@ -7,76 +7,97 @@ _%>
 ---
 type: Adr
 title: <% name %>
-description: # Brief one-line description
-status: draft  # draft | proposed | accepted | deprecated | superseded
-adrType: null  # Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
+description:
+status: draft
+adrType: # Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 tags: [ADR, architecture]
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
-
-# Decision Makers
-deciders: []  # People who made the decision
+deciders: []
 approvers:
-  # Customize based on your organization's approval structure
-  - Architecture Lead
-  - Tech Lead / Principal Architect
-  - Security Architect (if applicable)
-  # Add domain-specific SMEs as needed
+  # Core Assessors (Required)
+  - Head of Architecture or Engineering
+  - Principal Solution Architect
+  - Cyber Assurance (Tom Phillips or delegate)
+  # Subject-Specific SMEs (add as appropriate - see Page - BA ADR Approvers and SME)
+  # Stakeholders
+project:
+jiraTicket: null  # To be added when JIRA ticket created
+
+# Source/Provenance
+source: local                         # local | confluence
+sourcePageId: null                    # Confluence page ID (if synced)
+sourceSpace: null                     # Confluence space key (if synced)
+sourceUrl: null                       # Link to authoritative version
+sourceVersion: null                   # Confluence version number
+
+# Publication (for local ADRs)
+isPublished: false                    # Has been published to Confluence?
+publishedDate: null                   # When published (YYYY-MM-DD)
+publishedUrl: null                    # Confluence URL when published
+
+# Authority Level
+authority: draft                      # draft | local | team | organizational
 
 # Relationships
-relatedTo: []      # Related ADRs or documentation
-supersedes: []     # ADRs this replaces
-dependsOn: []      # ADRs this depends on
+relatedTo: []
+supersedes: []
+dependsOn: []
 
 # Quality Indicators
-confidence: medium  # low | medium | high - How certain are we about this decision?
-freshness: current  # current | recent | stale - How up-to-date is this?
-source: primary     # primary | secondary | synthesis | external
-verified: false     # Has this been validated in production?
+confidence: medium
+freshness: current
+verified: false
 reviewed: <% tp.date.now("YYYY-MM-DD") %>
 
 # Context
-summary: # Brief summary for AI and quick reference
-assumptions: []    # Key assumptions made in this decision
-stakeholders: []   # Who is impacted by this decision
-project: null      # Link to related project: "[[Project - Name]]"
-externalRef: null  # Optional: Link to external ticket (JIRA, ADO, GitHub Issue)
+summary:
+assumptions: []
+stakeholders: []
 
 # AI-Specific Fields (for AI_ADR type)
-aiProvider: null          # aws-bedrock | azure-openai | openai | google | anthropic | custom
-aiModel: null             # claude-3 | gpt-4 | llama | gemini | custom
-aiUseCase: null           # generation | classification | extraction | conversation | agents
-aiRiskLevel: null         # high | medium | low
+aiProvider: null          # aws-bedrock | azure-openai | openai | google | anthropic | custom | null
+aiModel: null             # claude-3 | gpt-4 | llama | custom | null
+aiUseCase: null           # generation | classification | extraction | conversation | agents | null
+aiRiskLevel: null         # high | medium | low | null
 ethicsReviewed: false     # Has AI ethics been considered?
 biasAssessed: false       # Has bias/fairness been assessed?
-dataPrivacyReviewed: false # Has data privacy (DPIA) been considered?
-humanOversight: null      # full | partial | minimal | none
+dataPrivacyReviewed: false # DPIA completed for AI data usage?
+humanOversight: null      # full | partial | minimal | none | null
 ---
 
 # ADR - <% name %>
 
-> **Architecture Decision Record** - Documenting significant architectural choices and their rationale.
+> **Based on Official BA ADR Template**: [[Page - BA ADR Template (Official)]]
+>
+> **ADR Process**: [[Page - BA ADR Process (Official)]]
+>
+> **Required Approvers**: [[Page - BA ADR Approvers and SME (Official)]]
 
 ---
 
 ## Status
 
-**<% "Draft" %>** - <% tp.date.now("YYYY-MM-DD") %>
+**Draft** - <% tp.date.now("YYYY-MM-DD") %>
 
-**ADR Type**: [Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR]
+**ADR Type**: [Technology_ADR | Architecture_ADR | Local_ADR]
+
+**Following Official BA ADR Process**: [[Page - BA ADR Process (Official)]]
 
 **Workflow Progress:**
-1. ⏳ Draft ADR Content
-2. ⏳ Technical Review
-3. ⏳ Stakeholder Review and Approval
-4. ⏳ ADR Acceptance
-5. ⏳ Post-Approval Actions
+1. ⏳ Check for Existing Guardrail
+2. ⏳ Draft ADR Content
+3. ⏳ Create JIRA Ticket in [PROJECT] (pending - **CRITICAL STEP**)
+4. ⏳ Add Approvers in Jira
+5. ⏳ Stakeholder Review and Approval
+6. ⏳ ADR Acceptance
+7. ⏳ Post-Approval Actions
 
 **Next Steps:**
 1. **Complete ADR content** (all sections below)
-2. **Technical review** with architecture team
-3. **Stakeholder approval** from approvers listed above
-4. **Update status** to "accepted" after approval
+2. **Create JIRA ticket** - Type: ADR, Label: "[adrType]"
+3. **Add approvers** (see [[Page - BA ADR Approvers and SME (Official)]])
+4. **Update status** to "proposed" after JIRA ticket created
 
 ---
 
@@ -149,7 +170,6 @@ humanOversight: null      # full | partial | minimal | none
 
 **Rejected Because:**
 
-
 (Add more alternatives as needed)
 
 ---
@@ -196,7 +216,7 @@ humanOversight: null      # full | partial | minimal | none
 * Note alignment with existing architectural principles
 * Reference related architectural decisions
 
-### Regulatory Compliance
+### GDPR Compliance
 
 
 ### Security Classification
@@ -320,8 +340,13 @@ humanOversight: null      # full | partial | minimal | none
 **Project:**
 
 
-**Related Documentation:**
+**Compliance:**
 
+
+**Official BA ADR Process:**
+- [[Page - BA ADR Process (Official)]] - Main ADR workflow
+- [[Page - BA ADR Approvers and SME (Official)]] - Required approvers by domain
+- [[Page - BA ADR Template (Official)]] - Official template structure
 
 ---
 
@@ -334,12 +359,12 @@ humanOversight: null      # full | partial | minimal | none
 
 ## Approval
 
-**Approvers**:
+**Approvers** (from JIRA ticket):
 
 
 **Date**: [YYYY-MM-DD]
 
-**External Reference**: [Link to ticket/issue if applicable]
+**JIRA Ticket**: [Link when created]
 
 ---
 

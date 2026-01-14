@@ -10,9 +10,9 @@ title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-website: # Company website URL
-industry: # Industry/sector
-relationship: null  # customer | partner | vendor | competitor | internal
+website:
+industry:
+relationship:
 ---
 
 # <% name %>
@@ -21,35 +21,32 @@ relationship: null  # customer | partner | vendor | competitor | internal
 
 - **Website:**
 - **Industry:**
-- **Relationship:** Customer | Partner | Vendor | Competitor | Internal
+- **Relationship:** Customer | Partner | Vendor | Competitor
 
 ## Description
 
-<!-- About the organization, what they do, relevance to your work -->
+
 
 ## Key Contacts
 
 ```dataview
-TABLE role, email AS "Email"
+TABLE role, emailAddress
 FROM ""
 WHERE type = "Person" AND contains(organisation, this.file.name)
-SORT role ASC
 ```
 
 ## Projects
 
 ```dataview
-TABLE status, priority
+TABLE status, timeFrame
 FROM ""
 WHERE type = "Project" AND contains(file.outlinks, this.file.link)
-SORT status ASC
 ```
 
 ## Notes
 
-<!-- Notes about the organization, collaboration history, etc. -->
+-
 
 ## Related
 
-- [[Related Organisation]]
-- [[Related Project]]
+-

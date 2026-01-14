@@ -2,9 +2,9 @@
 context: fork
 ---
 
-# /pptx-to-page
+# Skill: PowerPoint to Page
 
-Convert PowerPoint presentations to Page notes with text extraction, tables, and images.
+Convert PowerPoint presentations to Obsidian Page notes with text extraction, tables, and images.
 
 ## When to Use
 
@@ -129,7 +129,7 @@ modified: YYYY-MM-DD
 tags:
   - presentation
   - slides
-  - pptx-import
+  - pdf-import
 sourceType: PPTX
 processedWith: docling
 slides: <count>
@@ -174,7 +174,6 @@ tables: <count>
 ## Related
 
 - [[<linked meeting note if applicable>]]
-- [[<linked project if applicable>]]
 ```
 
 **Visual Mode Output Format:**
@@ -289,26 +288,26 @@ User: /pptx-to-page ~/Downloads/Project_Update.pptx
 
 ### Example 2: Visual Mode
 ```
-User: /pptx-to-page Architecture_Overview.pptx visual
+User: /pptx-to-page SAP_Architecture.pptx visual
 ```
 
 ### Example 3: With Meeting Link
 ```
-User: Convert the architecture presentation and add it to today's meeting note
+User: Convert the Datasphere presentation and add it to today's meeting note
 ```
 
 ### Example 4: With Custom Title
 ```
-User: Convert Cloud_Platform_2026.pptx to a page called "Cloud Platform Architecture 2026"
+User: Convert SAP_BTP_2026.pptx to a page called "SAP BTP Architecture 2026"
 ```
 
 ## Integration with Other Skills
 
 This skill works well with:
 - `/meeting` - Add presentation to meeting notes
+- `/project-status` - Include project presentations
 - `/adr` - Attach architecture diagrams from slides
-- `/task` - Create tasks from action items in slides
-- `/weblink` - Save presentation along with related URLs
+- `/weekly-summary` - Reference key slides in summaries
 
 ## Dependencies
 
@@ -329,36 +328,3 @@ This skill works well with:
 - Always copy the original PPTX to `+Attachments/` for reference
 - Speaker notes are only available via python-pptx (both modes can include them)
 - Consider using quick mode first, then visual mode for specific slides if needed
-
-## Installation
-
-**Quick Mode Requirements:**
-```bash
-pip3 install docling python-pptx
-```
-
-**Visual Mode Additional Requirements:**
-```bash
-brew install --cask libreoffice  # macOS
-brew install poppler
-pip3 install pdf2image
-```
-
-## Use Cases
-
-**Architecture Presentations:**
-- Convert vendor architecture decks
-- Import design review presentations
-- Archive technical presentations from conferences
-- Extract diagrams for ADRs
-
-**Meeting Presentations:**
-- Import slides from architecture reviews
-- Save project status presentations
-- Archive training materials
-- Reference technical deep-dives
-
-**Documentation:**
-- Convert presentation-based documentation to searchable notes
-- Extract tables and diagrams for reference
-- Build knowledge base from presentation content

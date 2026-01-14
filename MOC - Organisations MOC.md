@@ -1,535 +1,361 @@
 ---
-type: MOC
-title: Organisations MOC
+type: Page
+title: MOC - Organisations MOC
+description: Central navigation for all organisations - internal teams, vendors, partners, and consultancies
 created: 2026-01-07
 modified: 2026-01-07
-tags: [moc, organisations, vendors, partners]
+tags: [MOC, organisations, vendors, partners]
+
+# Quality Indicators
+confidence: high
+freshness: current
+source: primary
+verified: true
+reviewed: 2026-01-07
+summary: Comprehensive directory of organisations involved in BA projects including internal teams, aviation vendors, enterprise software providers, and consultancies
+keywords: [organisations, vendors, partners, consultancies, MOC, directory]
 ---
 
-# 🏢 Organisations MOC
+# MOC - Organisations MOC
 
-> **Company and vendor directory**
+**Purpose:** Central directory of all organisations involved in British Airways projects, including internal teams, external vendors, partners, and consultancies.
 
-Last Updated: 2026-01-07
-
----
-
-## Overview
-
-This MOC provides comprehensive views of organizations you work with - internal divisions, vendors, partners, and consultancies. Use this to track relationships, projects, and key contacts.
-
-**Quick Links:**
-- [[Dashboard - Dashboard]] - Back to main dashboard
-- [[MOC - People MOC]] - View people by organization
-- [[MOC - Projects MOC]] - View projects by organization
-
----
-
-## 📊 All Organisations
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  type as "Type",
-  industry as "Industry",
-  relationship as "Relationship"
-FROM ""
-WHERE type = "Organisation"
-SORT file.name ASC
-```
+**Total Organisations:** `= length(filter(dv.pages(""), (p) => p.type == "Organisation"))`
 
 ---
 
-## 🏷️ By Relationship Type
+## Quick Navigation
 
-### Internal Divisions
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  industry as "Industry",
-  description as "Description"
-FROM ""
-WHERE type = "Organisation"
-  AND (relationship = "internal" OR contains(tags, "internal"))
-SORT file.name ASC
-```
-
-**Your Organization:** These are internal business units, divisions, or departments.
-
-### Vendors & Suppliers
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  industry as "Industry",
-  description as "Description",
-  contract as "Contract Status"
-FROM ""
-WHERE type = "Organisation"
-  AND (relationship = "vendor" OR contains(tags, "vendor"))
-SORT file.name ASC
-```
-
-**Vendor Relationships:** Companies providing products or services under contract.
-
-### Partners & Integrators
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  industry as "Industry",
-  description as "Description"
-FROM ""
-WHERE type = "Organisation"
-  AND (relationship = "partner" OR contains(tags, "partner"))
-SORT file.name ASC
-```
-
-**Strategic Partners:** Companies with collaborative relationships, system integrators, consultancies.
-
-### Consultants
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  industry as "Industry",
-  description as "Description"
-FROM ""
-WHERE type = "Organisation"
-  AND (relationship = "consultant" OR contains(tags, "consultant"))
-SORT file.name ASC
-```
-
-**Consulting Firms:** Advisory and implementation consultancies.
+- [Internal (BA/IAG)](#internal-baiag)
+- [Aviation Systems Vendors](#aviation-systems-vendors)
+- [Enterprise Software Vendors](#enterprise-software-vendors)
+- [Aviation/Engineering Software](#aviationengineering-software)
+- [Integration & Middleware](#integration--middleware)
+- [Systems Integrators & Consultancies](#systems-integrators--consultancies)
+- [Other Vendors & Partners](#other-vendors--partners)
+- [All Organisations (Complete List)](#all-organisations-complete-list)
 
 ---
 
-## 🏭 By Industry
+## Internal (BA/IAG)
 
-### Technology & Software
+### British Airways
+**[[Organisation - BA]]**
+- **Role:** Airline operator and primary organisation
+- **Key Projects:** All internal projects, digital transformation, engineering modernisation
+- **People:** All BA employees in vault
+
+### IAG (International Airlines Group)
+**[[Organisation - IAG]]**
+- **Role:** Parent company of British Airways
+- **Key Projects:** Group-wide initiatives, shared services
+- **Relationship:** BA is part of IAG portfolio
+
+---
+
+## Aviation Systems Vendors
+
+### Boeing
+**[[Organisation - Boeing]]**
+- **Role:** Aircraft manufacturer and systems provider
+- **Key Projects:** [[Project - 777-X EIS Programme]]
+- **Systems:** Fleetlink, LSAP Librarian, EFB, Gatelink, Configuration Management
+- **Contact:** Ryan Sands, Kenneth Krzyzewski, Kody Linscott, Mason Winchell
+- **Related ADRs:** [[ADR - Fleetlink Migration]]
+- **Context:** [[Page - Context - Aviation Systems & Aircraft Integration]]
+
+### Collins Aerospace
+**[[Organisation - Collins Aerospace]]**
+- **Role:** Aviation systems and electronics provider
+- **Key Projects:** [[Project - 777-X EIS Programme]] (EFB components)
+- **Systems:** Electronic Flight Bag (EFB), avionics
+- **Related Meetings:** [[Meeting - 2025-04-08 EFB Proxy - Traffic Discussion with Collins]]
+
+---
+
+## Enterprise Software Vendors
+
+### SAP
+**[[Organisation - SAP]]**
+- **Role:** Enterprise resource planning (ERP) and business technology platform
+- **Key Projects:** [[Project - Caerus]], [[Project - Axia (was EWS Futures)]]
+- **Systems:** S/4HANA, BTP, Datasphere, Integration Suite, Build Process Automation
+- **Contacts:** [[Deepthi Damodaran]], [[Blake Goddard]]
+- **Architects:** [[Navjot Sharma]], [[Neyez Akbar Khan]]
+- **Related ADRs:** [[ADR - SAP Data Product]], [[ADR - SAP to AWS Connectivity]]
+- **Context:** [[Page - Context - SAP Ecosystem at BA]]
+
+### Microsoft
+**[[Organisation - Microsoft]]**
+- **Role:** Enterprise software and cloud services provider
+- **Systems:** Microsoft 365, Power Platform, Entra ID (Azure AD), Power Apps
+- **Key Projects:** Power Apps initiatives, Entra ID integration
+- **Related ADRs:** [[ADR - ADR for Power Apps Integration]]
+- **Related Meetings:** [[Meeting - 2025-04-11 Meeting with Microsoft - Power Platform & Copilot Studio]]
+
+---
+
+## Aviation/Engineering Software
+
+### Logic Software
+**[[Organisation - Logic Software]]**
+- **Role:** Aviation ticketing and workflow software provider
+- **Key Projects:** [[Project - Sparks - Logic Software - Ticketing System]]
+- **Systems:** Sparks (ticketing system for engineering and maintenance)
+- **Related Meetings:**
+  - [[Meeting - 2025-04-03 Logic Software]]
+  - [[Meeting - 2025-08-11 British Airways and Logic Software Technical Discussion]]
+
+---
+
+## Integration & Middleware
+
+### Axway
+**[[Organisation - Axway]]**
+- **Role:** Integration middleware and API management provider
+- **Systems:** Integration platform, API Gateway, SFTP solutions
+- **Status:** Historical integration platform, being replaced/supplemented by cloud-native alternatives
+- **Related Meetings:**
+  - [[Meeting - 2024-11-25 Axway Cloud Delivery Model Meeting]]
+  - [[Meeting - 2024-11-27 Axway Technical Presentation]]
+
+---
+
+## Systems Integrators & Consultancies
+
+### TCS (Tata Consultancy Services)
+**[[Organisation - TCS]]**
+- **Role:** Global IT services and systems integrator
+- **Projects:** Various BA digital transformation and implementation projects
+
+### ANDigital
+**[[Organisation - ANDigital]]**
+- **Role:** Digital consultancy and systems integrator
+- **Projects:** Digital transformation, agile delivery
+
+### Oliver Wyman
+**[[Organisation - Oliver Wyman]]**
+- **Role:** Management consultancy
+- **Projects:** Strategy and advisory services
+- **Related Meetings:** [[Meeting - 2025-06-09 Intro to OW]]
+
+### Hayes
+**[[Organisation - Hayes]]**
+- **Role:** Recruitment and staffing services
+- **Projects:** Technical resource augmentation
+
+---
+
+## Other Vendors & Partners
+
+### Teamviewer
+**[[Organisation - Teamviewer]]**
+- **Role:** Remote support and collaboration software
+- **Systems:** Remote desktop, support tools
+
+### Leightons
+**[[Organisation - Leightons]]**
+- **Role:** Healthcare services (opticians)
+- **Services:** Employee vision care and support
+
+---
+
+## All Organisations (Complete List)
+
+### Alphabetical Directory
 
 ```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  description as "Description"
+TABLE
+  file.link as "Organisation",
+  role as "Role",
+  tags as "Tags"
 FROM ""
 WHERE type = "Organisation"
-  AND (contains(industry, "Technology") OR contains(industry, "Software"))
-SORT file.name ASC
-```
-
-### Cloud & Infrastructure
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  description as "Description"
-FROM ""
-WHERE type = "Organisation"
-  AND (contains(industry, "Cloud") OR contains(industry, "Infrastructure"))
-SORT file.name ASC
-```
-
-### Consulting & Services
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  description as "Description"
-FROM ""
-WHERE type = "Organisation"
-  AND contains(industry, "Consulting")
 SORT file.name ASC
 ```
 
 ---
 
-## 👥 People by Organisation
+## Organisations by Project
 
-### Contacts per Organization
+### Active Project Relationships
+
+```dataview
+TABLE
+  file.link as "Organisation",
+  length(file.inlinks) as "References",
+  choice(length(file.inlinks) > 10, "🔥 High Activity",
+         length(file.inlinks) > 5, "📈 Active",
+         "📊 Standard") as "Activity Level"
+FROM ""
+WHERE type = "Organisation"
+SORT length(file.inlinks) DESC
+```
+
+---
+
+## Quick Stats
+
+### Organisation Types
 
 ```dataview
 TABLE WITHOUT ID
-  organisation as "Organization",
-  length(rows) as "Contacts",
-  list(rows.file.link) as "People"
+  "**Category**" as Category,
+  length(rows) as "Count"
+FROM ""
+WHERE type = "Organisation"
+GROUP BY choice(
+  contains(file.name, "BA") OR contains(file.name, "IAG"), "Internal",
+  contains(file.name, "Boeing") OR contains(file.name, "Collins"), "Aviation Systems",
+  contains(file.name, "SAP") OR contains(file.name, "Microsoft"), "Enterprise Software",
+  contains(file.name, "Logic Software"), "Aviation/Engineering Software",
+  contains(file.name, "Axway"), "Integration & Middleware",
+  contains(file.name, "TCS") OR contains(file.name, "ANDigital") OR contains(file.name, "Oliver Wyman") OR contains(file.name, "Hayes"), "Consultancies",
+  "Other"
+) as Category
+SORT Category ASC
+```
+
+---
+
+## Related Project Mappings
+
+### Key Projects by Organisation
+
+**Boeing:**
+- [[Project - 777-X EIS Programme]]
+- [[ADR - Fleetlink Migration]]
+
+**SAP:**
+- [[Project - Caerus]]
+- [[Project - Axia (was EWS Futures)]]
+- [[ADR - SAP Data Product]]
+- [[ADR - SAP to AWS Connectivity]]
+
+**Logic Software:**
+- [[Project - Sparks - Logic Software - Ticketing System]]
+
+**Microsoft:**
+- Power Apps initiatives
+- [[ADR - ADR for Power Apps Integration]]
+
+---
+
+## Finding Organisations
+
+### By People
+
+To find which organisation a person works for:
+
+```dataview
+TABLE
+  file.link as "Person",
+  organisation as "Organisation",
+  role as "Role"
 FROM ""
 WHERE type = "Person"
-  AND organisation != null AND organisation != ""
-GROUP BY organisation
-SORT length(rows) DESC
+  AND organisation != null
+SORT organisation ASC, file.name ASC
+LIMIT 30
 ```
-
-**Network Map:** See which organizations you have the most contacts at.
-
-### Organizations Without Contacts
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  industry as "Industry"
-FROM ""
-WHERE type = "Organisation"
-  AND !any(filter(
-    file.inlinks,
-    (link) => meta(link).type = "Person"
-  ))
-SORT file.name ASC
-```
-
-**Action:** Consider adding key contacts or archiving if no longer relevant.
 
 ---
 
-## 🎯 Projects by Organisation
+### By Meetings
 
-### Active Projects per Organization
-
-```dataview
-TABLE WITHOUT ID
-  org as "Organization",
-  length(rows) as "Active Projects",
-  list(rows.file.link) as "Projects"
-FROM ""
-WHERE type = "Project"
-  AND status = "active"
-FLATTEN vendors as org
-WHERE org != null AND org != ""
-GROUP BY org
-SORT length(rows) DESC
-```
-
-**Vendor Engagement:** Track which vendors are involved in active projects.
-
-### Project History by Organization
+Organisations mentioned in recent meetings:
 
 ```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  length(filter(
-    file.inlinks,
-    (link) => meta(link).type = "Project"
-  )) as "Total Projects"
-FROM ""
-WHERE type = "Organisation"
-SORT length(filter(
-  file.inlinks,
-  (link) => meta(link).type = "Project"
-)) DESC
-LIMIT 15
-```
-
-**Relationship Depth:** Organizations with most project involvement.
-
----
-
-## 📅 Recent Interactions
-
-### Meetings with External Organizations (Last 90 Days)
-
-```dataview
-TABLE WITHOUT ID
+TABLE
   file.link as "Meeting",
   date as "Date",
-  project as "Project",
-  attendees as "Attendees"
-FROM "+Meetings"
+  project as "Project"
+FROM ""
 WHERE type = "Meeting"
-  AND date >= date(today) - dur(90 days)
-  AND any(map(attendees, (a) =>
-    !contains(meta(a).organisation, "Your Company")
-  ))
+  AND date != null
+  AND (contains(string(file.outlinks), "Organisation"))
 SORT date DESC
 LIMIT 20
 ```
 
-**External Engagement:** Recent meetings with vendor/partner representatives.
+---
 
-### Most Frequent External Collaborators
+## Contact Management
 
-```dataview
-TABLE WITHOUT ID
-  org as "Organization",
-  length(rows) as "Meetings"
-FROM "+Meetings"
-WHERE type = "Meeting"
-FLATTEN attendees as person
-WHERE person != null
-  AND !contains(meta(person).organisation, "Your Company")
-FLATTEN meta(person).organisation as org
-WHERE org != null AND org != ""
-GROUP BY org
-SORT length(rows) DESC
-LIMIT 10
-```
+### Organisations with Primary Contacts
 
-**Engagement Frequency:** Which external organizations you meet with most.
+**Boeing:**
+- Ryan Sands (ryan.j.sands2@boeing.com)
+- Kenneth Krzyzewski (kenneth.c.krzyzewski@boeing.com)
+- Kody Linscott (kody.c.linscott@boeing.com)
+- Mason Winchell (mason.l.winchell@boeing.com)
+
+**SAP:**
+- [[Deepthi Damodaran]]
+- [[Blake Goddard]]
+- [[Navjot Sharma]] (BA SAP Architect)
+- [[Neyez Akbar Khan]] (BA SAP Architect)
+
+**Note:** For complete contact details, see individual People notes linked from each organisation.
 
 ---
 
-## 📊 Organization Statistics
+## Vendor Categories
 
-### Organizations by Type
+### Strategic Partners
+Organisations with ongoing strategic relationships and multiple active projects:
+- [[Organisation - Boeing]]
+- [[Organisation - SAP]]
+- [[Organisation - Microsoft]]
 
-```dataview
-TABLE WITHOUT ID
-  relationship as "Relationship Type",
-  length(rows) as "Count"
-FROM ""
-WHERE type = "Organisation"
-GROUP BY relationship
-SORT length(rows) DESC
-```
+### Project-Specific Vendors
+Organisations engaged for specific projects or capabilities:
+- [[Organisation - Collins Aerospace]]
+- [[Organisation - Logic Software]]
 
-### Organizations by Industry
+### Systems Integrators
+Organisations providing implementation and consulting services:
+- [[Organisation - TCS]]
+- [[Organisation - ANDigital]]
+- [[Organisation - Oliver Wyman]]
 
-```dataview
-TABLE WITHOUT ID
-  industry as "Industry",
-  length(rows) as "Count"
-FROM ""
-WHERE type = "Organisation"
-GROUP BY industry
-SORT length(rows) DESC
-```
-
-### Organization Engagement Score
-
-Organizations ranked by total interactions (contacts + projects + meetings):
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  length(filter(file.inlinks, (l) => meta(l).type = "Person")) as "Contacts",
-  length(filter(file.inlinks, (l) => meta(l).type = "Project")) as "Projects",
-  length(filter(file.inlinks, (l) => meta(l).type = "Meeting")) as "Meetings",
-  (length(filter(file.inlinks, (l) => meta(l).type = "Person")) +
-   length(filter(file.inlinks, (l) => meta(l).type = "Project")) +
-   length(filter(file.inlinks, (l) => meta(l).type = "Meeting"))) as "Total Score"
-FROM ""
-WHERE type = "Organisation"
-SORT (length(filter(file.inlinks, (l) => meta(l).type = "Person")) +
-      length(filter(file.inlinks, (l) => meta(l).type = "Project")) +
-      length(filter(file.inlinks, (l) => meta(l).type = "Meeting"))) DESC
-LIMIT 15
-```
+### Legacy/Transitioning
+Organisations whose role is changing or being phased out:
+- [[Organisation - Axway]] (transitioning from on-premises to cloud alternatives)
 
 ---
 
-## 🔍 Quality Checks
+## Maintenance Notes
 
-### Organizations Without Descriptions
+### Adding New Organisations
 
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  industry as "Industry"
-FROM ""
-WHERE type = "Organisation"
-  AND (description = null OR description = "")
-SORT file.name ASC
-```
+When creating a new Organisation note:
+1. Use template: `+Templates/Organisation`
+2. Include: name, role, key contacts, related projects
+3. Add to this MOC in appropriate category
+4. Link from related Project and Person notes
 
-**Action:** Add brief descriptions for context and searchability.
+### Updating Organisation Notes
 
-### Organizations Without Industry Classification
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship"
-FROM ""
-WHERE type = "Organisation"
-  AND (industry = null OR industry = "")
-SORT file.name ASC
-```
-
-**Action:** Categorize by industry for better filtering.
-
-### Organizations Without Relationship Type
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  industry as "Industry"
-FROM ""
-WHERE type = "Organisation"
-  AND (relationship = null OR relationship = "")
-SORT file.name ASC
-```
-
-**Action:** Define relationship type (vendor/partner/internal/consultant).
-
-### Stale Organizations (No Interactions in 12+ Months)
-
-```dataview
-TABLE WITHOUT ID
-  file.link as "Organization",
-  relationship as "Relationship",
-  modified as "Last Updated"
-FROM ""
-WHERE type = "Organisation"
-  AND modified < date(today) - dur(365 days)
-SORT modified ASC
-LIMIT 10
-```
-
-**Action:** Review for relevance or archive if no longer active.
+Monthly review:
+- Update contact information
+- Add new project relationships
+- Update role and status
+- Review meeting attendance and activity
 
 ---
 
-## 📝 Organization Management
+## Related MOCs
 
-### When to Create an Organization Note
-
-**Create for:**
-- Vendors you have contracts with
-- Strategic partners with ongoing relationships
-- Major consultancies you engage
-- Internal divisions you collaborate with frequently
-- Technology providers (SaaS, cloud, etc.)
-
-**Don't Create for:**
-- One-time service providers
-- Organizations mentioned once
-- Generic tool vendors (unless strategic)
-
-### Organization Note Best Practices
-
-**Key Information to Track:**
-- Relationship type (vendor/partner/internal/consultant)
-- Industry classification
-- Key contacts (link to Person notes)
-- Active projects/contracts
-- Products/services provided
-- Website and contact information
-- Notes on working relationship
-
-**Maintenance:**
-- Update when contracts change
-- Add new contacts as relationships develop
-- Link to relevant projects and meetings
-- Archive inactive relationships
-- Review annually for relevance
-
-### Linking Conventions
-
-**From Other Notes:**
-- Link from Person notes: `organisation: "[[Org Name]]"`
-- Link from Project notes: `vendors: ["[[Org Name]]"]`
-- Mention in Meeting notes when discussing vendor topics
-- Reference in ADRs for technology decisions
-
-**In Organization Notes:**
-- Link to key contacts (Person notes)
-- Link to active projects
-- Link to relevant ADRs
-- Link to contract/agreement documents (in +Attachments)
+- [[Dashboard - Dashboard]] - Main navigation hub
+- [[MOC - People MOC]] - People directory
+- [[MOC - Projects MOC]] - Project tracking
+- [[MOC - Technology & Architecture MOC]] - Technology landscape
+- [[MOC - Weblinks MOC]] - External resources
 
 ---
 
-## 🤝 Vendor Management
-
-### Active Vendor Contracts
-
-**Track:**
-- Contract start/end dates
-- Services provided
-- Key deliverables
-- Performance metrics
-- Escalation contacts
-
-**Document in Organization note under "Contract Information" section.**
-
-### Vendor Performance Tracking
-
-Create Page notes for vendor assessments:
-- `Page - [Vendor Name] Performance Review YYYY-MM.md`
-- Link from Organization note
-- Update quarterly or annually
-
-### Vendor Onboarding
-
-**New Vendor Checklist:**
-1. Create Organization note
-2. Add key contacts (Person notes)
-3. Document services/products
-4. Link to contract documents
-5. Add to relevant projects
-6. Set review reminders
-
----
-
-## 🔗 Strategic Partnerships
-
-### Partnership Types
-
-**Technology Partners:**
-- Platform providers (cloud, SaaS)
-- Integration partners
-- Technology vendors
-
-**Service Partners:**
-- System integrators
-- Managed service providers
-- Consultancies
-
-**Document partnership value, joint initiatives, and success metrics in Organization notes.**
-
----
-
-## 🌐 Industry Landscape
-
-### Competitive Analysis
-
-Track competitors and alternatives:
-- Alternative vendors for each category
-- Competitive positioning
-- Market trends
-- Emerging players
-
-**Create Page notes for market analysis:**
-- `Page - Cloud Provider Landscape.md`
-- `Page - API Gateway Vendor Comparison.md`
-
-Link from relevant Organization notes.
-
----
-
-## Related
-
-**Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
-- [[MOC - People MOC]] - View people by organization
-- [[MOC - Projects MOC]] - Projects with vendor involvement
-- [[MOC - Weblinks MOC]] - Vendor documentation and resources
-
-**Templates:**
-- `+Templates/Organisation.md` - Create new organization note
-
-**Integration:**
-- Link organizations from Person notes
-- Reference vendors in Project notes
-- Mention in Meeting notes
-- Cite in ADRs for technology selections
-
-**Best Practices:**
-- Create Organization notes for strategic relationships
-- Link key contacts via Person notes
-- Track contract information and renewal dates
-- Review vendor performance quarterly
-- Update industry classifications as markets evolve
-- Archive inactive relationships to reduce clutter
-
-**Tips:**
-- Use Organization notes as hubs linking to all related content
-- Track vendor engagement through project and meeting links
-- Document lessons learned from vendor relationships
-- Maintain contact information for escalations
-- Review organization portfolio during strategic planning
+**MOC Version:** 1.0
+**Total Organisations:** `= length(filter(dv.pages(""), (p) => p.type == "Organisation"))`
+**Last Updated:** 2026-01-07
+**Maintained By:** Solutions Architecture Team

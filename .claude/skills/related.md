@@ -12,7 +12,7 @@ Find all notes related to a topic using parallel sub-agents for comprehensive se
 /related <topic>
 /related Boeing
 /related SAP BTP
-/related John Smith
+/related Adam Drozd
 ```
 
 ## Instructions

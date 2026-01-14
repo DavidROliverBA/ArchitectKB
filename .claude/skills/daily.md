@@ -1,44 +1,79 @@
 ---
 context: fork
+model: haiku
 ---
 
-# Daily Note Skill
+# /daily
 
-Create today's daily note from template.
+Create today's daily note in the Obsidian vault.
 
 ## Instructions
 
-When the user invokes `/daily` or asks to create today's daily note:
+1. Get today's date in YYYY-MM-DD format
+2. Check if a daily note already exists at `+Daily/YYYY-MM-DD.md`
+3. If it exists, read and display it
+4. If it doesn't exist, create it with the following content:
 
-1. **Check if today's note exists**:
-   - Path: `+Daily/[YEAR]/YYYY-MM-DD.md`
-   - Example: `+Daily/2026/2026-01-07.md`
-   - If exists, open it and inform user
+```markdown
+---
+type: DailyNote
+title: {{DATE}}
+created: {{DATE}}
+date: {{DATE}}
+tags: [daily]
+---
 
-2. **If note doesn't exist, create it**:
-   - Create year subfolder if needed: `+Daily/[YEAR]/`
-   - Create note from template: `+Templates/Daily.md`
-   - Filename: `YYYY-MM-DD.md` (e.g., `2026-01-07.md`)
+# {{DAY_NAME}}, {{MONTH}} {{DAY_NUMBER}} {{YEAR}}
 
-3. **Populate template**:
-   - Set `date` to today's date (YYYY-MM-DD format)
-   - Set `created` and `modified` to today
-   - Leave other sections for user to fill
+## Today's Focus
 
-4. **Open the note** and inform user it's ready
+-
 
-## Example Response
+## Tasks
 
-"Created today's daily note at `+Daily/2026/2026-01-07.md`. Ready for you to capture your day!"
+### Due Today
 
-## Error Handling
+```dataview
+TASK
+FROM ""
+WHERE type = "Task" AND due = date("{{DATE}}") AND !completed
+```
 
-- If year folder doesn't exist, create it
-- If template doesn't exist, inform user to create `+Templates/Daily.md`
-- If note already exists, just open it
+### Completed Today
+
+- [ ]
+
+## Meetings Today
+
+```dataview
+TABLE time as "Time", summary as "Summary"
+FROM ""
+WHERE type = "Meeting" AND date = date("{{DATE}}")
+SORT time ASC
+```
 
 ## Notes
 
-- Daily notes are for personal reflection, task tracking, and journaling
-- They don't follow "DailyNote - " prefix naming convention
-- They're organized by year in subdirectories for scalability
+
+## Reflections
+
+```
+
+Replace:
+- `{{DATE}}` with today's date (YYYY-MM-DD)
+- `{{DAY_NAME}}` with full day name (e.g., Monday)
+- `{{MONTH}}` with full month name (e.g., January)
+- `{{DAY_NUMBER}}` with day of month with ordinal (e.g., 5th)
+- `{{YEAR}}` with 4-digit year
+
+5. After creating, confirm the file was created and show the path
+
+## File Naming
+
+Daily notes use simple date-based naming: `YYYY-MM-DD.md`
+
+Since files are in the `+Daily/` folder, no prefix is needed. Examples:
+- `+Daily/2026-01-05.md`
+- `+Daily/2025-12-25.md`
+
+This keeps filenames clean and works well with the Calendar plugin.

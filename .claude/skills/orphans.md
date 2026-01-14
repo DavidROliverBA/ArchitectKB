@@ -2,140 +2,118 @@
 context: fork
 ---
 
-# Find Orphaned Notes Skill
+# /orphans
 
-Identify notes with no backlinks (potential isolated content).
+Find orphan notes (notes with no backlinks) using sub-agents for efficient scanning.
+
+## Usage
+
+```
+/orphans
+/orphans type:Meeting
+/orphans --fix
+```
 
 ## Instructions
 
-When the user invokes `/orphans` or asks to find orphaned notes:
+### Phase 1: Planning
 
-1. **Use Task tool to launch exploration agent**:
-   - Create comprehensive search for notes with zero backlinks
-   - Exclude: MOCs, Daily notes, Templates, system folders
-   - Group by note type
+1. Determine scope:
+   - All notes (default)
+   - Specific type if provided
+2. Plan the scan:
+   - Get all notes in vault
+   - Build link graph
+   - Identify orphans
 
-2. **Analysis to perform**:
-   - Count total orphaned notes
-   - Categorize by type (Project, ADR, Page, etc.)
-   - Identify age of orphaned notes (older = more concerning)
-   - Suggest integration strategies
+### Phase 2: Parallel Analysis (use sub-agents)
 
-3. **Report format**:
-   ```markdown
-   # Orphaned Notes Report
+Launch these sub-agents in parallel using `model: "haiku"` for efficiency:
 
-   **Total Orphaned:** X notes
-   **Last Run:** YYYY-MM-DD
+**Agent 1: Build Note Index** (Haiku)
+- List all .md files in vault root and `+Meetings/` folder
+- Extract: filename, type from frontmatter
+- Return: complete note inventory
 
-   ## Summary by Type
-   - Projects: X notes
-   - ADRs: X notes
-   - Pages: X notes
-   - Tasks: X notes
-   - People: X notes
-   - Other: X notes
+**Agent 2: Extract Outgoing Links** (Haiku)
+- For each note, extract all [[wiki-links]]
+- Build map: note → [linked notes]
+- Return: outgoing link map
 
-   ## Recommendations
+**Agent 3: Calculate Incoming Links** (Haiku)
+- Invert the link map
+- Build map: note → [notes linking to it]
+- Return: incoming link counts
 
-   ### High Priority (Archive or Integrate)
-   [Older notes with no connections]
+**Agent 4: Identify Special Cases** (Haiku)
+- Find MOC files (should have many outgoing, few incoming)
+- Find template files (expected orphans)
+- Find daily notes (may not need links)
+- Return: exclusion list
 
-   ### Medium Priority (Review)
-   [Recent notes that may need linking]
+### Phase 3: Compile Results
 
-   ### Low Priority (Monitor)
-   [Intentionally standalone content]
-   ```
+```markdown
+# Orphan Notes Report
 
-4. **Provide actionable recommendations**:
-   - **Archive**: Move to archive folder if no longer relevant
-   - **Integrate**: Add links from relevant notes
-   - **Delete**: Remove if truly obsolete
-   - **Keep**: Some notes (reference docs) are OK orphaned
+**Scanned**: {{total notes}}
+**Orphans Found**: {{count}}
+**Generated**: {{DATE}}
 
-## Example Interaction
+## Summary
 
-**User:** `/orphans`
+- Total notes: {{count}}
+- With incoming links: {{count}} ({{%}})
+- Orphans (no incoming): {{count}} ({{%}})
+- Excluded (templates, MOCs): {{count}}
 
-**Claude:**
-"Searching for orphaned notes (notes with no backlinks)...
+## Orphan Notes by Type
 
-Found 8 orphaned notes:
+### Projects ({{count}})
+These projects aren't referenced anywhere:
+| Note | Created | Last Modified |
+|------|---------|---------------|
+{{orphan projects}}
 
-**Projects (2):**
-- [[Project - Research - Event-Driven Architecture]] (paused, 60 days old)
-  → Recommendation: Link from [[MOC - Cloud Architecture]] or archive if research complete
-- [[Project - Mobile App Prototype]] (completed, 180 days old)
-  → Recommendation: Archive to keep vault clean
+### Meetings ({{count}})
+Meetings not linked from any note:
+{{orphan meetings}}
 
-**Pages (3):**
-- [[Page - Database Migration Checklist]] (45 days old)
-  → Recommendation: Link from [[ADR - Standardize on PostgreSQL]]
-- [[Page - Onboarding Guide]] (30 days old)
-  → Recommendation: Link from [[Dashboard - Dashboard]]
-- [[Page - API Standards]] (90 days old)
-  → Recommendation: Link from [[MOC - Technology & Architecture MOC]]
+### People ({{count}})
+People not mentioned in any note:
+{{orphan people}}
 
-**ADRs (1):**
-- [[ADR - Microservices vs Monolith Decision]] (superseded)
-  → Recommendation: This is OK - superseded ADRs can be orphaned
+### Pages ({{count}})
+Documentation pages with no references:
+{{orphan pages}}
 
-**Tasks (2):**
-- [[Task - Research GraphQL alternatives]] (completed, 120 days old)
-  → Recommendation: Archive or delete
-- [[Task - Update documentation]] (completed, 90 days old)
-  → Recommendation: Delete if done
+### Tasks ({{count}})
+Tasks not linked to projects:
+{{orphan tasks}}
 
-**Actions to take:**
-1. Archive completed projects and tasks
-2. Link Page notes from relevant MOCs
-3. Review paused projects for relevance
+## Recommendations
 
-Would you like me to help link any of these notes?"
+### High Priority (should definitely be linked)
+{{notes that seem important but have no links}}
 
-## What Makes a Note an Orphan?
+### Consider Archiving
+{{old notes with no links that may be obsolete}}
 
-**Criteria:**
-- Zero backlinks (no other notes link to it)
-- Not a MOC (MOCs are navigation hubs)
-- Not a Daily note (standalone by nature)
-- Not in +Templates folder
+### Link Suggestions
 
-**Not Necessarily Bad:**
-- Reference documentation may stand alone
-- Recently created notes haven't been linked yet
-- Completed projects may naturally orphan over time
+| Orphan Note | Suggested Link From |
+|-------------|---------------------|
+{{AI-suggested connections based on content}}
 
-## Integration Strategies
+## Quick Fixes
 
-**For Projects:**
-- Link from relevant MOCs
-- Link from team member Person notes
-- Link from related ADRs
+To link orphan meetings to their projects:
+{{list of suggested edits}}
+```
 
-**For ADRs:**
-- Link from Project notes that implement them
-- Link from technology MOCs
-- Cross-link related ADRs
+### --fix Mode
 
-**For Pages:**
-- Link from MOCs
-- Link from Project notes as documentation
-- Cross-reference in ADRs
-
-**For Tasks:**
-- Archive completed tasks older than 90 days
-- Link active tasks to projects
-- Delete obsolete tasks
-
-## Regular Maintenance
-
-Suggest to user:
-"Run `/orphans` monthly to keep vault connected. Goal is <5% orphaned content (excluding intentional standalone docs)."
-
-## Error Handling
-
-- If no orphans found, congratulate user on well-connected vault
-- If many orphans (>20%), suggest focused linking session
-- Handle large vaults gracefully (may take time to analyze)
+If `--fix` flag provided:
+1. For each orphan meeting with a project in frontmatter, add link from project file
+2. For each orphan person mentioned in meetings, add link from relevant meetings
+3. Report changes made

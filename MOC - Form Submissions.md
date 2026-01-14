@@ -1,260 +1,179 @@
 ---
 type: MOC
-title: Form Submissions MOC
-description: Map of Content for tracking governance and compliance form submissions
+title: MOC - Form Submissions
+scope: Track all form submissions across projects
 created: 2026-01-11
 modified: 2026-01-11
-tags: [MOC, navigation, governance, compliance]
-
-# Quality Indicators
-confidence: high
-freshness: current
-source: primary
-verified: true
-reviewed: 2026-01-11
-summary: Central tracking for all governance forms including DPIAs, security reviews, risk assessments, and change requests
-keywords: [forms, governance, compliance, DPIA, security, risk]
+tags: [MOC, forms, compliance]
 ---
 
-# Form Submissions MOC
+# Form Submissions
 
-**Purpose:** Central directory tracking all governance and compliance form submissions. Monitor status, identify pending items, and track expiring approvals.
+Track intake forms, assessments, and compliance submissions across all projects.
 
-**Quick Navigation:** [Attention Required](#attention-required) | [By Status](#forms-by-status) | [By Type](#forms-by-type) | [By Project](#forms-by-project) | [Statistics](#form-statistics)
+## Quick Stats
 
-**Total Forms:** `$= dv.pages("").where(p => p.type == "FormSubmission").length`
+**Total Forms**: `$= dv.pages().where(p => p.type == "FormSubmission").length`
+
+| Status | Count |
+|--------|-------|
+| Draft | `$= dv.pages().where(p => p.type == "FormSubmission" && p.status == "draft").length` |
+| Submitted/Pending | `$= dv.pages().where(p => p.type == "FormSubmission" && (p.status == "submitted" || p.status == "pending")).length` |
+| Approved | `$= dv.pages().where(p => p.type == "FormSubmission" && p.status == "approved").length` |
+| Rejected | `$= dv.pages().where(p => p.type == "FormSubmission" && p.status == "rejected").length` |
+| Expired | `$= dv.pages().where(p => p.type == "FormSubmission" && p.status == "expired").length` |
 
 ---
 
 ## Attention Required
 
-### ⚠️ Pending Review
-
-Forms awaiting response from assessors:
+### Pending Response (Waiting >14 days)
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  submittedDate AS "Submitted"
+TABLE formType as "Type", project as "Project", submittedDate as "Submitted",
+      (date(today) - date(submittedDate)).days + " days" as "Waiting"
 FROM ""
-WHERE type = "FormSubmission" AND (status = "submitted" OR status = "pending")
+WHERE type = "FormSubmission"
+  AND (status = "submitted" OR status = "pending")
+  AND submittedDate != null
+  AND (date(today) - date(submittedDate)).days > 14
 SORT submittedDate ASC
 ```
 
-### ⏰ Expiring Soon
-
-Approvals expiring within 30 days:
+### Drafts Not Submitted
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  expiryDate AS "Expires"
+TABLE formType as "Type", project as "Project", created as "Created"
 FROM ""
 WHERE type = "FormSubmission"
-  AND status = "approved"
+  AND status = "draft"
+SORT created ASC
+```
+
+### Expiring Soon (<60 days)
+
+```dataview
+TABLE formType as "Type", project as "Project", expiryDate as "Expires",
+      (date(expiryDate) - date(today)).days + " days" as "Remaining"
+FROM ""
+WHERE type = "FormSubmission"
   AND expiryDate != null
-  AND expiryDate <= date(today) + dur(30 days)
+  AND status = "approved"
+  AND (date(expiryDate) - date(today)).days < 60
+  AND (date(expiryDate) - date(today)).days > 0
 SORT expiryDate ASC
 ```
 
-### ❌ Expired
-
-Approvals that have expired and may need renewal:
-
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  expiryDate AS "Expired On"
-FROM ""
-WHERE type = "FormSubmission"
-  AND status = "expired"
-SORT expiryDate DESC
-```
-
 ---
 
-## Form Statistics
-
-| Metric | Count |
-|--------|-------|
-| **Total Forms** | `$= dv.pages("").where(p => p.type == "FormSubmission").length` |
-| **Draft** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "draft").length` |
-| **Submitted** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "submitted").length` |
-| **Pending** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "pending").length` |
-| **Approved** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "approved").length` |
-| **Rejected** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "rejected").length` |
-| **Expired** | `$= dv.pages("").where(p => p.type == "FormSubmission" && p.status == "expired").length` |
-
----
-
-## Forms by Status
-
-### Draft
-
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  created AS "Created"
-FROM ""
-WHERE type = "FormSubmission" AND status = "draft"
-SORT created DESC
-```
-
-### Submitted / Pending
-
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  submittedDate AS "Submitted"
-FROM ""
-WHERE type = "FormSubmission" AND (status = "submitted" OR status = "pending")
-SORT submittedDate ASC
-```
-
-### Approved
-
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  responseDate AS "Approved",
-  expiryDate AS "Expires"
-FROM ""
-WHERE type = "FormSubmission" AND status = "approved"
-SORT responseDate DESC
-```
-
-### Rejected
-
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  project AS "Project",
-  responseDate AS "Rejected"
-FROM ""
-WHERE type = "FormSubmission" AND status = "rejected"
-SORT responseDate DESC
-```
-
----
-
-## Forms by Type
+## By Form Type
 
 ### DPIA (Data Protection Impact Assessment)
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  status AS "Status",
-  project AS "Project"
+TABLE status as "Status", project as "Project", submittedDate as "Submitted", responseDate as "Response"
 FROM ""
 WHERE type = "FormSubmission" AND formType = "DPIA"
-SORT status ASC
+SORT submittedDate DESC
 ```
 
-### Security Reviews
+### CyberRisk (Cyber Security Risk Assessment)
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  status AS "Status",
-  project AS "Project"
+TABLE status as "Status", project as "Project", submittedDate as "Submitted", responseDate as "Response"
 FROM ""
-WHERE type = "FormSubmission" AND formType = "SecurityReview"
-SORT status ASC
+WHERE type = "FormSubmission" AND formType = "CyberRisk"
+SORT submittedDate DESC
 ```
 
-### Risk Assessments
+### TPRM (Third Party Risk Management)
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  status AS "Status",
-  project AS "Project"
+TABLE status as "Status", project as "Project", submittedDate as "Submitted", responseDate as "Response"
 FROM ""
-WHERE type = "FormSubmission" AND formType = "RiskAssessment"
-SORT status ASC
+WHERE type = "FormSubmission" AND formType = "TPRM"
+SORT submittedDate DESC
 ```
 
-### Change Requests
+### IAF (Initial Assessment Form)
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  status AS "Status",
-  project AS "Project"
+TABLE status as "Status", project as "Project", submittedDate as "Submitted", responseDate as "Response"
+FROM ""
+WHERE type = "FormSubmission" AND formType = "IAF"
+SORT submittedDate DESC
+```
+
+### ChangeRequest
+
+```dataview
+TABLE status as "Status", project as "Project", submittedDate as "Submitted", responseDate as "Response"
 FROM ""
 WHERE type = "FormSubmission" AND formType = "ChangeRequest"
-SORT status ASC
+SORT submittedDate DESC
 ```
 
 ### Other Forms
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  status AS "Status",
-  project AS "Project"
+TABLE status as "Status", project as "Project", requestingTeam as "Team", submittedDate as "Submitted"
 FROM ""
-WHERE type = "FormSubmission" AND (formType = "ComplianceCheck" OR formType = "Other" OR formType = null)
-SORT status ASC
+WHERE type = "FormSubmission" AND formType = "Other"
+SORT submittedDate DESC
 ```
 
 ---
 
-## Forms by Project
+## By Project
 
 ```dataview
 TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  status AS "Status"
+  project as "Project",
+  length(rows) as "Forms",
+  length(filter(rows, (r) => r.status = "approved")) as "Approved",
+  length(filter(rows, (r) => r.status = "pending" OR r.status = "submitted")) as "Pending",
+  length(filter(rows, (r) => r.status = "draft")) as "Draft"
 FROM ""
-WHERE type = "FormSubmission" AND project != null
+WHERE type = "FormSubmission"
 GROUP BY project
 SORT project ASC
 ```
 
 ---
 
-## All Forms
+## All Form Submissions
 
 ```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Form",
-  formType AS "Type",
-  status AS "Status",
-  project AS "Project",
-  submittedDate AS "Submitted"
+TABLE formType as "Type", status as "Status", project as "Project",
+      submittedDate as "Submitted", responseDate as "Response", referenceNumber as "Ref"
 FROM ""
 WHERE type = "FormSubmission"
-SORT status ASC, submittedDate DESC
+SORT submittedDate DESC
 ```
 
 ---
 
-## Related MOCs
+## Form Types Reference
 
-- [[Dashboard - Dashboard]] - Main navigation hub
-- [[MOC - Projects MOC]] - Projects by status
-- [[MOC - ADRs MOC]] - Architecture decisions
+| Type | Full Name | Requesting Team | Typical Turnaround |
+|------|-----------|-----------------|-------------------|
+| DPIA | Data Protection Impact Assessment | Data Privacy / Legal | 2-4 weeks |
+| CyberRisk | Cyber Security Risk Assessment | Cyber Security | 1-2 weeks |
+| TPRM | Third Party Risk Management | Procurement / Cyber | 2-6 weeks |
+| IAF | Initial Assessment Form | Cyber Delivery Assurance | 1 week |
+| ChangeRequest | Change Request / RFC | Change Management | 1-2 weeks |
+
+## Quick Actions
+
+- **Create new form**: `/form <type> <project>`
+- **Check status**: `/form-status` or `/form-status <project>`
+- **Find pending**: `/form-status pending`
+- **Find overdue**: `/form-status overdue`
 
 ---
 
-**MOC Version:** 1.0
-**Total Forms:** `$= dv.pages("").where(p => p.type == "FormSubmission").length`
-**Last Updated:** 2026-01-11
-**Purpose:** Governance and compliance form tracking
+## Related
+
+- [[MOC - Projects MOC]] - All projects
+- [[MOC - Tasks MOC]] - Related tasks
+- [[Page - Cyber Assurance]] - Cyber assessment guidance
