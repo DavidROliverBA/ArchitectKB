@@ -86,14 +86,14 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/DavidROliverBA/obsidian-architect-vault-template.git
-   cd obsidian-architect-vault-template
+   git clone https://github.com/DavidROliverBA/ArchitectKB.git
+   cd ArchitectKB
    ```
 
 2. **Open in Obsidian**:
    - Launch Obsidian
    - Click "Open folder as vault"
-   - Select the `obsidian-architect-vault-template` directory
+   - Select the `ArchitectKB` directory
 
 3. **Install Required Plugins**:
    - Go to Settings → Community Plugins → Browse
@@ -153,7 +153,7 @@ obsidian-architect-vault-template/
 └── README.md               # This file
 ```
 
-### Note Types (15 Total)
+### Note Types (14 Total)
 
 | Type | Prefix | Example | Purpose |
 |------|--------|---------|---------|
@@ -169,7 +169,6 @@ obsidian-architect-vault-template/
 | **DailyNote** | None | `2026-01-07.md` | Daily journal |
 | **AtomicNote** | `Atomic Note -` | `Atomic Note - SOLID.md` | Single-concept notes |
 | **Course** | `Course -` | `Course - Cloud Architecture.md` | Learning tracking |
-| **Zettel** | `Zettel -` | `Zettel - Research.md` | Personal notes |
 | **Incubator** | `Incubator -` | `Incubator - New Framework.md` | Research ideas |
 | **IncubatorNote** | `Incubator Note -` | `Incubator Note - Analysis.md` | Supporting research |
 
@@ -199,15 +198,15 @@ The Dashboard provides:
 5. **ADRs MOC** - Architecture decisions
 6. **Weblinks MOC** - External resources
 
-**Content & Organisation** (4 MOCs):
-7. **Technology & Architecture MOC** - Tech platforms
+**Organisation & Management** (4 MOCs):
+7. **Technology & Architecture MOC** - Tech platforms and architecture domains
 8. **Organisations MOC** - Vendors/partners
-9. **Incubator MOC** - Research ideas and exploration
-10. **Vault Quality Dashboard** - Health monitoring
+9. **Form Submissions MOC** - Intake forms and compliance tracking
+10. **Vault Quality Dashboard** - Health monitoring and metrics
 
-**Domain-Specific** (2 example MOCs):
-11. **Cloud Architecture MOC** - Example specialization
-12. **Data Platform MOC** - Example domain knowledge
+**Optional Examples** (2 customizable MOCs):
+11. **Cloud Architecture MOC** - Example: customize for your architecture domain
+12. **Data Platform MOC** - Example: customize for your data architecture
 
 ---
 
