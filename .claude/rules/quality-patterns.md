@@ -96,7 +96,7 @@ tags: [activity/architecture, technology/aws, project/caerus]
 
 **Inline in note body (with `#` prefix):**
 ```markdown
-This relates to #technology/aws and #project/caerus work.
+This relates to #technology/aws 
 ```
 
 Obsidian recognises both - the `#` is only needed when writing tags inline in the note body.
@@ -107,5 +107,5 @@ Obsidian recognises both - the `#` is only needed when writing tags inline in th
 |--------|---------|----------|
 | `activity/` | Type of work | architecture, implementation, evaluation |
 | `technology/` | Technologies | aws, sap, kafka, bedrock |
-| `project/` | Project scope | caerus, axia, dispax-ai |
+| `project/` | Project scope |  |
 | `domain/` | Business domain | aviation, data, integration, security |
