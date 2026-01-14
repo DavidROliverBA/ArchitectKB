@@ -22,6 +22,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
+- **Architecture Knowledge Graph** - Generic sample templates for building enterprise architecture documentation (systems, integrations, HLDs, scenarios, visualizations)
 - **Example Content** - Rich examples showing best practices
 - **Zero Lock-In** - Plain markdown files, works with any text editor
 
@@ -153,7 +154,7 @@ obsidian-architect-vault-template/
 └── README.md               # This file
 ```
 
-### Note Types (14 Total)
+### Note Types (19 Total)
 
 | Type | Prefix | Example | Purpose |
 |------|--------|---------|---------|
@@ -171,6 +172,11 @@ obsidian-architect-vault-template/
 | **Course** | `Course -` | `Course - Cloud Architecture.md` | Learning tracking |
 | **Incubator** | `Incubator -` | `Incubator - New Framework.md` | Research ideas |
 | **IncubatorNote** | `Incubator Note -` | `Incubator Note - Analysis.md` | Supporting research |
+| **System** | `System -` | `System - Sample ERP Application.md` | Enterprise systems |
+| **Integration** | `Integration -` | `Integration - ERP to Data Platform.md` | System-to-system connections |
+| **Architecture** | `Architecture -` | `Architecture - Data Platform HLD.md` | High-level designs |
+| **Scenario** | `Scenario -` | `Scenario - Cloud Expansion.md` | Architecture scenarios & roadmaps |
+| **Canvas** | `Canvas -` | `Canvas - System Landscape.md` | Visual diagrams & architecture |
 
 ---
 
@@ -205,6 +211,186 @@ The Dashboard provides:
 **Customizable Examples** (2 MOCs you should adapt):
 - **Cloud Architecture MOC** - Example: customize for your cloud strategy
 - **Data Platform MOC** - Example: customize for your data architecture
+
+---
+
+## 🏛️ Architecture Knowledge Graph Feature
+
+### What is It?
+
+A comprehensive, generic template for building enterprise architecture documentation. It includes sample notes for Systems, Integrations, High-Level Designs (HLDs), Scenarios, and visual Canvas diagrams—all fully customizable for any organisation.
+
+**Perfect for:**
+- Building your organisation's architecture knowledge base
+- Documenting enterprise data integration platforms
+- Creating architecture decision records with supporting context
+- Planning and documenting system landscapes
+- Analysing expansion scenarios and roadmaps
+- Visualising system dependencies and data flows
+
+### What's Included
+
+**20 Generic Template Files (3,961 lines):**
+
+**Systems** (5 files):
+- `System - Sample ERP Application.md` - Core transaction system
+- `System - Sample Data Integration Platform.md` - Real-time & batch ETL
+- `System - Sample Analytics Warehouse.md` - Analytics & reporting
+- `System - Sample API Gateway.md` - API management layer
+- `System - Sample Cloud Infrastructure.md` - Cloud hosting & disaster recovery
+
+**Integrations** (2 files):
+- `Integration - Sample ERP to Data Platform Real-time.md` - Event-driven real-time path (<5 sec)
+- `Integration - Sample Data Platform to Analytics Batch.md` - Daily batch ETL (4 hours)
+
+**Architecture** (1 file):
+- `Architecture - Sample Data Integration Platform HLD.md` - Enterprise high-level design with multi-region DR, 99.95% availability, cost model
+
+**Scenarios** (1 file):
+- `Scenario - Sample Real-time Analytics Expansion.md` - 9-month roadmap, £301K setup, £1.7M annual benefits, 2.1 month ROI
+
+**Visualisations** (3 Canvas files):
+- `Canvas - Sample System Landscape.md` - All systems with criticality coding
+- `Canvas - Sample C4 Context Diagram.md` - C4 Level 1 system context
+- `Canvas - Sample Data Flow Diagram.md` - Real-time/batch/API paths with latency
+
+**Navigation** (1 Dashboard + 7 Queries):
+- `Dashboard - Architecture Knowledge Graph.md` - Central navigation hub
+- `Query - Critical Systems Inventory.md` - 99.95% SLA systems
+- `Query - Real-time Integrations.md` - Event-driven paths
+- `Query - Systems by Hosting Platform.md` - Infrastructure analysis
+- `Query - Integration Dependency Chain.md` - Data flow lineage
+- `Query - Architecture by Domain.md` - Architecture documents
+- `Query - Data Volume by System.md` - Storage and capacity metrics
+- `Query - Annual Cost Breakdown.md` - Cost allocation & optimisation
+
+### How to Use
+
+**1. Review Generic Examples**
+   - Read the sample System, Integration, and Architecture notes
+   - Understand the structure and level of detail
+   - Review the Canvas visualisations
+
+**2. Customise for Your Organisation**
+   - Replace "Sample ERP" with your actual ERP (SAP, Oracle, etc.)
+   - Update "Sample Data Integration Platform" with your actual platform
+   - Adjust metrics and volumes to match your systems
+   - Each note includes a "Customisation Guide" section with instructions
+
+**3. Add Your Own Systems**
+   - Create new System notes for systems not covered in the template
+   - Use the existing sample notes as a structure reference
+   - Link integrations and architecture to your systems
+
+**4. Document Your Integrations**
+   - Create Integration notes for each system-to-system connection
+   - Document data flows, latency, volume, and quality checks
+   - Link to source and target systems
+
+**5. Build Your Architecture**
+   - Create Architecture HLD documents for major components
+   - Reference your systems and integrations
+   - Document NFRs, costs, deployment topology
+
+**6. Plan Scenarios**
+   - Create Scenario notes for expansion plans, optimisations, migrations
+   - Use the sample scenario as a template for timeline, costs, risks
+   - Link to related architecture and projects
+
+**7. Visualise**
+   - Customise Canvas diagrams for your system landscape
+   - Update C4 diagrams for your context
+   - Create data flow diagrams for your actual integrations
+
+**8. Navigate**
+   - Update Dashboard queries to point to your systems
+   - Create custom queries for your specific needs
+   - Use the navigation hub to explore your architecture
+
+### Example: Building a Data Integration Platform Architecture
+
+**Step 1: Document Your Systems**
+```
+System - Your ERP Application.md
+System - Your Data Platform.md
+System - Your Analytics Warehouse.md
+System - Your Cloud Infrastructure.md
+System - Your API Gateway.md
+(+ any other systems specific to your architecture)
+```
+
+**Step 2: Document Integrations**
+```
+Integration - Your ERP to Data Platform.md
+Integration - Your Data Platform to Analytics.md
+(+ any other integration paths)
+```
+
+**Step 3: Create Architecture HLD**
+```
+Architecture - Your Data Platform HLD.md
+(Adapted from the sample, with your technology stack and metrics)
+```
+
+**Step 4: Plan Scenarios**
+```
+Scenario - Your Expansion Plan.md
+(Timeline, costs, risks, success criteria adapted to your business)
+```
+
+**Step 5: Build Visualisations**
+```
+Canvas - Your System Landscape.md
+Canvas - Your C4 Context.md
+Canvas - Your Data Flow.md
+(Updated with your actual systems and connections)
+```
+
+**Step 6: Add Navigation**
+```
+Dashboard - Your Architecture Knowledge Graph.md
+Query - Your System Inventory.md
+Query - Your Integration Paths.md
+(+ other queries specific to your architecture)
+```
+
+### Key Features of the Template
+
+✅ **Real-world Metrics**
+- 450 active pipelines, 150 TB active data, 500+ events/sec
+- 350+ analytics tables, 500 concurrent users, 100+ dashboards
+- £5.2M annual cost with detailed breakdown
+- Realistic performance benchmarks (99.95% availability, <5 sec latency)
+
+✅ **Production-Ready Patterns**
+- Multi-region disaster recovery with RTO/RPO targets
+- High availability design (3-broker Kafka cluster, Kubernetes auto-scaling)
+- Data quality framework with 500+ validation tests
+- Security & compliance controls (encryption, IAM, audit logging)
+
+✅ **Financial Analysis**
+- Complete cost breakdown by category (compute, storage, data transfer)
+- Cost optimization opportunities (£475K/year savings identified)
+- ROI calculations and payback periods
+
+✅ **Risk Management**
+- Failure scenarios and recovery procedures
+- Alternative approaches and trade-off analysis
+- Success criteria and KPIs
+
+✅ **Comprehensive Customisation Guides**
+- Every major note includes section: "How to adapt for your organisation"
+- Clear instructions on replacing generic names with your systems
+- Guidance on adjusting metrics and technologies
+
+### Getting Started
+
+1. Open `Dashboard - Architecture Knowledge Graph.md` to navigate the sample
+2. Read `Page - Architecture Knowledge Graph Guide.md` for detailed instructions
+3. Copy sample notes and rename for your organisation
+4. Update frontmatter with your system names and metrics
+5. Customize visualisations and queries
+6. Link your projects and ADRs to the architecture
 
 ---
 
@@ -738,7 +924,17 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ 39 total Claude Code skills
 - ✅ Sanitized for generic use - removed all BA-specific content and projects
 
-**v1.5** (Planned):
+**v1.5.0** (Released 2026-01-14):
+- ✅ **Architecture Knowledge Graph** - Generic templates for building enterprise architecture documentation
+- ✅ 5 System notes with real-world metrics and customization guides
+- ✅ 2 Integration notes (real-time event-driven, batch ETL)
+- ✅ 1 Architecture HLD with enterprise patterns, costs, deployment topology
+- ✅ 1 Scenario note with 9-month roadmap, financial analysis, risk assessment
+- ✅ 3 Canvas visualizations (System Landscape, C4 Context, Data Flow)
+- ✅ 1 Dashboard + 7 Query notes for navigation and discovery
+- ✅ Comprehensive Architecture Knowledge Graph Guide
+
+**v1.6** (Planned):
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
 - Mobile optimization and mobile-first workflows
