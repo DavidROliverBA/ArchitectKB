@@ -16,8 +16,8 @@ This is a **production-ready Obsidian vault template** designed specifically for
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
-- **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
-- **Claude Code Integration** - 38 AI-assisted workflows + Node.js automation
+- **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
+- **Claude Code Integration** - 39 AI-assisted workflows + Node.js automation
 - **Graph-First Search** - Pre-computed index for instant queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
@@ -131,7 +131,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 37 AI-assisted workflows
+│   ├── skills/             # 39 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
@@ -192,21 +192,19 @@ The Dashboard provides:
 
 **Core Navigation** (6 MOCs):
 1. **Tasks MOC** - All tasks by priority/status
-2. **Projects MOC** - Projects by status
-3. **People MOC** - Contact directory
-4. **Meetings MOC** - Meeting history
-5. **ADRs MOC** - Architecture decisions
-6. **Weblinks MOC** - External resources
+2. **People MOC** - Contact directory
+3. **Meetings MOC** - Meeting history
+4. **ADRs MOC** - Architecture decisions
+5. **Weblinks MOC** - External resources
+6. **Form Submissions MOC** - Intake forms and compliance tracking
 
-**Organisation & Management** (4 MOCs):
-7. **Technology & Architecture MOC** - Tech platforms and architecture domains
-8. **Organisations MOC** - Vendors/partners
-9. **Form Submissions MOC** - Intake forms and compliance tracking
-10. **Vault Quality Dashboard** - Health monitoring and metrics
+**Organisation & Monitoring** (2 MOCs):
+7. **Vault Quality Dashboard** - Health monitoring and metrics
+8. **Incubator - MOC** - Research ideas and exploration
 
-**Optional Examples** (2 customizable MOCs):
-11. **Cloud Architecture MOC** - Example: customize for your architecture domain
-12. **Data Platform MOC** - Example: customize for your data architecture
+**Customizable Examples** (2 MOCs you should adapt):
+- **Cloud Architecture MOC** - Example: customize for your cloud strategy
+- **Data Platform MOC** - Example: customize for your data architecture
 
 ---
 
@@ -322,7 +320,7 @@ See `+Meetings/README.md` for a detailed guide.
 
 ## 🤖 Claude Code Skills
 
-This vault includes **38 AI-assisted workflows** accessible via Claude Code:
+This vault includes **39 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -517,7 +515,7 @@ This vault is based on a GitHub template. To receive updates:
 
 **1. Add template as upstream remote (one-time):**
 ```bash
-git remote add template https://github.com/DavidROliverBA/obsidian-architect-vault-template.git
+git remote add template https://github.com/DavidROliverBA/ArchitectKB.git
 ```
 
 **2. Fetch and review updates:**
@@ -722,7 +720,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Performance benchmarks: 50-200 notes/second
 
 **v1.3.0** (Released 2026-01-10):
-- ✅ 18 new Claude Code skills (36 total with sync-governance)
+- ✅ 18 new Claude Code skills (37 total with sync-governance)
 - ✅ Incubator system for research ideas with lifecycle management
 - ✅ Incubator archive workflow - graduated/rejected ideas move to `+Archive/Incubator/`
 - ✅ Graduate and reject commands with automatic archiving
@@ -737,7 +735,8 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Graph-first search strategy with `/search` skill
 - ✅ PreToolUse hook for search optimization hints
 - ✅ `npm run graph:build`, `graph:watch`, `graph:query` commands
-- ✅ 38 total Claude Code skills
+- ✅ 39 total Claude Code skills
+- ✅ Sanitized for generic use - removed all BA-specific content and projects
 
 **v1.5** (Planned):
 - Video walkthrough and tutorials
