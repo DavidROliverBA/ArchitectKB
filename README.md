@@ -1,6 +1,6 @@
-# Obsidian Architect Vault Template
+# Architect Knowledge Base
 
-> A comprehensive, metadata-driven Obsidian vault template for Solutions Architects to manage projects, decisions, meetings, and technical knowledge.
+> A comprehensive, metadata-driven Knowledge Base for Solutions Architects to manage projects, decisions, meetings, and technical knowledge.
 
 ## 🎯 What is This?
 
@@ -15,7 +15,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ### ✨ Key Features
 
-- **Metadata-Driven Organization** - Notes organized by `type` field, not folders
+- **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 13 Maps of Content (MOCs) powered by Dataview queries
 - **Claude Code Integration** - 38 AI-assisted workflows + Node.js automation
 - **Graph-First Search** - Pre-computed index for instant queries
@@ -39,7 +39,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ![Projects MOC](screenshots/projects-moc.png)
 
-*Projects automatically organize by status (Active, Paused, Completed) with priority filtering and timeline tracking.*
+*Projects automatically organise by status (Active, Paused, Completed) with priority filtering and timeline tracking.*
 
 ### Architecture Decision Record (ADR) Example
 
@@ -121,7 +121,7 @@ obsidian-architect-vault-template/
 │   ├── Projects/           # Completed/cancelled projects
 │   └── Tasks/              # Completed tasks
 ├── +Attachments/           # All binary files (images, PDFs, docs)
-├── +Daily/                 # Daily journal entries (organized by year)
+├── +Daily/                 # Daily journal entries (organised by year)
 │   ├── 2026/
 │   └── README.md
 ├── +Incubator/             # Research ideas and exploration
@@ -133,7 +133,7 @@ obsidian-architect-vault-template/
 ├── .claude/                # Claude Code integration
 │   ├── skills/             # 37 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
-│   ├── context/            # Domain-specific context (customize)
+│   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
 ├── .obsidian/              # Obsidian configuration
 ├── scripts/                # Node.js automation + Python utilities
@@ -199,7 +199,7 @@ The Dashboard provides:
 5. **ADRs MOC** - Architecture decisions
 6. **Weblinks MOC** - External resources
 
-**Content & Organization** (4 MOCs):
+**Content & Organisation** (4 MOCs):
 7. **Technology & Architecture MOC** - Tech platforms
 8. **Organisations MOC** - Vendors/partners
 9. **Incubator MOC** - Research ideas and exploration
@@ -230,12 +230,12 @@ The Dashboard provides:
 
 ### 2. Update Context Files
 
-Customize `.claude/context/` for Claude Code:
+Customise `.claude/context/` for Claude Code:
 
 - `projects-template.md` → Add your real projects
 - `technology-template.md` → Document your tech stack
 - `people-template.md` → Add key stakeholders
-- `acronyms-template.md` → Your organization's acronyms
+- `acronyms-template.md` → Your organization’s acronyms
 - `architecture-template.md` → Your architecture patterns
 - `organisations-template.md` → Your vendors/partners
 
@@ -276,11 +276,11 @@ Replace with your organization's approval structure.
 3. **Link**: Connect to projects, people, meetings
 4. **Review**: End-of-day reflection
 
-See `+Daily/README.md` for detailed guide.
+See `+Daily/README.md` for a detailed guide.
 
 ### Meeting Capture Process
 
-1. **Before meeting**: Create note with `/meeting` skill
+1. **Before meeting**: Create a note with `/meeting` skill
 2. **During meeting**:
    - Capture key points
    - Note action items
@@ -290,7 +290,7 @@ See `+Daily/README.md` for detailed guide.
    - Extract tasks to Task notes
    - Add to Meeting MOC (automatic via Dataview)
 
-See `+Meetings/README.md` for detailed guide.
+See `+Meetings/README.md` for a detailed guide.
 
 ### ADR Creation Workflow
 
