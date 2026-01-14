@@ -73,7 +73,7 @@ File and folder naming patterns for this Obsidian vault.
 ## Wiki-Link Considerations
 
 - Person notes have no prefix to allow clean links: `[[John Smith]]`
-- Other types use prefixes: `[[Project - Caerus]]`, `[[ADR - API Gateway Selection]]`
+- Other types use prefixes: `[[Project - XYZ]]`, `[[ADR - API Gateway Selection]]`
 - Obsidian resolves links by filename regardless of folder location
 
 ## Known Issues
