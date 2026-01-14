@@ -1,17 +1,21 @@
 # Architect Knowledge Base
 
-> A comprehensive, metadata-driven Knowledge Base for Solutions Architects to manage projects, decisions, meetings, and technical knowledge.
+> A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
+>
+> **Now includes:** 20 generic architecture templates (Systems, Integrations, HLDs, Scenarios, Visualizations) ready to customize for any organization's architecture documentation.
 
 ## 🎯 What is This?
 
 This is a **production-ready Obsidian vault template** designed specifically for Solutions Architects, Technical Architects, and Enterprise Architects. It provides a complete organizational framework for:
 
-- **Architecture Decision Records (ADRs)** - Document and track technical decisions
-- **Project Management** - Track active projects, tasks, and deliverables
-- **Meeting Notes** - Capture and link meetings to projects and people
-- **Knowledge Management** - Build a personal knowledge base with cross-linked notes
+- **Architecture Decision Records (ADRs)** - Document and track technical decisions with relationships and approval workflows
+- **Architecture Documentation** - Document enterprise systems, integrations, HLDs, scenarios with 20 generic templates
+- **Project Management** - Track active projects, tasks, and deliverables with status and priority tracking
+- **Meeting Notes** - Capture and link meetings to projects, people, and decisions
+- **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
-- **Quality Monitoring** - Built-in dashboard to maintain vault health
+- **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
+- **AI-Assisted Workflows** - 39 Claude Code skills for architecture analysis, document processing, and automation
 
 ### ✨ Key Features
 
@@ -106,7 +110,10 @@ This is a **production-ready Obsidian vault template** designed specifically for
    - Explore the Maps of Content (MOCs)
    - Review example notes
 
-5. **Customize** (see [Customization Guide](#-customization-guide) below)
+5. **Choose Your Starting Point**:
+   - **For Architecture Documentation**: Open `[[Dashboard - Architecture Knowledge Graph]]` and read `[[Page - Architecture Knowledge Graph Guide]]`
+   - **For General Knowledge Management**: Continue to Customization Guide below
+   - **For Examples**: Review projects, ADRs, and daily notes in the vault
 
 ---
 
@@ -149,8 +156,15 @@ obsidian-architect-vault-template/
 │   ├── Project notes (e.g., "Project - Cloud Migration.md")
 │   ├── ADRs (e.g., "ADR - Use Kubernetes.md")
 │   ├── Tasks (e.g., "Task - Review ADR.md")
-│   ├── Pages (e.g., "Page - Architecture Principles.md")
-│   └── MOCs (e.g., "MOC - Projects MOC.md")
+│   ├── Pages (e.g., "Page - Architecture Knowledge Graph Guide.md")
+│   ├── MOCs (e.g., "MOC - Projects MOC.md")
+│   ├── System notes (e.g., "System - Sample ERP Application.md") **[NEW]**
+│   ├── Integration notes (e.g., "Integration - ERP to Data Platform.md") **[NEW]**
+│   ├── Architecture notes (e.g., "Architecture - Data Platform HLD.md") **[NEW]**
+│   ├── Scenario notes (e.g., "Scenario - Real-time Analytics Expansion.md") **[NEW]**
+│   ├── Canvas visualizations (e.g., "Canvas - System Landscape.md") **[NEW]**
+│   ├── Query notes (e.g., "Query - Critical Systems Inventory.md") **[NEW]**
+│   └── Dashboard for architecture (e.g., "Dashboard - Architecture Knowledge Graph.md") **[NEW]**
 └── README.md               # This file
 ```
 
@@ -194,7 +208,7 @@ The Dashboard provides:
 - **Statistics** - Note counts by type
 - **Quick Capture** - Create new notes
 
-### Maps of Content (MOCs)
+### Maps of Content & Dashboards
 
 **Core Navigation** (6 MOCs):
 1. **Tasks MOC** - All tasks by priority/status
@@ -204,13 +218,26 @@ The Dashboard provides:
 5. **Weblinks MOC** - External resources
 6. **Form Submissions MOC** - Intake forms and compliance tracking
 
+**Architecture & Knowledge Graphs** (2 Dashboards):
+7. **Dashboard - Dashboard.md** - General vault hub with all MOCs
+8. **Dashboard - Architecture Knowledge Graph.md** - Architecture-specific hub with systems, integrations, scenarios
+
 **Organisation & Monitoring** (2 MOCs):
-7. **Vault Quality Dashboard** - Health monitoring and metrics
-8. **Incubator - MOC** - Research ideas and exploration
+9. **Vault Quality Dashboard** - Health monitoring and metrics
+10. **Incubator - MOC** - Research ideas and exploration
 
 **Customizable Examples** (2 MOCs you should adapt):
 - **Cloud Architecture MOC** - Example: customize for your cloud strategy
 - **Data Platform MOC** - Example: customize for your data architecture
+
+**Architecture Queries** (7 Queries - NEW):
+- **Critical Systems Inventory** - Systems with 99.95% availability SLA
+- **Real-time Integrations** - Event-driven paths with <5 sec latency
+- **Systems by Hosting Platform** - Infrastructure analysis and grouping
+- **Integration Dependency Chain** - Data flow lineage and impact
+- **Architecture by Domain** - Architecture documents organized by domain
+- **Data Volume by System** - Storage and capacity metrics
+- **Annual Cost Breakdown** - Cost allocation and optimization opportunities
 
 ---
 
@@ -418,11 +445,133 @@ Customise `.claude/context/` for Claude Code:
 - `projects-template.md` → Add your real projects
 - `technology-template.md` → Document your tech stack
 - `people-template.md` → Add key stakeholders
-- `acronyms-template.md` → Your organization’s acronyms
+- `acronyms-template.md` → Your organization's acronyms
 - `architecture-template.md` → Your architecture patterns
 - `organisations-template.md` → Your vendors/partners
 
-### 3. Adapt ADR Approval Workflow
+### 3. Customise Architecture Templates
+
+The vault includes **20 generic architecture template files** (Systems, Integrations, HLDs, Scenarios, Canvas diagrams, Queries, Dashboard). Each is designed to be easily adapted to your organisation.
+
+**Key Customisation Points by Note Type:**
+
+#### Systems (5 files to rename and adapt):
+
+| Sample Template | Customise to Your | Key Fields to Update |
+|---|---|---|
+| `System - Sample ERP Application.md` | Your ERP (SAP, Oracle, etc.) | `systemId`, `systemType`, costs, tech stack |
+| `System - Sample Data Integration Platform.md` | Your data platform (Kafka, NiFi, etc.) | Pipelines, throughput, topics, data volume |
+| `System - Sample Analytics Warehouse.md` | Your BI platform (Snowflake, Redshift, etc.) | Tables, users, dashboards, capacity |
+| `System - Sample API Gateway.md` | Your API management (Kong, AWS, etc.) | Endpoints, throughput, security policies |
+| `System - Sample Cloud Infrastructure.md` | Your cloud provider regions | Accounts, services, multi-region design |
+
+**For each System, update:**
+- Frontmatter: `systemId`, `systemType`, `criticality`, `annualCost`
+- Technology stack and component details
+- Performance metrics (transactions/sec, data volume, concurrent users, etc.)
+- Integration points to your actual systems
+- Security controls and compliance requirements for your organisation
+- Disaster recovery topology and RTO/RPO targets
+- Annual cost breakdown and optimisation opportunities
+
+#### Integrations (2 files to rename and adapt):
+
+| Sample Template | Customise to Your | Key Sections to Update |
+|---|---|---|
+| `Integration - Sample ERP to Data Platform Real-time.md` | Your real-time data flows | Source/target systems, events/sec, latency, topics |
+| `Integration - Sample Data Platform to Analytics Batch.md` | Your batch processes | Schedule, tables, duration, SLAs |
+
+**For each Integration, update:**
+- Source and target system names and IDs
+- Integration pattern type (real-time event-streaming, batch-etl, api-gateway, etc.)
+- Data volume and frequency (events/sec, records/day, MB/sec, etc.)
+- Latency requirements and SLAs
+- Data quality validation rules specific to your data
+- Topic/schema/table names for your platforms
+- Failure scenarios and recovery procedures
+- Monitoring and alerting thresholds
+
+#### Architecture HLD (1 file to customize):
+
+- `Architecture - Sample Data Integration Platform HLD.md` → Your enterprise data platform architecture
+
+**Update:**
+- Executive summary for your business context
+- Architecture vision and objectives
+- Technology stack with your actual platforms and versions
+- Functional architecture with your integration patterns and data flows
+- NFR targets for your organisation (availability %, latency ms, capacity growth, etc.)
+- Deployment topology showing your regions/cloud accounts and failover strategy
+- Cost model with your actual infrastructure costs and savings opportunities
+- Quarterly roadmap tailored to your transformation plan
+
+#### Scenarios (1 file to customize):
+
+- `Scenario - Sample Real-time Analytics Expansion.md` → Your expansion/transformation initiatives
+
+**Update:**
+- Timeline and phases relevant to your organisation
+- List of systems/data sources you plan to add or modernise
+- New capabilities (analytics models, dashboards, APIs, etc.)
+- Financial analysis with your actual setup costs and ROI
+- Risk assessment specific to your environment and team
+- Success criteria and KPIs for your business
+
+#### Canvas Visualisations (3 files to customize):
+
+| Canvas Type | Update For Your |
+|---|---|
+| `Canvas - Sample System Landscape.md` | Your actual system topology and criticality |
+| `Canvas - Sample C4 Context Diagram.md` | Your system context and external integrations |
+| `Canvas - Sample Data Flow Diagram.md` | Your actual data flows and latency |
+
+**For each Canvas:**
+- Replace node labels with your actual system names
+- Update system types and criticality colouring
+- Adjust connections to match your integration topology
+- Include your actual latency and throughput metrics
+- Add your specific data flow stages and SLAs
+
+#### Navigation Queries (7 Dataview queries to customize):
+
+Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
+
+- `Query - Critical Systems Inventory.md` → Filter by your SLA/criticality targets
+- `Query - Real-time Integrations.md` → List your event-driven integration paths
+- `Query - Systems by Hosting Platform.md` → Group by your cloud providers (AWS, Azure, on-prem, etc.)
+- `Query - Integration Dependency Chain.md` → Show your data lineage and dependencies
+- `Query - Architecture by Domain.md` → Organise by your business domains
+- `Query - Data Volume by System.md` → Track your storage and capacity utilisation
+- `Query - Annual Cost Breakdown.md` → Allocate your infrastructure costs by system
+
+#### Dashboard (1 file to customize):
+
+- `Dashboard - Architecture Knowledge Graph.md` → Your architecture navigation hub
+
+**Update:**
+- Links to your customised System, Integration, and Architecture notes
+- Dataview query filters for your systems
+- System relationships section showing your integration topology
+- Technology stack summary with your actual platforms
+
+#### How to Get Started with Architecture Customisation:
+
+1. **Choose your starting point**: Select one system to customize first (e.g., "System - Sample ERP Application.md")
+2. **Read the customisation guide**: Each architecture note includes a "How to adapt for your organisation" section
+3. **Rename the file**: Change "Sample [Name]" to your actual system name
+4. **Update frontmatter**: Change `systemId`, costs, `criticality`, technologies
+5. **Customise metrics**: Replace sample numbers with your actual data volumes and performance targets
+6. **Update integrations**: Replace references to "Sample Data Integration Platform" with your actual platform
+7. **Link to your notes**: Update references to other systems and integrations as you customise them
+8. **Create Canvas diagrams**: Update visualisations to match your architecture
+9. **Customise queries**: Update Dataview queries to filter your systems
+10. **Update dashboard**: Link to your customised notes
+
+**See Also:**
+- `Page - Architecture Knowledge Graph Guide.md` - Comprehensive 2,000-line customisation guide with examples
+- Each architecture note has a built-in "How to adapt for your organisation" section
+
+### 4. Adapt ADR Approval Workflow
 
 Edit `+Templates/ADR.md`:
 
@@ -501,6 +650,125 @@ See `+Meetings/README.md` for a detailed guide.
    - Meetings: `project: "[[Project - Name]]"`
    - ADRs: `project: "[[Project - Name]]"`
 4. **Track in MOC**: Projects MOC auto-updates via Dataview
+
+### Architecture Documentation Workflow
+
+Follow this structured approach to build your enterprise architecture knowledge graph:
+
+#### 1. Start with Systems
+
+1. **Create System notes** for each system in your landscape
+2. **Set critical fields**:
+   - `systemId`: Unique identifier (e.g., "erp-prod-sap")
+   - `systemType`: application, platform, infrastructure, data-warehouse, middleware
+   - `criticality`: critical, high, medium, low
+   - `annualCost`: Total annual cost in £
+3. **Document**:
+   - Technology stack and versions
+   - Performance metrics (transactions/sec, data volume, users, capacity)
+   - SLAs and availability targets
+   - Integration points (what systems connect to this one)
+   - Disaster recovery and failover procedures
+   - Security controls and compliance
+4. **Link**: Reference other systems you integrate with
+5. **Explore**: Use `Dashboard - Architecture Knowledge Graph.md` to view relationships
+
+#### 2. Document Integrations
+
+1. **Create Integration notes** for each system-to-system connection
+2. **Set critical fields**:
+   - `integrationPattern`: real-time, batch-etl, api-gateway, event-streaming, etc.
+   - `sourceSystem` and `targetSystem`: Link to your System notes
+   - `criticality`: Based on impact if integration fails
+   - `latencyTarget`: Required latency (e.g., "<5 seconds")
+3. **Document**:
+   - Data volume and frequency (events/sec, records/day, etc.)
+   - Data quality validation rules and failure handling
+   - Topic/queue/table schemas for your platforms
+   - Failure scenarios and recovery procedures
+   - SLAs and monitoring thresholds
+4. **Example patterns**:
+   - **Real-time**: Event streaming (Kafka, Kinesis), <5 second latency
+   - **Batch**: Scheduled ETL (Spark, NiFi), 4-24 hour window
+   - **API**: Synchronous requests via gateway, <500ms latency
+5. **Track lineage**: Create `Query - Integration Dependency Chain.md` to show data flow
+
+#### 3. Create Architecture HLD
+
+1. **Create one Architecture note** for major components (data platform, APIs, etc.)
+2. **Include**:
+   - Executive summary (business context, objectives)
+   - Architecture diagram (C4 Level 2: containers and major components)
+   - Technology stack by layer (application, data, infrastructure)
+   - Functional architecture (your integration patterns and data flows)
+   - NFR targets (availability %, latency ms, throughput, capacity growth)
+   - Deployment topology (regions, cloud accounts, failover strategy)
+   - Cost model (annual cost by system, optimisation opportunities)
+   - Risk assessment and mitigation
+   - Quarterly roadmap and evolution plan
+3. **Link to**: Systems, Integrations, and related ADRs
+4. **Keep current**: Review quarterly, update NFR achievements vs targets
+
+#### 4. Plan Expansion Scenarios
+
+1. **Create Scenario notes** for transformation/expansion plans
+2. **Include**:
+   - Timeline and phases (e.g., Q1/Q2/Q3 2026)
+   - Systems/data sources you plan to add
+   - New capabilities (analytics, dashboards, APIs, ML models)
+   - Financial analysis: setup cost, annual incremental cost, benefits, ROI
+   - Risk assessment: dependencies, failure modes, mitigations
+   - Success criteria and KPIs by phase
+   - Alternative scenarios (Conservative, Standard, Aggressive)
+3. **Publish**: Share Architecture HLD + Scenario with stakeholders for buy-in
+
+#### 5. Visualise with Canvas Diagrams
+
+1. **Create Canvas visualisations** for system landscape, C4 context, and data flows
+2. **Best practices**:
+   - **System Landscape**: Show all systems with colour-coded criticality (red=critical, yellow=high, etc.)
+   - **C4 Context**: External actors, bounded systems, and major integrations
+   - **Data Flow**: Stages (source → transform → load), latency per stage, SLAs
+3. **Keep updated**: Refresh when systems change or new integrations added
+
+#### 6. Create Navigation Queries
+
+1. **Customise the 7 sample Query notes** for your systems
+2. **Each query filters specific architecture aspects**:
+   - Critical systems (99.95% SLA)
+   - Real-time integrations (<5 sec latency)
+   - Systems by cloud provider
+   - Integration dependency chain (data lineage)
+   - Architecture by business domain
+   - Data volume and storage capacity
+   - Annual cost breakdown by system
+3. **Create additional queries** for your specific needs:
+   - Systems with pending capacity review
+   - Integrations above cost threshold
+   - Systems due for renewal/upgrade
+   - Technology stack inventory
+
+#### 7. Use the Dashboard for Discovery
+
+1. **Open `Dashboard - Architecture Knowledge Graph.md`** as your starting point
+2. **Use for**:
+   - Quick overview of all systems and integrations
+   - System relationships and criticality
+   - Technology stack summary
+   - Entry point to detailed System, Integration, and Architecture notes
+3. **Customise**: Add your own sections and queries specific to your context
+
+#### Best Practices for Architecture Documentation
+
+✅ **Keep systems updated**: Review quarterly, update metrics and costs annually
+✅ **Link everything**: Use `relatedTo`, `dependsOn` relationships to show architecture flow
+✅ **Document trade-offs**: In each System and Integration note, explain why this approach
+✅ **Include realistic numbers**: Performance benchmarks, cost models, and data volumes make architecture credible
+✅ **Track risk**: Include failure scenarios, SLAs, disaster recovery procedures
+✅ **Show alternatives**: Document options considered and why you chose this approach
+✅ **Publish visualisations**: Canvas diagrams and C4 context help stakeholders understand architecture
+✅ **Create scenarios**: Planned expansions and roadmaps demonstrate architecture evolution
+✅ **Use queries**: Custom queries reveal patterns and guide future decisions
 
 ---
 
@@ -737,7 +1005,7 @@ git commit -m "Merge template updates"
 
 ### Quality Indicators
 
-Add to critical notes (ADRs, Pages, Projects):
+Add to critical notes (ADRs, Pages, Projects, Architecture notes):
 
 ```yaml
 # Quality Indicators
@@ -752,36 +1020,76 @@ reviewed: 2026-01-07               # Last review date
 - AI can prioritize high-confidence content
 - Identify content needing updates
 - Track information provenance
+- Track when architecture requires refresh
 
 ### Relationship Metadata
 
-Link related notes (especially ADRs):
+Link related notes (ADRs, Architecture, Systems, Integrations):
 
 ```yaml
 # Relationships
-relatedTo: ["[[ADR - Related Decision]]"]
-supersedes: ["[[ADR - Old Approach]]"]     # Replaces
-dependsOn: ["[[ADR - Foundation]]"]        # Requires
+relatedTo: ["[[System - Sample Data Platform]]", "[[ADR - Event-driven Architecture]]"]
+supersedes: ["[[Architecture - Old Batch Design]]"]     # Replaces
+dependsOn: ["[[System - Cloud Infrastructure]]"]        # Requires
 ```
 
 **Benefits**:
 - Navigate decision evolution
 - Understand dependencies
 - Build knowledge graph
+- Track architecture dependencies and data flow lineage
 
-### Hierarchical Tags
+### Hierarchical Tags for Architecture
 
-Use domain-specific tagging:
+Use domain-specific tagging for architecture work:
 
 ```yaml
-tags: [ADR, activity/architecture, technology/kubernetes, project/cloud-migration, domain/infrastructure]
+tags: [System, activity/architecture, technology/kafka, domain/data, criticality/critical]
+tags: [Integration, activity/architecture, technology/aws, domain/integration, pattern/real-time]
+tags: [Architecture, activity/architecture, domain/data, domain/integration, technology/multi-cloud]
 ```
 
 **Categories**:
-- `activity/` - architecture, implementation, evaluation
-- `technology/` - kubernetes, aws, postgresql, etc.
-- `project/` - cloud-migration, api-modernization, etc.
-- `domain/` - infrastructure, data, security, etc.
+- `activity/` - architecture, implementation, evaluation, research
+- `technology/` - kubernetes, aws, kafka, postgresql, snowflake, etc.
+- `project/` - cloud-migration, api-modernization, data-platform, etc.
+- `domain/` - infrastructure, data, security, integration, cloud, etc.
+- `criticality/` - critical, high, medium, low (for Systems)
+- `pattern/` - real-time, batch, api-gateway, event-streaming (for Integrations)
+
+### Architecture-Specific Metrics
+
+Track key architecture metrics in System notes:
+
+```yaml
+# Performance Metrics
+performanceTargets:
+  throughput: "5,000 req/sec"        # Peak capacity
+  latency: "<100ms p95"              # Latency percentile
+  availability: "99.95%"             # Uptime target
+  rtoMinutes: 30                     # Recovery time objective
+  rpoMinutes: 5                      # Recovery point objective
+
+# Financial Metrics
+annualCost: 2500000                 # Annual cost in £
+costOptimizationOpportunities:
+  - "Switch to reserved instances (£200K/year savings)"
+  - "Archive cold data (£100K/year savings)"
+
+# Capacity Metrics
+capacityMetrics:
+  activeDataVolume: "150 TB"
+  activeRecords: "35 billion"
+  concurrentUsers: 500
+  tablesCount: 350
+  pipelinesActive: 450
+```
+
+**Use these metrics to:**
+- Track against NFR targets
+- Identify cost optimization opportunities
+- Plan capacity scaling
+- Monitor system health over time
 
 ---
 
@@ -824,11 +1132,79 @@ tags: [ADR, activity/architecture, technology/kubernetes, project/cloud-migratio
 3. Verify skill file format (see vault-conventions.md)
 4. Check Claude Code settings: `claude settings show`
 
+### Architecture Queries Returning Wrong Systems
+
+**Problem**: Custom Dataview queries show only sample systems
+
+**Solution**:
+1. Make sure you've renamed System notes (e.g., `System - Sample ERP` → `System - Your ERP`)
+2. Update Query frontmatter: change `WHERE type = "System"` to match your note naming
+3. Verify `systemType`, `criticality`, and other filter fields match your systems
+4. Run `/broken-links` to find references to old sample names
+5. Use `/rename` to batch-update all references
+
+### Integrations Not Showing Data Flow
+
+**Problem**: Canvas or query shows incomplete integration topology
+
+**Solution**:
+1. Ensure all Integration notes have `sourceSystem` and `targetSystem` links
+2. Verify those System notes exist and are correctly named
+3. Check Integration frontmatter fields: `integrationPattern`, `criticality`, `latencyTarget`
+4. For Canvas diagrams, update node connections and source names
+5. Create corresponding `Query - Integration Dependency Chain` entries
+
+### Scenario ROI Numbers Don't Match
+
+**Problem**: Financial analysis in Scenario appears inconsistent
+
+**Solution**:
+1. Verify annual costs in System notes match Scenario assumptions
+2. Check for double-counting (e.g., infrastructure cost shouldn't include system costs if already listed separately)
+3. Update Scenario with your actual cost baselines
+4. Recalculate benefits based on your specific business case
+5. Document assumptions in Scenario "Financial Methodology" section
+
 ---
 
 ## 📚 Additional Resources
 
-### Example Notes
+### Architecture Knowledge Graph
+
+**Getting started with architecture documentation:**
+- **`Page - Architecture Knowledge Graph Guide.md`** - Comprehensive 2,000-line guide covering:
+  - Understanding each note type (System, Integration, Architecture, Scenario, Canvas)
+  - Step-by-step customization for your organisation
+  - 6-phase implementation plan
+  - Best practices for naming, metrics, and linking
+  - Real-world architecture patterns
+  - Troubleshooting guide
+
+**Example architecture notes:**
+- `System - Sample ERP Application.md` - Complete System example with 2,000+ tables
+- `System - Sample Data Integration Platform.md` - Platform example with 450 pipelines
+- `System - Sample Cloud Infrastructure.md` - Multi-region infrastructure example
+- `Integration - Sample ERP to Data Platform Real-time.md` - Real-time event-driven example
+- `Integration - Sample Data Platform to Analytics Batch.md` - Batch ETL example
+- `Architecture - Sample Data Integration Platform HLD.md` - Enterprise HLD example
+- `Scenario - Sample Real-time Analytics Expansion.md` - Roadmap & ROI example
+- `Dashboard - Architecture Knowledge Graph.md` - Navigation hub
+- `Query - Critical Systems Inventory.md` - Example Dataview query
+
+**Canvas visualisations:**
+- `Canvas - Sample System Landscape.md` - System topology with criticality
+- `Canvas - Sample C4 Context Diagram.md` - C4 Level 1 context
+- `Canvas - Sample Data Flow Diagram.md` - Real-time/batch/API flows
+
+### General Documentation
+
+- `Page - How to Use This Vault.md` - Internal usage guide
+- `Page - Vault Setup Checklist.md` - Onboarding checklist
+- `+Daily/README.md` - Daily note practice guide
+- `+Meetings/README.md` - Meeting capture guide
+- `.claude/vault-conventions.md` - Metadata formatting rules
+
+### Example Notes by Type
 
 Review these examples for best practices:
 - `ADR - Use Kubernetes for Container Orchestration.md` - Complete ADR example
@@ -837,20 +1213,13 @@ Review these examples for best practices:
 - `+Daily/2026/2026-01-07.md` - Daily note example
 - `+Meetings/Meeting - 2026-01-07 Project Kickoff.md` - Meeting example
 
-### Documentation Files
-
-- `Page - How to Use This Vault.md` - Internal usage guide
-- `Page - Vault Setup Checklist.md` - Onboarding checklist
-- `+Daily/README.md` - Daily note practice guide
-- `+Meetings/README.md` - Meeting capture guide
-- `.claude/vault-conventions.md` - Metadata formatting rules
-
 ### External Resources
 
 - [Obsidian Documentation](https://help.obsidian.md/)
 - [Dataview Plugin Guide](https://blacksmithgu.github.io/obsidian-dataview/)
 - [Templater Plugin Guide](https://silentvoid13.github.io/Templater/)
 - [Claude Code Documentation](https://claude.com/code)
+- [C4 Model Documentation](https://c4model.com/) - For architecture visualisations
 
 ---
 
@@ -861,6 +1230,38 @@ We welcome contributions! Please see `CONTRIBUTING.md` for:
 - How to report bugs
 - Code of conduct
 - Development workflow
+
+### Architecture Template Contributions
+
+We especially welcome contributions that enhance the Architecture Knowledge Graph:
+
+**New architecture patterns:**
+- Real-world System examples from different industries
+- Integration patterns not currently covered (e.g., CDC, streaming analytics, hybrid cloud)
+- Scenario templates for common transformation initiatives
+- Canvas visualisation examples for specific architectural styles
+
+**Improvements to existing templates:**
+- Better customisation guidance
+- Additional metrics and performance examples
+- Risk assessment templates
+- Cost model refinements
+- Security compliance examples
+
+**To contribute architecture content:**
+1. Fork this repository
+2. Create a new System, Integration, Architecture, or Scenario note following the examples
+3. Ensure all metrics are realistic and well-documented
+4. Include a "How to adapt" section for customisation
+5. Submit pull request with description of your contribution
+6. Include examples relevant to the template audience
+
+**Quality standards for contributions:**
+- Real-world metrics and performance data
+- Clear technology stack and versioning
+- Complete disaster recovery and security sections
+- Example customisation guide for organisations
+- Dataview query examples if adding new query types
 
 ---
 
