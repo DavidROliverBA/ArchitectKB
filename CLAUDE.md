@@ -17,6 +17,20 @@ This is an Obsidian vault template designed for **Solutions Architects** to mana
 - Quality indicators for content freshness and confidence
 - Claude Code skills for automation and AI-assisted workflows
 
+## Important: This Template is Organization-Agnostic
+
+**This repository is a generic template designed for any organization.** It contains NO organization-specific entries. All examples, text, and guidance use neutral language that works for any architect in any company.
+
+**When contributing to this template, maintain this standard:**
+- ❌ **DO NOT add** organization names, project names, staff names, or system names from any specific organization
+- ✅ **DO use** generic terminology: "your organization", "your projects", "your team", "your systems"
+- ✅ **DO include** customization guidance so users can adapt the template to their context
+- ✅ **DO provide** examples that are illustrative but not tied to any real organization
+
+**Example:**
+- ❌ Bad: "Create ADRs following the BA ADR process with Tom Phillips as approver"
+- ✅ Good: "Create ADRs following your organization's governance process, adding your required approvers"
+
 ## Directory Structure
 
 The vault uses a **metadata-driven organisation** where notes are organised by their `type` frontmatter field rather than folders. This enables powerful Dataview queries for navigation.
