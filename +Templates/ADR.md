@@ -15,12 +15,12 @@ created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 deciders: []
 approvers:
-  # Core Assessors (Required) - customize for your organization
-  - []  # Add your organization's required approvers
-  # Subject-Specific SMEs (add as appropriate)
-  - []
+  # Core Assessors (Required)
+  - Head of Architecture or Engineering
+  - Principal Solution Architect
+  - Cyber Assurance (John Smith or delegate)
+  # Subject-Specific SMEs (add as appropriate - see Page - YourOrg ADR Approvers and SME)
   # Stakeholders
-  - []
 project:
 jiraTicket: null  # To be added when JIRA ticket created
 
@@ -68,9 +68,11 @@ humanOversight: null      # full | partial | minimal | none | null
 
 # ADR - <% name %>
 
-> **ADR Status**: [Draft | Proposed | Accepted | Deprecated | Superseded]
+> **Based on Official YourOrg ADR Template**: [[Page - YourOrg ADR Template (Official)]]
 >
-> **Type**: [Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR]
+> **ADR Process**: [[Page - YourOrg ADR Process (Official)]]
+>
+> **Required Approvers**: [[Page - YourOrg ADR Approvers and SME (Official)]]
 
 ---
 
@@ -78,20 +80,24 @@ humanOversight: null      # full | partial | minimal | none | null
 
 **Draft** - <% tp.date.now("YYYY-MM-DD") %>
 
+**ADR Type**: [Technology_ADR | Architecture_ADR | Local_ADR]
+
+**Following Official YourOrg ADR Process**: [[Page - YourOrg ADR Process (Official)]]
+
 **Workflow Progress:**
-1. ⏳ Draft ADR Content
-2. ⏳ Identify Required Approvers
-3. ⏳ Review with Stakeholders
-4. ⏳ Incorporate Feedback
-5. ⏳ Final Approval
-6. ⏳ Document Acceptance
-7. ⏳ Post-Decision Implementation Planning
+1. ⏳ Check for Existing Guardrail
+2. ⏳ Draft ADR Content
+3. ⏳ Create JIRA Ticket in [PROJECT] (pending - **CRITICAL STEP**)
+4. ⏳ Add Approvers in Jira
+5. ⏳ Stakeholder Review and Approval
+6. ⏳ ADR Acceptance
+7. ⏳ Post-Approval Actions
 
 **Next Steps:**
 1. **Complete ADR content** (all sections below)
-2. **Add approvers** in the frontmatter
-3. **Share for review** with stakeholders
-4. **Update status** to "proposed" after initial review
+2. **Create JIRA ticket** - Type: ADR, Label: "[adrType]"
+3. **Add approvers** (see [[Page - YourOrg ADR Approvers and SME (Official)]])
+4. **Update status** to "proposed" after JIRA ticket created
 
 ---
 
@@ -334,9 +340,13 @@ humanOversight: null      # full | partial | minimal | none | null
 **Project:**
 
 
-**Related Pages:**
-- Link to related documentation or policies
-- Link to related specifications or requirements
+**Compliance:**
+
+
+**Official YourOrg ADR Process:**
+- [[Page - YourOrg ADR Process (Official)]] - Main ADR workflow
+- [[Page - YourOrg ADR Approvers and SME (Official)]] - Required approvers by domain
+- [[Page - YourOrg ADR Template (Official)]] - Official template structure
 
 ---
 

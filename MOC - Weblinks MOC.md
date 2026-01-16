@@ -11,7 +11,7 @@ tags: [MOC, navigation, weblinks]
 > Central navigation hub for all 157 external web resources including Confluence pages, Jira projects, technical documentation, and learning resources.
 
 ## Quick Navigation
-- [BA Internal Resources](#ba-internal-resources)
+- [Internal Resources](#internal-resources)
 - [Technical Documentation](#technical-documentation)
 - [Project Resources](#project-resources)
 - [Learning & Training](#learning--training)
@@ -21,7 +21,7 @@ tags: [MOC, navigation, weblinks]
 
 ---
 
-## BA Internal Resources
+## Internal Resources
 
 ### Confluence Pages
 ```dataview
@@ -51,7 +51,7 @@ TABLE WITHOUT ID
   link(file.link, title) AS "Resource",
   description AS "Description"
 FROM ""
-WHERE type = "Weblink" AND archived != true AND (contains(title, "ServiceNow") OR contains(title, "SharePoint") OR contains(domain, "ba.com"))
+WHERE type = "Weblink" AND archived != true AND (contains(title, "ServiceNow") OR contains(title, "SharePoint"))
 SORT title ASC
 ```
 
@@ -93,43 +93,25 @@ SORT title ASC
 
 ## Project Resources
 
-### Project Caerus
+*Customise these sections for your specific projects.*
+
+### Project Alpha
 ```dataview
 TABLE WITHOUT ID
   link(file.link, title) AS "Resource",
   url AS "Link"
 FROM ""
-WHERE type = "Weblink" AND archived != true AND contains(title, "Caerus")
+WHERE type = "Weblink" AND archived != true AND contains(title, "Project Alpha")
 SORT title ASC
 ```
 
-### AMOS & Axia Programme
+### Project Beta
 ```dataview
 TABLE WITHOUT ID
   link(file.link, title) AS "Resource",
   url AS "Link"
 FROM ""
-WHERE type = "Weblink" AND archived != true AND (contains(title, "AMOS") OR contains(title, "Axia"))
-SORT title ASC
-```
-
-### Snap-On & Tooling
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Resource",
-  url AS "Link"
-FROM ""
-WHERE type = "Weblink" AND archived != true AND contains(title, "Snap")
-SORT title ASC
-```
-
-### 777X & Aircraft Systems
-```dataview
-TABLE WITHOUT ID
-  link(file.link, title) AS "Resource",
-  url AS "Link"
-FROM ""
-WHERE type = "Weblink" AND archived != true AND contains(title, "777")
+WHERE type = "Weblink" AND archived != true AND contains(title, "Project Beta")
 SORT title ASC
 ```
 
@@ -225,7 +207,7 @@ SORT domain ASC, title ASC
 ---
 
 ## Related MOCs
-- [[Dashboard - Dashboard]] - Main hub
+- [[Dashboard - Main Dashboard]] - Main hub
 - [[MOC - Projects MOC]] - All projects
 - [[MOC - Technology & Architecture MOC]] - Technical resources (to be created)
 - [[MOC - ADRs MOC]] - Architecture decisions

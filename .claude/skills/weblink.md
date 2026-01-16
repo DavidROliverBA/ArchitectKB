@@ -30,7 +30,7 @@ Save a URL as a weblink note with analysis and summary.
 2. **Generate analysis** (REQUIRED):
    - Write a 2-3 sentence summary of what the resource is
    - Extract 4-8 key points as bullet points
-   - Identify relevance to BA/Solutions Architecture work where applicable
+   - Identify relevance to your organization/Solutions Architecture work where applicable
    - Note any technical details (technologies, integrations, versions)
 
 3. **Generate filename**: `Weblink - {{title}}.md`
@@ -69,9 +69,9 @@ source: {{source name}}
 - {{key point 3}}
 - {{...more as relevant}}
 
-## Relevance to BA
+## Relevance to your organization
 
-{{How this relates to BA work, if applicable. Remove section if not relevant.}}
+{{How this relates to YourOrg work, if applicable. Remove section if not relevant.}}
 
 ## Related
 

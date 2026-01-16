@@ -18,7 +18,7 @@ keywords: [ADR, architecture, decisions, governance, MOC]
 
 # ADRs MOC
 
-**Purpose:** Central directory of all Architecture Decision Records (ADRs) documenting key architectural decisions across British Airways projects. Navigate by status, relationships, or project context.
+**Purpose:** Central directory of all Architecture Decision Records (ADRs) documenting key architectural decisions across your projects. Navigate by status, relationships, or project context.
 
 **Quick Navigation:** [All ADRs](#all-adrs) | [By Status](#adrs-by-status) | [By Type](#adrs-by-type) | [AI ADRs](#ai-adrs) | [Statistics](#adr-statistics)
 
@@ -265,34 +265,28 @@ LIMIT 10
 
 ### Project-Linked ADRs
 
-**Dispax AI:**
-- [[ADR - Dispax AI - AI Services]]
-- [[ADR - Dispax AI - Bedrock]]
-- [[ADR - Dispax AI - Redshift Access]] - Extended Booking agent data
-- [[ADR - KAMA Pattern - Dispax AI (SUPERSEDED)]]
+*Organise your ADRs by project here. Examples:*
 
-**Caerus:**
-- [[ADR - SAP to AWS Connectivity]]
-- [[ADR - SAP Data Product]]
+**Project Alpha:**
+- [[ADR - API Gateway Selection]]
+- [[ADR - Event Streaming Platform]]
 
-**777X EIS Programme:**
-- [[ADR - 777X GBST Virtualization on AWS EC2]]
-- [[ADR - 777X CSCT Local Deployment (Non-Virtualization)]]
-- [[ADR - Fleetlink Migration]]
+**Project Beta:**
+- [[ADR - Cloud Migration Strategy]]
+- [[ADR - Data Lake Architecture]]
 
 ### Standalone ADRs
 
 ADRs not linked to a specific project:
 
-- [[ADR - ADR for Power Apps Integration]]
-- [[ADR - ADR for Seal Printing]]
-- [[ADR - KAMA (SUPERSEDED)]]
+- [[ADR - Enterprise Integration Patterns]]
+- [[ADR - Security Standards]]
 
 ---
 
 ## Related MOCs
 
-- [[Dashboard - Dashboard]] - Main navigation hub
+- [[Dashboard - Main Dashboard]] - Main navigation hub
 - [[MOC - Projects MOC]] - Projects by status and priority
 - [[MOC - Technology & Architecture MOC]] - Technical platforms and architecture
 - [[MOC - Organisations MOC]] - Vendors and partners

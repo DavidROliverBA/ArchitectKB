@@ -21,7 +21,7 @@ The todo list should only contain:
 
 Tasks with due dates in the future should:
 - Be stored in the vault as Task notes (using `/task` skill)
-- Be tracked in your issue tracking system/external systems
+- Be tracked in Jira/external systems
 - Only appear in the todo list on or after their due date
 
 **Why**: The todo list is for immediate work tracking, not a calendar or reminder system.
@@ -36,7 +36,7 @@ Add to todo list when:
 Do NOT add when:
 - Task is scheduled for a future date
 - Task is a reminder/calendar item
-- Task belongs in an external system (your issue tracking system, calendar)
+- Task belongs in an external system (Jira, calendar)
 
 ### 4. Cleaning Up
 
@@ -89,4 +89,4 @@ This creates a proper Task note in the vault that can be:
 | Today's tasks | Todo list |
 | Future dated | Task note in vault |
 | Recurring reminders | Task note or calendar |
-| Project work items | your issue tracking system + Task notes |
+| Project work items | Jira + Task notes |

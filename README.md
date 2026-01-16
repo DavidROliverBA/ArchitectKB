@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **Now includes:** 20 generic architecture templates (Systems, Integrations, HLDs, Scenarios, Visualizations) ready to customize for any organization's architecture documentation.
+> **v1.7 Release:** 53 AI-assisted skills + 21 note templates including comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations) ready to customize for any organization.
 
 ## 🎯 What is This?
 
@@ -15,14 +15,14 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
 - **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
-- **AI-Assisted Workflows** - 39 Claude Code skills for architecture analysis, document processing, and automation
+- **AI-Assisted Workflows** - 53 Claude Code skills for architecture analysis, document processing, and automation
 
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 39 AI-assisted workflows + Node.js automation
-- **Graph-First Search** - Pre-computed index for instant queries
+- **Claude Code Integration** - 52 AI-assisted workflows + Node.js automation
+- **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
@@ -139,7 +139,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 39 AI-assisted workflows
+│   ├── skills/             # 53 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
@@ -168,7 +168,7 @@ obsidian-architect-vault-template/
 └── README.md               # This file
 ```
 
-### Note Types (19 Total)
+### Note Types (21 Total)
 
 | Type | Prefix | Example | Purpose |
 |------|--------|---------|---------|
@@ -190,7 +190,9 @@ obsidian-architect-vault-template/
 | **Integration** | `Integration -` | `Integration - ERP to Data Platform.md` | System-to-system connections |
 | **Architecture** | `Architecture -` | `Architecture - Data Platform HLD.md` | High-level designs |
 | **Scenario** | `Scenario -` | `Scenario - Cloud Expansion.md` | Architecture scenarios & roadmaps |
+| **DataSource** | `DataSource -` | `DataSource - Customers Table.md` | Databases, tables, APIs, data entities |
 | **Canvas** | `Canvas -` | `Canvas - System Landscape.md` | Visual diagrams & architecture |
+| **Query** | `Query -` | `Query - Critical Systems.md` | Saved Dataview queries |
 
 ---
 
@@ -774,7 +776,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
 
 ## 🤖 Claude Code Skills
 
-This vault includes **39 AI-assisted workflows** accessible via Claude Code:
+This vault includes **52 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -785,6 +787,25 @@ This vault includes **39 AI-assisted workflows** accessible via Claude Code:
 - `/adr <title>` - Create new Architecture Decision Record
 - `/adr-report [period]` - ADR activity report (week/month/all)
 - `/find-decisions <topic>` - Find all decisions about a topic (sub-agents)
+
+### Architecture Documentation & Analysis (NEW - v1.7)
+- `/system <name>` - Create comprehensive System note with guided prompts (checks for duplicates, gathers tech stack, metrics, SLAs)
+- `/integration <source> <target>` - Document system-to-system integration with pattern, latency, data volume, quality checks
+- `/architecture <title>` - Create Architecture HLD/LLD with systems, components, NFRs, deployment topology
+- `/scenario <name>` - Create what-if scenarios, future-state plans, cost/benefit analysis, risk assessment
+- `/datasource <name>` - Document databases, tables, APIs, datasets with schema and access info
+- `/diagram <type>` - Generate C4, system landscape, data flow, or AWS architecture diagrams
+- `/canvas <name>` - Create visual Canvas diagrams (system landscape, C4 context, data flows)
+- `/architecture-report [filter]` - Generate architecture documentation report with system inventory, integration matrix, cost analysis
+- `/cost-optimization [scope]` - Identify cost savings across systems (underutilized resources, right-sizing, contract optimization)
+- `/dependency-graph [system]` - Visualize system dependencies, identify single points of failure, plan impact analysis
+- `/impact-analysis <system>` - Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation)
+- `/scenario-compare <baseline> <options>` - Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)
+- `/system-sync [source]` - Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)
+- `/tag-management [action]` - Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
+
+**What's New:**
+These 14 skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyze costs, visualize dependencies, and maintain quality—all with AI assistance and graph index integration.
 
 ### Engineering Management
 - `/project-status <project>` - Generate project status report (sub-agents)
@@ -830,6 +851,7 @@ This vault includes **39 AI-assisted workflows** accessible via Claude Code:
 - `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
 
 ### Vault Maintenance
+- `/wipe` - Generate context handoff, clear session, resume fresh (auto-detects tmux)
 - `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
 - `/orphans` - Find notes with no backlinks (sub-agents)
 - `/broken-links` - Comprehensive broken link detection (3 parallel Sonnet sub-agents)
@@ -892,7 +914,7 @@ npm run test
 - **health-check.js** - Analyzes note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
 - **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualization
 - **generate-graph-enhanced.js** - Builds pre-computed graph index for fast queries (outputs to `.graph/`)
-- **graph-query.js** - CLI for instant structured queries against the graph index
+- **graph-query.js** - CLI with BM25 relevance ranking for instant structured queries with ranked results
 - **graph-watcher.js** - File watcher for auto-rebuilding index on changes
 
 **Output Formats:**
@@ -1322,7 +1344,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Graph-first search strategy with `/search` skill
 - ✅ PreToolUse hook for search optimization hints
 - ✅ `npm run graph:build`, `graph:watch`, `graph:query` commands
-- ✅ 39 total Claude Code skills
+- ✅ 52 total Claude Code skills
 - ✅ Sanitized for generic use - removed all BA-specific content and projects
 
 **v1.5.0** (Released 2026-01-14):
@@ -1335,7 +1357,19 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ 1 Dashboard + 7 Query notes for navigation and discovery
 - ✅ Comprehensive Architecture Knowledge Graph Guide
 
-**v1.6** (Planned):
+**v1.7.0** (Released 2026-01-15):
+- ✅ **14 New Architecture Skills** - Complete AI-assisted architecture documentation workflow
+- ✅ `/system`, `/integration`, `/architecture`, `/scenario`, `/datasource` - Create architecture notes with guided prompts
+- ✅ `/diagram`, `/canvas` - Generate visual architecture diagrams
+- ✅ `/cost-optimization`, `/dependency-graph`, `/impact-analysis` - Architecture analysis and optimization
+- ✅ `/architecture-report`, `/scenario-compare`, `/system-sync` - Comprehensive reporting and external system sync
+- ✅ `/tag-management` - Audit and migrate tags to hierarchical taxonomy
+- ✅ **7 New Templates** - Architecture, Integration, Scenario, System, DataSource, Query, EAKB Submission
+- ✅ 52 total Claude Code skills (up from 39)
+- ✅ 21 note types supported (up from 19)
+- ✅ Complete template repository genericization - all BA-specific content removed
+
+**v1.8** (Planned):
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
 - Mobile optimization and mobile-first workflows

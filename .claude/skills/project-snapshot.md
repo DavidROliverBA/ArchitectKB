@@ -71,7 +71,7 @@ When this skill is invoked:
   - ✅ PKI infrastructure planned
   - 📅 Last meeting: 2026-01-07
 - **Next Actions**:
-  - Boeing certificate migration to BA Cloud PKI
+  - VendorA certificate migration to YourOrg Cloud PKI
   - AWS EC2 deployment planning
 - **Owner**: [[Naushin Galmani]] (PM), [[Mike Wallace]] (Tech Lead)
 - **Compliance**: N/A (aviation certified)
@@ -81,7 +81,7 @@ When this skill is invoked:
 - **Status**: Active
 - **Health**: 🟢 On track
 - **Recent Progress**:
-  - ✅ ADR completed [your issue tracking system-61](https://...)
+  - ✅ ADR completed [BDOBSTR-61](https://...)
   - ✅ DPIA threshold assessment complete
   - 📅 Infrastructure kick-off today (2026-01-07)
 - **Next Actions**:
@@ -101,7 +101,7 @@ When this skill is invoked:
   - ⏳ DPIA under review since 2025-10-08
 - **Blockers**:
   - ⚠️ DPIA approval pending (OneTrust 6284)
-  - Awaiting BA Data Protection Officer decision
+  - Awaiting YourOrg Data Protection Officer decision
 - **Next Actions**:
   - [[Naushin Galmani]] to follow up with DPO
   - Cannot proceed to deployment without DPIA approval
@@ -135,31 +135,31 @@ When this skill is invoked:
 
 ### Cloud & AWS (5 projects)
 - [[Project - 777-X EIS Programme]] 🟢
-- [[Project - Dispax AI]] 🟢
-- [[Project - relevant projects]] 🟢
+- [[Project - AIIncidentProcessor]] 🟢
+- [[Project - MyDataIntegration]] 🟢
 
 ### MRO & Engineering Systems (4 projects)
-- [[Project - relevant projects Implementation]] 🟡 (Entra ID migration needed)
+- [[Project - MaintenanceSystem Implementation]] 🟡 (Entra ID migration needed)
 - [[Project - Snap On Tooling - v9 Upgrade]] 🟢
 - [[Project - Siemens Teamcenter X SaaS]] 🟡 (DPIA pending)
 
 ### Data Integration (3 projects)
-- [[Project - relevant projects]] 🟢
-- [[Project - ODIE Programme]] 🟢
+- [[Project - MyDataIntegration]] 🟢
+- [[Project - DataPlatform Programme]] 🟢
 
 ## Key Milestones This Week
 
 | Project | Milestone | Due Date | Status |
 |---------|-----------|----------|--------|
 | [[Snap On]] | Infrastructure kick-off | 2026-01-07 | ✅ Today |
-| [[Dispax AI]] | Send ADRs to Roy Johnston | 2026-01-07 | ⏳ Pending |
-| [[relevant projects]] | SAP data call | 2026-01-07 | 📅 Today |
+| [[AIIncidentProcessor]] | Send ADRs to Roy Johnston | 2026-01-07 | ⏳ Pending |
+| [[MyDataIntegration]] | SAP data call | 2026-01-07 | 📅 Today |
 
 ## Immediate Attention Required
 
 ### High Priority Actions (Next 24-48 Hours)
 
-1. **[[Project - Dispax AI]]**
+1. **[[Project - AIIncidentProcessor]]**
    - Task: Send Watchlist API and Bedrock ADRs to Roy Johnston
    - Owner: David Oliver
    - Due: Today (2026-01-07)
@@ -171,7 +171,7 @@ When this skill is invoked:
 
 ### Medium Priority Actions (This Week)
 
-1. **[[Project - relevant projects Implementation]]**
+1. **[[Project - MaintenanceSystem Implementation]]**
    - Planning: Entra ID migration roadmap
    - Owner: [PM/Owner]
    - Note: Technical debt documented
@@ -187,8 +187,8 @@ When this skill is invoked:
 | [[Snap On]] | Threshold complete (6285) | ✅ Complete | - |
 | [[Siemens]] | Under review (6284) | ⏳ Pending | - |
 | [[SPARK]] | Under review (6276) | ⏳ Pending | - |
-| [[relevant projects]] | N/A | ✅ Complete | ✅ Aviation certified |
-| [[relevant projects]] | N/A | ✅ Complete | ⚠️ Entra ID migration needed |
+| [[NewProductLine]] | N/A | ✅ Complete | ✅ Aviation certified |
+| [[MaintenanceSystem]] | N/A | ✅ Complete | ⚠️ Entra ID migration needed |
 
 ## Resource Allocation
 
@@ -202,8 +202,8 @@ When this skill is invoked:
 
 ## Recent Wins 🎉
 
-- ✅ Snap On ADR completed (your issue tracking system-61)
-- ✅ relevant projects architecture decisions formalized (2 ADRs)
+- ✅ Snap On ADR completed (BDOBSTR-61)
+- ✅ NewProductLine architecture decisions formalized (2 ADRs)
 - ✅ PKI knowledge base created
 - ✅ DPIA tracking system established
 
@@ -211,7 +211,7 @@ When this skill is invoked:
 
 ### Critical Risks
 1. **DPIA Approvals Delayed**: Siemens and SPARK >60 days pending
-2. **Technical Debt**: relevant projects Entra ID migration unfunded
+2. **Technical Debt**: MaintenanceSystem Entra ID migration unfunded
 
 ### Medium Risks
 1. **Resource Constraints**: [If identified]
@@ -221,13 +221,13 @@ When this skill is invoked:
 
 **For Leadership:**
 1. Escalate DPIA approval delays (Siemens, SPARK)
-2. Fund relevant projects Entra ID migration work
+2. Fund MaintenanceSystem Entra ID migration work
 3. Review resource allocation across 20+ active projects
 
 **For Project Teams:**
-1. Complete Dispax AI ADR distribution today
+1. Complete AIIncidentProcessor ADR distribution today
 2. DPIA follow-ups this week (Naushin)
-3. Plan relevant projects AWS implementation roadmap
+3. Plan NewProductLine AWS implementation roadmap
 
 **For Architecture:**
 1. Continue ADR documentation for new projects
@@ -238,13 +238,13 @@ When this skill is invoked:
 
 | Project | Status | Health | Owner | Recent Activity | Next Milestone |
 |---------|--------|--------|-------|-----------------|----------------|
-| [[relevant projects EIS]] | Active | 🟢 | [[Naushin Galmani]] | 2 ADRs created | AWS deployment planning |
+| [[NewProductLine EIS]] | Active | 🟢 | [[Naushin Galmani]] | 2 ADRs created | AWS deployment planning |
 | [[Snap On]] | Active | 🟢 | [[Naushin Galmani]] | ADR complete | Infra kick-off (today) |
-| [[relevant projects]] | Active | 🟡 | [PM] | Tech debt documented | Entra migration planning |
+| [[MaintenanceSystem]] | Active | 🟡 | [PM] | Tech debt documented | Entra migration planning |
 | [[Siemens]] | Active | 🟡 | [PM] | DPIA pending | DPIA approval |
 | [[SPARK]] | Active | 🟡 | [PM] | DPIA pending | DPIA approval |
-| [[Dispax AI]] | Active | 🟢 | [PM] | ADR task created | Send ADRs to Roy |
-| [[relevant projects]] | Active | 🟢 | [PM] | SAP data call | [Milestone] |
+| [[AIIncidentProcessor]] | Active | 🟢 | [PM] | ADR task created | Send ADRs to Roy |
+| [[MyDataIntegration]] | Active | 🟢 | [PM] | SAP data call | [Milestone] |
 
 ```
 
@@ -252,7 +252,7 @@ When this skill is invoked:
 
 7. **Provide actionable insights:**
    - Flag urgent items requiring immediate attention
-   - Identify patterns across projects 
+   - Identify patterns across projects (e.g., multiple DPIA delays)
    - Highlight resource constraints or bottlenecks
    - Recommend prioritization
 
@@ -262,7 +262,7 @@ When this skill is invoked:
 
 ## Detailed Project View
 
-If user requests specific project :
+If user requests specific project (e.g., `/project-snapshot AIIncidentProcessor`):
 
 ```markdown
 # Project Snapshot: [[Project Name]]
@@ -355,5 +355,5 @@ User: `/project-snapshot all`
 Assistant: [Shows all 25 projects including paused and completed, organized by status]
 
 **Example 3:**
-User: `/project-snapshot relevant projects`
-Assistant: [Detailed snapshot of relevant projects project showing recent ADRs, upcoming AWS deployment, stakeholders]
+User: `/project-snapshot NewProductLine`
+Assistant: [Detailed snapshot of NewProductLine project showing recent ADRs, upcoming AWS deployment, stakeholders]

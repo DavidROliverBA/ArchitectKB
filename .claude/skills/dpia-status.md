@@ -117,7 +117,7 @@ When this skill is invoked:
 
 ### [[Project - Siemens Teamcenter X SaaS]]
 - **OneTrust ID**: 6284
-- **Status**: Under review by BA Data Protection Officer
+- **Status**: Under review by YourOrg Data Protection Officer
 - **Submitted**: 2025-10-08
 - **Owner**: [[Naushin Galmani]]
 - **Risk Level**: [High/Medium/Low]
@@ -169,7 +169,7 @@ When this skill is invoked:
 
 - [[Page - DPIA Tracker]] - Central DPIA tracking page
 - [[Weblink - OneTrust DPIA System]] - OneTrust platform
-- [[Project - Cyber Uplift]] - Security compliance programme
+- [[Project - SecurityEnhancement]] - Security compliance programme
 ```
 
 6. **Output the report** as formatted markdown

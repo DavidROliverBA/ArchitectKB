@@ -20,8 +20,8 @@ Quick-create a task linked to a project.
 
 ```
 /task Review ADR draft
-/task Complete cyber assessment for relevant projects due Friday
-/task Update architecture diagram priority high for relevant projects
+/task Complete cyber assessment for MyDataIntegration due Friday
+/task Update architecture diagram priority high for NewProductLine
 ```
 
 ## Instructions
@@ -74,7 +74,7 @@ tags: []
 ```
 
 5. If project provided:
-   - Format as wiki-link: `"[[Project - relevant projects]]"`
+   - Format as wiki-link: `"[[Project - MyDataIntegration]]"`
    - Fuzzy match project name if partial
 
 6. If due date provided:

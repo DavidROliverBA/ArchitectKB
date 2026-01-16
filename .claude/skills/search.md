@@ -4,7 +4,7 @@ context: fork
 
 # /search
 
-Smart search that queries the graph index first, then falls back to grep if needed.
+Smart search using BM25 relevance ranking. Queries the graph index first with ranked results, then falls back to grep for content search.
 
 ## Usage
 
@@ -12,7 +12,7 @@ Smart search that queries the graph index first, then falls back to grep if need
 /search kafka
 /search "API gateway"
 /search type:Adr status:proposed
-/search backlinks:Project - relevant projects
+/search backlinks:Project - MyProject
 ```
 
 ## Instructions
@@ -60,17 +60,21 @@ grep -r "<query>" --include="*.md" --exclude-dir=".git" --exclude-dir=".obsidian
 
 ### Phase 4: Present Combined Results
 
-Format output:
+Format output with BM25 relevance scores:
 
 ```markdown
 ## Search Results for "<query>"
 
-### Graph Index Results (metadata/structure)
+### Graph Index Results (BM25 ranked)
 Found **X** notes matching in graph index:
 
-| Type | Status | Title |
-|------|--------|-------|
-| Adr | proposed | ADR - Kafka Integration |
+| Score | Type | Title |
+|-------|------|-------|
+| 14.65 | Page | Kafka to SAP Integration |
+| 11.32 | Adr | ADR - Kafka Integration |
+| 9.45 | Meeting | Data Platform Discussion |
+
+*Results ranked by relevance (higher score = better match)*
 
 ### Content Search Results (full-text)
 Found **Y** additional matches in note content:
@@ -96,7 +100,7 @@ Found **Y** additional matches in note content:
 ```
 /search kafka                    # Keyword in graph + content
 /search type:Meeting kafka       # Meetings mentioning kafka
-/search backlinks:Project - ODIE # Notes linking to ODIE
+/search backlinks:Project - MyProject # Notes linking to project
 /search status:proposed          # All proposed items
 /search orphans                  # Orphaned notes
 /search "event.*driven"          # Regex - grep only
@@ -104,9 +108,11 @@ Found **Y** additional matches in note content:
 
 ## Performance Notes
 
-- **Graph search**: ~50ms for 1500 notes (pre-indexed)
+- **Graph search (BM25)**: ~50ms for 1500 notes (pre-indexed with ranking)
 - **Grep search**: ~2-5s depending on vault size
 - **Combined**: Graph first catches 80%+ of searches instantly
+- **Relevance ranking**: Results are sorted by BM25 score, so top results are most relevant
+- **IDF weighting**: Rare terms like "kafka" score higher than common terms like "the"
 
 ## Related
 

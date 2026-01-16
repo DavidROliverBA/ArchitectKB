@@ -12,7 +12,7 @@ Perform comprehensive analysis of architecture diagrams, flowcharts, and technic
 /diagram-review <image-path>
 /diagram-review +Attachments/architecture-diagram.png
 /diagram-review +Attachments/data-flow.png --type "C4"
-/diagram-review +Attachments/process-flow.png --project "relevant projects"
+/diagram-review +Attachments/process-flow.png --project "MyDataIntegration"
 ```
 
 ## Instructions
@@ -73,7 +73,7 @@ Task: Identify technologies and integrations
 - Identify cloud services (AWS, Azure, SAP)
 - Note databases, queues, APIs
 - Map external system integrations
-- Identify known your systems (relevant projects, relevant projects, ODIE, etc.)
+- Identify known YourOrg systems (SAP LegacyEngineeringSystem, MROPlatform, DataPlatform, etc.)
 Return: Technology inventory with integration points
 ```
 
@@ -165,5 +165,5 @@ Return: Technology inventory with integration points
 ### Notes
 
 - Optimised for C4 diagrams, UML, flowcharts, and network diagrams
-- Can recognise-specific systems and technologies
+- Can recognise organization-specific systems and technologies
 - Useful for architecture reviews and documentation

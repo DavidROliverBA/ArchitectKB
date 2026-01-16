@@ -122,7 +122,7 @@ When this skill is invoked:
 
 **Example 1:**
 User: `/adr-report week`
-Assistant: [Generates report for past 7 days showing 3 new ADRs created for relevant projects and Dispax AI projects]
+Assistant: [Generates report for past 7 days showing 3 new ADRs created for NewProductLine and AIIncidentProcessor projects]
 
 **Example 2:**
 User: `/adr-report`

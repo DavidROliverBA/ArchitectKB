@@ -45,7 +45,7 @@ If transcript unavailable, note this and proceed with description-only analysis.
 
 ### 2. Parse Chapter Markers
 
-If the description contains chapter timestamps , extract these as structured sections for the Page note.
+If the description contains chapter timestamps (e.g., `00:00 - Introduction`), extract these as structured sections for the Page note.
 
 ### 3. Analyse Content
 
@@ -55,7 +55,7 @@ From the transcript, identify:
 - **Actionable insights** - What viewers should do
 - **Technologies/tools** - Any mentioned tech stack
 - **Notable quotes** - 2-4 memorable statements
-- **Relevance to BA** - Architecture, governance, engineering work
+- **Relevance to your organization** - Architecture, governance, engineering work
 
 ### 4. Create Weblink Note
 
@@ -162,9 +162,9 @@ summary: {{one-line summary}}
 
 > "{{quote 2}}"
 
-## Relevance to BA Work
+## Relevance to Your Organization Work
 
-{{How this relates to Solutions Architecture, BA projects, or current work. Remove if not applicable.}}
+{{How this relates to Solutions Architecture, YourOrg projects, or current work. Remove if not applicable.}}
 
 ## Chapter Summary
 

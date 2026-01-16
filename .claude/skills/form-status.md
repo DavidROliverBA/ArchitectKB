@@ -18,7 +18,7 @@ Show status of form submissions across projects.
 /form-status                    # All forms summary
 /form-status pending            # Forms awaiting response
 /form-status overdue            # Forms past expected response
-/form-status relevant projects             # Forms for specific project
+/form-status MyDataIntegration             # Forms for specific project
 /form-status DPIA               # All DPIA submissions
 /form-status CyberRisk          # All Cyber Risk assessments
 ```
@@ -87,22 +87,22 @@ Show status of form submissions across projects.
 ## Attention Required
 
 ### Overdue (>30 days, no response)
-- [[Form Submission - DPIA for relevant projects]] - submitted 2025-12-01 (41 days ago)
+- [[Form Submission - DPIA for MyDataIntegration]] - submitted 2025-12-01 (41 days ago)
 
 ### Expiring Soon (<30 days to expiry)
-- [[Form Submission - TPRM for relevant projects]] - expires 2026-02-10
+- [[Form Submission - TPRM for MaintenanceSystem]] - expires 2026-02-10
 
 ### Drafts Not Submitted
 - [[Form Submission - CyberRisk for OpDef]] - created 2026-01-03
 
 ## By Project
 
-### [[Project - relevant projects]]
+### [[Project - MyDataIntegration]]
 - DPIA: approved (2025-11-15)
 - CyberRisk: pending (submitted 2026-01-05)
 - TPRM: draft
 
-### [[Project - relevant projects]]
+### [[Project - MaintenanceSystem]]
 ...
 ```
 
@@ -136,4 +136,4 @@ If user mentions a form they need to track, offer to create:
 /form <type> <project>
 ```
 
-Example: `/form DPIA relevant projects` creates `Form Submission - DPIA for relevant projects.md`
+Example: `/form DPIA MyDataIntegration` creates `Form Submission - DPIA for MyDataIntegration.md`

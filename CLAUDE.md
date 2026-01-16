@@ -79,6 +79,11 @@ Notes are identified by their `type` frontmatter field:
 | `DailyNote` | Daily journal entries | +Daily/[year]/ |
 | `Incubator` | Research ideas and concepts being explored | +Incubator/ |
 | `IncubatorNote` | Supporting research for incubator ideas | +Incubator/ |
+| `System` | Enterprise systems, applications, platforms | root |
+| `Integration` | System-to-system data integrations | root |
+| `Architecture` | High-level designs (HLD), low-level designs (LLD) | root |
+| `Scenario` | What-if scenarios, future-state planning | root |
+| `DataSource` | Databases, tables, APIs, data entities | root |
 | `Okr` | OKR and goal tracking notes | root |
 | `Query` | Saved Dataview queries | root |
 | `Course` | Training and course notes | root |
@@ -90,7 +95,7 @@ Notes are identified by their `type` frontmatter field:
 ### Navigation
 
 Use these Maps of Content (MOC) files to navigate:
-- **[[Dashboard - Dashboard]]** - Main hub with Dataview queries
+- **[[Dashboard - Main Dashboard]]** - Main hub with Dataview queries
 - **[[MOC - Tasks MOC]]** - All tasks by priority/due date
 - **[[MOC - Projects MOC]]** - Projects by status
 - **[[MOC - People MOC]]** - People directory
@@ -322,6 +327,115 @@ language: python | javascript | bash | yaml | sql | other
 purpose: <what this snippet does>
 ```
 
+**System (Enterprise Systems):**
+```yaml
+type: System
+systemId: "<unique-id>"               # Unique identifier for the system
+aliases: []                           # Alternative names, acronyms
+systemType: application | platform | database | middleware | saas | infrastructure | interface | null
+owner: "[[Person]]" | null
+status: active | planned | deprecated | retired | null
+criticality: critical | high | medium | low | null
+hosting: on-prem | aws | azure | saas | external | hybrid | null
+vendor: "[[Organisation]]" | null
+annualCost: <number> | null           # Annual cost in currency
+
+# Technology
+technology: []                        # [sap-ecc, java, postgresql]
+
+# Relationships
+connectsTo: []                        # ["[[System - Target]]"]
+relatedProjects: []                   # ["[[Project - Name]]"]
+
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
+**Integration (System-to-System Connections):**
+```yaml
+type: Integration
+sourceSystem: "[[System - Source]]"
+targetSystem: "[[System - Target]]"
+integrationPattern: real-time | batch-etl | api-gateway | event-streaming | message-queue | file-transfer | database-replication | null
+criticality: critical | high | medium | low | null
+latencyTarget: "<5 seconds" | null    # Required latency
+dataVolume: "<volume per time>" | null # e.g., "500 events/sec", "10GB/day"
+frequency: real-time | hourly | daily | weekly | on-demand | null
+
+# Relationships
+relatedProjects: []
+dependsOn: []                         # Prerequisites
+
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
+**Architecture (High-Level/Low-Level Designs):**
+```yaml
+type: Architecture
+architectureType: high-level-design | low-level-design | c4-context | c4-container | aws-architecture | null
+scope: enterprise | department | project | application | null
+project: "[[Project]]" | null
+systems: []                           # ["[[System - Name]]"]
+integrations: []                      # ["[[Integration - A to B]]"]
+
+# Relationships
+relatedTo: []
+supersedes: []                        # Older designs
+dependsOn: []                         # Foundation architectures
+
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
+**Scenario (What-If Analysis & Planning):**
+```yaml
+type: Scenario
+scenarioType: current-state | future-state | alternative-option | risk-mitigation | null
+baselineArchitecture: "[[Architecture]]" | null
+project: "[[Project]]" | null
+timeline: <description> | null        # e.g., "Q1-Q3 2026"
+estimatedCost: <number> | null        # Setup cost
+annualRecurringCost: <number> | null  # Ongoing cost
+
+# Relationships
+relatedTo: []
+dependsOn: []
+
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
+**DataSource (Databases, Tables, APIs):**
+```yaml
+type: DataSource
+dataSourceType: database-table | database-view | api-endpoint | data-lake | file-feed | stream | null
+parentSystem: "[[System]]" | null
+owner: "[[Person]]" | null
+accessMethod: direct-query | api | batch-export | streaming | null
+dataClassification: public | internal | confidential | secret | null
+recordCount: <number> | null
+dataVolume: "<size>" | null           # e.g., "2.5 TB"
+
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
 ### Quality Indicators Pattern
 
 Important notes (ADRs, Pages, Projects) should include quality metadata:
@@ -467,6 +581,24 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/project-status <project>` | Generate project status report (uses sub-agents) |
 | `/find-decisions <topic>` | Find all decisions about a topic (uses sub-agents) |
 
+### Architecture Documentation & Analysis
+| Command | Description |
+|---------|-------------|
+| `/system <name>` | Create comprehensive System note with guided prompts (checks duplicates, gathers tech stack, metrics, SLAs) |
+| `/integration <source> <target>` | Document system-to-system integration with pattern, latency, data volume, quality checks |
+| `/architecture <title>` | Create Architecture HLD/LLD with systems, components, NFRs, deployment topology |
+| `/scenario <name>` | Create what-if scenarios, future-state plans, cost/benefit analysis, risk assessment |
+| `/datasource <name>` | Document databases, tables, APIs, datasets with schema and access info |
+| `/diagram <type>` | Generate C4, system landscape, data flow, or AWS architecture diagrams |
+| `/canvas <name>` | Create visual Canvas diagrams (system landscape, C4 context, data flows) |
+| `/architecture-report [filter]` | Generate architecture documentation report with system inventory, integration matrix, cost analysis |
+| `/cost-optimization [scope]` | Identify cost savings across systems (underutilized resources, right-sizing, contract optimization) |
+| `/dependency-graph [system]` | Visualize system dependencies, identify single points of failure, plan impact analysis |
+| `/impact-analysis <system>` | Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation) |
+| `/scenario-compare <baseline> <options>` | Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits) |
+| `/system-sync [source]` | Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library) |
+| `/tag-management [action]` | Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy) |
+
 ### Engineering Management
 | Command | Description |
 |---------|-------------|
@@ -491,6 +623,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 ### Maintenance
 | Command | Description |
 |---------|-------------|
+| `/wipe` | Generate context handoff, clear session, resume fresh (auto-detects tmux) |
 | `/vault-maintenance` | Quarterly health check - all quality checks (uses sub-agents) |
 | `/check-weblinks` | Test all weblink URLs for dead/redirected links (uses sub-agents) |
 | `/archive <note>` | Soft archive a note (Project, Task, Page, Person) |
@@ -561,17 +694,19 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 
 ## Search Strategy
 
-**IMPORTANT:** This vault has a pre-computed knowledge graph index. Always query the graph BEFORE using Grep or find commands.
+**IMPORTANT:** This vault has a pre-computed knowledge graph index with **BM25 relevance ranking**. Always query the graph BEFORE using Grep or find commands.
 
 ### Graph-First Search Order
 
-1. **First: Query the graph index** (fast, structured)
+1. **First: Query the graph index** (fast, ranked results)
    ```bash
-   node scripts/graph-query.js --search "<term>"      # Keyword search
+   node scripts/graph-query.js --search "<term>"      # BM25 ranked search
    node scripts/graph-query.js --type <Type>          # Filter by type
    node scripts/graph-query.js --type Adr --status proposed  # Combined filters
    node scripts/graph-query.js --backlinks "<Note>"   # Find references
    ```
+
+   Search results are ranked by BM25 relevance score - top results are most relevant.
 
 2. **Second: Use Grep** (only if graph doesn't have needed data)
    - For content not in frontmatter
@@ -592,7 +727,7 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 | Search for "kafka" | `node scripts/graph-query.js --search kafka` |
 | Orphaned notes | `node scripts/graph-query.js --orphans` |
 | Broken links | `node scripts/graph-query.js --broken-links` |
-| Notes linking to X | `node scripts/graph-query.js --backlinks "Project - Caerus"` |
+| Notes linking to X | `node scripts/graph-query.js --backlinks "Project - MyProject"` |
 | Vault statistics | `node scripts/graph-query.js --stats` |
 
 ### When to Skip the Graph

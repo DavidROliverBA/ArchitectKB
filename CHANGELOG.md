@@ -7,6 +7,269 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.1] - 2026-01-16
+
+### Added
+
+#### `/wipe` - Session Context Handoff
+
+New skill for managing Claude Code session context:
+
+- **Auto-detects environment**: tmux (automated) vs other terminals (manual workflow)
+- **Generates structured handoff**: What we're working on, current state, decisions, changes, next steps
+- **tmux mode**: Fully automated - clears scrollback, runs `/clear`, pastes handoff (~12s)
+- **Manual mode**: Copies to clipboard, provides step-by-step instructions
+- **Variants**: `/wipe quick` (minimal) and `/wipe detailed` (comprehensive)
+- **Cross-platform clipboard**: macOS (pbcopy), WSL (clip.exe), Linux (xclip), Wayland (wl-copy)
+
+Based on the [GGPrompts wipe workflow](https://gist.github.com/GGPrompts/62bbf077596dc47d9f424276575007a1).
+
+#### BM25 Relevance Ranking for Graph Search
+
+The graph-query.js script now uses **BM25 (Best Match 25) relevance ranking** for search queries:
+
+- **Ranked Results**: Search results are sorted by relevance score, not just filtered
+- **IDF Weighting**: Rare terms (like "kafka") score higher than common terms
+- **Term Frequency Saturation**: Mentioning a term multiple times has diminishing returns
+- **Document Length Normalisation**: Short and long notes are fairly compared
+- **Relevance Scores**: Output includes numerical scores for each result
+
+**Example Output:**
+```
+Score   Type           Title
+14.65   Page           Kafka Integration Solution Architecture
+11.32   Integration    ERP → Data Lake
+9.45    System         Data Platform
+```
+
+**JSON Output** now includes scores for programmatic use:
+```json
+{"id": "...", "score": "14.650", "type": "Page", "title": "..."}
+```
+
+### Changed
+
+- Added `/wipe` to CLAUDE.md Maintenance skills section
+- Updated `/graph-query` skill to document BM25 ranking behaviour
+- Updated `/search` skill to show relevance scores in output format
+- Updated CLAUDE.md Search Strategy section to mention BM25 ranking
+- Updated README.md to highlight BM25 in feature list and scripts section
+
+### Technical Details
+
+- Pure JavaScript implementation - no new dependencies
+- BM25 parameters: k1=1.5 (saturation), b=0.75 (length normalisation)
+- Index built at load time from existing search.json
+- Query time remains ~50ms for 1500+ notes
+
+## [1.7.0] - 2026-01-15
+
+### Added
+
+#### 14 New Architecture Documentation & Analysis Skills
+
+Complete AI-assisted workflow for building enterprise architecture knowledge graphs:
+
+- **`/system <name>`** - Create comprehensive System notes
+  - Checks for duplicates before creating
+  - Guided prompts for tech stack, metrics, SLAs, costs
+  - Searches Confluence/CMDB for existing system information
+  - Generates structured frontmatter with relationships
+
+- **`/integration <source> <target>`** - Document system integrations
+  - Links to existing System notes or offers to create them
+  - Guided prompts for pattern, latency, data volume, error handling
+  - Validates integration patterns and technology choices
+  - Creates bidirectional relationship metadata
+
+- **`/architecture <title>`** - Create HLD/LLD architecture notes
+  - Types: high-level-design, low-level-design, c4-context, c4-container, aws-architecture
+  - Links systems and integrations
+  - Documents NFRs, deployment topology, design decisions
+  - Generates diagrams and visual representations
+
+- **`/scenario <name>`** - What-if analysis and planning
+  - Types: current-state, future-state, alternative-option, risk-mitigation
+  - Financial analysis with setup and recurring costs
+  - Risk assessment with mitigation strategies
+  - Timeline and roadmap planning
+
+- **`/datasource <name>`** - Document data entities
+  - Types: database-table, api-endpoint, data-lake, stream
+  - Schema documentation and access methods
+  - Data classification and volume metrics
+  - Ownership and governance information
+
+- **`/diagram <type>`** - Generate architecture diagrams
+  - C4 context, container, component diagrams
+  - System landscape maps
+  - Data flow diagrams
+  - AWS infrastructure diagrams
+  - Integration pattern visualizations
+
+- **`/canvas <name>`** - Create visual Canvas diagrams
+  - System landscape with automatic node positioning
+  - C4 context diagrams
+  - Data flow architectures
+  - Obsidian Canvas format for interactive editing
+
+- **`/architecture-report [filter]`** - Generate comprehensive reports
+  - System inventory with metrics and costs
+  - Integration matrix showing all connections
+  - Cost analysis by system and vendor
+  - Technology stack breakdown
+  - Critical system identification
+
+- **`/cost-optimization [scope]`** - Identify savings opportunities
+  - Analyze underutilized resources
+  - Right-sizing recommendations
+  - Contract optimization suggestions
+  - Cost per transaction/user analysis
+  - ROI calculations for optimization initiatives
+
+- **`/dependency-graph [system]`** - Visualize dependencies
+  - System dependency trees
+  - Identify single points of failure
+  - Critical path analysis
+  - Blast radius calculations
+  - Circular dependency detection
+
+- **`/impact-analysis <system>`** - Failure impact assessment
+  - Downstream consumer identification
+  - Integration path tracing
+  - Risk scoring and mitigation strategies
+  - Business impact quantification
+  - Recovery priority recommendations
+
+- **`/scenario-compare <baseline> <options>`** - Compare scenarios
+  - Side-by-side comparison matrix
+  - Cost/benefit analysis
+  - Risk assessment comparison
+  - Timeline and effort comparison
+  - Recommendation engine
+
+- **`/system-sync [source]`** - Sync from external CMDBs
+  - ServiceNow integration
+  - Jira project system sync
+  - Confluence Application Library sync
+  - Automatic frontmatter generation
+  - Duplicate detection and merging
+
+- **`/tag-management [action]`** - Tag quality management
+  - Audit flat tags and suggest hierarchical alternatives
+  - Migrate tags to official taxonomy
+  - Validate tag usage across vault
+  - Generate tag usage reports
+  - Identify orphan and unused tags
+
+#### 6 New Note Templates
+
+- **`Architecture.md`** - High-level/low-level design template with guided sections for scope, systems, integrations, NFRs, deployment, decisions
+- **`Integration.md`** - System-to-system integration documentation with pattern, protocol, data flow, error handling, quality checks
+- **`Scenario.md`** - What-if scenario planning with cost/benefit analysis, risk assessment, timeline, recommendations
+- **`System.md`** - Enterprise system documentation with tech stack, metrics, SLAs, costs, owners, relationships
+- **`DataSource.md`** - Database, API, data entity template with schema, access, classification, volume, governance
+- **`EAKB Submission.md`** - Enterprise Architecture Knowledge Base submission tracking
+
+#### 5 New Note Types
+
+Architecture knowledge graph building blocks:
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `System` | Enterprise systems, applications, platforms | `System - Customer Data Platform.md` |
+| `Integration` | System-to-system data integrations | `Integration - SAP to Data Lake.md` |
+| `Architecture` | HLDs, LLDs, C4 diagrams | `Architecture - Cloud Migration HLD.md` |
+| `Scenario` | What-if scenarios, future-state plans | `Scenario - Multi-Cloud Strategy.md` |
+| `DataSource` | Databases, tables, APIs, datasets | `DataSource - Customers Table.md` |
+
+### Changed
+
+- **Skill count**: 38 → 52 (14 new architecture skills)
+- **Note types**: 19 → 21 (5 new architecture types)
+- **Templates**: 14 → 21 (6 new + 1 updated ADR template)
+- **README.md**: Added "Architecture Documentation & Analysis" section with comprehensive descriptions
+- **CLAUDE.md**: Updated Note Types table, added Architecture Documentation & Analysis skills section, added frontmatter schemas for 5 new types
+
+### Technical
+
+- All 14 new skills include `context: fork` frontmatter for parallel agent execution
+- Skills use consistent guided prompt patterns for data collection
+- Integration with graph index for duplicate detection and relationship discovery
+- External system sync capabilities (ServiceNow, Jira, Confluence)
+- Tag management includes migration scripts and taxonomy validation
+
+### Migration Guide
+
+**From v1.4.0 (no breaking changes):**
+
+1. Pull latest changes:
+   ```bash
+   git pull origin main
+   ```
+
+2. Review new templates in `+Templates/`:
+   - `Architecture.md`
+   - `Integration.md`
+   - `Scenario.md`
+   - `System.md`
+   - `DataSource.md`
+   - `EAKB Submission.md`
+
+3. Customize templates for your organization:
+   - Replace placeholder system names with your systems
+   - Update cost currency and metrics
+   - Adjust technology stacks to match your environment
+   - Configure CMDB sync sources if using `/system-sync`
+
+4. Start building your architecture knowledge graph:
+   ```bash
+   /system MyFirstSystem              # Create a system
+   /integration System1 System2       # Document integration
+   /architecture "Project HLD"        # Design architecture
+   /scenario "Cloud Migration Plan"   # Plan scenarios
+   ```
+
+### Best Practices
+
+**Building Architecture Knowledge Graphs:**
+
+1. Start with critical systems: Document your most important systems first using `/system`
+2. Document integrations: Use `/integration` to map data flows between systems
+3. Create baseline architecture: Use `/architecture` for current-state HLD
+4. Plan future states: Use `/scenario` for migration or modernization planning
+5. Analyze costs: Use `/cost-optimization` to identify savings
+6. Assess risks: Use `/dependency-graph` and `/impact-analysis` for resilience planning
+
+**Tag Management Workflow:**
+
+```bash
+# Audit tags
+/tag-management audit
+
+# Migrate flat tags to hierarchical
+/tag-management migrate --dry-run
+/tag-management migrate
+
+# Validate against taxonomy
+/tag-management validate
+```
+
+**External System Sync:**
+
+```bash
+# Sync from Confluence Application Library
+/system-sync confluence
+
+# Sync from ServiceNow CMDB
+/system-sync servicenow
+
+# Sync specific Jira project systems
+/system-sync jira --project MYPROJ
+```
+
+---
+
 ## [1.4.0] - 2026-01-12
 
 ### Added
@@ -78,7 +341,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
   npm run graph:query -- --type Adr --status proposed
 
   # Backlink search
-  npm run graph:query -- --backlinks "Project - Caerus"
+  npm run graph:query -- --backlinks "Project - MyProject"
 
   # Special queries
   npm run graph:query -- --orphans
@@ -93,7 +356,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
   /search kafka                    # Keyword in graph + content
   /search "API gateway"            # Phrase search
   /search type:Adr status:proposed # Combined filters
-  /search backlinks:Project - Caerus # Backlink search
+  /search backlinks:Project - MyProject # Backlink search
   /search orphans                  # Orphaned notes
   /search "event.*driven"          # Regex (grep only)
   ```
@@ -113,7 +376,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
   ```
   /graph-query ADRs with status proposed
   /graph-query orphaned notes
-  /graph-query backlinks to "Project - Caerus"
+  /graph-query backlinks to "Project - MyProject"
   /graph-query notes not updated in 30 days
   ```
 
@@ -376,7 +639,8 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.4.0...v1.7.0
 [1.4.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.1.0...v1.2.0

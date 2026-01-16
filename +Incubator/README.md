@@ -89,7 +89,7 @@ Use these values for the `domain` field:
 ### From Incubator to Vault
 Link freely using standard wiki-links:
 ```markdown
-This relates to [[Project - Caerus]] and involves [[SAP]] integration.
+This relates to [[Project - MyProject]] and involves [[ERP]] integration.
 ```
 
 ### From Vault to Incubator

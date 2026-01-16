@@ -12,7 +12,7 @@
  *   node scripts/graph-query.js --orphans
  *   node scripts/graph-query.js --broken-links
  *   node scripts/graph-query.js --search="kafka integration"
- *   node scripts/graph-query.js --backlinks="Project - Caerus"
+ *   node scripts/graph-query.js --backlinks="Project - MyProject"
  *   node scripts/graph-query.js --json   # Output as JSON
  *
  * Run without arguments to see help.
@@ -33,15 +33,136 @@ const INDEX_PATH = path.join(GRAPH_DIR, 'index.json');
 const SEARCH_PATH = path.join(GRAPH_DIR, 'search.json');
 const QUALITY_PATH = path.join(GRAPH_DIR, 'quality.json');
 
+/**
+ * BM25 Search Index
+ *
+ * Implements the BM25 (Best Match 25) ranking algorithm for relevance-scored search.
+ * BM25 is the industry standard used by Elasticsearch, Lucene, and most search engines.
+ *
+ * Key advantages over simple keyword matching:
+ * - Rare terms are weighted higher (IDF - Inverse Document Frequency)
+ * - Term frequency has diminishing returns (saturation)
+ * - Document length is normalised
+ * - Results are ranked by relevance score
+ */
+class BM25Index {
+  constructor(k1 = 1.5, b = 0.75) {
+    this.k1 = k1;  // Term frequency saturation parameter
+    this.b = b;    // Length normalisation parameter
+    this.documents = [];
+    this.avgDocLength = 0;
+    this.termDocFreq = new Map();  // term -> number of docs containing term
+    this.docTermFreq = [];         // doc index -> Map(term -> frequency)
+    this.docMetadata = [];         // doc index -> original metadata
+  }
+
+  /**
+   * Tokenize text into searchable terms
+   */
+  tokenize(text) {
+    if (!text) return [];
+    return String(text)
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, ' ')
+      .split(/\s+/)
+      .filter(t => t.length > 1);
+  }
+
+  /**
+   * Add a document to the index
+   */
+  addDocument(id, searchableText, metadata = {}) {
+    const terms = this.tokenize(searchableText);
+    const docIndex = this.documents.length;
+
+    this.documents.push({ id, length: terms.length });
+    this.docMetadata.push(metadata);
+
+    const termFreq = new Map();
+    const seenTerms = new Set();
+
+    for (const term of terms) {
+      termFreq.set(term, (termFreq.get(term) || 0) + 1);
+      if (!seenTerms.has(term)) {
+        this.termDocFreq.set(term, (this.termDocFreq.get(term) || 0) + 1);
+        seenTerms.add(term);
+      }
+    }
+
+    this.docTermFreq.push(termFreq);
+
+    // Update average document length
+    const totalLength = this.documents.reduce((sum, d) => sum + d.length, 0);
+    this.avgDocLength = totalLength / this.documents.length;
+  }
+
+  /**
+   * Search the index and return ranked results
+   */
+  search(query, limit = 50) {
+    const queryTerms = this.tokenize(query);
+    if (queryTerms.length === 0) return [];
+
+    const scores = [];
+    const N = this.documents.length;
+
+    for (let i = 0; i < N; i++) {
+      let score = 0;
+      const doc = this.documents[i];
+      const termFreq = this.docTermFreq[i];
+
+      for (const term of queryTerms) {
+        const tf = termFreq.get(term) || 0;
+        if (tf === 0) continue;
+
+        const df = this.termDocFreq.get(term) || 0;
+        // IDF with smoothing to avoid negative values
+        const idf = Math.log((N - df + 0.5) / (df + 0.5) + 1);
+
+        // BM25 term score
+        const numerator = tf * (this.k1 + 1);
+        const denominator = tf + this.k1 * (1 - this.b + this.b * (doc.length / this.avgDocLength));
+
+        score += idf * (numerator / denominator);
+      }
+
+      if (score > 0) {
+        scores.push({
+          index: i,
+          score,
+          id: doc.id,
+          metadata: this.docMetadata[i]
+        });
+      }
+    }
+
+    return scores
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit);
+  }
+
+  /**
+   * Get index statistics
+   */
+  getStats() {
+    return {
+      documentCount: this.documents.length,
+      uniqueTerms: this.termDocFreq.size,
+      avgDocLength: this.avgDocLength.toFixed(2)
+    };
+  }
+}
+
 class GraphQuery {
   constructor() {
     this.index = null;
     this.searchIndex = null;
     this.qualityIndex = null;
+    this.bm25Index = null;
   }
 
   /**
-   * Load index files
+   * Load index files and build BM25 search index
    */
   loadIndexes() {
     if (!fs.existsSync(INDEX_PATH)) {
@@ -55,10 +176,40 @@ class GraphQuery {
 
     if (fs.existsSync(SEARCH_PATH)) {
       this.searchIndex = JSON.parse(fs.readFileSync(SEARCH_PATH, 'utf8'));
+      this.buildBM25Index();
     }
 
     if (fs.existsSync(QUALITY_PATH)) {
       this.qualityIndex = JSON.parse(fs.readFileSync(QUALITY_PATH, 'utf8'));
+    }
+  }
+
+  /**
+   * Build BM25 index from search index data
+   */
+  buildBM25Index() {
+    if (!this.searchIndex) return;
+
+    this.bm25Index = new BM25Index();
+
+    for (const item of this.searchIndex) {
+      // Build searchable text from title, keywords, and tags
+      const searchableText = [
+        item.title || '',
+        item.id || '',
+        ...(item.keywords || []),
+        ...(item.tags || []),
+        item.excerpt || ''
+      ].join(' ');
+
+      this.bm25Index.addDocument(item.id, searchableText, {
+        path: item.path,
+        type: item.type,
+        title: item.title,
+        status: item.status,
+        priority: item.priority,
+        tags: item.tags
+      });
     }
   }
 
@@ -174,22 +325,22 @@ class GraphQuery {
       );
     }
 
-    // Search filter
-    if (filters.search && this.searchIndex) {
-      const searchTerms = filters.search.toLowerCase().split(/\s+/);
-      const searchResults = this.searchIndex.filter(item => {
-        const searchableText = [
-          item.title?.toLowerCase() || '',
-          item.id.toLowerCase(),
-          ...(item.keywords || []),
-          ...(item.tags || [])
-        ].join(' ');
+    // Search filter using BM25 ranking
+    if (filters.search && this.bm25Index) {
+      const bm25Results = this.bm25Index.search(filters.search, 100);
 
-        return searchTerms.every(term => searchableText.includes(term));
-      });
+      // Create a map of id -> score for ranking
+      const scoreMap = new Map(bm25Results.map(r => [r.id, r.score]));
+      const searchIds = new Set(bm25Results.map(r => r.id));
 
-      const searchIds = new Set(searchResults.map(r => r.id));
-      results = results.filter(n => searchIds.has(n.id));
+      // Filter results and attach scores
+      results = results
+        .filter(n => searchIds.has(n.id))
+        .map(n => ({
+          ...n,
+          _relevanceScore: scoreMap.get(n.id) || 0
+        }))
+        .sort((a, b) => b._relevanceScore - a._relevanceScore);
     }
 
     // Backlinks query
@@ -224,6 +375,35 @@ class GraphQuery {
         data: this.qualityIndex.staleNotes,
         count: this.qualityIndex.staleNotes.length
       };
+    }
+
+    // Tag violations query
+    if (filters.tagViolations) {
+      return {
+        type: 'tagViolations',
+        data: this.index.tagViolations || [],
+        count: (this.index.tagViolations || []).length
+      };
+    }
+
+    // Filter by tag prefix (e.g., "technology/")
+    if (filters.tagPrefix) {
+      results = results.filter(n => {
+        const tags = n.frontmatter.tags || [];
+        return tags.some(tag =>
+          String(tag).toLowerCase().startsWith(filters.tagPrefix.toLowerCase())
+        );
+      });
+    }
+
+    // Filter by exact tag
+    if (filters.tag) {
+      results = results.filter(n => {
+        const tags = n.frontmatter.tags || [];
+        return tags.some(tag =>
+          String(tag).toLowerCase() === filters.tag.toLowerCase()
+        );
+      });
     }
 
     return {
@@ -278,22 +458,75 @@ class GraphQuery {
           chalk.yellow(item.modified)
         );
       }
-    } else {
-      // Regular node results
-      lines.push(chalk.gray('Type'.padEnd(15) + 'Status'.padEnd(12) + 'Priority'.padEnd(10) + 'Title'));
+    } else if (type === 'tagViolations') {
+      lines.push(chalk.gray('Note'.padEnd(40) + 'Tag'.padEnd(25) + 'Issue'));
       lines.push(chalk.gray('─'.repeat(100)));
 
-      for (const node of data.slice(0, 50)) {
-        const status = node.frontmatter.status || '-';
-        const priority = node.frontmatter.priority || '-';
-        const title = node.frontmatter.title || node.id;
+      // Group by issue type
+      const byIssue = {};
+      for (const violation of data) {
+        if (!byIssue[violation.issue]) {
+          byIssue[violation.issue] = [];
+        }
+        byIssue[violation.issue].push(violation);
+      }
+
+      // Show summary by type
+      lines.push(chalk.yellow('\nViolations by Type:'));
+      for (const [issue, violations] of Object.entries(byIssue)) {
+        lines.push(chalk.gray(`  ${issue}: ${violations.length}`));
+      }
+      lines.push('');
+
+      // Show first 50 violations
+      for (const violation of data.slice(0, 50)) {
+        const issueColor = violation.issue === 'orphan-flat-tag' ? chalk.yellow :
+                          violation.issue === 'case-violation' ? chalk.cyan :
+                          violation.issue === 'inline-prefix' ? chalk.red :
+                          chalk.magenta;
 
         lines.push(
-          chalk.cyan(node.type.padEnd(15)) +
-          this.formatStatus(status).padEnd(12) +
-          this.formatPriority(priority).padEnd(10) +
-          chalk.white(title.substring(0, 60))
+          chalk.white(violation.nodeId.substring(0, 38).padEnd(40)) +
+          chalk.gray(violation.tag.substring(0, 23).padEnd(25)) +
+          issueColor(violation.issue)
         );
+      }
+    } else {
+      // Regular node results
+      const hasScores = data.some(n => n._relevanceScore !== undefined);
+
+      if (hasScores) {
+        // Show relevance scores for search results
+        lines.push(chalk.gray('Score'.padEnd(8) + 'Type'.padEnd(15) + 'Title'));
+        lines.push(chalk.gray('─'.repeat(100)));
+
+        for (const node of data.slice(0, 50)) {
+          const score = node._relevanceScore?.toFixed(2) || '0.00';
+          const title = node.frontmatter.title || node.id;
+
+          lines.push(
+            chalk.yellow(score.padEnd(8)) +
+            chalk.cyan(node.type.padEnd(15)) +
+            chalk.white(title.substring(0, 75))
+          );
+        }
+      } else {
+        // Standard output without scores
+        lines.push(chalk.gray('Type'.padEnd(15) + 'Status'.padEnd(12) + 'Priority'.padEnd(10) + 'Title'));
+        lines.push(chalk.gray('─'.repeat(100)));
+
+        for (const node of data.slice(0, 50)) {
+          const status = node.frontmatter.status || '-';
+          const priority = node.frontmatter.priority || '-';
+          const title = node.frontmatter.title || node.id;
+
+          lines.push(
+            chalk.cyan(node.type.padEnd(15)) +
+            this.formatStatus(status).padEnd(12) +
+            this.formatPriority(priority).padEnd(10) +
+            chalk.white(title.substring(0, 60))
+          );
+        }
       }
     }
 
@@ -341,6 +574,23 @@ class GraphQuery {
    * Format results as JSON
    */
   formatJson(queryResult) {
+    // For search results with scores, simplify the output
+    if (queryResult.type === 'nodes' && queryResult.data.some(n => n._relevanceScore !== undefined)) {
+      const simplified = {
+        type: 'search',
+        count: queryResult.count,
+        results: queryResult.data.map(n => ({
+          id: n.id,
+          score: n._relevanceScore?.toFixed(3) || '0.000',
+          type: n.type,
+          title: n.frontmatter?.title || n.id,
+          path: n.path,
+          status: n.frontmatter?.status || null,
+          tags: n.frontmatter?.tags || []
+        }))
+      };
+      return JSON.stringify(simplified, null, 2);
+    }
     return JSON.stringify(queryResult, null, 2);
   }
 
@@ -397,6 +647,9 @@ function parseArgs() {
     priority: null,
     search: null,
     backlinks: null,
+    tagPrefix: null,
+    tag: null,
+    tagViolations: false,
     orphans: false,
     brokenLinks: false,
     stale: false,
@@ -421,6 +674,8 @@ function parseArgs() {
       options.stale = true;
     } else if (arg === '--stats') {
       options.stats = true;
+    } else if (arg === '--tag-violations') {
+      options.tagViolations = true;
     } else if (arg.startsWith('--type=')) {
       options.type = arg.split('=')[1];
     } else if (arg.startsWith('--status=')) {
@@ -431,6 +686,10 @@ function parseArgs() {
       options.search = arg.split('=')[1];
     } else if (arg.startsWith('--backlinks=')) {
       options.backlinks = arg.split('=')[1];
+    } else if (arg.startsWith('--tag-prefix=')) {
+      options.tagPrefix = arg.split('=')[1];
+    } else if (arg.startsWith('--tag=')) {
+      options.tag = arg.split('=')[1];
     } else if (!arg.startsWith('-')) {
       // Natural language query
       options.naturalQuery = arg;
@@ -454,13 +713,18 @@ ${chalk.yellow('Structured Options:')}
   --type=<type>       Filter by note type (Adr, Project, Task, Meeting, etc.)
   --status=<status>   Filter by status (active, proposed, accepted, draft, etc.)
   --priority=<pri>    Filter by priority (high, medium, low)
-  --search=<term>     Search titles, keywords, and tags
+  --search=<term>     Search with BM25 relevance ranking (results sorted by score)
   --backlinks=<note>  Find notes linking to specified note
+
+${chalk.yellow('Tag Filtering:')}
+  --tag-prefix=<pre>  Filter by tag hierarchy (e.g., "technology/", "domain/")
+  --tag=<tag>         Filter by exact tag match (e.g., "activity/architecture")
 
 ${chalk.yellow('Special Queries:')}
   --orphans           List orphaned notes (no backlinks)
   --broken-links      List broken wiki-links
   --stale             List stale notes (>6 months old)
+  --tag-violations    List tag taxonomy violations
   --stats             Show index statistics
 
 ${chalk.yellow('Output Options:')}
@@ -474,18 +738,22 @@ ${chalk.yellow('Natural Language Examples:')}
   "orphaned notes"
   "broken links"
   "meetings about kafka"
-  "backlinks to Project - Caerus"
+  "backlinks to Project - MyProject"
 
 ${chalk.yellow('Structured Examples:')}
   --type=Adr --status=proposed
   --type=Task --priority=high
   --search="kafka integration"
-  --backlinks="Project - Caerus"
+  --backlinks="Project - MyProject"
+  --tag-prefix="technology/"
+  --tag="activity/architecture" --type=Adr
+  --tag-violations
   --orphans --json
 
 ${chalk.yellow('npm Script:')}
   npm run graph:query -- "your query here"
   npm run graph:query -- --type=Adr --status=proposed
+  npm run graph:query -- --tag-prefix="technology/" --json
 `);
 }
 
@@ -505,9 +773,12 @@ async function main() {
       !options.priority &&
       !options.search &&
       !options.backlinks &&
+      !options.tagPrefix &&
+      !options.tag &&
       !options.orphans &&
       !options.brokenLinks &&
       !options.stale &&
+      !options.tagViolations &&
       !options.stats) {
     showHelp();
     process.exit(0);
@@ -535,9 +806,12 @@ async function main() {
     priority: options.priority,
     search: options.search,
     backlinks: options.backlinks,
+    tagPrefix: options.tagPrefix,
+    tag: options.tag,
     orphans: options.orphans,
     brokenLinks: options.brokenLinks,
-    stale: options.stale
+    stale: options.stale,
+    tagViolations: options.tagViolations
   };
 
   // Parse natural language query if provided

@@ -10,9 +10,9 @@ Find all notes related to a topic using parallel sub-agents for comprehensive se
 
 ```
 /related <topic>
-/related Boeing
+/related VendorA
 /related SAP BTP
-/related Adam Drozd
+/related Jane Doe
 ```
 
 ## Instructions

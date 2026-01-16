@@ -18,7 +18,7 @@ Convert PDF documents into Page notes with extracted images saved as PNG files i
 
 ## Instructions
 
-This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and entity extraction.
+This skill uses **docling** for PDF structure extraction + **1 agent** for visual analysis and YourOrg entity extraction.
 
 ### Phase 1: PDF Loading & Validation
 
@@ -38,12 +38,12 @@ Options:
   1. "Sonnet - Concise" (Recommended)
      Description: "Faster processing, concise overview. Best for straightforward documents."
   2. "Opus - Comprehensive"
-     Description: "Deeper analysis with detailed BA context. Best for complex technical documents."
+     Description: "Deeper analysis with detailed YourOrg context. Best for complex technical documents."
 ```
 
 **When to recommend each**:
 - **Sonnet**: Default choice. Fast, cost-effective, good for most documents
-- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive entity extraction is critical
+- **Opus**: Use for complex technical documents, architecture specs, or when comprehensive YourOrg entity extraction is critical
 
 Store the selection for use in Phase 3.
 
@@ -99,16 +99,16 @@ with open(json_file, 'w', encoding='utf-8') as f:
     f.write(json_data)
 ```
 
-### Phase 3: Visual Analysis & BA Entity Extraction
+### Phase 3: Visual Analysis & YourOrg Entity Extraction
 
 Launch **one agent** using the model selected in Phase 1.5:
 
 - **If Sonnet selected**: Use `model="sonnet"` - faster, concise analysis
 - **If Opus selected**: Use `model="opus"` - comprehensive, detailed analysis
 
-**Agent: Visual Analysis & BA Entity Extraction** (Sonnet or Opus based on selection)
+**Agent: Visual Analysis & YourOrg Entity Extraction** (Sonnet or Opus based on selection)
 ```
-Task: Analyze PDF visually and extract relevant entities
+Task: Analyze PDF visually and extract organization-specific entities
 
 1. VISUAL ANALYSIS:
    - Read the PDF file (Claude can view PDFs visually)
@@ -118,11 +118,11 @@ Task: Analyze PDF visually and extract relevant entities
    - Assess image types (architecture diagrams, flowcharts, screenshots, photos, logos)
    - Count pages with significant visual content
 
-2. BA ENTITY EXTRACTION:
-   - Identify relevant projects mentioned (relevant projects and solutions)
-   - Find people and roles (architects, PMs, stakeholders)
-   - Identify your systems and technologies (SAP, AWS, relevant projects, etc.)
-   - Extract referenced organizations (relevant organizations and vendors)
+2. YourOrg ENTITY EXTRACTION:
+   - Identify YourOrg projects mentioned (MyDataIntegration, ModernizationProject, NewProductLine, MaintenanceSystem, etc.)
+   - Find YourOrg people and roles (architects, PMs, stakeholders)
+   - Identify YourOrg systems and technologies (SAP, AWS, MROPlatform, etc.)
+   - Extract YourOrg organizations (VendorA, SAP, VendorB, VendorC, etc.)
    - Find dates, deadlines, milestones
    - Identify action items, decisions, recommendations
 
@@ -134,20 +134,20 @@ Task: Analyze PDF visually and extract relevant entities
 
 Return:
 - Image inventory with page numbers, descriptions, and suggested filenames
-- entity list (projects, people, systems, organizations)
+- YourOrg entity list (projects, people, systems, organizations)
 - Document classification and topics
 - Action items and key dates
 ```
 
 **Why only 1 agent now?**
 - Docling already extracted the text structure (Phase 2)
-- Only need visual understanding and domain knowledge
+- Only need visual understanding and YourOrg domain knowledge
 - 67% reduction in API costs (3 agents → 1 agent)
 - Faster processing time
 
 **Model selection impact**:
 - **Sonnet**: ~10 seconds agent time, cost-effective, good quality
-- **Opus**: ~30-60 seconds agent time, higher cost, comprehensive analysis with richer BA context
+- **Opus**: ~30-60 seconds agent time, higher cost, comprehensive analysis with richer YourOrg context
 
 ### Phase 4: Image Extraction
 
@@ -164,7 +164,7 @@ For each image identified by the agent:
 
 2. **Save as PNG files** in `+Attachments/`:
    - Naming convention: `{pdf-basename} - Page {N} - {description}.png`
-   - Example: `relevant projects Architecture - Page 3 - System Diagram.png`
+   - Example: `MROPlatform Architecture - Page 3 - System Diagram.png`
    - Use descriptive names from Sonnet agent's visual analysis
 
 3. **Track all created files** for linking in the final Page note
@@ -249,19 +249,19 @@ processedWith: docling
 
 ### Projects Referenced
 
-{List from agent's entity extraction with [[Project]] links}
+{List from agent's YourOrg entity extraction with [[Project]] links}
 
 ### People Mentioned
 
-{List from agent's entity extraction with [[Person]] links}
+{List from agent's YourOrg entity extraction with [[Person]] links}
 
 ### Systems & Technologies
 
-{List from agent's entity extraction}
+{List from agent's YourOrg entity extraction}
 
 ### Organizations Referenced
 
-{List from agent's entity extraction with [[Organisation]] links}
+{List from agent's YourOrg entity extraction with [[Organisation]] links}
 
 ### Dates & Deadlines
 
@@ -312,7 +312,7 @@ After creation, provide user with:
 - `{image2.png}` - {description}
 - ...
 
-**BA Entities Identified**:
+**YourOrg Entities Identified**:
 - Projects: {count} ({list})
 - People: {count} ({list})
 - Systems: {count} ({list})
@@ -325,7 +325,7 @@ After creation, provide user with:
 
 **Suggested Actions**:
 1. Review extracted content for accuracy
-2. Verify entity links are correct
+2. Verify YourOrg entity links are correct
 3. Add additional tags if needed: {suggestions}
 4. Create tasks from action items: {task suggestions}
 5. Link to related projects: {suggestions}
@@ -405,7 +405,7 @@ pdftoppm -png -r 150 -f 3 -l 3 input.pdf output-prefix  # Page 3 only
 
 ### Performance Benchmarks
 
-Based on relevant projects System Architecture & Roadmap (29 pages):
+Based on MROPlatform System Architecture & Roadmap (29 pages):
 
 | Metric | Value |
 |--------|-------|
@@ -425,4 +425,4 @@ Based on relevant projects System Architecture & Roadmap (29 pages):
 ## Example Workflow
 
 ```
-User: /pdf-to-page +Attachments/relevant projects-Architecture-Overview.pdf
+User: /pdf-to-page +Attachments/MROPlatform-Architecture-Overview.pdf

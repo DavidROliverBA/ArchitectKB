@@ -17,7 +17,7 @@ tags: [ADR, #activity/architecture, #technology/aws]
 
 **✅ CORRECT - Use plain hierarchical paths:**
 ```yaml
-tags: [ADR, activity/architecture, technology/aws, project/dispax-ai, domain/cloud]
+tags: [ADR, activity/architecture, technology/aws, project/my-project, domain/cloud]
 ```
 
 **Explanation:**
@@ -34,7 +34,7 @@ tags: [
   ADR,                          # Note type (if applicable)
   activity/architecture,        # What kind of work (activity/)
   technology/aws,               # Technologies involved (technology/)
-  project/dispax-ai,            # Which project (project/)
+  project/my-project,           # Which project (project/)
   domain/cloud,                 # Business domain (domain/)
   other-tags                    # Other flat tags as needed
 ]
@@ -43,7 +43,7 @@ tags: [
 **Hierarchical Prefixes:**
 - `activity/` - Type of work: architecture, implementation, evaluation, research
 - `technology/` - Technologies: aws, sap, kafka, bedrock, etc.
-- `project/` - Projects: caerus, axia, dispax-ai, 777x, odie
+- `project/` - Projects: your-project-names-here
 - `domain/` - Business domains: aviation, data, integration, security, cloud
 
 ### Field Naming Standards
@@ -68,22 +68,22 @@ tags: [
 
 **Plain strings (no quotes needed):**
 ```yaml
-title: ADR - SAP Data Product
+title: ADR - API Gateway Selection
 status: accepted
 priority: high
 ```
 
 **Quoted strings (use when containing special characters):**
 ```yaml
-title: "ADR - Dispax AI: AWS Services"
+title: "ADR - Project Alpha: AWS Services"
 description: "Multi-line description
   that spans lines"
 ```
 
 **Wiki-links in frontmatter:**
 ```yaml
-project: "[[Project - Caerus]]"
-relatedTo: ["[[ADR - SAP to AWS Connectivity]]"]
+project: "[[Project - MyProject]]"
+relatedTo: ["[[ADR - Cloud Migration Strategy]]"]
 ```
 
 ---
@@ -146,35 +146,35 @@ dependsOn: ["[[Foundation ADR]]"]
 **ADRs:**
 ```
 ADR - <Decision Title>.md
-ADR - SAP Data Product.md
-ADR - KAMA Pattern - Dispax AI.md
+ADR - API Gateway Selection.md
+ADR - Event Streaming Platform.md
 ```
 
 **Projects:**
 ```
 Project - <Project Name>.md
-Project - Caerus.md
-Project - Axia (was EWS Futures).md
+Project - MyProject.md
+Project - Cloud Migration.md
 ```
 
 **People:**
 ```
 <First Name> <Last Name>.md
 John Smith.md
-Adam Drozd.md
+Jane Doe.md
 ```
 
 **Meetings:**
 ```
 Meeting - YYYY-MM-DD <Title>.md
-Meeting - 2026-01-06 Digital - AMOS Deep-dive topics.md
+Meeting - 2026-01-06 Architecture Review.md
 ```
 
 **Pages:**
 ```
 Page - <Title>.md
-Page - Context - SAP Ecosystem at BA.md
-Page - AMOS Gap Analysis for BA.md
+Page - System Context Guide.md
+Page - Integration Patterns.md
 ```
 
 **Daily Notes:**
@@ -267,13 +267,13 @@ Templates ensure all required fields are present and properly formatted.
 ```markdown
 [[Note Title]]                    # Basic link
 [[Note Title|Display Text]]       # Link with custom text
-[[Page - Context - SAP Ecosystem at BA|SAP Context]]  # Shorter alias
+[[Page - System Context Guide|Context Guide]]  # Shorter alias
 ```
 
 ### Links in Frontmatter
 ```yaml
-project: "[[Project - Caerus]]"                      # Single link
-relatedTo: ["[[ADR - SAP to AWS Connectivity]]"]     # Array of links
+project: "[[Project - MyProject]]"                   # Single link
+relatedTo: ["[[ADR - Cloud Migration Strategy]]"]    # Array of links
 ```
 
 **Always quote wiki-links in frontmatter YAML**
@@ -311,22 +311,22 @@ SORT priority ASC
 
 ### ADRs
 ```yaml
-tags: [ADR, activity/architecture, technology/aws, project/dispax-ai, domain/cloud]
+tags: [ADR, activity/architecture, technology/aws, project/my-project, domain/cloud]
 ```
 
 ### Projects
 ```yaml
-tags: [Project, domain/data, domain/integration, technology/sap]
+tags: [Project, domain/data, domain/integration, technology/kafka]
 ```
 
 ### Pages
 ```yaml
-tags: [context, technology/sap, domain/integration, domain/data]
+tags: [context, technology/aws, domain/integration, domain/data]
 ```
 
 ### Meetings
 ```yaml
-tags: [Meeting, project/caerus, domain/architecture]
+tags: [Meeting, project/my-project, domain/architecture]
 ```
 
 ---

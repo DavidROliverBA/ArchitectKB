@@ -19,7 +19,7 @@ Quick-create a person note.
 
 ```
 /person John Smith
-/person Sarah Jones from Boeing
+/person Sarah Jones from VendorA
 /person Mike Chen role Solutions Architect from SAP
 ```
 
@@ -83,7 +83,7 @@ WHERE type = "Project" AND contains(file.outlinks, this.file.link)
 
 5. For organisation:
    - Check if `Organisation - {{org}}.md` exists
-   - If yes, link: `"[[Organisation - Boeing]]"`
+   - If yes, link: `"[[Organisation - VendorA]]"`
    - If no, just use the name (offer to create org note)
 
 6. After creating:

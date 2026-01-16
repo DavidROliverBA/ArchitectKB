@@ -4,7 +4,7 @@ context: fork
 
 # /adr
 
-Create a new Architecture Decision Record (ADR) for your organization.
+Create a new Architecture Decision Record (ADR) following the official YourOrg ADR process.
 
 ## Usage
 
@@ -17,7 +17,7 @@ Create a new Architecture Decision Record (ADR) for your organization.
 
 ```
 /adr API Gateway Selection
-/adr Kafka vs EventBridge for Project - MyProject
+/adr Kafka vs EventBridge for Project - MyDataIntegration
 /adr Standalone Laptop for Offline Database Build
 ```
 
@@ -88,20 +88,36 @@ Store the selected type in `adrType` frontmatter field.
 
 ### 5. Identify Required Approvers
 
-Ask the user: "Who should approve this ADR?"
+Based on the ADR type and subject area, identify required approvers using [[Page - YourOrg ADR Approvers and SME (Official)]].
 
-**Suggested Approvers** (customize for your organization):
+**Core Assessors (Always Required)**:
 - Head of Architecture or Engineering
 - Principal Solution Architect (if not already involved)
-- Subject-matter experts for the affected area
-- Security/Compliance leads (if applicable)
-- Key stakeholders
+- Cyber Assurance (John Smith or delegate)
 
-Store approver names in the frontmatter `approvers` field.
+**Ask the user**: "What subject areas does this ADR cover?"
+
+**Common Subject Areas** (select all that apply):
+- Application Database/Storage (Nick Lee / Jane Doe)
+- Application Integration (Nick Lee / Jane Doe)
+- AI (Jake Pearce / Eleanor Armiger)
+- Cloud (AWS/Azure/GCP) (James Dean / Jane Doe)
+- Data Products/Integration (Jonathan Osborne / Jonathan Kemp)
+- Data Platform (Jonathan Osborne / Jonathan Kemp)
+- Data Privacy (Privacy Officer / dataprotection@yourorg.com)
+- PC Hardware/Software (John Smith/Jane Doe/Bob Johnson)
+- Mobile (iOS/Android) (John Smith/Jane Doe/Bob Johnson)
+- Networks (Nick Davey / Drew Urwin)
+- Cyber (John Smith)
+- IT Operations (Indhu Gosal / Claire Dunn)
+- Software Engineering/DevSecOps (Verita Sorsby / Petter Franzen)
+- Power Platform (Terry Hagan / James Cacia)
+
+Build the complete approvers list from Core + Subject-Specific SMEs.
 
 ### 6. Gather ADR Content
 
-Ask the user for key information to fill the ADR template:
+Ask the user for key information using the official YourOrg ADR template structure:
 
 #### Context Questions:
 1. **Background**: What is the architectural context? What problem led to this decision?
@@ -160,25 +176,25 @@ approvers:
   # Core Assessors (Required)
   - Head of Architecture or Engineering
   - Principal Solution Architect
-  - 
+  - Cyber Assurance (John Smith or delegate)
   # Subject-Specific SMEs (from user selections)
   {{list of SME approvers based on subject areas}}
   # Stakeholders
   {{project stakeholders if applicable}}
 project: {{project_link or null}}
-jiraTicket: null  # To be added when your tracking system ticket created
+jiraTicket: null  # To be added when JIRA ticket created
 
 # Source/Provenance
 source: local                         # local | confluence
-sourcePageId: null                    # your tracking system page ID (once published)
-sourceSpace: null                     # your tracking system space key
+sourcePageId: null                    # Confluence page ID (once published)
+sourceSpace: null                     # Confluence space key
 sourceUrl: null                       # Link to authoritative version
 sourceVersion: null                   # Version number
 
 # Publication
-isPublished: false                    # Updated when published to your tracking system
+isPublished: false                    # Updated when published to Confluence
 publishedDate: null                   # YYYY-MM-DD
-publishedUrl: null                    # your tracking system URL
+publishedUrl: null                    # Confluence URL
 
 # Authority Level
 authority: draft                      # draft → local → team → organizational
@@ -201,7 +217,16 @@ stakeholders: {{list from approvers}}
 ---
 ```
 
-**Content**: Use ADR template structure with all sections filled in from user responses.
+**Content**: Use official YourOrg ADR template structure with all sections filled in from user responses.
+
+Include at the top:
+```markdown
+> **Based on Official YourOrg ADR Template**: [[Page - YourOrg ADR Template (Official)]]
+>
+> **ADR Process**: [[Page - YourOrg ADR Process (Official)]]
+>
+> **Required Approvers**: [[Page - YourOrg ADR Approvers and SME (Official)]]
+```
 
 ### 8. Provide Next Steps Guidance
 
@@ -210,48 +235,48 @@ After creating the ADR, display:
 ```
 ✅ ADR created: ADR - {{title}}.md
 
-📋 Next Steps (ADR Process):
+📋 Next Steps (Official YourOrg ADR Process):
 
 1. ⏳ REVIEW ADR CONTENT
    - Review all sections for completeness
    - Ensure alternatives are well-documented
    - Verify approvers list is correct
 
-2. ⏳ CREATE your tracking system TICKET (CRITICAL - ADR not complete without this)
-   - Project: {{user's project or your tracking system}}
+2. ⏳ CREATE JIRA TICKET (CRITICAL - ADR not complete without this)
+   - Project: {{user's project or BDOBSTR}}
    - Issue Type: ADR
    - Label: "{{adrType}}"
    - Summary: "ADR - {{title}}"
-   - Link this ADR document to your tracking system ticket
+   - Link this ADR document to JIRA ticket
 
-3. ⏳ ADD APPROVERS IN your tracking system
-   Use '@' function in your tracking system to add:
+3. ⏳ ADD APPROVERS IN JIRA
+   Use '@' function in Jira to add:
    {{list all approvers from frontmatter}}
 
 4. ⏳ CREATE/LINK CONFLUENCE PAGE
-   - Create your tracking system page with ADR content
-   - Link your tracking system page to your tracking system ticket
+   - Create Confluence page with ADR content
+   - Link Confluence page to JIRA ticket
 
 5. ⏳ UPDATE ADR STATUS
-   - After your tracking system ticket created, update status: draft → proposed
-   - Add your tracking system ticket reference to frontmatter
+   - After JIRA ticket created, update status: draft → proposed
+   - Add JIRA ticket reference to frontmatter
 
 6. ⏳ STAKEHOLDER REVIEW
-   - Approvers review in your tracking system
-   - Discussion via your tracking system comments
+   - Approvers review in Jira
+   - Discussion via Jira comments
    - All approvers must agree
 
 7. ⏳ ADR ACCEPTANCE
-   - All approvals confirmed in your tracking system
+   - All approvals confirmed in Jira
    - Update status: proposed → accepted
 
 8. ⏳ POST-APPROVAL
-   - Close your tracking system ticket
-   - Tidy your tracking system page
+   - Close JIRA ticket
+   - Tidy Confluence page
    - Add appropriate labels
 
 9. ⏳ PUBLISH TO CONFLUENCE (Final Step)
-   - Create your tracking system page with ADR content
+   - Create Confluence page with ADR content
    - Update vault ADR frontmatter:
      - isPublished: true
      - publishedDate: {{today}}
@@ -262,15 +287,15 @@ After creating the ADR, display:
 🔄 Authority Progression:
 - draft → ADR being created (local work)
 - local → Personal decision, not yet shared
-- team → Approved by team, in your tracking system
+- team → Approved by team, in Confluence
 - organizational → Company-wide standard/guardrail
 
 📚 References:
-- Review your organization's ADR governance and approval process
-- Consult with your architecture leadership on approval requirements
-- Customize approvers list based on your domain expertise
+- [[Page - YourOrg ADR Process (Official)]] - Full process documentation
+- [[Page - YourOrg ADR Approvers and SME (Official)]] - Approvers reference
+- [[Page - YourOrg ADR Template (Official)]] - Template structure
 
-⚠️ REMEMBER: ADRs are not complete until your tracking system ticket is raised!
+⚠️ REMEMBER: ADRs are not complete until JIRA ticket is raised!
 ```
 
 ### 9. Create Associated Task (Optional)
@@ -285,20 +310,23 @@ If yes, create a task: `Task - Create ADR - {{title}}.md` with:
 
 ## Important Notes
 
-1. **your tracking system Ticket is Mandatory**: Always emphasize that ADR is not complete without your tracking system ticket
-2. **Your Process**: Adapt ADR workflow to your organization's governance process
+1. **JIRA Ticket is Mandatory**: Always emphasize that ADR is not complete without JIRA ticket
+2. **Official Process**: Always reference the official YourOrg ADR process documentation
 3. **Approvers are Required**: Must identify and document required approvers before proceeding
-4. **your tracking system Integration**: ADRs live in your tracking system with your tracking system as anchor
-5. **Status Progression**: draft → proposed (after your tracking system) → accepted (after approvals)
+4. **Confluence Integration**: ADRs live in Confluence with JIRA as anchor
+5. **Status Progression**: draft → proposed (after JIRA) → accepted (after approvals)
 6. **Three ADR Types**: Technology_ADR (most common), Architecture_ADR (new guardrail), Local_ADR (within guardrails)
 
 ## Error Handling
 
 - If user skips checking for existing guardrail, remind them this is required
-- If user cannot identify appropriate approvers, suggest checking your organization's governance documentation
+- If user cannot identify appropriate approvers, suggest reviewing [[Page - YourOrg ADR Approvers and SME (Official)]]
 - If ADR type is unclear, explain each type with examples
-- If user wants to skip your tracking system ticket, explain it's mandatory per official process
+- If user wants to skip JIRA ticket, explain it's mandatory per official process
 
-## Implementation Notes
+## Reference Documentation
 
-This skill creates ADRs following the ADR template in `+Templates/ADR.md`. Customize the approvers, workflow, and governance process for your organization.
+All guidance based on:
+- [[Page - YourOrg ADR Process (Official)]]
+- [[Page - YourOrg ADR Approvers and SME (Official)]]
+- [[Page - YourOrg ADR Template (Official)]]

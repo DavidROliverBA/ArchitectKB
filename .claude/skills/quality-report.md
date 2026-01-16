@@ -142,7 +142,7 @@ Task: Analyze content freshness and tag quality
   - Analyze tags:
     * Has tags? (yes = good)
     * Tag count: 2-5 = optimal, 1 = okay, 0 = poor, >5 = excessive
-    * Tag relevance: match type-specific patterns 
+    * Tag relevance: match type-specific patterns (e.g., Projects should have domain tags)
   - Score calculation:
     * Freshness: 0-60 points based on days since modification (capped by type thresholds)
     * Tags: 0-40 points (has tags +20, optimal count +20, else proportional)

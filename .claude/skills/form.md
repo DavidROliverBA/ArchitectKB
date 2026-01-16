@@ -18,10 +18,10 @@ Quick-create a form submission tracking note.
 ## Usage
 
 ```
-/form DPIA relevant projects
-/form CyberRisk "relevant projects"
+/form DPIA MyDataIntegration
+/form CyberRisk "MaintenanceSystem"
 /form TPRM Snap-On
-/form IAF "Dispax AI"
+/form IAF "AIIncidentProcessor"
 /form ChangeRequest OpDef
 ```
 
@@ -143,10 +143,10 @@ tags: [form/{{formType | lowercase}}]
 
 ## Example Output
 
-After `/form DPIA relevant projects`:
+After `/form DPIA MyDataIntegration`:
 
 ```
-Created: Form Submission - DPIA for relevant projects.md
+Created: Form Submission - DPIA for MyDataIntegration.md
 
 Next steps:
 1. Fill in the summary and key information

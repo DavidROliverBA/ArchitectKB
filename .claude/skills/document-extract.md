@@ -62,7 +62,7 @@ Task: Classify and categorise the content
 - Extract action items or tasks
 - Find decisions or commitments
 - Note any deadlines or dates mentioned
-- Identify references to BA projects or systems
+- Identify references to YourOrg projects or systems
 Return: Classified content with entity extraction
 ```
 
@@ -161,4 +161,4 @@ After extraction, offer to:
 
 - Works with photos of whiteboards, handwritten notes, printed documents
 - PDF support for text extraction
-- Can recognise-specific terminology and systems
+- Can recognise organization-specific terminology and systems

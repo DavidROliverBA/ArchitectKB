@@ -10,8 +10,8 @@ Generate a chronological timeline for a project or topic using sub-agents.
 
 ```
 /timeline <project or topic>
-/timeline relevant projects
-/timeline relevant projects
+/timeline MyDataIntegration
+/timeline NewProductLine
 /timeline SAP migration
 ```
 

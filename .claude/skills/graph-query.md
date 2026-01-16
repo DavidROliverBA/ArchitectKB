@@ -13,7 +13,7 @@ Query the vault's knowledge graph index using natural language or structured que
 /graph-query high priority tasks
 /graph-query orphaned notes
 /graph-query broken links
-/graph-query backlinks to Project - relevant projects
+/graph-query backlinks to Project - MyProject
 /graph-query --type=Adr --status=accepted
 ```
 
@@ -58,13 +58,13 @@ Understand what the user is asking for. The query system supports:
 | `--type=` | Filter by note type | `--type=Adr`, `--type=Project` |
 | `--status=` | Filter by status | `--status=proposed`, `--status=active` |
 | `--priority=` | Filter by priority | `--priority=high` |
-| `--search=` | Keyword search | `--search="kafka integration"` |
-| `--backlinks=` | Find notes linking to target | `--backlinks="Project - relevant projects"` |
+| `--search=` | BM25 relevance search (ranked results) | `--search="kafka integration"` |
+| `--backlinks=` | Find notes linking to target | `--backlinks="Project - MyProject"` |
 | `--orphans` | List orphaned notes | |
 | `--broken-links` | List broken wiki-links | |
 | `--stale` | List notes >6 months old | |
 | `--stats` | Show index statistics | |
-| `--json` | Output as JSON | |
+| `--json` | Output as JSON with scores | |
 
 ### Phase 3: Execute Query via CLI
 
@@ -88,7 +88,23 @@ node scripts/graph-query.js --type=Task --priority=high --json
 
 ### Phase 4: Format Response
 
-Present results as a markdown table:
+Present results as a markdown table. For search queries, results are ranked by **BM25 relevance score**:
+
+```markdown
+## Search Results
+
+Found **X** result(s) for: "kafka integration"
+
+| Score | Type | Title |
+|-------|------|-------|
+| 14.65 | Page | Kafka Integration Solution Architecture |
+| 11.32 | Integration | ERP → Data Lake |
+| 9.45 | System | Data Platform |
+
+*Results ranked by BM25 relevance score (higher = more relevant)*
+```
+
+For type/status queries (no search term), show standard format:
 
 ```markdown
 ## Query Results
@@ -151,7 +167,7 @@ Found **8** orphaned notes (notes with no backlinks)
 
 ### Relationships
 ```
-/graph-query backlinks to Project - relevant projects
+/graph-query backlinks to Project - MyProject
 /graph-query orphaned notes
 /graph-query broken links
 ```
@@ -169,6 +185,9 @@ Found **8** orphaned notes (notes with no backlinks)
 - Rebuild index after major changes: `npm run graph:build`
 - Use `npm run graph:watch` for automatic rebuilding during active work
 - Results are limited to 50 items by default; use `--json` for full results
+- **Search uses BM25 ranking** - results are sorted by relevance score, not just filtered
+- BM25 weights rare terms higher (IDF) and normalises for document length
+- JSON output includes relevance scores for programmatic use
 
 ## Related Skills
 

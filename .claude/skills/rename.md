@@ -52,7 +52,7 @@ Batch rename files matching a pattern, with automatic wiki-link updates.
    Files to rename: 45
 
    Examples:
-     Person - Adam Drozd.md → Adam Drozd.md
+     Person - Jane Doe.md → Jane Doe.md
      Person - Sarah Jones.md → Sarah Jones.md
      ...
 
