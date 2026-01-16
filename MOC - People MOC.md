@@ -65,7 +65,7 @@ GROUP BY role
 
 ## Related MOCs
 
-- [[Dashboard - Dashboard]] - Main hub
+- [[Dashboard - Main Dashboard]] - Main hub
 - [[MOC - Meetings MOC]] - Meeting history
 - [[MOC - Projects MOC]] - All projects
 - [[MOC - Tasks MOC]] - All tasks

@@ -19,7 +19,7 @@ Last Updated: 2026-01-07
 This is an **example MOC** showing how to organize data platform knowledge. Customize for your data architecture, analytics tools, and data governance practices.
 
 **Quick Links:**
-- [[Dashboard - Dashboard]] - Main dashboard
+- [[Dashboard - Main Dashboard]] - Main dashboard
 - [[MOC - Technology & Architecture MOC]] - All tech standards
 - [[MOC - Cloud Architecture]] - Infrastructure foundation
 - [[MOC - ADRs MOC]] - Data-related decisions
@@ -550,7 +550,7 @@ SORT status ASC, priority ASC
 ## Related
 
 **Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
+- [[Dashboard - Main Dashboard]] - Main dashboard
 - [[MOC - Technology & Architecture MOC]] - Tech standards hub
 - [[MOC - Cloud Architecture]] - Cloud infrastructure
 

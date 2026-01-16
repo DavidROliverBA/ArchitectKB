@@ -415,7 +415,7 @@ SORT dateformat(reviewed, "yyyy-MM") DESC
 
 ## Related MOCs
 
-- [[Dashboard - Dashboard]] - Main navigation hub
+- [[Dashboard - Main Dashboard]] - Main navigation hub
 - [[MOC - ADRs MOC]] - Architecture Decision Records
 - [[MOC - Projects MOC]] - Project tracking
 - [[MOC - Tasks MOC]] - Task management

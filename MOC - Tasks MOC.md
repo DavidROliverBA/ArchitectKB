@@ -127,7 +127,7 @@ SORT project DESC, priority ASC, dueBy ASC
 
 ## Related MOCs
 
-- [[Dashboard - Dashboard]] - Main hub
+- [[Dashboard - Main Dashboard]] - Main hub
 - [[MOC - Projects MOC]] - All projects by status
 - [[MOC - Meetings MOC]] - Meeting history
 - [[MOC - People MOC]] - People directory

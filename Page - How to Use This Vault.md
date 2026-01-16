@@ -18,7 +18,7 @@ Last Updated: 2026-01-07
 
 ### Your First 15 Minutes
 
-1. **Open [[Dashboard - Dashboard]]** - Your central navigation hub
+1. **Open [[Dashboard - Main Dashboard]]** - Your central navigation hub
 2. **Review example notes** - See how different note types work
 3. **Create your first daily note** - Type `/daily` and start capturing
 4. **Explore MOCs** - Maps of Content organize everything
@@ -272,7 +272,7 @@ This is a note about #cloud-architecture and #kubernetes
 
 ### The Dashboard
 
-**[[Dashboard - Dashboard]]** is your home base:
+**[[Dashboard - Main Dashboard]]** is your home base:
 - Quick stats (open tasks, active projects)
 - Recent activity
 - Links to all MOCs

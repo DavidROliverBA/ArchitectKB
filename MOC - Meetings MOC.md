@@ -95,7 +95,7 @@ SORT date DESC
 
 ## Related MOCs
 
-- [[Dashboard - Dashboard]] - Main hub
+- [[Dashboard - Main Dashboard]] - Main hub
 - [[MOC - People MOC]] - People directory
 - [[MOC - Projects MOC]] - All projects
 - [[MOC - Tasks MOC]] - All tasks

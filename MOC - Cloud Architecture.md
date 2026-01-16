@@ -19,7 +19,7 @@ Last Updated: 2026-01-07
 This is an **example MOC** showing how to organize domain-specific knowledge. Customize this for your cloud platform (AWS, Azure, GCP, or multi-cloud) and infrastructure patterns.
 
 **Quick Links:**
-- [[Dashboard - Dashboard]] - Main dashboard
+- [[Dashboard - Main Dashboard]] - Main dashboard
 - [[MOC - Technology & Architecture MOC]] - All tech standards
 - [[MOC - ADRs MOC]] - Cloud-related decisions
 - [[MOC - Projects MOC]] - Cloud migration projects
@@ -423,7 +423,7 @@ SORT priority ASC
 ## Related
 
 **Navigation:**
-- [[Dashboard - Dashboard]] - Main dashboard
+- [[Dashboard - Main Dashboard]] - Main dashboard
 - [[MOC - Technology & Architecture MOC]] - Tech standards hub
 - [[MOC - Data Platform]] - Data architecture (if applicable)
 

@@ -457,7 +457,7 @@ After setup, you should have:
 
 **Resources:**
 - [[Page - How to Use This Vault]] - Comprehensive guide
-- [[Dashboard - Dashboard]] - Your daily starting point
+- [[Dashboard - Main Dashboard]] - Your daily starting point
 - [[MOC - Vault Quality Dashboard]] - Maintenance help
 
 **Get help:**
