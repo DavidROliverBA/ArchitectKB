@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.7 Release:** 53 AI-assisted skills + 21 note templates including comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations) ready to customize for any organization.
+> **v1.8 Release:** 54 AI-assisted skills + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), and session management ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -15,13 +15,13 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
 - **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
-- **AI-Assisted Workflows** - 53 Claude Code skills for architecture analysis, document processing, and automation
+- **AI-Assisted Workflows** - 54 Claude Code skills for architecture analysis, document processing, and automation
 
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 52 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 54 AI-assisted workflows + Node.js automation
 - **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
@@ -106,7 +106,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
    - Enable both plugins in Settings → Community Plugins
 
 4. **Review the Dashboard**:
-   - Open `Dashboard - Dashboard.md`
+   - Open `Dashboard - Main Dashboard.md`
    - Explore the Maps of Content (MOCs)
    - Review example notes
 
@@ -139,7 +139,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 53 AI-assisted workflows
+│   ├── skills/             # 54 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
@@ -158,17 +158,17 @@ obsidian-architect-vault-template/
 │   ├── Tasks (e.g., "Task - Review ADR.md")
 │   ├── Pages (e.g., "Page - Architecture Knowledge Graph Guide.md")
 │   ├── MOCs (e.g., "MOC - Projects MOC.md")
-│   ├── System notes (e.g., "System - Sample ERP Application.md") **[NEW]**
-│   ├── Integration notes (e.g., "Integration - ERP to Data Platform.md") **[NEW]**
-│   ├── Architecture notes (e.g., "Architecture - Data Platform HLD.md") **[NEW]**
-│   ├── Scenario notes (e.g., "Scenario - Real-time Analytics Expansion.md") **[NEW]**
-│   ├── Canvas visualizations (e.g., "Canvas - System Landscape.md") **[NEW]**
-│   ├── Query notes (e.g., "Query - Critical Systems Inventory.md") **[NEW]**
-│   └── Dashboard for architecture (e.g., "Dashboard - Architecture Knowledge Graph.md") **[NEW]**
+│   ├── System notes (e.g., "System - Sample ERP Application.md")
+│   ├── Integration notes (e.g., "Integration - ERP to Data Platform.md")
+│   ├── Architecture notes (e.g., "Architecture - Data Platform HLD.md")
+│   ├── Scenario notes (e.g., "Scenario - Real-time Analytics Expansion.md")
+│   ├── Canvas visualizations (e.g., "Canvas - System Landscape.md")
+│   ├── Query notes (e.g., "Query - Critical Systems Inventory.md")
+│   └── Dashboard for architecture (e.g., "Dashboard - Architecture Knowledge Graph.md")
 └── README.md               # This file
 ```
 
-### Note Types (21 Total)
+### Note Types (23 Total)
 
 | Type | Prefix | Example | Purpose |
 |------|--------|---------|---------|
@@ -200,7 +200,7 @@ obsidian-architect-vault-template/
 
 ### Dashboard (Central Hub)
 
-Start here: `Dashboard - Dashboard.md`
+Start here: `Dashboard - Main Dashboard.md`
 
 The Dashboard provides:
 - **Quick Navigation** - Links to all MOCs
@@ -221,7 +221,7 @@ The Dashboard provides:
 6. **Form Submissions MOC** - Intake forms and compliance tracking
 
 **Architecture & Knowledge Graphs** (2 Dashboards):
-7. **Dashboard - Dashboard.md** - General vault hub with all MOCs
+7. **Dashboard - Main Dashboard.md** - General vault hub with all MOCs
 8. **Dashboard - Architecture Knowledge Graph.md** - Architecture-specific hub with systems, integrations, scenarios
 
 **Organisation & Monitoring** (2 MOCs):
@@ -776,7 +776,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
 
 ## 🤖 Claude Code Skills
 
-This vault includes **52 AI-assisted workflows** accessible via Claude Code:
+This vault includes **54 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 - `/daily` - Create today's daily note
@@ -788,7 +788,7 @@ This vault includes **52 AI-assisted workflows** accessible via Claude Code:
 - `/adr-report [period]` - ADR activity report (week/month/all)
 - `/find-decisions <topic>` - Find all decisions about a topic (sub-agents)
 
-### Architecture Documentation & Analysis (NEW - v1.7)
+### Architecture Documentation & Analysis
 - `/system <name>` - Create comprehensive System note with guided prompts (checks for duplicates, gathers tech stack, metrics, SLAs)
 - `/integration <source> <target>` - Document system-to-system integration with pattern, latency, data volume, quality checks
 - `/architecture <title>` - Create Architecture HLD/LLD with systems, components, NFRs, deployment topology
@@ -804,8 +804,7 @@ This vault includes **52 AI-assisted workflows** accessible via Claude Code:
 - `/system-sync [source]` - Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)
 - `/tag-management [action]` - Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
 
-**What's New:**
-These 14 skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyze costs, visualize dependencies, and maintain quality—all with AI assistance and graph index integration.
+These skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyse costs, visualise dependencies, and maintain quality—all with AI assistance and graph index integration.
 
 ### Engineering Management
 - `/project-status <project>` - Generate project status report (sub-agents)
@@ -851,7 +850,7 @@ These 14 skills enable comprehensive architecture documentation and knowledge gr
 - `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
 
 ### Vault Maintenance
-- `/wipe` - Generate context handoff, clear session, resume fresh (auto-detects tmux)
+- `/wipe` - Generate context handoff, clear session, resume fresh (auto-detects tmux vs manual workflow)
 - `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
 - `/orphans` - Find notes with no backlinks (sub-agents)
 - `/broken-links` - Comprehensive broken link detection (3 parallel Sonnet sub-agents)
@@ -1358,21 +1357,29 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Comprehensive Architecture Knowledge Graph Guide
 
 **v1.7.0** (Released 2026-01-15):
-- ✅ **14 New Architecture Skills** - Complete AI-assisted architecture documentation workflow
+- ✅ **16 New Architecture Skills** - Complete AI-assisted architecture documentation workflow
 - ✅ `/system`, `/integration`, `/architecture`, `/scenario`, `/datasource` - Create architecture notes with guided prompts
 - ✅ `/diagram`, `/canvas` - Generate visual architecture diagrams
-- ✅ `/cost-optimization`, `/dependency-graph`, `/impact-analysis` - Architecture analysis and optimization
+- ✅ `/cost-optimization`, `/dependency-graph`, `/impact-analysis` - Architecture analysis and optimisation
 - ✅ `/architecture-report`, `/scenario-compare`, `/system-sync` - Comprehensive reporting and external system sync
 - ✅ `/tag-management` - Audit and migrate tags to hierarchical taxonomy
-- ✅ **7 New Templates** - Architecture, Integration, Scenario, System, DataSource, Query, EAKB Submission
-- ✅ 52 total Claude Code skills (up from 39)
-- ✅ 21 note types supported (up from 19)
-- ✅ Complete template repository genericization - all BA-specific content removed
+- ✅ **6 New Templates** - Architecture, Integration, Scenario, System, DataSource, EAKB Submission
+- ✅ 53 total Claude Code skills
+- ✅ 23 note templates
+- ✅ Complete template repository genericisation - all organisation-specific content removed
 
-**v1.8** (Planned):
+**v1.8.0** (Released 2026-01-16):
+- ✅ **BM25 Relevance Ranking** - Graph search now returns results ranked by relevance score
+- ✅ `/wipe` skill - Session context management with auto-detect tmux vs manual workflow
+- ✅ Dashboard renamed to `Dashboard - Main Dashboard.md` for clarity
+- ✅ `Page - JSON Graph Index Technical Reference.md` - Technical documentation for graph index
+- ✅ MOC updates with cleaner generic content
+- ✅ 54 total Claude Code skills
+
+**v1.9** (Planned):
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
-- Mobile optimization and mobile-first workflows
+- Mobile optimisation and mobile-first workflows
 - Integration templates (Jira, ADO, GitHub Issues)
 - Community skill contributions
 
@@ -1404,7 +1411,7 @@ A: Yes. This structure has been used in enterprise environments.
 
 ---
 
-**Getting Started**: Open `Dashboard - Dashboard.md` and start exploring!
+**Getting Started**: Open `Dashboard - Main Dashboard.md` and start exploring!
 
 **Questions?**: Open an issue on GitHub or check the FAQ above.
 
