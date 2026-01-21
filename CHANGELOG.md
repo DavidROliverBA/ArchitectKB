@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.1] - 2026-01-21
+
+### Changed
+
+#### Skills Documentation Improvements
+
+Updated multiple skills and rules files for better consistency and accuracy:
+
+- **`task.md` skill** - Updated to use correct date fields (`dueBy` for hard deadline, `doDate` for start date) and `assignedTo` array format instead of legacy singular fields
+- **`meeting.md` skill** - Added `collections` field for meeting categorisation (e.g., "1:1", "Sprint Planning")
+- **`form.md` skill** - Changed from flat tags to hierarchical tags with domain lookup table (`domain/data`, `domain/security`, `domain/operations`)
+
+#### Rules Documentation Improvements
+
+- **`frontmatter-reference.md`** - Added `keywords` field to ADR and Article quality indicators sections
+- **`quality-patterns.md`** - Expanded tag prefixes table with all 9 hierarchies, added minimum tags guidance table with 9 note types
+- **`tag-management.md`** - Updated references section to point to authoritative sources
+
+### Technical
+
+- All changes align with hierarchical tag taxonomy requirements
+- Skills now use consistent field naming patterns matching frontmatter-reference.md
+- Documentation cross-references updated to remove circular dependencies
+
 ## [1.7.1] - 2026-01-16
 
 ### Added
@@ -35,6 +59,7 @@ The graph-query.js script now uses **BM25 (Best Match 25) relevance ranking** fo
 - **Relevance Scores**: Output includes numerical scores for each result
 
 **Example Output:**
+
 ```
 Score   Type           Title
 14.65   Page           Kafka Integration Solution Architecture
@@ -43,8 +68,9 @@ Score   Type           Title
 ```
 
 **JSON Output** now includes scores for programmatic use:
+
 ```json
-{"id": "...", "score": "14.650", "type": "Page", "title": "..."}
+{ "id": "...", "score": "14.650", "type": "Page", "title": "..." }
 ```
 
 ### Changed
@@ -175,13 +201,13 @@ Complete AI-assisted workflow for building enterprise architecture knowledge gra
 
 Architecture knowledge graph building blocks:
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| `System` | Enterprise systems, applications, platforms | `System - Customer Data Platform.md` |
-| `Integration` | System-to-system data integrations | `Integration - SAP to Data Lake.md` |
-| `Architecture` | HLDs, LLDs, C4 diagrams | `Architecture - Cloud Migration HLD.md` |
-| `Scenario` | What-if scenarios, future-state plans | `Scenario - Multi-Cloud Strategy.md` |
-| `DataSource` | Databases, tables, APIs, datasets | `DataSource - Customers Table.md` |
+| Type           | Purpose                                     | Example                                 |
+| -------------- | ------------------------------------------- | --------------------------------------- |
+| `System`       | Enterprise systems, applications, platforms | `System - Customer Data Platform.md`    |
+| `Integration`  | System-to-system data integrations          | `Integration - SAP to Data Lake.md`     |
+| `Architecture` | HLDs, LLDs, C4 diagrams                     | `Architecture - Cloud Migration HLD.md` |
+| `Scenario`     | What-if scenarios, future-state plans       | `Scenario - Multi-Cloud Strategy.md`    |
+| `DataSource`   | Databases, tables, APIs, datasets           | `DataSource - Customers Table.md`       |
 
 ### Changed
 
@@ -204,6 +230,7 @@ Architecture knowledge graph building blocks:
 **From v1.4.0 (no breaking changes):**
 
 1. Pull latest changes:
+
    ```bash
    git pull origin main
    ```
@@ -279,11 +306,13 @@ Architecture knowledge graph building blocks:
 A pre-computed knowledge graph that enables instant structured queries across your vault. Instead of waiting seconds for grep to search through files, the graph index returns results in ~50ms.
 
 **Why this matters:**
+
 - Grep searches on 1500+ note vaults take 3-5 seconds
 - Graph queries return in ~50ms (60-500x faster)
 - Encourages exploration - no friction when asking "what else relates to this?"
 
 **Index structure (`.graph/` directory):**
+
 ```
 .graph/
 ├── index.json      # Full graph: nodes, edges, backlinks, orphans
@@ -307,6 +336,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
 #### New Scripts
 
 - **`scripts/generate-graph-enhanced.js`** - Builds all graph indexes from vault content
+
   ```bash
   npm run graph:build
 
@@ -321,6 +351,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
   ```
 
 - **`scripts/graph-watcher.js`** - Watches vault and auto-rebuilds indexes on change
+
   ```bash
   npm run graph:watch
 
@@ -329,10 +360,12 @@ A pre-computed knowledge graph that enables instant structured queries across yo
   # [10:15:32] Detected change: ADR - Kafka Integration.md
   # [10:15:33] Rebuilding index... done (0.8s)
   ```
+
   - 1-second debounce batches rapid changes
   - Excludes `.obsidian/`, `node_modules/`, `.git/`
 
 - **`scripts/graph-query.js`** - CLI for structured graph queries
+
   ```bash
   # Keyword search
   npm run graph:query -- --search "kafka"
@@ -352,6 +385,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
 #### New Claude Code Skills (6 new, 38 total)
 
 - **`/search`** - Smart search that queries graph first, falls back to grep
+
   ```
   /search kafka                    # Keyword in graph + content
   /search "API gateway"            # Phrase search
@@ -385,6 +419,7 @@ A pre-computed knowledge graph that enables instant structured queries across yo
 Embedded throughout the vault to ensure Claude Code uses the fastest search method:
 
 1. **CLAUDE.md Instructions** - New "Search Strategy" section:
+
    ```markdown
    ## Search Strategy
 
@@ -392,6 +427,7 @@ Embedded throughout the vault to ensure Claude Code uses the fastest search meth
    Always query the graph BEFORE using Grep or find commands.
 
    ### Graph-First Search Order
+
    1. First: Query the graph index (fast, structured)
    2. Second: Use Grep (only if graph doesn't have needed data)
    3. Third: Use Glob (for file patterns only)
@@ -414,13 +450,13 @@ Embedded throughout the vault to ensure Claude Code uses the fastest search meth
 
 #### When to Use Graph vs Grep
 
-| Use Graph For | Use Grep For |
-|---------------|--------------|
-| Keyword search | Regex patterns |
-| Type/status filters | Content within files |
-| Backlink queries | Line-by-line context |
-| Orphan detection | Multi-file content search |
-| Quick lookups | Precise text matching |
+| Use Graph For       | Use Grep For              |
+| ------------------- | ------------------------- |
+| Keyword search      | Regex patterns            |
+| Type/status filters | Content within files      |
+| Backlink queries    | Line-by-line context      |
+| Orphan detection    | Multi-file content search |
+| Quick lookups       | Precise text matching     |
 
 ### Changed
 
@@ -442,21 +478,25 @@ Embedded throughout the vault to ensure Claude Code uses the fastest search meth
 **From v1.3.0 (no breaking changes):**
 
 1. Pull latest changes:
+
    ```bash
    git pull origin main
    ```
 
 2. Install dependencies (if not already):
+
    ```bash
    npm install
    ```
 
 3. Build initial index:
+
    ```bash
    npm run graph:build
    ```
 
 4. (Optional) Start watcher for auto-updates:
+
    ```bash
    npm run graph:watch
    ```
@@ -466,6 +506,7 @@ Embedded throughout the vault to ensure Claude Code uses the fastest search meth
 ### Best Practices
 
 **Development workflow:**
+
 ```bash
 # Start watcher in background
 npm run graph:watch &
@@ -474,12 +515,14 @@ npm run graph:watch &
 ```
 
 **Before presentations/reviews:**
+
 ```bash
 # Force rebuild for accurate metrics
 npm run graph:build
 ```
 
 **CI/CD integration:**
+
 ```bash
 npm run graph:build
 npm run graph:query -- --broken-links
@@ -491,6 +534,7 @@ npm run graph:query -- --broken-links
 ## [1.3.0] - 2026-01-10
 
 ### Added
+
 - **18 New Claude Code Skills** - Expanded from 14 to 32 total skills
   - **Research & Discovery**: `/related`, `/summarize`, `/timeline`, `/find-decisions`
   - **Engineering Management**: `/adr-report`, `/dpia-status`, `/project-snapshot`, `/project-status`
@@ -522,12 +566,14 @@ npm run graph:query -- --broken-links
   - Configurable model selection: `model: "haiku"` for quick tasks, `model: "sonnet"` for analysis
 
 ### Changed
+
 - Updated README with new skill count (14 → 32) and Incubator documentation
 - Updated CLAUDE.md to document all new skills and conventions
 - Note types increased from 13 to 15 (added Incubator, IncubatorNote)
 - Enhanced skill categories with Engineering Management and Research sections
 
 ### Technical
+
 - All new skills include `context: fork` frontmatter for parallel agent execution
 - Skills use consistent patterns for report generation and user prompts
 - Incubator integrates with existing Dataview query patterns
@@ -537,6 +583,7 @@ npm run graph:query -- --broken-links
 ## [Unreleased]
 
 ### Tested
+
 - **Node.js Automation Infrastructure** - All automation scripts verified working
   - `npm install` - Successfully installed 52 packages with 0 vulnerabilities
   - `npm run validate` - Correctly identifies missing frontmatter and broken links (exit code 1 on errors)
@@ -583,6 +630,7 @@ npm run graph:query -- --broken-links
 ## [1.2.0] - 2026-01-09
 
 ### Added
+
 - **Node.js Automation Infrastructure** - Professional-grade vault validation, health checks, and knowledge graph export
   - `package.json` with npm scripts for automation
   - `scripts/validate.js` - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
@@ -599,12 +647,14 @@ npm run graph:query -- --broken-links
 - **CI/CD Integration Examples** - GitHub Actions workflows for automated quality checks
 
 ### Changed
+
 - Updated README with Node.js automation section and revised skill count (11 → 14)
 - Updated `.gitignore` to exclude node_modules, automation outputs, and generated files
 - Updated `scripts/README.md` to document both Node.js and Python automation tools
 - Enhanced Quality Monitoring section in README with automation examples
 
 ### Technical
+
 - Dependencies: chalk (v5.3.0), glob (v10.3.10), gray-matter (v4.0.3)
 - Node.js 18+ required for ES modules support
 - Exit codes for CI/CD integration (validate.js returns 0/1)
@@ -613,6 +663,7 @@ npm run graph:query -- --broken-links
 ## [1.1.0] - 2026-01-08
 
 ### Added
+
 - Screenshots section in README with 6 visual examples (dashboard, projects-moc, adr-example, graph-view, daily-note, quality-dashboard)
 - Screenshot capture guide in `screenshots/README.md`
 - `/pdf-to-page` skill - Convert PDFs to Page notes with docling and Sonnet/Opus analysis
@@ -623,6 +674,7 @@ npm run graph:query -- --broken-links
 - Visual Analysis category in Claude Code Skills section
 
 ### Changed
+
 - All existing Claude Code skills now include `context: fork` frontmatter for parallel agent execution
 - Updated skill count from 9 to 11 throughout documentation
 - Enhanced Prerequisites section with required Obsidian plugins (Dataview, Templater)
@@ -631,6 +683,7 @@ npm run graph:query -- --broken-links
 ## [1.0.0] - 2026-01-07
 
 ### Added
+
 - First public release of Obsidian Architect Vault Template
 - Metadata-driven organizational framework
 - Full Claude Code integration
@@ -639,7 +692,9 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...HEAD
+[1.8.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.1...v1.8.1
+[1.7.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.4.0...v1.7.0
 [1.4.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.2.0...v1.3.0

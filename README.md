@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.8 Release:** 54 AI-assisted skills + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), and session management ready to customise for any organisation.
+> **v1.8.1 Release:** 54 AI-assisted skills + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), and session management ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -38,37 +38,37 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ![Dashboard Overview](screenshots/dashboard.png)
 
-*The Dashboard provides quick navigation to all MOCs, active tasks, current projects, and recent meetings with real-time statistics.*
+_The Dashboard provides quick navigation to all MOCs, active tasks, current projects, and recent meetings with real-time statistics._
 
 ### Projects MOC - Dynamic Dataview Queries
 
 ![Projects MOC](screenshots/projects-moc.png)
 
-*Projects automatically organise by status (Active, Paused, Completed) with priority filtering and timeline tracking.*
+_Projects automatically organise by status (Active, Paused, Completed) with priority filtering and timeline tracking._
 
 ### Architecture Decision Record (ADR) Example
 
 ![ADR Example](screenshots/adr-example.png)
 
-*Complete ADR showing context, decision, rationale, consequences, and alternatives with relationship tracking.*
+_Complete ADR showing context, decision, rationale, consequences, and alternatives with relationship tracking._
 
 ### Knowledge Graph View
 
 ![Graph View](screenshots/graph-view.png)
 
-*Visual representation of interconnected notes - people, projects, meetings, and decisions forming a knowledge graph.*
+_Visual representation of interconnected notes - people, projects, meetings, and decisions forming a knowledge graph._
 
 ### Daily Note Workflow
 
 ![Daily Note](screenshots/daily-note.png)
 
-*Daily notes capture tasks, reflections, and links to ongoing work with yesterday/today/tomorrow structure.*
+_Daily notes capture tasks, reflections, and links to ongoing work with yesterday/today/tomorrow structure._
 
 ### Vault Quality Dashboard
 
 ![Quality Dashboard](screenshots/quality-dashboard.png)
 
-*Built-in quality monitoring tracks orphaned notes, stale content, missing metadata, and ADR health.*
+_Built-in quality monitoring tracks orphaned notes, stale content, missing metadata, and ADR health._
 
 ---
 
@@ -90,6 +90,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 ### Installation
 
 1. **Clone this repository**:
+
    ```bash
    git clone https://github.com/DavidROliverBA/ArchitectKB.git
    cd ArchitectKB
@@ -170,29 +171,29 @@ obsidian-architect-vault-template/
 
 ### Note Types (23 Total)
 
-| Type | Prefix | Example | Purpose |
-|------|--------|---------|---------|
-| **Person** | None | `Jane Smith.md` | Contact information |
-| **Project** | `Project -` | `Project - Cloud Migration.md` | Project tracking |
-| **Meeting** | `Meeting -` | `Meeting - 2026-01-07 Kickoff.md` | Meeting minutes |
-| **Task** | `Task -` | `Task - Review ADR.md` | Task management |
-| **ADR** | `ADR -` | `ADR - Use Kubernetes.md` | Architecture decisions |
-| **Page** | `Page -` | `Page - Tech Stack.md` | Long-form documentation |
-| **Weblink** | `Weblink -` | `Weblink - Martin Fowler.md` | Saved web resources |
-| **Organisation** | `Organisation -` | `Organisation - Your Company.md` | Companies/vendors |
-| **MOC** | `MOC -` | `MOC - Projects MOC.md` | Navigation hubs |
-| **DailyNote** | None | `2026-01-07.md` | Daily journal |
-| **AtomicNote** | `Atomic Note -` | `Atomic Note - SOLID.md` | Single-concept notes |
-| **Course** | `Course -` | `Course - Cloud Architecture.md` | Learning tracking |
-| **Incubator** | `Incubator -` | `Incubator - New Framework.md` | Research ideas |
-| **IncubatorNote** | `Incubator Note -` | `Incubator Note - Analysis.md` | Supporting research |
-| **System** | `System -` | `System - Sample ERP Application.md` | Enterprise systems |
-| **Integration** | `Integration -` | `Integration - ERP to Data Platform.md` | System-to-system connections |
-| **Architecture** | `Architecture -` | `Architecture - Data Platform HLD.md` | High-level designs |
-| **Scenario** | `Scenario -` | `Scenario - Cloud Expansion.md` | Architecture scenarios & roadmaps |
-| **DataSource** | `DataSource -` | `DataSource - Customers Table.md` | Databases, tables, APIs, data entities |
-| **Canvas** | `Canvas -` | `Canvas - System Landscape.md` | Visual diagrams & architecture |
-| **Query** | `Query -` | `Query - Critical Systems.md` | Saved Dataview queries |
+| Type              | Prefix             | Example                                 | Purpose                                |
+| ----------------- | ------------------ | --------------------------------------- | -------------------------------------- |
+| **Person**        | None               | `Jane Smith.md`                         | Contact information                    |
+| **Project**       | `Project -`        | `Project - Cloud Migration.md`          | Project tracking                       |
+| **Meeting**       | `Meeting -`        | `Meeting - 2026-01-07 Kickoff.md`       | Meeting minutes                        |
+| **Task**          | `Task -`           | `Task - Review ADR.md`                  | Task management                        |
+| **ADR**           | `ADR -`            | `ADR - Use Kubernetes.md`               | Architecture decisions                 |
+| **Page**          | `Page -`           | `Page - Tech Stack.md`                  | Long-form documentation                |
+| **Weblink**       | `Weblink -`        | `Weblink - Martin Fowler.md`            | Saved web resources                    |
+| **Organisation**  | `Organisation -`   | `Organisation - Your Company.md`        | Companies/vendors                      |
+| **MOC**           | `MOC -`            | `MOC - Projects MOC.md`                 | Navigation hubs                        |
+| **DailyNote**     | None               | `2026-01-07.md`                         | Daily journal                          |
+| **AtomicNote**    | `Atomic Note -`    | `Atomic Note - SOLID.md`                | Single-concept notes                   |
+| **Course**        | `Course -`         | `Course - Cloud Architecture.md`        | Learning tracking                      |
+| **Incubator**     | `Incubator -`      | `Incubator - New Framework.md`          | Research ideas                         |
+| **IncubatorNote** | `Incubator Note -` | `Incubator Note - Analysis.md`          | Supporting research                    |
+| **System**        | `System -`         | `System - Sample ERP Application.md`    | Enterprise systems                     |
+| **Integration**   | `Integration -`    | `Integration - ERP to Data Platform.md` | System-to-system connections           |
+| **Architecture**  | `Architecture -`   | `Architecture - Data Platform HLD.md`   | High-level designs                     |
+| **Scenario**      | `Scenario -`       | `Scenario - Cloud Expansion.md`         | Architecture scenarios & roadmaps      |
+| **DataSource**    | `DataSource -`     | `DataSource - Customers Table.md`       | Databases, tables, APIs, data entities |
+| **Canvas**        | `Canvas -`         | `Canvas - System Landscape.md`          | Visual diagrams & architecture         |
+| **Query**         | `Query -`          | `Query - Critical Systems.md`           | Saved Dataview queries                 |
 
 ---
 
@@ -203,6 +204,7 @@ obsidian-architect-vault-template/
 Start here: `Dashboard - Main Dashboard.md`
 
 The Dashboard provides:
+
 - **Quick Navigation** - Links to all MOCs
 - **Open Tasks** - Filtered by priority (high/medium/low)
 - **Active Projects** - Current work with status
@@ -213,6 +215,7 @@ The Dashboard provides:
 ### Maps of Content & Dashboards
 
 **Core Navigation** (6 MOCs):
+
 1. **Tasks MOC** - All tasks by priority/status
 2. **People MOC** - Contact directory
 3. **Meetings MOC** - Meeting history
@@ -220,19 +223,17 @@ The Dashboard provides:
 5. **Weblinks MOC** - External resources
 6. **Form Submissions MOC** - Intake forms and compliance tracking
 
-**Architecture & Knowledge Graphs** (2 Dashboards):
-7. **Dashboard - Main Dashboard.md** - General vault hub with all MOCs
-8. **Dashboard - Architecture Knowledge Graph.md** - Architecture-specific hub with systems, integrations, scenarios
+**Architecture & Knowledge Graphs** (2 Dashboards): 7. **Dashboard - Main Dashboard.md** - General vault hub with all MOCs 8. **Dashboard - Architecture Knowledge Graph.md** - Architecture-specific hub with systems, integrations, scenarios
 
-**Organisation & Monitoring** (2 MOCs):
-9. **Vault Quality Dashboard** - Health monitoring and metrics
-10. **Incubator - MOC** - Research ideas and exploration
+**Organisation & Monitoring** (2 MOCs): 9. **Vault Quality Dashboard** - Health monitoring and metrics 10. **Incubator - MOC** - Research ideas and exploration
 
 **Customizable Examples** (2 MOCs you should adapt):
+
 - **Cloud Architecture MOC** - Example: customize for your cloud strategy
 - **Data Platform MOC** - Example: customize for your data architecture
 
 **Architecture Queries** (7 Queries - NEW):
+
 - **Critical Systems Inventory** - Systems with 99.95% availability SLA
 - **Real-time Integrations** - Event-driven paths with <5 sec latency
 - **Systems by Hosting Platform** - Infrastructure analysis and grouping
@@ -250,6 +251,7 @@ The Dashboard provides:
 A comprehensive, generic template for building enterprise architecture documentation. It includes sample notes for Systems, Integrations, High-Level Designs (HLDs), Scenarios, and visual Canvas diagrams—all fully customizable for any organisation.
 
 **Perfect for:**
+
 - Building your organisation's architecture knowledge base
 - Documenting enterprise data integration platforms
 - Creating architecture decision records with supporting context
@@ -262,6 +264,7 @@ A comprehensive, generic template for building enterprise architecture documenta
 **20 Generic Template Files (3,961 lines):**
 
 **Systems** (5 files):
+
 - `System - Sample ERP Application.md` - Core transaction system
 - `System - Sample Data Integration Platform.md` - Real-time & batch ETL
 - `System - Sample Analytics Warehouse.md` - Analytics & reporting
@@ -269,21 +272,26 @@ A comprehensive, generic template for building enterprise architecture documenta
 - `System - Sample Cloud Infrastructure.md` - Cloud hosting & disaster recovery
 
 **Integrations** (2 files):
+
 - `Integration - Sample ERP to Data Platform Real-time.md` - Event-driven real-time path (<5 sec)
 - `Integration - Sample Data Platform to Analytics Batch.md` - Daily batch ETL (4 hours)
 
 **Architecture** (1 file):
+
 - `Architecture - Sample Data Integration Platform HLD.md` - Enterprise high-level design with multi-region DR, 99.95% availability, cost model
 
 **Scenarios** (1 file):
+
 - `Scenario - Sample Real-time Analytics Expansion.md` - 9-month roadmap, £301K setup, £1.7M annual benefits, 2.1 month ROI
 
 **Visualisations** (3 Canvas files):
+
 - `Canvas - Sample System Landscape.md` - All systems with criticality coding
 - `Canvas - Sample C4 Context Diagram.md` - C4 Level 1 system context
 - `Canvas - Sample Data Flow Diagram.md` - Real-time/batch/API paths with latency
 
 **Navigation** (1 Dashboard + 7 Queries):
+
 - `Dashboard - Architecture Knowledge Graph.md` - Central navigation hub
 - `Query - Critical Systems Inventory.md` - 99.95% SLA systems
 - `Query - Real-time Integrations.md` - Event-driven paths
@@ -296,49 +304,58 @@ A comprehensive, generic template for building enterprise architecture documenta
 ### How to Use
 
 **1. Review Generic Examples**
-   - Read the sample System, Integration, and Architecture notes
-   - Understand the structure and level of detail
-   - Review the Canvas visualisations
+
+- Read the sample System, Integration, and Architecture notes
+- Understand the structure and level of detail
+- Review the Canvas visualisations
 
 **2. Customise for Your Organisation**
-   - Replace "Sample ERP" with your actual ERP (SAP, Oracle, etc.)
-   - Update "Sample Data Integration Platform" with your actual platform
-   - Adjust metrics and volumes to match your systems
-   - Each note includes a "Customisation Guide" section with instructions
+
+- Replace "Sample ERP" with your actual ERP (SAP, Oracle, etc.)
+- Update "Sample Data Integration Platform" with your actual platform
+- Adjust metrics and volumes to match your systems
+- Each note includes a "Customisation Guide" section with instructions
 
 **3. Add Your Own Systems**
-   - Create new System notes for systems not covered in the template
-   - Use the existing sample notes as a structure reference
-   - Link integrations and architecture to your systems
+
+- Create new System notes for systems not covered in the template
+- Use the existing sample notes as a structure reference
+- Link integrations and architecture to your systems
 
 **4. Document Your Integrations**
-   - Create Integration notes for each system-to-system connection
-   - Document data flows, latency, volume, and quality checks
-   - Link to source and target systems
+
+- Create Integration notes for each system-to-system connection
+- Document data flows, latency, volume, and quality checks
+- Link to source and target systems
 
 **5. Build Your Architecture**
-   - Create Architecture HLD documents for major components
-   - Reference your systems and integrations
-   - Document NFRs, costs, deployment topology
+
+- Create Architecture HLD documents for major components
+- Reference your systems and integrations
+- Document NFRs, costs, deployment topology
 
 **6. Plan Scenarios**
-   - Create Scenario notes for expansion plans, optimisations, migrations
-   - Use the sample scenario as a template for timeline, costs, risks
-   - Link to related architecture and projects
+
+- Create Scenario notes for expansion plans, optimisations, migrations
+- Use the sample scenario as a template for timeline, costs, risks
+- Link to related architecture and projects
 
 **7. Visualise**
-   - Customise Canvas diagrams for your system landscape
-   - Update C4 diagrams for your context
-   - Create data flow diagrams for your actual integrations
+
+- Customise Canvas diagrams for your system landscape
+- Update C4 diagrams for your context
+- Create data flow diagrams for your actual integrations
 
 **8. Navigate**
-   - Update Dashboard queries to point to your systems
-   - Create custom queries for your specific needs
-   - Use the navigation hub to explore your architecture
+
+- Update Dashboard queries to point to your systems
+- Create custom queries for your specific needs
+- Use the navigation hub to explore your architecture
 
 ### Example: Building a Data Integration Platform Architecture
 
 **Step 1: Document Your Systems**
+
 ```
 System - Your ERP Application.md
 System - Your Data Platform.md
@@ -349,6 +366,7 @@ System - Your API Gateway.md
 ```
 
 **Step 2: Document Integrations**
+
 ```
 Integration - Your ERP to Data Platform.md
 Integration - Your Data Platform to Analytics.md
@@ -356,18 +374,21 @@ Integration - Your Data Platform to Analytics.md
 ```
 
 **Step 3: Create Architecture HLD**
+
 ```
 Architecture - Your Data Platform HLD.md
 (Adapted from the sample, with your technology stack and metrics)
 ```
 
 **Step 4: Plan Scenarios**
+
 ```
 Scenario - Your Expansion Plan.md
 (Timeline, costs, risks, success criteria adapted to your business)
 ```
 
 **Step 5: Build Visualisations**
+
 ```
 Canvas - Your System Landscape.md
 Canvas - Your C4 Context.md
@@ -376,6 +397,7 @@ Canvas - Your Data Flow.md
 ```
 
 **Step 6: Add Navigation**
+
 ```
 Dashboard - Your Architecture Knowledge Graph.md
 Query - Your System Inventory.md
@@ -386,28 +408,33 @@ Query - Your Integration Paths.md
 ### Key Features of the Template
 
 ✅ **Real-world Metrics**
+
 - 450 active pipelines, 150 TB active data, 500+ events/sec
 - 350+ analytics tables, 500 concurrent users, 100+ dashboards
 - £5.2M annual cost with detailed breakdown
 - Realistic performance benchmarks (99.95% availability, <5 sec latency)
 
 ✅ **Production-Ready Patterns**
+
 - Multi-region disaster recovery with RTO/RPO targets
 - High availability design (3-broker Kafka cluster, Kubernetes auto-scaling)
 - Data quality framework with 500+ validation tests
 - Security & compliance controls (encryption, IAM, audit logging)
 
 ✅ **Financial Analysis**
+
 - Complete cost breakdown by category (compute, storage, data transfer)
 - Cost optimization opportunities (£475K/year savings identified)
 - ROI calculations and payback periods
 
 ✅ **Risk Management**
+
 - Failure scenarios and recovery procedures
 - Alternative approaches and trade-off analysis
 - Success criteria and KPIs
 
 ✅ **Comprehensive Customisation Guides**
+
 - Every major note includes section: "How to adapt for your organisation"
 - Clear instructions on replacing generic names with your systems
 - Guidance on adjusting metrics and technologies
@@ -428,11 +455,13 @@ Query - Your Integration Paths.md
 ### 1. Replace Example Content
 
 **People** (3 examples to replace):
+
 - `Jane Smith.md` → Your manager
 - `Alex Johnson.md` → Colleague
 - `Dr. Sarah Chen.md` → External contact
 
 **Projects** (4 examples to replace):
+
 - `Project - Cloud Migration.md`
 - `Project - API Gateway Modernization.md`
 - `Project - Legacy System Decommission.md`
@@ -459,15 +488,16 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 
 #### Systems (5 files to rename and adapt):
 
-| Sample Template | Customise to Your | Key Fields to Update |
-|---|---|---|
-| `System - Sample ERP Application.md` | Your ERP (SAP, Oracle, etc.) | `systemId`, `systemType`, costs, tech stack |
-| `System - Sample Data Integration Platform.md` | Your data platform (Kafka, NiFi, etc.) | Pipelines, throughput, topics, data volume |
-| `System - Sample Analytics Warehouse.md` | Your BI platform (Snowflake, Redshift, etc.) | Tables, users, dashboards, capacity |
-| `System - Sample API Gateway.md` | Your API management (Kong, AWS, etc.) | Endpoints, throughput, security policies |
-| `System - Sample Cloud Infrastructure.md` | Your cloud provider regions | Accounts, services, multi-region design |
+| Sample Template                                | Customise to Your                            | Key Fields to Update                        |
+| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| `System - Sample ERP Application.md`           | Your ERP (SAP, Oracle, etc.)                 | `systemId`, `systemType`, costs, tech stack |
+| `System - Sample Data Integration Platform.md` | Your data platform (Kafka, NiFi, etc.)       | Pipelines, throughput, topics, data volume  |
+| `System - Sample Analytics Warehouse.md`       | Your BI platform (Snowflake, Redshift, etc.) | Tables, users, dashboards, capacity         |
+| `System - Sample API Gateway.md`               | Your API management (Kong, AWS, etc.)        | Endpoints, throughput, security policies    |
+| `System - Sample Cloud Infrastructure.md`      | Your cloud provider regions                  | Accounts, services, multi-region design     |
 
 **For each System, update:**
+
 - Frontmatter: `systemId`, `systemType`, `criticality`, `annualCost`
 - Technology stack and component details
 - Performance metrics (transactions/sec, data volume, concurrent users, etc.)
@@ -478,12 +508,13 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 
 #### Integrations (2 files to rename and adapt):
 
-| Sample Template | Customise to Your | Key Sections to Update |
-|---|---|---|
-| `Integration - Sample ERP to Data Platform Real-time.md` | Your real-time data flows | Source/target systems, events/sec, latency, topics |
-| `Integration - Sample Data Platform to Analytics Batch.md` | Your batch processes | Schedule, tables, duration, SLAs |
+| Sample Template                                            | Customise to Your         | Key Sections to Update                             |
+| ---------------------------------------------------------- | ------------------------- | -------------------------------------------------- |
+| `Integration - Sample ERP to Data Platform Real-time.md`   | Your real-time data flows | Source/target systems, events/sec, latency, topics |
+| `Integration - Sample Data Platform to Analytics Batch.md` | Your batch processes      | Schedule, tables, duration, SLAs                   |
 
 **For each Integration, update:**
+
 - Source and target system names and IDs
 - Integration pattern type (real-time event-streaming, batch-etl, api-gateway, etc.)
 - Data volume and frequency (events/sec, records/day, MB/sec, etc.)
@@ -498,6 +529,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - `Architecture - Sample Data Integration Platform HLD.md` → Your enterprise data platform architecture
 
 **Update:**
+
 - Executive summary for your business context
 - Architecture vision and objectives
 - Technology stack with your actual platforms and versions
@@ -512,6 +544,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - `Scenario - Sample Real-time Analytics Expansion.md` → Your expansion/transformation initiatives
 
 **Update:**
+
 - Timeline and phases relevant to your organisation
 - List of systems/data sources you plan to add or modernise
 - New capabilities (analytics models, dashboards, APIs, etc.)
@@ -521,13 +554,14 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 
 #### Canvas Visualisations (3 files to customize):
 
-| Canvas Type | Update For Your |
-|---|---|
-| `Canvas - Sample System Landscape.md` | Your actual system topology and criticality |
+| Canvas Type                             | Update For Your                               |
+| --------------------------------------- | --------------------------------------------- |
+| `Canvas - Sample System Landscape.md`   | Your actual system topology and criticality   |
 | `Canvas - Sample C4 Context Diagram.md` | Your system context and external integrations |
-| `Canvas - Sample Data Flow Diagram.md` | Your actual data flows and latency |
+| `Canvas - Sample Data Flow Diagram.md`  | Your actual data flows and latency            |
 
 **For each Canvas:**
+
 - Replace node labels with your actual system names
 - Update system types and criticality colouring
 - Adjust connections to match your integration topology
@@ -551,6 +585,7 @@ Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
 - `Dashboard - Architecture Knowledge Graph.md` → Your architecture navigation hub
 
 **Update:**
+
 - Links to your customised System, Integration, and Architecture notes
 - Dataview query filters for your systems
 - System relationships section showing your integration topology
@@ -570,6 +605,7 @@ Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
 10. **Update dashboard**: Link to your customised notes
 
 **See Also:**
+
 - `Page - Architecture Knowledge Graph Guide.md` - Comprehensive 2,000-line customisation guide with examples
 - Each architecture note has a built-in "How to adapt for your organisation" section
 
@@ -589,10 +625,12 @@ Replace with your organization's approval structure.
 ### 4. Configure External Integrations (Optional)
 
 **JIRA Integration**:
+
 - ADR template has `externalRef` field
 - Link to JIRA tickets: `externalRef: PROJ-123`
 
 **Notion Sync**:
+
 - See `/sync-notion` skill in `.claude/skills/sync-notion.md`
 - Configure Notion API credentials
 
@@ -779,16 +817,19 @@ Follow this structured approach to build your enterprise architecture knowledge 
 This vault includes **54 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
+
 - `/daily` - Create today's daily note
 - `/meeting <title>` - Create meeting note with prompts
 - `/weekly-summary` - Generate comprehensive weekly summary (5 parallel sub-agents)
 
 ### Architecture Work
+
 - `/adr <title>` - Create new Architecture Decision Record
 - `/adr-report [period]` - ADR activity report (week/month/all)
 - `/find-decisions <topic>` - Find all decisions about a topic (sub-agents)
 
 ### Architecture Documentation & Analysis
+
 - `/system <name>` - Create comprehensive System note with guided prompts (checks for duplicates, gathers tech stack, metrics, SLAs)
 - `/integration <source> <target>` - Document system-to-system integration with pattern, latency, data volume, quality checks
 - `/architecture <title>` - Create Architecture HLD/LLD with systems, components, NFRs, deployment topology
@@ -807,36 +848,43 @@ This vault includes **54 AI-assisted workflows** accessible via Claude Code:
 These skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyse costs, visualise dependencies, and maintain quality—all with AI assistance and graph index integration.
 
 ### Engineering Management
+
 - `/project-status <project>` - Generate project status report (sub-agents)
 - `/project-snapshot [name]` - Quick status of all active projects
 - `/dpia-status [filter]` - DPIA compliance status across projects
 
 ### Research & Discovery
+
 - `/related <topic>` - Find all notes mentioning a topic (sub-agents)
 - `/summarize <note>` - Summarise a note or set of notes
 - `/timeline <project>` - Chronological project history (sub-agents)
 
 ### Document Processing
+
 - `/pdf-to-page <path>` - Convert PDF to Page note with docling (Sonnet or Opus analysis)
 - `/pptx-to-page <path>` - Convert PowerPoint to Page note (quick or visual mode)
 - `/document-extract <path>` - Extract text from scanned documents/photos (Sonnet sub-agents)
 - `/attachment-audit` - Audit all vault attachments with visual analysis (Sonnet sub-agents)
 
 ### Sync & Integration
+
 - `/sync-governance` - Sync policies, guardrails, and org ADRs from Confluence (MCP)
 - `/sync-notion` - Sync meetings from Notion database
 
 ### Visual Analysis
+
 - `/screenshot-analyze <path>` - Analyse screenshots with OCR and visual inspection (3 Sonnet sub-agents)
 - `/diagram-review <path>` - Analyse architecture diagrams and technical drawings (4 Sonnet sub-agents)
 
 ### Quick Capture
+
 - `/task <title>` - Quick-create task with priority
 - `/person <name>` - Create person note (clean links without prefix)
 - `/weblink <url>` - Save URL with AI summary
 - `/youtube <url>` - Save YouTube video with transcript analysis
 
 ### Incubator (Idea Lifecycle)
+
 - `incubator <title>` - Quick-create incubator idea
 - `incubator <title> [domain]` - Create with domain keywords
 - `incubator note <title> for <idea>` - Create research note
@@ -846,10 +894,12 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `incubator reject <idea>` - Reject with reason (archives idea)
 
 ### Search & Discovery
+
 - `/search <query>` - Smart search: queries graph index first, falls back to grep
 - `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
 
 ### Vault Maintenance
+
 - `/wipe` - Generate context handoff, clear session, resume fresh (auto-detects tmux vs manual workflow)
 - `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
 - `/orphans` - Find notes with no backlinks (sub-agents)
@@ -860,6 +910,7 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `/quality-report` - Content quality analysis with scores (5 parallel Sonnet sub-agents)
 
 ### Reference
+
 - `todos` - Guidelines for Claude Code todo list usage and best practices
 
 **See** `.claude/skills/` directory for all skill definitions.
@@ -909,6 +960,7 @@ npm run test
 ```
 
 **Key Scripts:**
+
 - **validate.js** - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
 - **health-check.js** - Analyzes note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
 - **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualization
@@ -917,11 +969,13 @@ npm run test
 - **graph-watcher.js** - File watcher for auto-rebuilding index on changes
 
 **Output Formats:**
+
 - Console (colorized, human-readable)
 - JSON (programmatic access)
 - Markdown (reports and documentation)
 
 **Integration Examples:**
+
 - Pre-commit hooks (validate before commit)
 - CI/CD pipelines (GitHub Actions)
 - Weekly health reports (cron jobs)
@@ -929,6 +983,7 @@ npm run test
 **See** `scripts/AUTOMATION.md` for complete documentation.
 
 **Recommended Review Cadence**:
+
 - **Weekly**: Check open tasks, active projects, run `npm run health`
 - **Monthly**: Review stale content (5-10 notes), fix broken links
 - **Quarterly**: Comprehensive quality audit, run `npm run test`
@@ -954,17 +1009,19 @@ Use `/sync-governance` to pull policies, guardrails, and organisational ADRs fro
 
 **What gets synced:**
 
-| Content Type | Confluence Source | Local Path |
-|--------------|-------------------|------------|
-| Policies | Pages with `governance-policy` label | `+Sync/Policies/` |
-| Guardrails | Pages in guardrail directories | `+Sync/Guardrails/` |
-| Organisational ADRs | Pages with `Approved_Architecture_ADR` label | `+Sync/Org-ADRs/` |
+| Content Type        | Confluence Source                            | Local Path          |
+| ------------------- | -------------------------------------------- | ------------------- |
+| Policies            | Pages with `governance-policy` label         | `+Sync/Policies/`   |
+| Guardrails          | Pages in guardrail directories               | `+Sync/Guardrails/` |
+| Organisational ADRs | Pages with `Approved_Architecture_ADR` label | `+Sync/Org-ADRs/`   |
 
 **Prerequisites:**
+
 - Atlassian MCP plugin connected and authenticated
 - Configure source pages in `.claude/sync/manifest.json`
 
 **Benefits:**
+
 - **Offline access** to governance content during architecture work
 - **Cross-referencing** with local ADRs and projects
 - **AI-assisted analysis** when creating new designs
@@ -981,6 +1038,7 @@ Use `/sync-notion` to pull meetings from a Notion database:
 ```
 
 **Prerequisites:**
+
 - Notion API token configured
 - `scripts/notion_sync.py` script exists
 
@@ -989,17 +1047,20 @@ Use `/sync-notion` to pull meetings from a Notion database:
 This vault is based on a GitHub template. To receive updates:
 
 **1. Add template as upstream remote (one-time):**
+
 ```bash
 git remote add template https://github.com/DavidROliverBA/ArchitectKB.git
 ```
 
 **2. Fetch and review updates:**
+
 ```bash
 git fetch template main
 git log HEAD..template/main --oneline  # See what's new
 ```
 
 **3. Merge updates (carefully):**
+
 ```bash
 git merge template/main --no-commit    # Merge without auto-commit
 # Review changes, resolve conflicts
@@ -1007,6 +1068,7 @@ git commit -m "Merge template updates"
 ```
 
 **What typically updates:**
+
 - `.claude/skills/` - New and improved AI workflows
 - `.claude/rules/` - Updated conventions and reference docs
 - `scripts/` - New automation scripts
@@ -1014,6 +1076,7 @@ git commit -m "Merge template updates"
 - `package.json` - New npm automation scripts
 
 **What you should NOT merge:**
+
 - Your personal notes and content
 - Custom context files in `.claude/context/`
 - Your `.claude/sync/manifest.json`
@@ -1030,14 +1093,15 @@ Add to critical notes (ADRs, Pages, Projects, Architecture notes):
 
 ```yaml
 # Quality Indicators
-confidence: high | medium | low     # How authoritative
+confidence: high | medium | low # How authoritative
 freshness: current | recent | stale # How up-to-date
 source: primary | secondary | synthesis | external
-verified: true | false              # Fact-checked
-reviewed: 2026-01-07               # Last review date
+verified: true | false # Fact-checked
+reviewed: 2026-01-07 # Last review date
 ```
 
 **Benefits**:
+
 - AI can prioritize high-confidence content
 - Identify content needing updates
 - Track information provenance
@@ -1049,12 +1113,14 @@ Link related notes (ADRs, Architecture, Systems, Integrations):
 
 ```yaml
 # Relationships
-relatedTo: ["[[System - Sample Data Platform]]", "[[ADR - Event-driven Architecture]]"]
-supersedes: ["[[Architecture - Old Batch Design]]"]     # Replaces
-dependsOn: ["[[System - Cloud Infrastructure]]"]        # Requires
+relatedTo:
+  ["[[System - Sample Data Platform]]", "[[ADR - Event-driven Architecture]]"]
+supersedes: ["[[Architecture - Old Batch Design]]"] # Replaces
+dependsOn: ["[[System - Cloud Infrastructure]]"] # Requires
 ```
 
 **Benefits**:
+
 - Navigate decision evolution
 - Understand dependencies
 - Build knowledge graph
@@ -1071,6 +1137,7 @@ tags: [Architecture, activity/architecture, domain/data, domain/integration, tec
 ```
 
 **Categories**:
+
 - `activity/` - architecture, implementation, evaluation, research
 - `technology/` - kubernetes, aws, kafka, postgresql, snowflake, etc.
 - `project/` - cloud-migration, api-modernization, data-platform, etc.
@@ -1085,14 +1152,14 @@ Track key architecture metrics in System notes:
 ```yaml
 # Performance Metrics
 performanceTargets:
-  throughput: "5,000 req/sec"        # Peak capacity
-  latency: "<100ms p95"              # Latency percentile
-  availability: "99.95%"             # Uptime target
-  rtoMinutes: 30                     # Recovery time objective
-  rpoMinutes: 5                      # Recovery point objective
+  throughput: "5,000 req/sec" # Peak capacity
+  latency: "<100ms p95" # Latency percentile
+  availability: "99.95%" # Uptime target
+  rtoMinutes: 30 # Recovery time objective
+  rpoMinutes: 5 # Recovery point objective
 
 # Financial Metrics
-annualCost: 2500000                 # Annual cost in £
+annualCost: 2500000 # Annual cost in £
 costOptimizationOpportunities:
   - "Switch to reserved instances (£200K/year savings)"
   - "Archive cold data (£100K/year savings)"
@@ -1107,6 +1174,7 @@ capacityMetrics:
 ```
 
 **Use these metrics to:**
+
 - Track against NFR targets
 - Identify cost optimization opportunities
 - Plan capacity scaling
@@ -1121,6 +1189,7 @@ capacityMetrics:
 **Problem**: MOCs show `Dataview: Query not found` or empty results
 
 **Solution**:
+
 1. Verify Dataview plugin is installed and enabled
 2. Check Settings → Dataview → Enable JavaScript Queries
 3. Reload Obsidian (Ctrl/Cmd + R)
@@ -1130,6 +1199,7 @@ capacityMetrics:
 **Problem**: Templates don't auto-fill or rename
 
 **Solution**:
+
 1. Verify Templater plugin is installed and enabled
 2. Check Settings → Templater → Template folder location = `+Templates`
 3. Check Settings → Templater → Enable "Trigger Templater on new file creation"
@@ -1139,6 +1209,7 @@ capacityMetrics:
 **Problem**: Links show as broken after replacing example content
 
 **Solution**:
+
 1. Use `/rename` skill to batch rename with link updates
 2. Or: Manually update links using Obsidian's backlink pane
 3. Run `/broken-links` skill to find remaining issues
@@ -1148,6 +1219,7 @@ capacityMetrics:
 **Problem**: `/skill` commands not recognized
 
 **Solution**:
+
 1. Ensure you're using Claude Code CLI (not web interface)
 2. Check `.claude/skills/` directory exists
 3. Verify skill file format (see vault-conventions.md)
@@ -1158,6 +1230,7 @@ capacityMetrics:
 **Problem**: Custom Dataview queries show only sample systems
 
 **Solution**:
+
 1. Make sure you've renamed System notes (e.g., `System - Sample ERP` → `System - Your ERP`)
 2. Update Query frontmatter: change `WHERE type = "System"` to match your note naming
 3. Verify `systemType`, `criticality`, and other filter fields match your systems
@@ -1169,6 +1242,7 @@ capacityMetrics:
 **Problem**: Canvas or query shows incomplete integration topology
 
 **Solution**:
+
 1. Ensure all Integration notes have `sourceSystem` and `targetSystem` links
 2. Verify those System notes exist and are correctly named
 3. Check Integration frontmatter fields: `integrationPattern`, `criticality`, `latencyTarget`
@@ -1180,6 +1254,7 @@ capacityMetrics:
 **Problem**: Financial analysis in Scenario appears inconsistent
 
 **Solution**:
+
 1. Verify annual costs in System notes match Scenario assumptions
 2. Check for double-counting (e.g., infrastructure cost shouldn't include system costs if already listed separately)
 3. Update Scenario with your actual cost baselines
@@ -1193,6 +1268,7 @@ capacityMetrics:
 ### Architecture Knowledge Graph
 
 **Getting started with architecture documentation:**
+
 - **`Page - Architecture Knowledge Graph Guide.md`** - Comprehensive 2,000-line guide covering:
   - Understanding each note type (System, Integration, Architecture, Scenario, Canvas)
   - Step-by-step customization for your organisation
@@ -1202,6 +1278,7 @@ capacityMetrics:
   - Troubleshooting guide
 
 **Example architecture notes:**
+
 - `System - Sample ERP Application.md` - Complete System example with 2,000+ tables
 - `System - Sample Data Integration Platform.md` - Platform example with 450 pipelines
 - `System - Sample Cloud Infrastructure.md` - Multi-region infrastructure example
@@ -1213,6 +1290,7 @@ capacityMetrics:
 - `Query - Critical Systems Inventory.md` - Example Dataview query
 
 **Canvas visualisations:**
+
 - `Canvas - Sample System Landscape.md` - System topology with criticality
 - `Canvas - Sample C4 Context Diagram.md` - C4 Level 1 context
 - `Canvas - Sample Data Flow Diagram.md` - Real-time/batch/API flows
@@ -1228,6 +1306,7 @@ capacityMetrics:
 ### Example Notes by Type
 
 Review these examples for best practices:
+
 - `ADR - Use Kubernetes for Container Orchestration.md` - Complete ADR example
 - `Project - Cloud Migration.md` - Active project example
 - `Page - Architecture Principles.md` - Documentation example
@@ -1247,6 +1326,7 @@ Review these examples for best practices:
 ## 🤝 Contributing
 
 We welcome contributions! Please see `CONTRIBUTING.md` for:
+
 - How to suggest improvements
 - How to report bugs
 - Code of conduct
@@ -1257,12 +1337,14 @@ We welcome contributions! Please see `CONTRIBUTING.md` for:
 We especially welcome contributions that enhance the Architecture Knowledge Graph:
 
 **New architecture patterns:**
+
 - Real-world System examples from different industries
 - Integration patterns not currently covered (e.g., CDC, streaming analytics, hybrid cloud)
 - Scenario templates for common transformation initiatives
 - Canvas visualisation examples for specific architectural styles
 
 **Improvements to existing templates:**
+
 - Better customisation guidance
 - Additional metrics and performance examples
 - Risk assessment templates
@@ -1270,6 +1352,7 @@ We especially welcome contributions that enhance the Architecture Knowledge Grap
 - Security compliance examples
 
 **To contribute architecture content:**
+
 1. Fork this repository
 2. Create a new System, Integration, Architecture, or Scenario note following the examples
 3. Ensure all metrics are realistic and well-documented
@@ -1278,6 +1361,7 @@ We especially welcome contributions that enhance the Architecture Knowledge Grap
 6. Include examples relevant to the template audience
 
 **Quality standards for contributions:**
+
 - Real-world metrics and performance data
 - Clear technology stack and versioning
 - Complete disaster recovery and security sections
@@ -1299,6 +1383,7 @@ Free to use, modify, and distribute. No attribution required (but appreciated!).
 This template is based on real-world Solutions Architecture practice at enterprise organizations. Special thanks to the Obsidian community for plugins and inspiration.
 
 **Built with**:
+
 - [Obsidian](https://obsidian.md) - The knowledge base tool
 - [Dataview](https://github.com/blacksmithgu/obsidian-dataview) - Query engine
 - [Templater](https://github.com/SilentVoid13/Templater) - Template automation
@@ -1309,18 +1394,21 @@ This template is based on real-world Solutions Architecture practice at enterpri
 ## 🗺️ Roadmap
 
 **v1.0.0** (Released 2026-01-07):
+
 - ✅ Initial release with metadata-driven framework
 - ✅ 11 Claude Code skills
 - ✅ Quality indicator system
 - ✅ 12 Maps of Content with Dataview queries
 
 **v1.1.0** (Released 2026-01-08):
+
 - ✅ Visual analysis skills (screenshot-analyze, diagram-review)
 - ✅ Document processing skills (pdf-to-page, pptx-to-page)
 - ✅ Parallel agent architecture with `context: fork` frontmatter
 - ✅ Screenshots and visual documentation
 
 **v1.2.0** (Released 2026-01-09):
+
 - ✅ Node.js automation infrastructure (validate.js, health-check.js, generate-graph.js)
 - ✅ 3 new vault maintenance skills (broken-links, weekly-summary, quality-report)
 - ✅ Comprehensive testing and quality baseline metrics established
@@ -1328,6 +1416,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Performance benchmarks: 50-200 notes/second
 
 **v1.3.0** (Released 2026-01-10):
+
 - ✅ 18 new Claude Code skills (37 total with sync-governance)
 - ✅ Incubator system for research ideas with lifecycle management
 - ✅ Incubator archive workflow - graduated/rejected ideas move to `+Archive/Incubator/`
@@ -1339,6 +1428,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Enhanced quick capture (youtube, incubator)
 
 **v1.4.0** (Released 2026-01-12):
+
 - ✅ **Hybrid Graph Index System** - Pre-computed indexes for instant queries
 - ✅ Graph-first search strategy with `/search` skill
 - ✅ PreToolUse hook for search optimization hints
@@ -1347,6 +1437,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Sanitized for generic use - removed all BA-specific content and projects
 
 **v1.5.0** (Released 2026-01-14):
+
 - ✅ **Architecture Knowledge Graph** - Generic templates for building enterprise architecture documentation
 - ✅ 5 System notes with real-world metrics and customization guides
 - ✅ 2 Integration notes (real-time event-driven, batch ETL)
@@ -1357,6 +1448,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Comprehensive Architecture Knowledge Graph Guide
 
 **v1.7.0** (Released 2026-01-15):
+
 - ✅ **16 New Architecture Skills** - Complete AI-assisted architecture documentation workflow
 - ✅ `/system`, `/integration`, `/architecture`, `/scenario`, `/datasource` - Create architecture notes with guided prompts
 - ✅ `/diagram`, `/canvas` - Generate visual architecture diagrams
@@ -1369,6 +1461,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Complete template repository genericisation - all organisation-specific content removed
 
 **v1.8.0** (Released 2026-01-16):
+
 - ✅ **BM25 Relevance Ranking** - Graph search now returns results ranked by relevance score
 - ✅ `/wipe` skill - Session context management with auto-detect tmux vs manual workflow
 - ✅ Dashboard renamed to `Dashboard - Main Dashboard.md` for clarity
@@ -1376,7 +1469,17 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ MOC updates with cleaner generic content
 - ✅ 54 total Claude Code skills
 
+**v1.8.1** (Released 2026-01-21):
+
+- ✅ **Skills documentation improvements** - Updated task, meeting, and form skills for consistency
+- ✅ Task skill now uses correct date fields (`dueBy`/`doDate`) and `assignedTo` array format
+- ✅ Meeting skill includes `collections` field for categorisation
+- ✅ Form skill uses hierarchical tags with domain lookup table
+- ✅ Added `keywords` field to quality indicators in frontmatter-reference.md
+- ✅ Expanded tag guidance in quality-patterns.md with full prefix table and minimum tags
+
 **v1.9** (Planned):
+
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
 - Mobile optimisation and mobile-first workflows
@@ -1384,6 +1487,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - Community skill contributions
 
 **v2.0** (Future):
+
 - Obsidian Publish demo site
 - Historical quality trend tracking
 - Alternative theme support
