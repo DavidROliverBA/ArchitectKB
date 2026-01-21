@@ -13,11 +13,13 @@
 Analyze tag quality and compliance.
 
 **Scopes:**
+
 - `/tag-analyze` - Current note (if applicable)
 - `/tag-analyze vault` - Full vault analysis
 - `/tag-analyze <path>` - Specific file or folder
 
 **Analysis Includes:**
+
 1. Tag coverage (has tags vs no tags)
 2. Hierarchical compliance (proper prefixes)
 3. Case violations (uppercase, mixed case)
@@ -28,6 +30,7 @@ Analyze tag quality and compliance.
 8. Tag recommendations
 
 **Output:**
+
 - Summary of violations
 - Specific issues found
 - Suggested fixes
@@ -39,6 +42,7 @@ Analyze tag quality and compliance.
 Refactor tags to follow official taxonomy.
 
 **Scopes:**
+
 - `/tag-refactor` - Current note
 - `/tag-refactor vault` - Full vault refactor
 - `/tag-refactor <path>` - Specific file or folder
@@ -71,6 +75,7 @@ Refactor tags to follow official taxonomy.
    - `Technology/AWS` → `technology/aws`
 
 **Safety:**
+
 - Always backup before vault-wide refactoring
 - Preview changes with `--dry-run` first
 - Commit changes to git before refactoring
@@ -82,17 +87,20 @@ Refactor tags to follow official taxonomy.
 Suggest appropriate tags for a note based on content analysis.
 
 **Process:**
+
 1. Read note frontmatter and content
 2. Analyze note type (`type:` field)
 3. Extract key terms and context
 4. Suggest tags from approved taxonomy
 
 **Example:**
+
 ```bash
 /tag-suggest "ADR - AIIncidentProcessor - Bedrock.md"
 ```
 
 **Output:**
+
 ```yaml
 # Current tags:
 tags: [ADR, activity/architecture, AWS, Bedrock]
@@ -122,6 +130,7 @@ tags: [
 Find specific tag violations across the vault.
 
 **Types:**
+
 - `/tag-find-violations case` - Case violations (uppercase, mixed case)
 - `/tag-find-violations inline` - Inline `#` prefix in frontmatter
 - `/tag-find-violations flat` - Orphan flat tags (no hierarchy)
@@ -130,6 +139,7 @@ Find specific tag violations across the vault.
 - `/tag-find-violations all` - All violations (default)
 
 **Output:**
+
 - List of files with violations
 - Specific violations per file
 - Count summary
@@ -141,6 +151,7 @@ Find specific tag violations across the vault.
 Batch rename a tag across the entire vault.
 
 **Examples:**
+
 ```bash
 /tag-migrate "ADR" "type/adr"
 /tag-migrate "AWS" "technology/aws"
@@ -148,12 +159,14 @@ Batch rename a tag across the entire vault.
 ```
 
 **Process:**
+
 1. Find all notes with `<old>` tag
 2. Replace with `<new>` tag
 3. Update frontmatter YAML
 4. Report changes made
 
 **Safety:**
+
 - Shows preview before applying
 - Requires confirmation for vault-wide changes
 
@@ -166,6 +179,7 @@ Batch rename a tag across the entire vault.
 When implementing `/tag-refactor`:
 
 1. **Read note frontmatter**
+
    ```python
    import re, yaml
 
@@ -179,6 +193,7 @@ When implementing `/tag-refactor`:
    ```
 
 2. **Apply refactoring rules**
+
    ```python
    refactored_tags = []
 
@@ -200,6 +215,7 @@ When implementing `/tag-refactor`:
    ```
 
 3. **Contextual flat tag resolution**
+
    ```python
    def apply_migrations(tag, note_type, content):
        # Simple mappings
@@ -238,6 +254,7 @@ When implementing `/tag-refactor`:
    ```
 
 4. **Update frontmatter**
+
    ```python
    frontmatter['tags'] = refactored_tags
 
@@ -263,44 +280,44 @@ When implementing `/tag-refactor`:
 
 ### Common Flat Tag Migrations
 
-| Old Tag | New Tag | Context |
-|---------|---------|---------|
-| `ADR` | `type/adr` | Always |
-| `MROSystem` | `technology/mroPlatform` | Always |
-| `AWS` | `technology/aws` | Always |
-| `AI` | `technology/ai` | Always |
-| `MRO` | `technology/mro-software` | Technology context |
-| `mroSystem` | `technology/mroPlatform` | Always |
-| `aws` | `technology/aws` | Always |
-| `dataPlatform` | `project/dataPlatform` | Always |
-| `modernization` | `project/modernization` | Always |
-| `myProject` | `project/myProject` | Always |
-| `ecp` | `project/ecp` | Always |
-| `architecture` | `activity/architecture` | Activity context |
-| `architecture` | `domain/engineering` | Domain context (rare) |
-| `integration` | `activity/integration` | Activity context |
-| `integration` | `domain/integration` | Domain context |
-| `security` | `domain/security` | Always |
-| `governance` | `activity/governance` | Always |
-| `documentation` | `activity/documentation` | Always |
+| Old Tag         | New Tag                   | Context               |
+| --------------- | ------------------------- | --------------------- |
+| `ADR`           | `type/adr`                | Always                |
+| `MROSystem`     | `technology/mroPlatform`  | Always                |
+| `AWS`           | `technology/aws`          | Always                |
+| `AI`            | `technology/ai`           | Always                |
+| `MRO`           | `technology/mro-software` | Technology context    |
+| `mroSystem`     | `technology/mroPlatform`  | Always                |
+| `aws`           | `technology/aws`          | Always                |
+| `dataPlatform`  | `project/dataPlatform`    | Always                |
+| `modernization` | `project/modernization`   | Always                |
+| `myProject`     | `project/myProject`       | Always                |
+| `ecp`           | `project/ecp`             | Always                |
+| `architecture`  | `activity/architecture`   | Activity context      |
+| `architecture`  | `domain/engineering`      | Domain context (rare) |
+| `integration`   | `activity/integration`    | Activity context      |
+| `integration`   | `domain/integration`      | Domain context        |
+| `security`      | `domain/security`         | Always                |
+| `governance`    | `activity/governance`     | Always                |
+| `documentation` | `activity/documentation`  | Always                |
 
 ### Capitalized Hierarchy Migrations
 
-| Old Tag | New Tag |
-|---------|---------|
-| `Project/ModernizationProject` | `project/modernization` |
-| `Project/LegacyEngineeringSystem-Futures` | `project/modernization` |
-| `Technology/MROPlatform` | `technology/mroPlatform` |
-| `Technology/AWS` | `technology/aws` |
-| `Domain/Engineering-Systems` | `domain/engineering` |
+| Old Tag                                   | New Tag                  |
+| ----------------------------------------- | ------------------------ |
+| `Project/ModernizationProject`            | `project/modernization`  |
+| `Project/LegacyEngineeringSystem-Futures` | `project/modernization`  |
+| `Technology/MROPlatform`                  | `technology/mroPlatform` |
+| `Technology/AWS`                          | `technology/aws`         |
+| `Domain/Engineering-Systems`              | `domain/engineering`     |
 
 ### Inline Prefix Removal
 
-| Old Tag | New Tag |
-|---------|---------|
+| Old Tag                  | New Tag                 |
+| ------------------------ | ----------------------- |
 | `#activity/architecture` | `activity/architecture` |
-| `#technology/aws` | `technology/aws` |
-| `#project/myProject` | `project/myProject` |
+| `#technology/aws`        | `technology/aws`        |
+| `#project/myProject`     | `project/myProject`     |
 
 ---
 
@@ -460,6 +477,7 @@ Summary:
 ## Integration with Other Skills
 
 This skill works well with:
+
 - `/quality-report` - Includes tag analysis
 - `/vault-maintenance` - Includes tag health checks
 - `/adr` - Suggests tags when creating ADRs
@@ -469,14 +487,14 @@ This skill works well with:
 
 ## References
 
-- [[.claude/rules/tag-taxonomy.md]] - Official taxonomy
-- [[CLAUDE.md]] - Tag syntax
-- [[.claude/vault-conventions.md]] - Tag conventions
-- [[.claude/rules/quality-patterns.md]] - Quality patterns
+- [[.claude/rules/tag-taxonomy.md]] - Official taxonomy (authoritative)
+- [[.claude/vault-conventions.md]] - Tag syntax and conventions
+- [[.claude/rules/quality-patterns.md]] - Quality patterns and tag guidance
 
 ---
 
 **Sources:**
+
 - [Knowledge Base Taxonomy: 10 Proven Design Principles](https://www.matrixflows.com/blog/10-best-practices-for-creating-taxonomy-for-your-company-knowledge-base)
 - [Taxonomy 101: Definition and Best Practices - Nielsen Norman Group](https://www.nngroup.com/articles/taxonomy-101/)
 - [Personal Knowledge Management at Scale](https://www.dsebastien.net/personal-knowledge-management-at-scale-analyzing-8-000-notes-and-64-000-links/)

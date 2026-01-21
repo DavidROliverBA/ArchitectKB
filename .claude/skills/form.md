@@ -55,31 +55,31 @@ Quick-create a form submission tracking note.
 ---
 type: FormSubmission
 title: "{{formType}} for {{project}}"
-formType: {{formType}}
+formType: { { formType } }
 status: draft
 project: "[[Project - {{project}}]]"
-requestingTeam: {{lookup from table below}}
+requestingTeam: { { lookup from table below } }
 submittedDate: null
 responseDate: null
 expiryDate: null
 referenceNumber: null
 attachments: []
-created: {{today}}
-modified: {{today}}
-tags: [form/{{formType | lowercase}}]
+created: { { today } }
+modified: { { today } }
+tags: [activity/compliance, { { domain_tag } }] # See tag lookup table below
 ---
 ```
 
-6. **Requesting team lookup**:
+6. **Requesting team and tag lookup**:
 
-| formType | requestingTeam |
-|----------|----------------|
-| DPIA | Data Privacy |
-| CyberRisk | Cyber Security |
-| TPRM | Procurement |
-| IAF | Cyber Delivery Assurance |
-| ChangeRequest | Change Management |
-| Other | (ask user) |
+| formType      | requestingTeam           | domain_tag        |
+| ------------- | ------------------------ | ----------------- |
+| DPIA          | Data Privacy             | domain/data       |
+| CyberRisk     | Cyber Security           | domain/security   |
+| TPRM          | Procurement              | domain/security   |
+| IAF           | Cyber Delivery Assurance | domain/security   |
+| ChangeRequest | Change Management        | domain/operations |
+| Other         | (ask user)               | (ask user)        |
 
 7. **Generate body content**:
 
@@ -88,15 +88,15 @@ tags: [form/{{formType | lowercase}}]
 
 ## Form Details
 
-| Field | Value |
-|-------|-------|
-| **Form Type** | {{formType}} |
-| **Status** | draft |
-| **Project** | [[Project - {{project}}]] |
-| **Requesting Team** | {{requestingTeam}} |
-| **Submitted** | - |
-| **Response** | - |
-| **Reference** | - |
+| Field               | Value                     |
+| ------------------- | ------------------------- |
+| **Form Type**       | {{formType}}              |
+| **Status**          | draft                     |
+| **Project**         | [[Project - {{project}}]] |
+| **Requesting Team** | {{requestingTeam}}        |
+| **Submitted**       | -                         |
+| **Response**        | -                         |
+| **Reference**       | -                         |
 
 ## Summary
 
@@ -133,13 +133,13 @@ tags: [form/{{formType | lowercase}}]
 
 ## Form Type Descriptions
 
-| Type | Purpose | Typical Questions |
-|------|---------|-------------------|
-| **DPIA** | Assess data protection risks for new processing | Personal data types, legal basis, retention, transfers |
-| **CyberRisk** | Evaluate cyber security risks | Architecture, controls, vulnerabilities, mitigations |
-| **TPRM** | Assess third-party vendor risks | Vendor security posture, data handling, contracts |
-| **IAF** | Initial cyber assessment for new projects | Scope, data, integrations, compliance requirements |
-| **ChangeRequest** | Request infrastructure/system changes | What, why, when, impact, rollback plan |
+| Type              | Purpose                                         | Typical Questions                                      |
+| ----------------- | ----------------------------------------------- | ------------------------------------------------------ |
+| **DPIA**          | Assess data protection risks for new processing | Personal data types, legal basis, retention, transfers |
+| **CyberRisk**     | Evaluate cyber security risks                   | Architecture, controls, vulnerabilities, mitigations   |
+| **TPRM**          | Assess third-party vendor risks                 | Vendor security posture, data handling, contracts      |
+| **IAF**           | Initial cyber assessment for new projects       | Scope, data, integrations, compliance requirements     |
+| **ChangeRequest** | Request infrastructure/system changes           | What, why, when, impact, rollback plan                 |
 
 ## Example Output
 

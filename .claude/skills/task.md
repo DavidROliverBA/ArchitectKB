@@ -29,12 +29,14 @@ Quick-create a task linked to a project.
 1. Parse the command for:
    - **title**: Task description (required)
    - **project**: Project to link (after "for")
-   - **due**: Due date (after "due") - parse natural language
+   - **dueBy**: Hard deadline (after "due") - parse natural language
+   - **doDate**: When to start working (after "start" or "do")
    - **priority**: high/medium/low (after "priority")
 
 2. Defaults:
    - priority: medium
-   - due: null
+   - dueBy: null
+   - doDate: null
    - project: null (or infer from recent context)
 
 3. Generate filename: `Task - {{title}}.md`
@@ -44,14 +46,15 @@ Quick-create a task linked to a project.
 ```markdown
 ---
 type: Task
-title: {{title}}
-created: {{DATE}}
-modified: {{DATE}}
+title: { { title } }
+created: { { DATE } }
+modified: { { DATE } }
 completed: false
-priority: {{priority}}
-due: {{due_date or null}}
-project: {{project_link or null}}
-assignee: "[[David (me)]]"
+priority: { { priority } }
+doDate: { { do_date or null } }
+dueBy: { { due_date or null } }
+project: { { project_link or null } }
+assignedTo: ["[[Your Name]]"]
 tags: []
 ---
 
@@ -66,7 +69,6 @@ tags: []
 - [ ]
 
 ## Notes
-
 
 ## Related
 

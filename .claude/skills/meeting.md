@@ -39,14 +39,15 @@ Create a new meeting note in the Obsidian vault.
 ```markdown
 ---
 type: Meeting
-title: {{title}}
-created: {{DATE}}
-modified: {{DATE}}
+title: { { title } }
+created: { { DATE } }
+modified: { { DATE } }
 tags: []
-date: '{{DATE}}'
-project: {{project_link or null}}
-attendees: [{{attendee_links}}]
+date: "{{DATE}}"
+project: { { project_link or null } }
+attendees: [{ { attendee_links } }]
 summary:
+collections: { { collections or null } }
 ---
 
 # {{title}}
@@ -60,8 +61,6 @@ summary:
 1.
 
 ## Discussion Notes
-
-
 
 ## Action Items
 
