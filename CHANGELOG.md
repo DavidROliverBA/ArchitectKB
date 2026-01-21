@@ -7,6 +7,119 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.2] - 2026-01-21
+
+### Added
+
+#### Claude Code Hooks System
+
+Added 10 Claude Code hooks for automated vault quality enforcement and workflow automation:
+
+**PreToolUse Hooks:**
+
+- **`graph-search-hint.sh`** - Suggests using graph index instead of grep for keyword searches (existing)
+
+**PostToolUse Hooks:**
+
+- **`code-formatter.py`** - Auto-formats files after Edit/Write based on extension
+  - JavaScript/TypeScript: Prettier
+  - Python: Black
+  - Go: gofmt
+  - Rust: rustfmt
+  - Shell: shfmt
+
+- **`file-protection.py`** - Blocks edits to sensitive files
+  - Environment files (.env, .env.\*)
+  - Lock files (package-lock.json, yarn.lock, etc.)
+  - Credential files (credentials.json, secrets.\*, etc.)
+  - Key files (_.key, _.pem)
+
+- **`filename-convention-checker.py`** - Validates markdown filenames follow vault naming conventions
+  - Checks for correct type prefixes (Meeting -, Project -, ADR -, etc.)
+  - Validates date formats in meeting notes
+  - Warns about naming inconsistencies
+
+- **`frontmatter-validator.py`** - Validates YAML frontmatter fields and values
+  - Checks required fields by note type
+  - Validates enumerated values (status, priority, etc.)
+  - Validates date formats (ISO 8601)
+  - Checks for common YAML syntax errors
+
+- **`tag-taxonomy-enforcer.py`** - Ensures tags follow hierarchical taxonomy
+  - Validates tag prefixes (activity/, domain/, project/, technology/, etc.)
+  - Warns about flat tags that should be hierarchical
+  - Checks for uppercase violations
+  - Customizable project and vendor lists
+
+- **`wiki-link-checker.py`** - Checks if wiki-links point to existing notes
+  - Validates `[[Note Title]]` links after edits
+  - Reports broken links with suggestions
+  - Handles aliased links `[[Note|Alias]]`
+
+**UserPromptSubmit Hooks:**
+
+- **`secret-detection.py`** - Detects potential secrets in user prompts
+  - API keys and tokens
+  - Connection strings
+  - Passwords in commands
+  - Private keys
+
+- **`skill-context-loader.sh`** - Auto-loads context files based on skill commands
+  - Detects `/person`, `/meeting`, `/project-status`, `/adr`, etc.
+  - Loads relevant context from `.claude/context/`
+  - Customizable organisation and acronym detection
+
+**Notification Hook:**
+
+- **`notify.sh`** - macOS desktop notification helper
+  - Used by other hooks for alerts
+  - Supports title and message parameters
+
+### Technical
+
+- All hooks include `CUSTOMIZE:` comments for organisation-specific configuration
+- Exit codes follow Claude Code conventions: 0=success, 1=error (non-blocking), 2=block
+- Python hooks use standard library only (no external dependencies)
+- Shell hooks support bash and are POSIX-compatible where possible
+- Hooks are executable (`chmod +x`) and ready to use
+
+### Configuration
+
+To enable hooks, add to `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Grep", "command": ".claude/hooks/graph-search-hint.sh" }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": ".claude/hooks/frontmatter-validator.py"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": ".claude/hooks/tag-taxonomy-enforcer.py"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": ".claude/hooks/wiki-link-checker.py"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": ".claude/hooks/filename-convention-checker.py"
+      },
+      { "matcher": "Edit|Write", "command": ".claude/hooks/code-formatter.py" }
+    ],
+    "UserPromptSubmit": [
+      { "matcher": "", "command": ".claude/hooks/secret-detection.py" },
+      { "matcher": "", "command": ".claude/hooks/skill-context-loader.sh" }
+    ]
+  }
+}
+```
+
 ## [1.8.1] - 2026-01-21
 
 ### Changed
@@ -692,7 +805,8 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...HEAD
+[1.8.2]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.1...v1.8.1
 [1.7.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.4.0...v1.7.0

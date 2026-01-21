@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.8.1 Release:** 54 AI-assisted skills + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), and session management ready to customise for any organisation.
+> **v1.8.2 Release:** 54 AI-assisted skills + 11 Claude Code hooks + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), automated quality enforcement, and session management ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -1477,6 +1477,16 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Form skill uses hierarchical tags with domain lookup table
 - ✅ Added `keywords` field to quality indicators in frontmatter-reference.md
 - ✅ Expanded tag guidance in quality-patterns.md with full prefix table and minimum tags
+
+**v1.8.2** (Released 2026-01-21):
+
+- ✅ **Claude Code Hooks System** - 11 hooks for automated quality enforcement
+- ✅ PostToolUse hooks: frontmatter-validator, tag-taxonomy-enforcer, wiki-link-checker, filename-convention-checker, code-formatter, file-protection
+- ✅ UserPromptSubmit hooks: secret-detection, skill-context-loader
+- ✅ PreToolUse hooks: graph-search-hint (existing)
+- ✅ Notification helper: notify.sh for macOS desktop alerts
+- ✅ All hooks include CUSTOMIZE comments for organisation-specific configuration
+- ✅ Configuration example for `.claude/settings.json`
 
 **v1.9** (Planned):
 
