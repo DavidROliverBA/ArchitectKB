@@ -2,11 +2,11 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.8.2 Release:** 54 AI-assisted skills + 11 Claude Code hooks + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualizations), automated quality enforcement, and session management ready to customise for any organisation.
+> **v1.8.2 Release:** 54 AI-assisted skills + 11 Claude Code hooks + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualisations), automated quality enforcement, and session management ready to customise for any organisation.
 
 ## 🎯 What is This?
 
-This is a **production-ready Obsidian vault template** designed specifically for Solutions Architects, Technical Architects, and Enterprise Architects. It provides a complete organizational framework for:
+This is a **production-ready Obsidian vault template** designed specifically for Solutions Architects, Technical Architects, and Enterprise Architects. It provides a complete organisational framework for:
 
 - **Architecture Decision Records (ADRs)** - Document and track technical decisions with relationships and approval workflows
 - **Architecture Documentation** - Document enterprise systems, integrations, HLDs, scenarios with 20 generic templates
@@ -26,7 +26,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
 - **Incubator System** - Idea lifecycle for research and exploration
-- **Architecture Knowledge Graph** - Generic sample templates for building enterprise architecture documentation (systems, integrations, HLDs, scenarios, visualizations)
+- **Architecture Knowledge Graph** - Generic sample templates for building enterprise architecture documentation (systems, integrations, HLDs, scenarios, visualisations)
 - **Example Content** - Rich examples showing best practices
 - **Zero Lock-In** - Plain markdown files, works with any text editor
 
@@ -229,8 +229,8 @@ The Dashboard provides:
 
 **Customizable Examples** (2 MOCs you should adapt):
 
-- **Cloud Architecture MOC** - Example: customize for your cloud strategy
-- **Data Platform MOC** - Example: customize for your data architecture
+- **Cloud Architecture MOC** - Example: customise for your cloud strategy
+- **Data Platform MOC** - Example: customise for your data architecture
 
 **Architecture Queries** (7 Queries - NEW):
 
@@ -337,7 +337,7 @@ A comprehensive, generic template for building enterprise architecture documenta
 **6. Plan Scenarios**
 
 - Create Scenario notes for expansion plans, optimisations, migrations
-- Use the sample scenario as a template for timeline, costs, risks
+- Use the sample scenario as a template for timeline, costs, and risks
 - Link to related architecture and projects
 
 **7. Visualise**
@@ -405,39 +405,6 @@ Query - Your Integration Paths.md
 (+ other queries specific to your architecture)
 ```
 
-### Key Features of the Template
-
-✅ **Real-world Metrics**
-
-- 450 active pipelines, 150 TB active data, 500+ events/sec
-- 350+ analytics tables, 500 concurrent users, 100+ dashboards
-- £5.2M annual cost with detailed breakdown
-- Realistic performance benchmarks (99.95% availability, <5 sec latency)
-
-✅ **Production-Ready Patterns**
-
-- Multi-region disaster recovery with RTO/RPO targets
-- High availability design (3-broker Kafka cluster, Kubernetes auto-scaling)
-- Data quality framework with 500+ validation tests
-- Security & compliance controls (encryption, IAM, audit logging)
-
-✅ **Financial Analysis**
-
-- Complete cost breakdown by category (compute, storage, data transfer)
-- Cost optimization opportunities (£475K/year savings identified)
-- ROI calculations and payback periods
-
-✅ **Risk Management**
-
-- Failure scenarios and recovery procedures
-- Alternative approaches and trade-off analysis
-- Success criteria and KPIs
-
-✅ **Comprehensive Customisation Guides**
-
-- Every major note includes section: "How to adapt for your organisation"
-- Clear instructions on replacing generic names with your systems
-- Guidance on adjusting metrics and technologies
 
 ### Getting Started
 
@@ -445,7 +412,7 @@ Query - Your Integration Paths.md
 2. Read `Page - Architecture Knowledge Graph Guide.md` for detailed instructions
 3. Copy sample notes and rename for your organisation
 4. Update frontmatter with your system names and metrics
-5. Customize visualisations and queries
+5. Customise visualisations and queries
 6. Link your projects and ADRs to the architecture
 
 ---
@@ -476,7 +443,7 @@ Customise `.claude/context/` for Claude Code:
 - `projects-template.md` → Add your real projects
 - `technology-template.md` → Document your tech stack
 - `people-template.md` → Add key stakeholders
-- `acronyms-template.md` → Your organization's acronyms
+- `acronyms-template.md` → Your organisation's acronyms
 - `architecture-template.md` → Your architecture patterns
 - `organisations-template.md` → Your vendors/partners
 
@@ -524,7 +491,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - Failure scenarios and recovery procedures
 - Monitoring and alerting thresholds
 
-#### Architecture HLD (1 file to customize):
+#### Architecture HLD (1 file to customise):
 
 - `Architecture - Sample Data Integration Platform HLD.md` → Your enterprise data platform architecture
 
@@ -539,7 +506,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - Cost model with your actual infrastructure costs and savings opportunities
 - Quarterly roadmap tailored to your transformation plan
 
-#### Scenarios (1 file to customize):
+#### Scenarios (1 file to customise):
 
 - `Scenario - Sample Real-time Analytics Expansion.md` → Your expansion/transformation initiatives
 
@@ -552,7 +519,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - Risk assessment specific to your environment and team
 - Success criteria and KPIs for your business
 
-#### Canvas Visualisations (3 files to customize):
+#### Canvas Visualisations (3 files to customise):
 
 | Canvas Type                             | Update For Your                               |
 | --------------------------------------- | --------------------------------------------- |
@@ -568,7 +535,7 @@ The vault includes **20 generic architecture template files** (Systems, Integrat
 - Include your actual latency and throughput metrics
 - Add your specific data flow stages and SLAs
 
-#### Navigation Queries (7 Dataview queries to customize):
+#### Navigation Queries (7 Dataview queries to customise):
 
 Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
 
@@ -580,7 +547,7 @@ Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
 - `Query - Data Volume by System.md` → Track your storage and capacity utilisation
 - `Query - Annual Cost Breakdown.md` → Allocate your infrastructure costs by system
 
-#### Dashboard (1 file to customize):
+#### Dashboard (1 file to customise):
 
 - `Dashboard - Architecture Knowledge Graph.md` → Your architecture navigation hub
 
@@ -593,10 +560,10 @@ Update each Query's `FROM "" WHERE type = "System"` to filter your systems:
 
 #### How to Get Started with Architecture Customisation:
 
-1. **Choose your starting point**: Select one system to customize first (e.g., "System - Sample ERP Application.md")
+1. **Choose your starting point**: Select one system to customise first (e.g., "System - Sample ERP Application.md")
 2. **Read the customisation guide**: Each architecture note includes a "How to adapt for your organisation" section
 3. **Rename the file**: Change "Sample [Name]" to your actual system name
-4. **Update frontmatter**: Change `systemId`, costs, `criticality`, technologies
+4. **Update frontmatter**: Change `systemId`, costs, `criticality`, and technologies
 5. **Customise metrics**: Replace sample numbers with your actual data volumes and performance targets
 6. **Update integrations**: Replace references to "Sample Data Integration Platform" with your actual platform
 7. **Link to your notes**: Update references to other systems and integrations as you customise them
@@ -620,7 +587,7 @@ approvers:
   - Your Security Lead
 ```
 
-Replace with your organization's approval structure.
+Replace with your organisation's approval structure.
 
 ### 4. Configure External Integrations (Optional)
 
@@ -719,7 +686,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
 2. **Set critical fields**:
    - `integrationPattern`: real-time, batch-etl, api-gateway, event-streaming, etc.
    - `sourceSystem` and `targetSystem`: Link to your System notes
-   - `criticality`: Based on impact if integration fails
+   - `criticality`: Based on the impact if integration fails
    - `latencyTarget`: Required latency (e.g., "<5 seconds")
 3. **Document**:
    - Data volume and frequency (events/sec, records/day, etc.)
@@ -769,7 +736,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
    - **System Landscape**: Show all systems with colour-coded criticality (red=critical, yellow=high, etc.)
    - **C4 Context**: External actors, bounded systems, and major integrations
    - **Data Flow**: Stages (source → transform → load), latency per stage, SLAs
-3. **Keep updated**: Refresh when systems change or new integrations added
+3. **Keep updated**: Refresh when systems change, or new integrations are added
 
 #### 6. Create Navigation Queries
 
@@ -784,7 +751,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
    - Annual cost breakdown by system
 3. **Create additional queries** for your specific needs:
    - Systems with pending capacity review
-   - Integrations above cost threshold
+   - Integrations above the cost threshold
    - Systems due for renewal/upgrade
    - Technology stack inventory
 
@@ -838,12 +805,12 @@ This vault includes **54 AI-assisted workflows** accessible via Claude Code:
 - `/diagram <type>` - Generate C4, system landscape, data flow, or AWS architecture diagrams
 - `/canvas <name>` - Create visual Canvas diagrams (system landscape, C4 context, data flows)
 - `/architecture-report [filter]` - Generate architecture documentation report with system inventory, integration matrix, cost analysis
-- `/cost-optimization [scope]` - Identify cost savings across systems (underutilized resources, right-sizing, contract optimization)
-- `/dependency-graph [system]` - Visualize system dependencies, identify single points of failure, plan impact analysis
-- `/impact-analysis <system>` - Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation)
+- `/cost-optimization [scope]` - Identify cost savings across systems (underutilised resources, right-sizing, contract optimisation)
+- `/dependency-graph [system]` - Visualise system dependencies, identify single points of failure, plan impact analysis
+- `/impact-analysis <system>` - Analyse what breaks if a system fails (downstream consumers, integration paths, risk mitigation)
 - `/scenario-compare <baseline> <options>` - Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)
 - `/system-sync [source]` - Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)
-- `/tag-management [action]` - Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
+- `/tag-management [action]` - Audit, migrate, normalise tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
 
 These skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyse costs, visualise dependencies, and maintain quality—all with AI assistance and graph index integration.
 
@@ -890,7 +857,7 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `incubator note <title> for <idea>` - Create research note
 - `incubator list [filter]` - List active ideas by status/domain
 - `incubator list all` - Include archived (graduated/rejected)
-- `incubator graduate <idea>` - Graduate to Project/ADR/Page (archives idea)
+- `incubator graduate <idea>` - Graduate to Project/ADR/Page (archive idea)
 - `incubator reject <idea>` - Reject with reason (archives idea)
 
 ### Search & Discovery
@@ -962,15 +929,15 @@ npm run test
 **Key Scripts:**
 
 - **validate.js** - Validates frontmatter schema, required fields, date formats, enumerated values, and wiki-links
-- **health-check.js** - Analyzes note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
-- **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualization
+- **health-check.js** - Analyses note counts, orphaned notes, stale content, link statistics, and calculates overall health score (0-100)
+- **generate-graph.js** - Exports complete knowledge graph with nodes (notes) and edges (links) for visualisation
 - **generate-graph-enhanced.js** - Builds pre-computed graph index for fast queries (outputs to `.graph/`)
 - **graph-query.js** - CLI with BM25 relevance ranking for instant structured queries with ranked results
 - **graph-watcher.js** - File watcher for auto-rebuilding index on changes
 
 **Output Formats:**
 
-- Console (colorized, human-readable)
+- Console (colourised, human-readable)
 - JSON (programmatic access)
 - Markdown (reports and documentation)
 
@@ -1102,7 +1069,7 @@ reviewed: 2026-01-07 # Last review date
 
 **Benefits**:
 
-- AI can prioritize high-confidence content
+- AI can prioritise high-confidence content
 - Identify content needing updates
 - Track information provenance
 - Track when architecture requires refresh
@@ -1123,7 +1090,7 @@ dependsOn: ["[[System - Cloud Infrastructure]]"] # Requires
 
 - Navigate decision evolution
 - Understand dependencies
-- Build knowledge graph
+- Build a knowledge graph
 - Track architecture dependencies and data flow lineage
 
 ### Hierarchical Tags for Architecture
@@ -1140,7 +1107,7 @@ tags: [Architecture, activity/architecture, domain/data, domain/integration, tec
 
 - `activity/` - architecture, implementation, evaluation, research
 - `technology/` - kubernetes, aws, kafka, postgresql, snowflake, etc.
-- `project/` - cloud-migration, api-modernization, data-platform, etc.
+- `project/` - cloud-migration, api-modernisation, data-platform, etc.
 - `domain/` - infrastructure, data, security, integration, cloud, etc.
 - `criticality/` - critical, high, medium, low (for Systems)
 - `pattern/` - real-time, batch, api-gateway, event-streaming (for Integrations)
@@ -1176,7 +1143,7 @@ capacityMetrics:
 **Use these metrics to:**
 
 - Track against NFR targets
-- Identify cost optimization opportunities
+- Identify cost optimisation opportunities
 - Plan capacity scaling
 - Monitor system health over time
 
@@ -1190,7 +1157,7 @@ capacityMetrics:
 
 **Solution**:
 
-1. Verify Dataview plugin is installed and enabled
+1. Verify the Dataview plugin is installed and enabled
 2. Check Settings → Dataview → Enable JavaScript Queries
 3. Reload Obsidian (Ctrl/Cmd + R)
 
@@ -1200,11 +1167,11 @@ capacityMetrics:
 
 **Solution**:
 
-1. Verify Templater plugin is installed and enabled
+1. Verify the Templater plugin is installed and enabled
 2. Check Settings → Templater → Template folder location = `+Templates`
 3. Check Settings → Templater → Enable "Trigger Templater on new file creation"
 
-### Broken Links After Customization
+### Broken Links After Customisation
 
 **Problem**: Links show as broken after replacing example content
 
@@ -1216,7 +1183,7 @@ capacityMetrics:
 
 ### Claude Skills Not Working
 
-**Problem**: `/skill` commands not recognized
+**Problem**: `/skill` commands not recognised
 
 **Solution**:
 
@@ -1259,7 +1226,7 @@ capacityMetrics:
 2. Check for double-counting (e.g., infrastructure cost shouldn't include system costs if already listed separately)
 3. Update Scenario with your actual cost baselines
 4. Recalculate benefits based on your specific business case
-5. Document assumptions in Scenario "Financial Methodology" section
+5. Document assumptions in the Scenario "Financial Methodology" section
 
 ---
 
@@ -1271,7 +1238,7 @@ capacityMetrics:
 
 - **`Page - Architecture Knowledge Graph Guide.md`** - Comprehensive 2,000-line guide covering:
   - Understanding each note type (System, Integration, Architecture, Scenario, Canvas)
-  - Step-by-step customization for your organisation
+  - Step-by-step customisation for your organisation
   - 6-phase implementation plan
   - Best practices for naming, metrics, and linking
   - Real-world architecture patterns
@@ -1357,7 +1324,7 @@ We especially welcome contributions that enhance the Architecture Knowledge Grap
 2. Create a new System, Integration, Architecture, or Scenario note following the examples
 3. Ensure all metrics are realistic and well-documented
 4. Include a "How to adapt" section for customisation
-5. Submit pull request with description of your contribution
+5. Submit a pull request with a description of your contribution
 6. Include examples relevant to the template audience
 
 **Quality standards for contributions:**
@@ -1380,7 +1347,7 @@ Free to use, modify, and distribute. No attribution required (but appreciated!).
 
 ## 🙏 Acknowledgments
 
-This template is based on real-world Solutions Architecture practice at enterprise organizations. Special thanks to the Obsidian community for plugins and inspiration.
+This template is based on real-world Solutions Architecture practice at enterprise organisations. Special thanks to the Obsidian community for plugins and inspiration.
 
 **Built with**:
 
@@ -1402,7 +1369,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 
 **v1.1.0** (Released 2026-01-08):
 
-- ✅ Visual analysis skills (screenshot-analyze, diagram-review)
+- ✅ Visual analysis skills (screenshot-analyse, diagram-review)
 - ✅ Document processing skills (pdf-to-page, pptx-to-page)
 - ✅ Parallel agent architecture with `context: fork` frontmatter
 - ✅ Screenshots and visual documentation
@@ -1424,26 +1391,26 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Rules directory with modular reference documentation
 - ✅ Archive system for soft-archiving notes
 - ✅ Engineering management skills (project-status, project-snapshot, dpia-status, adr-report)
-- ✅ Research & discovery skills (related, summarize, timeline, find-decisions)
-- ✅ Enhanced quick capture (youtube, incubator)
+- ✅ Research & discovery skills (related, summarise, timeline, find-decisions)
+- ✅ Enhanced quick capture (YouTube, incubator)
 
 **v1.4.0** (Released 2026-01-12):
 
 - ✅ **Hybrid Graph Index System** - Pre-computed indexes for instant queries
 - ✅ Graph-first search strategy with `/search` skill
-- ✅ PreToolUse hook for search optimization hints
+- ✅ PreToolUse hook for search optimisation hints
 - ✅ `npm run graph:build`, `graph:watch`, `graph:query` commands
 - ✅ 52 total Claude Code skills
-- ✅ Sanitized for generic use - removed all BA-specific content and projects
+- ✅ Sanitised for generic use - removed all BA-specific content and projects
 
 **v1.5.0** (Released 2026-01-14):
 
 - ✅ **Architecture Knowledge Graph** - Generic templates for building enterprise architecture documentation
-- ✅ 5 System notes with real-world metrics and customization guides
+- ✅ 5 System notes with real-world metrics and customisation guides
 - ✅ 2 Integration notes (real-time event-driven, batch ETL)
 - ✅ 1 Architecture HLD with enterprise patterns, costs, deployment topology
 - ✅ 1 Scenario note with 9-month roadmap, financial analysis, risk assessment
-- ✅ 3 Canvas visualizations (System Landscape, C4 Context, Data Flow)
+- ✅ 3 Canvas visualisations (System Landscape, C4 Context, Data Flow)
 - ✅ 1 Dashboard + 7 Query notes for navigation and discovery
 - ✅ Comprehensive Architecture Knowledge Graph Guide
 
@@ -1474,7 +1441,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ **Skills documentation improvements** - Updated task, meeting, and form skills for consistency
 - ✅ Task skill now uses correct date fields (`dueBy`/`doDate`) and `assignedTo` array format
 - ✅ Meeting skill includes `collections` field for categorisation
-- ✅ Form skill uses hierarchical tags with domain lookup table
+- ✅ Form skill uses hierarchical tags with a domain lookup table
 - ✅ Added `keywords` field to quality indicators in frontmatter-reference.md
 - ✅ Expanded tag guidance in quality-patterns.md with full prefix table and minimum tags
 
@@ -1488,22 +1455,6 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ All hooks include CUSTOMIZE comments for organisation-specific configuration
 - ✅ Configuration example for `.claude/settings.json`
 
-**v1.9** (Planned):
-
-- Video walkthrough and tutorials
-- More domain-specific MOC examples
-- Mobile optimisation and mobile-first workflows
-- Integration templates (Jira, ADO, GitHub Issues)
-- Community skill contributions
-
-**v2.0** (Future):
-
-- Obsidian Publish demo site
-- Historical quality trend tracking
-- Alternative theme support
-- Web dashboard for quality metrics
-- Docker-based setup for automation
-
 ---
 
 ## ❓ FAQ
@@ -1515,9 +1466,9 @@ A: Yes! While designed for architects, it works for any knowledge-intensive role
 A: No. The vault works without it. Claude Code adds AI-assisted workflows (optional).
 
 **Q: Can I use this with Notion/Roam/Logseq?**
-A: Partially. It's optimized for Obsidian, but markdown is portable.
+A: Partially. It's optimised for Obsidian, but Markdown is portable.
 
-**Q: How do I update to new template versions?**
+**Q: How do I update to the new template versions?**
 A: Pull changes from git, merge carefully (your content stays in separate notes).
 
 **Q: Is this production-ready?**
