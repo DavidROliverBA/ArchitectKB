@@ -21,7 +21,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 60 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 60 AI-assisted workflows via integrated Obsidian terminal + Node.js automation
 - **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
@@ -81,8 +81,14 @@ _Built-in quality monitoring tracks orphaned notes, stale content, missing metad
 2. **Required Obsidian Plugins** (install from Community Plugins):
    - **[Dataview](https://github.com/blacksmithgu/obsidian-dataview)** - Power queries and navigation for MOCs
    - **[Templater](https://github.com/SilentVoid13/Templater)** - Note templates with automation and dynamic content
+   - **[Terminal](https://github.com/polyipseity/obsidian-terminal)** - Integrated terminal for running Claude Code within Obsidian
 
-3. **Optional Python Tools** (for document processing skills):
+3. **Claude Code** (for AI-assisted workflows):
+   - Install: `curl -fsSL https://claude.ai/install.sh | bash` (or `brew install --cask claude-code` on macOS)
+   - Verify: `claude --version`
+   - Requires an [Anthropic API key](https://console.anthropic.com/) or Claude Pro/Max subscription
+
+4. **Optional Python Tools** (for document processing skills):
    - **docling** - PDF/PPTX processing: `pip3 install docling`
    - **python-pptx** - PowerPoint extraction: `pip3 install python-pptx`
    - **poppler** - PDF utilities: `brew install poppler` (macOS) or `apt-get install poppler-utils` (Linux)
@@ -102,16 +108,25 @@ _Built-in quality monitoring tracks orphaned notes, stale content, missing metad
    - Select the `ArchitectKB` directory
 
 3. **Install Required Plugins**:
-   - Go to Settings → Community Plugins → Browse
-   - Install "Dataview" and "Templater"
-   - Enable both plugins in Settings → Community Plugins
+   - Go to Settings → Community Plugins → Turn off Restricted Mode
+   - Click Browse, then install and enable each:
+     - **Dataview** - for queries and MOC navigation
+     - **Templater** - for note templates
+     - **Terminal** - for integrated Claude Code terminal
 
-4. **Review the Dashboard**:
+4. **Launch Claude Code** (optional but recommended):
+   - Open the terminal: click the Terminal ribbon icon, or press `Ctrl+Shift+`` ` (backtick), or use Command Palette → "Terminal: Open terminal"
+   - The terminal opens at your vault root directory
+   - Type `claude` to start an interactive session
+   - Claude Code automatically detects `CLAUDE.md` and loads all vault rules and skills
+   - See [Running Claude Code from Obsidian](#running-claude-code-from-obsidian) below for detailed setup
+
+5. **Review the Dashboard**:
    - Open `Dashboard - Main Dashboard.md`
    - Explore the Maps of Content (MOCs)
    - Review example notes
 
-5. **Choose Your Starting Point**:
+6. **Choose Your Starting Point**:
    - **For Architecture Documentation**: Open `[[Dashboard - Architecture Knowledge Graph]]` and read `[[Page - Architecture Knowledge Graph Guide]]`
    - **For General Knowledge Management**: Continue to Customization Guide below
    - **For Examples**: Review projects, ADRs, and daily notes in the vault
@@ -778,9 +793,98 @@ Follow this structured approach to build your enterprise architecture knowledge 
 
 ---
 
+## 🖥️ Running Claude Code from Obsidian
+
+The recommended way to use Claude Code with this vault is directly from within Obsidian using the **Terminal** community plugin. This gives you an integrated AI assistant that understands your entire knowledge base.
+
+### How It Works
+
+When you run `claude` from a terminal whose working directory is your vault root, Claude Code automatically:
+
+1. Loads `CLAUDE.md` (vault instructions, note types, skill definitions)
+2. Loads `.claude/rules/*.md` (frontmatter schemas, tag taxonomy, naming conventions, quality patterns)
+3. Detects the Git repository for version tracking
+4. Makes all 60 skills available via `/skill-name` commands
+
+### Terminal Plugin Setup
+
+1. **Install the Terminal plugin** (if not already done):
+   - Settings → Community Plugins → Browse → search "Terminal"
+   - Click Install, then Enable
+
+2. **Open a terminal pane**:
+   - Click the **Terminal ribbon icon** in the left sidebar, or
+   - Press `Ctrl+Shift+`` ` (backtick) to toggle the terminal, or
+   - Command Palette (Cmd/Ctrl+P) → "Terminal: Open terminal"
+
+3. **Verify the working directory** is your vault root:
+   ```bash
+   pwd
+   # Should show: /path/to/your/ArchitectKB
+   ```
+
+### Starting a Claude Code Session
+
+**Basic interactive session:**
+
+```bash
+claude
+```
+
+**With a specific model:**
+
+```bash
+claude --model opus    # Deep analysis, complex multi-step tasks
+claude --model sonnet  # Balanced for most tasks (default)
+claude --model haiku   # Fast queries, simple lookups
+```
+
+**Continue your most recent session:**
+
+```bash
+claude -c
+```
+
+**With additional working directories** (e.g., a related code repository):
+
+```bash
+claude --add-dir ../my-project
+```
+
+### What You Can Do
+
+Once Claude Code is running, you have access to all vault skills:
+
+| Category           | Examples                                                          |
+| ------------------ | ----------------------------------------------------------------- |
+| **Daily workflow** | `/daily`, `/meeting Sprint Planning`, `/weekly-summary`           |
+| **Architecture**   | `/adr API Gateway Selection`, `/c4-model MySystem`                |
+| **Research**       | `/related kafka`, `/book-search event sourcing`                   |
+| **Maintenance**    | `/vault-maintenance`, `/quality-report`, `/orphans`               |
+| **Quick capture**  | `/task Review PR`, `/weblink https://...`, `/youtube https://...` |
+
+### Tips for Effective Use
+
+- **Session persistence**: Claude Code remembers your conversation per-directory. Use `claude -c` to resume where you left off.
+- **Multiple terminals**: Open multiple terminal panes for parallel work (e.g., one for research, one for writing).
+- **Model selection**: Use Haiku for quick lookups, Sonnet for balanced work, Opus for complex multi-file tasks.
+- **Context awareness**: Claude Code reads your vault structure, so you can reference notes naturally (e.g., "summarise the Caerus project").
+- **Keyboard shortcut**: `Ctrl+Shift+`` ` toggles focus between the terminal and your notes.
+
+### Alternative Approaches
+
+| Method                            | Description                                  | When to Use                           |
+| --------------------------------- | -------------------------------------------- | ------------------------------------- |
+| **Terminal plugin** (recommended) | Integrated terminal pane within Obsidian     | Day-to-day usage, full integration    |
+| **External terminal**             | Run `claude` from iTerm2, Terminal.app, etc. | When you prefer a standalone terminal |
+| **Claudian plugin**               | Dedicated Claude Code sidebar in Obsidian    | If you prefer a chat-style interface  |
+| **Agent Client plugin**           | Multi-agent sidebar (Claude, Codex, Gemini)  | If using multiple AI CLIs             |
+
+---
+
 ## 🤖 Claude Code Skills
 
-This vault includes **60 AI-assisted workflows** accessible via Claude Code:
+This vault includes **60 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
 
 ### Daily Workflow
 
@@ -1192,10 +1296,12 @@ capacityMetrics:
 
 **Solution**:
 
-1. Ensure you're using Claude Code CLI (not web interface)
-2. Check `.claude/skills/` directory exists
-3. Verify skill file format (see vault-conventions.md)
-4. Check Claude Code settings: `claude settings show`
+1. Ensure you're running Claude Code from the vault root directory (run `pwd` to check)
+2. Verify Claude Code is installed: `claude --version`
+3. Check `.claude/skills/` directory exists in your vault
+4. Verify `CLAUDE.md` is present at the vault root
+5. Check Claude Code settings: `claude settings show`
+6. Try opening a fresh session: close the terminal and reopen with the Terminal plugin
 
 ### Architecture Queries Returning Wrong Systems
 
@@ -1359,6 +1465,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - [Obsidian](https://obsidian.md) - The knowledge base tool
 - [Dataview](https://github.com/blacksmithgu/obsidian-dataview) - Query engine
 - [Templater](https://github.com/SilentVoid13/Templater) - Template automation
+- [Terminal](https://github.com/polyipseity/obsidian-terminal) - Integrated terminal for Claude Code
 - [Claude Code](https://claude.com/code) - AI-assisted workflows
 
 ---
@@ -1494,7 +1601,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 A: Yes! While designed for architects, it works for any knowledge-intensive role.
 
 **Q: Do I need Claude Code?**
-A: No. The vault works without it. Claude Code adds AI-assisted workflows (optional).
+A: No. The vault works without it for note-taking and Dataview queries. Claude Code adds 60 AI-assisted skills (optional). Install the Terminal plugin to run it directly within Obsidian.
 
 **Q: Can I use this with Notion/Roam/Logseq?**
 A: Partially. It's optimised for Obsidian, but Markdown is portable.
