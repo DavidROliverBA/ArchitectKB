@@ -18,21 +18,21 @@ This is an Obsidian vault template designed for **Solutions Architects** to mana
 - Quality indicators for content freshness and confidence
 - Claude Code skills for automation and AI-assisted workflows
 
-## Important: This Template is Organization-Agnostic
+## Important: This Template is Organisation-Agnostic
 
-**This repository is a generic template designed for any organization.** It contains NO organization-specific entries. All examples, text, and guidance use neutral language that works for any architect in any company.
+**This repository is a generic template designed for any organisation.** It contains NO organisation-specific entries. All examples, text, and guidance use neutral language that works for any architect in any company.
 
 **When contributing to this template, maintain this standard:**
 
-- ❌ **DO NOT add** organization names, project names, staff names, or system names from any specific organization
-- ✅ **DO use** generic terminology: "your organization", "your projects", "your team", "your systems"
-- ✅ **DO include** customization guidance so users can adapt the template to their context
-- ✅ **DO provide** examples that are illustrative but not tied to any real organization
+- ❌ **DO NOT add** organisation names, project names, staff names, or system names from any specific organisation
+- ✅ **DO use** generic terminology: "your organisation", "your projects", "your team", "your systems"
+- ✅ **DO include** customisation guidance so users can adapt the template to their context
+- ✅ **DO provide** examples that are illustrative but not tied to any real organisation
 
 **Example:**
 
 - ❌ Bad: "Create ADRs following the BA ADR process with Tom Phillips as approver"
-- ✅ Good: "Create ADRs following your organization's governance process, adding your required approvers"
+- ✅ Good: "Create ADRs following your organisation's governance process, adding your required approvers"
 
 ## Directory Structure
 
@@ -185,7 +185,16 @@ doDate: YYYY-MM-DD | null              # When to start working on it
 dueBy: YYYY-MM-DD | null               # Hard deadline
 project: "[[Project Name]]" | null
 assignedTo: ["[[Person Name]]"]        # Array of assignees
+parentTask: null                       # "[[Task - Parent]]" (if subtask)
+subtasks: []                           # ["[[Task - Child 1]]", "[[Task - Child 2]]"]
 ```
+
+**Subtask Conventions:**
+
+- Parent tasks list children in `subtasks` array
+- Child tasks reference parent in `parentTask` field
+- Parent inherits completion status from children (complete when all subtasks complete)
+- Children inherit project/priority from parent unless overridden
 
 > **Note:** Legacy notes may use `due` and `assignee` (singular). New notes use `dueBy`, `doDate`, and `assignedTo` (array).
 
@@ -231,8 +240,8 @@ date: "YYYY-MM-DD"
 
 ```yaml
 type: Adr
-status: proposed | accepted | deprecated | superseded
-adrType: Technology_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
+status: draft | proposed | accepted | deprecated | superseded
+adrType: Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 description: <one-line description>
 project: "[[Project Name]]" | null
 externalRef: <ticket reference> | null
@@ -361,6 +370,7 @@ purpose: <what this snippet does>
 type: System
 systemId: "<unique-id>"               # Unique identifier for the system
 aliases: []                           # Alternative names, acronyms
+apmNumber: null                       # APM0001234 (Application Portfolio Management ID)
 systemType: application | platform | database | middleware | saas | infrastructure | interface | null
 owner: "[[Person]]" | null
 status: active | planned | deprecated | retired | null
@@ -369,6 +379,11 @@ hosting: on-prem | aws | azure | saas | external | hybrid | null
 vendor: "[[Organisation]]" | null
 annualCost: <number> | null           # Annual cost in currency
 
+# External References
+confluenceUrl: null                   # Link to Application Library page
+cmdbId: null                          # ServiceNow CMDB identifier
+documentationUrl: null                # Primary documentation link
+
 # Technology
 technology: []                        # [sap-ecc, java, postgresql]
 
@@ -376,12 +391,30 @@ technology: []                        # [sap-ecc, java, postgresql]
 connectsTo: []                        # ["[[System - Target]]"]
 relatedProjects: []                   # ["[[Project - Name]]"]
 
+# Lifecycle Classification (Gartner TIME model)
+timeCategory: tolerate | invest | migrate | eliminate | null
+replacedBy: null                      # "[[System - Successor]]"
+predecessors: []                      # ["[[System - Dependency]]"]
+
+# Data Classification
+dataClassification: public | internal | confidential | secret | null
+gdprApplicable: false
+piiHandled: false
+
 # Quality Indicators
 confidence: high | medium | low | null
 freshness: current | recent | stale | null
 verified: false
 reviewed: null
 ```
+
+**TIME Category Values (Gartner TIME Model):**
+| Value | Description |
+|-------|-------------|
+| `tolerate` | Maintain current state, no active investment |
+| `invest` | Actively investing and growing capability |
+| `migrate` | Transitioning away, planning replacement |
+| `eliminate` | Scheduled for retirement/decommission |
 
 **Integration (System-to-System Connections):**
 
@@ -467,6 +500,97 @@ confidence: high | medium | low | null
 freshness: current | recent | stale | null
 verified: false
 reviewed: null
+```
+
+**Article (Communications & Content):**
+
+```yaml
+type: Article
+articleType: article | blog-post | document | guardrail | video | podcast | linkedin-post
+platform: medium | substack | confluence | linkedin | youtube | spotify | internal | null
+targetAudience: internal | external | both
+parentIdea: null # "[[Incubator - Source Idea]]"
+status: draft | ready | published | archived
+publishedUrl: null
+publishedDate: null
+
+# Quality Indicators
+summary: null
+keywords: [] # Searchable keywords
+confidence: medium
+freshness: current
+source: synthesis
+verified: false
+reviewed: null
+
+# Relationships
+relatedTo: []
+```
+
+**DataAsset (Data Products & Assets):**
+
+```yaml
+type: DataAsset
+assetId: <unique-identifier> # e.g., "SYSTEM-REVENUE-FACT-001"
+
+# Classification
+domain: engineering | data | operations | finance | hr | supply-chain | maintenance
+dataType: database-table | database-view | api-endpoint | kafka-topic | data-product | data-lake | file | report | cache
+classification: public | internal | confidential | secret
+
+# Location & Format
+sourceSystem: null # "[[System - X]]"
+storageLocation: null # path/table/endpoint
+format: sql | json | parquet | avro | csv | xml | binary
+
+# Ownership
+owner: null # "[[Person - X]]"
+steward: null # "[[Person - Y]]" - data governance contact
+
+# Relationships
+producedBy: [] # ["[[System - X]]"]
+consumedBy: [] # ["[[System - Y]]", "[[System - Z]]"]
+exposedVia: [] # [rest-api, kafka-topic, direct-query, batch-export]
+plannedConsumers: [] # Systems that WILL consume (future state)
+deprecatingConsumers: [] # Systems moving AWAY from this data
+
+# Lineage
+derivedFrom: [] # Upstream data assets
+feedsInto: [] # Downstream data assets
+
+# Operational Metrics
+refreshFrequency: real-time | hourly | daily | weekly | monthly | ad-hoc | null
+recordCount: null
+volumePerDay: null
+retentionPeriod: null
+
+# Governance
+gdprApplicable: false
+piiFields: []
+
+# Quality Indicators
+confidence: medium
+freshness: current
+verified: false
+reviewed: null
+```
+
+**Trip (Travel Planning):**
+
+```yaml
+type: Trip
+status: idea | planning | booked | completed | cancelled
+tripType: holiday | city-break | adventure | family-visit | business | null
+destination: null
+country: null
+startDate: null # YYYY-MM-DD
+endDate: null # YYYY-MM-DD
+travellers: []
+budget: null
+currency: GBP | EUR | USD
+accommodation: null
+flights: null
+notes: null
 ```
 
 ### Quality Indicators Pattern
@@ -630,9 +754,9 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/diagram <type>`                        | Generate C4, system landscape, data flow, or AWS architecture diagrams                                      |
 | `/canvas <name>`                         | Create visual Canvas diagrams (system landscape, C4 context, data flows)                                    |
 | `/architecture-report [filter]`          | Generate architecture documentation report with system inventory, integration matrix, cost analysis         |
-| `/cost-optimization [scope]`             | Identify cost savings across systems (underutilized resources, right-sizing, contract optimization)         |
-| `/dependency-graph [system]`             | Visualize system dependencies, identify single points of failure, plan impact analysis                      |
-| `/impact-analysis <system>`              | Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation)            |
+| `/cost-optimization [scope]`             | Identify cost savings across systems (underutilised resources, right-sizing, contract optimisation)         |
+| `/dependency-graph [system]`             | Visualise system dependencies, identify single points of failure, plan impact analysis                      |
+| `/impact-analysis <system>`              | Analyse what breaks if a system fails (downstream consumers, integration paths, risk mitigation)            |
 | `/scenario-compare <baseline> <options>` | Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)                       |
 | `/dataasset <name>`                      | Document data assets (tables, APIs, topics) with producers, consumers, lineage                              |
 | `/system-roadmap`                        | Generate system lifecycle roadmap visualisation (Gartner TIME categories)                                   |
@@ -871,7 +995,7 @@ Python scripts for vault maintenance are in `scripts/`:
 | `analyze_links.py`        | Analyse wiki-link connectivity across vault                             |
 | `analyze_structure.js`    | Comprehensive vault structure analysis                                  |
 
-Run with `python3 scripts/<script>.py [arguments]`. Most scripts support `--dry-run` flag to preview changes.
+Run Python scripts with `python3 scripts/<script>.py [arguments]` and Node.js scripts with `node scripts/<script>.js [arguments]`. Most Python scripts support `--dry-run` flag to preview changes.
 
 ## Getting Started
 
@@ -920,6 +1044,6 @@ This template is designed to be customised for your organisation's needs. Key ar
 
 ---
 
-**Version:** 1.0
+**Version:** 1.8.3
 **Template Maintained by:** Solutions Architecture Community
 **Review Frequency:** Update as conventions evolve
