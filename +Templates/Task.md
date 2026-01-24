@@ -12,9 +12,12 @@ modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 completed: false
 priority: medium
-due:
-project:
-assignee:
+doDate: null
+dueBy: null
+project: null
+assignedTo: ["[[Your Name]]"]
+parentTask: null
+subtasks: []
 ---
 
 # <% name %>
@@ -25,5 +28,6 @@ assignee:
 
 - [ ]
 
-## Notes
+## Subtasks
 
+## Notes

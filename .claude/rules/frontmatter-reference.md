@@ -26,6 +26,8 @@ doDate: null # When to start
 dueBy: null # Hard deadline
 project: null # "[[Project]]"
 assignedTo: [] # ["[[Person]]"]
+parentTask: null # "[[Task - Parent]]" (if subtask)
+subtasks: [] # ["[[Task - Child 1]]", "[[Task - Child 2]]"]
 ```
 
 ### Project
@@ -195,6 +197,115 @@ refreshed: YYYY-MM-DD
 type: CodeSnippet
 language: python | javascript | bash | yaml | sql | other
 purpose: null
+```
+
+### System
+
+```yaml
+type: System
+systemId: "{{systemId}}"
+aliases: [] # Alternative names
+apmNumber: null # Application Portfolio Management ID
+systemType: application | platform | infrastructure | database | middleware | saas | null
+owner: null # "[[Person]]"
+status: active | planned | deprecated | retired | null
+criticality: critical | high | medium | low | null
+hosting: on-prem | aws | azure | gcp | saas | hybrid | null
+vendor: null # "[[Organisation - Vendor]]"
+# Technology
+technology: [] # [java, python, postgresql]
+# Integrations
+connectsTo: [] # ["[[System - Other]]"]
+# Lifecycle
+launchDate: null # YYYY-MM-DD
+sunsetDate: null # YYYY-MM-DD
+timeCategory: tolerate | invest | migrate | eliminate | null # Gartner TIME model
+replacedBy: null # "[[System - Successor]]"
+predecessors: [] # ["[[System - Dependency]]"]
+# Data Classification
+dataClassification: public | internal | confidential | secret | null
+gdprApplicable: false
+# Quality Indicators
+confidence: high | medium | low | null
+freshness: current | recent | stale | null
+verified: false
+reviewed: null
+```
+
+### DataAsset
+
+```yaml
+type: DataAsset
+assetId: null # Unique identifier
+domain: engineering | data | operations | finance | null
+dataType: database-table | database-view | api-endpoint | kafka-topic | data-product | data-lake | file | report | cache
+classification: public | internal | confidential | secret
+sourceSystem: null # "[[System - X]]"
+storageLocation: null # path/table/endpoint
+format: sql | json | parquet | avro | csv | xml | binary
+owner: null # "[[Person]]"
+steward: null # Data governance contact
+# Relationships
+producedBy: [] # ["[[System - X]]"]
+consumedBy: [] # ["[[System - Y]]"]
+plannedConsumers: [] # Future consumers
+deprecatingConsumers: [] # Systems moving away
+# Lineage
+derivedFrom: [] # Upstream assets
+feedsInto: [] # Downstream assets
+# Operational
+refreshFrequency: real-time | hourly | daily | weekly | monthly | null
+# Governance
+gdprApplicable: false
+piiFields: []
+# Quality Indicators
+confidence: medium
+freshness: current
+verified: false
+reviewed: null
+```
+
+### Article
+
+```yaml
+type: Article
+articleType: article | blog-post | document | video | podcast | linkedin-post
+platform: medium | substack | confluence | linkedin | youtube | spotify | internal | null
+targetAudience: internal | external | both
+parentIdea: null # "[[Incubator - Source]]"
+status: draft | ready | published | archived
+publishedUrl: null
+publishedDate: null
+# Quality Indicators
+summary: null
+keywords: []
+confidence: medium
+freshness: current
+source: synthesis
+verified: false
+reviewed: null
+# Relationships
+relatedTo: []
+```
+
+### Trip
+
+```yaml
+type: Trip
+status: idea | planning | booked | completed | cancelled
+tripType: holiday | city-break | adventure | business | null
+destination: null
+country: null
+startDate: null # YYYY-MM-DD
+endDate: null # YYYY-MM-DD
+travellers: []
+budget: null
+currency: GBP | EUR | USD
+# Notion Sync (optional)
+notionPageId: null
+notionUrl: null
+lastSynced: null
+syncStatus: untracked | synced | local-ahead | remote-ahead | conflict
 ```
 
 ## Archive Fields

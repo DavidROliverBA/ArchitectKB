@@ -167,6 +167,18 @@ Filter by status or domain. No filter = summary of active ideas.
 1. Fuzzy match idea in `+Incubator/`
 2. Ask: "What should this become? (Project / ADR / Page / Task)"
 3. Create target note with context from idea
+
+**Graduation Outcomes:**
+
+| Type | When to Use |
+|------|-------------|
+| **Project** | Idea becomes formal initiative |
+| **ADR** | Idea results in architecture decision |
+| **Page** | Idea becomes documentation or guide |
+| **Article** | Idea becomes communication (blog, video, podcast, etc.) |
+| **Task** | Idea becomes a single actionable task |
+
+**Article graduation tip:** Use `/article <title> from <idea>` to create the Article first, then graduate the idea.
 4. Update idea frontmatter:
    - `status: accepted`
    - `outcome: "[[New Note]]"`

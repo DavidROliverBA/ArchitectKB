@@ -11,6 +11,7 @@ All generated text must be in UK English.
 This is an Obsidian vault template designed for **Solutions Architects** to manage professional knowledge effectively. The vault supports architecture decisions, project documentation, meeting notes, research ideas, and personal productivity tracking.
 
 **Key Features:**
+
 - Metadata-driven organisation using frontmatter `type` fields
 - Architecture Decision Records (ADRs) with relationship tracking
 - Incubator system for research and idea development
@@ -22,12 +23,14 @@ This is an Obsidian vault template designed for **Solutions Architects** to mana
 **This repository is a generic template designed for any organization.** It contains NO organization-specific entries. All examples, text, and guidance use neutral language that works for any architect in any company.
 
 **When contributing to this template, maintain this standard:**
+
 - ❌ **DO NOT add** organization names, project names, staff names, or system names from any specific organization
 - ✅ **DO use** generic terminology: "your organization", "your projects", "your team", "your systems"
 - ✅ **DO include** customization guidance so users can adapt the template to their context
 - ✅ **DO provide** examples that are illustrative but not tied to any real organization
 
 **Example:**
+
 - ❌ Bad: "Create ADRs following the BA ADR process with Tom Phillips as approver"
 - ✅ Good: "Create ADRs following your organization's governance process, adding your required approvers"
 
@@ -64,37 +67,41 @@ obsidian-architect-vault-template/
 
 Notes are identified by their `type` frontmatter field:
 
-| Type | Description | Location |
-|------|-------------|----------|
-| `Task` | Task tracking and to-dos | root |
-| `Project` | Project documentation | root |
-| `Meeting` | Meeting notes and minutes | +Meetings/ |
-| `Person` | Contact info and notes on colleagues | +People/ |
-| `Weblink` | Saved web links with descriptions | root |
-| `Page` | Long-form documentation and guides | root |
-| `Adr` | Architecture Decision Records | root |
-| `Organisation` | Notes about organisations and vendors | root |
-| `AtomicNote` | Small focused notes on specific topics | root |
-| `Zettel` | Zettelkasten-style notes (may contain sensitive info) | root |
-| `DailyNote` | Daily journal entries | +Daily/[year]/ |
-| `Incubator` | Research ideas and concepts being explored | +Incubator/ |
-| `IncubatorNote` | Supporting research for incubator ideas | +Incubator/ |
-| `System` | Enterprise systems, applications, platforms | root |
-| `Integration` | System-to-system data integrations | root |
-| `Architecture` | High-level designs (HLD), low-level designs (LLD) | root |
-| `Scenario` | What-if scenarios, future-state planning | root |
-| `DataSource` | Databases, tables, APIs, data entities | root |
-| `Okr` | OKR and goal tracking notes | root |
-| `Query` | Saved Dataview queries | root |
-| `Course` | Training and course notes | root |
-| `MOC` | Maps of Content for navigation | root |
-| `Dashboard` | Dashboard views with aggregated queries | root |
-| `CodeSnippet` | Reusable code snippets and examples | root |
-| `FormSubmission` | Governance and compliance form tracking | root |
+| Type             | Description                                            | Location       |
+| ---------------- | ------------------------------------------------------ | -------------- |
+| `Task`           | Task tracking and to-dos                               | root           |
+| `Project`        | Project documentation                                  | root           |
+| `Meeting`        | Meeting notes and minutes                              | +Meetings/     |
+| `Person`         | Contact info and notes on colleagues                   | +People/       |
+| `Weblink`        | Saved web links with descriptions                      | root           |
+| `Page`           | Long-form documentation and guides                     | root           |
+| `Adr`            | Architecture Decision Records                          | root           |
+| `Organisation`   | Notes about organisations and vendors                  | root           |
+| `AtomicNote`     | Small focused notes on specific topics                 | root           |
+| `Zettel`         | Zettelkasten-style notes (may contain sensitive info)  | root           |
+| `DailyNote`      | Daily journal entries                                  | +Daily/[year]/ |
+| `Incubator`      | Research ideas and concepts being explored             | +Incubator/    |
+| `IncubatorNote`  | Supporting research for incubator ideas                | +Incubator/    |
+| `System`         | Enterprise systems, applications, platforms            | root           |
+| `Integration`    | System-to-system data integrations                     | root           |
+| `Architecture`   | High-level designs (HLD), low-level designs (LLD)      | root           |
+| `Scenario`       | What-if scenarios, future-state planning               | root           |
+| `DataSource`     | Databases, tables, APIs, data entities                 | root           |
+| `Okr`            | OKR and goal tracking notes                            | root           |
+| `Query`          | Saved Dataview queries                                 | root           |
+| `Course`         | Training and course notes                              | root           |
+| `MOC`            | Maps of Content for navigation                         | root           |
+| `Dashboard`      | Dashboard views with aggregated queries                | root           |
+| `CodeSnippet`    | Reusable code snippets and examples                    | root           |
+| `Article`        | Communications: articles, blog posts, videos, podcasts | root           |
+| `DataAsset`      | Data asset documentation (tables, APIs, topics)        | root           |
+| `Trip`           | Personal trip planning and itineraries                 | root           |
+| `FormSubmission` | Governance and compliance form tracking                | root           |
 
 ### Navigation
 
 Use these Maps of Content (MOC) files to navigate:
+
 - **[[Dashboard - Main Dashboard]]** - Main hub with Dataview queries
 - **[[MOC - Tasks MOC]]** - All tasks by priority/due date
 - **[[MOC - Projects MOC]]** - Projects by status
@@ -109,22 +116,25 @@ Use these Maps of Content (MOC) files to navigate:
 All notes use YAML frontmatter with a `type` field. Common properties by type:
 
 ### Universal Fields (All Notes)
+
 ```yaml
-type: <note-type>           # Required: Task, Project, Meeting, Person, etc.
-title: <title>              # Required: Display title
-created: YYYY-MM-DD         # Creation date
-modified: YYYY-MM-DD        # Last modified date
-tags: []                    # Optional tags for categorisation
+type: <note-type> # Required: Task, Project, Meeting, Person, etc.
+title: <title> # Required: Display title
+created: YYYY-MM-DD # Creation date
+modified: YYYY-MM-DD # Last modified date
+tags: [] # Optional tags for categorisation
 ```
 
 ### Tag Syntax
 
 **In frontmatter (no `#`):**
+
 ```yaml
 tags: [activity/architecture, technology/aws, project/alpha]
 ```
 
 **Inline in note body (with `#`):**
+
 ```markdown
 This relates to #technology/aws and #project/alpha work.
 ```
@@ -134,16 +144,17 @@ Obsidian treats both the same way - the `#` is only needed for inline tags in th
 ### Type-Specific Fields
 
 **Project:**
+
 ```yaml
 type: Project
-status: active | paused | completed    # Simple string values
+status: active | paused | completed # Simple string values
 priority: high | medium | low
 timeFrame: YYYY-MM-DD - YYYY-MM-DD
 collections: <program name>
 # Transformation Classification
 transformationType: modernisation | migration | greenfield | integration | decommission | uplift | null
 transformationScope: enterprise | department | team | application | null
-aiInvolved: false         # Does project involve AI/ML?
+aiInvolved: false # Does project involve AI/ML?
 ```
 
 **Transformation Types:**
@@ -165,6 +176,7 @@ aiInvolved: false         # Does project involve AI/ML?
 | `application` | Single application or service |
 
 **Task:**
+
 ```yaml
 type: Task
 completed: true | false
@@ -174,9 +186,11 @@ dueBy: YYYY-MM-DD | null               # Hard deadline
 project: "[[Project Name]]" | null
 assignedTo: ["[[Person Name]]"]        # Array of assignees
 ```
+
 > **Note:** Legacy notes may use `due` and `assignee` (singular). New notes use `dueBy`, `doDate`, and `assignedTo` (array).
 
 **Meeting:**
+
 ```yaml
 type: Meeting
 date: 'YYYY-MM-DD'
@@ -185,9 +199,11 @@ attendees: ["[[Person Name]]"]        # List of attendee links
 summary: <brief summary>              # One-line summary
 collections: <category>               # e.g., "1:1", "Sprint Planning"
 ```
+
 > **Note:** Legacy notes may use `peopleInvolved` (string) instead of `attendees` (array).
 
 **Person:**
+
 ```yaml
 type: Person
 role: <job title>
@@ -196,6 +212,7 @@ emailAddress: '<email>'
 ```
 
 **Weblink:**
+
 ```yaml
 type: Weblink
 url: <URL>
@@ -204,12 +221,14 @@ createdAt: ISO timestamp
 ```
 
 **DailyNote:**
+
 ```yaml
 type: DailyNote
-date: 'YYYY-MM-DD'
+date: "YYYY-MM-DD"
 ```
 
 **ADR (Architecture Decision Record):**
+
 ```yaml
 type: Adr
 status: proposed | accepted | deprecated | superseded
@@ -255,20 +274,23 @@ humanOversight: full | partial | minimal | none | null
 | `none` | Fully autonomous (use with caution) |
 
 **Incubator (Research Idea):**
+
 ```yaml
 type: Incubator
 status: seed | exploring | validated | accepted | rejected
-domain: []                    # Controlled list: architecture, governance, tooling, security, data, documentation, process, ai, infrastructure
-outcome: null                 # Link to resulting deliverable when accepted
+domain: [] # Controlled list: architecture, governance, tooling, security, data, documentation, process, ai, infrastructure
+outcome: null # Link to resulting deliverable when accepted
 ```
 
 **IncubatorNote (Supporting Research):**
+
 ```yaml
 type: IncubatorNote
-parent-ideas: ["[[Incubator - Idea]]"]  # Can link to multiple ideas
+parent-ideas: ["[[Incubator - Idea]]"] # Can link to multiple ideas
 ```
 
 **FormSubmission (Governance Forms):**
+
 ```yaml
 type: FormSubmission
 formType: DPIA | SecurityReview | RiskAssessment | ChangeRequest | ComplianceCheck | Other
@@ -283,6 +305,7 @@ attachments: []                   # Links to related files
 ```
 
 **OKR (Objectives and Key Results):**
+
 ```yaml
 type: Okr
 status: active | completed | abandoned
@@ -293,13 +316,15 @@ project: "[[Project Name]]" | null
 ```
 
 **Query (Saved Dataview Query):**
+
 ```yaml
 type: Query
 description: <what this query shows>
-queryType: table | list | task          # Dataview query type
+queryType: table | list | task # Dataview query type
 ```
 
 **Course (Training Notes):**
+
 ```yaml
 type: Course
 status: not-started | in-progress | completed
@@ -309,18 +334,21 @@ completedDate: YYYY-MM-DD | null
 ```
 
 **MOC (Map of Content):**
+
 ```yaml
 type: MOC
 scope: <what this MOC covers>
 ```
 
 **Dashboard:**
+
 ```yaml
 type: Dashboard
-refreshed: YYYY-MM-DD                   # Last refresh date
+refreshed: YYYY-MM-DD # Last refresh date
 ```
 
 **CodeSnippet:**
+
 ```yaml
 type: CodeSnippet
 language: python | javascript | bash | yaml | sql | other
@@ -328,6 +356,7 @@ purpose: <what this snippet does>
 ```
 
 **System (Enterprise Systems):**
+
 ```yaml
 type: System
 systemId: "<unique-id>"               # Unique identifier for the system
@@ -355,6 +384,7 @@ reviewed: null
 ```
 
 **Integration (System-to-System Connections):**
+
 ```yaml
 type: Integration
 sourceSystem: "[[System - Source]]"
@@ -377,6 +407,7 @@ reviewed: null
 ```
 
 **Architecture (High-Level/Low-Level Designs):**
+
 ```yaml
 type: Architecture
 architectureType: high-level-design | low-level-design | c4-context | c4-container | aws-architecture | null
@@ -398,6 +429,7 @@ reviewed: null
 ```
 
 **Scenario (What-If Analysis & Planning):**
+
 ```yaml
 type: Scenario
 scenarioType: current-state | future-state | alternative-option | risk-mitigation | null
@@ -419,6 +451,7 @@ reviewed: null
 ```
 
 **DataSource (Databases, Tables, APIs):**
+
 ```yaml
 type: DataSource
 dataSourceType: database-table | database-view | api-endpoint | data-lake | file-feed | stream | null
@@ -442,13 +475,13 @@ Important notes (ADRs, Pages, Projects) should include quality metadata:
 
 ```yaml
 # Quality Indicators
-confidence: high | medium | low         # How authoritative is this?
-freshness: current | recent | stale     # How up-to-date?
+confidence: high | medium | low # How authoritative is this?
+freshness: current | recent | stale # How up-to-date?
 source: primary | secondary | synthesis # Where did info come from?
-verified: true | false                  # Has it been verified?
-reviewed: YYYY-MM-DD                    # Last review date
-keywords: []                            # Searchable keywords
-summary: <brief summary>                # One-line summary
+verified: true | false # Has it been verified?
+reviewed: YYYY-MM-DD # Last review date
+keywords: [] # Searchable keywords
+summary: <brief summary> # One-line summary
 ```
 
 **Guideline Values:**
@@ -470,13 +503,14 @@ ADRs and Projects should track relationships to other notes:
 
 ```yaml
 # Relationships
-relatedTo: ["[[Related Note]]"]         # Related decisions, projects, context
-supersedes: ["[[Old ADR]]"]             # ADRs this decision replaces
-dependsOn: ["[[Foundation ADR]]"]       # ADRs that must exist first
-contradicts: ["[[Conflicting ADR]]"]    # Known conflicts (rare)
+relatedTo: ["[[Related Note]]"] # Related decisions, projects, context
+supersedes: ["[[Old ADR]]"] # ADRs this decision replaces
+dependsOn: ["[[Foundation ADR]]"] # ADRs that must exist first
+contradicts: ["[[Conflicting ADR]]"] # Known conflicts (rare)
 ```
 
 **Guidelines:**
+
 - Use empty arrays `[]` if no relationships (don't omit the field)
 - Always quote wiki-links in frontmatter YAML
 - Keep relationships up-to-date when decisions change
@@ -499,17 +533,18 @@ The Incubator is a dedicated space for exploring ideas before committing to form
 
 ### Incubator Lifecycle
 
-| Status | Description |
-|--------|-------------|
-| `seed` | Initial idea capture, minimal research |
-| `exploring` | Active research and investigation |
-| `validated` | Research complete, ready for decision |
-| `accepted` | Graduated to Project, ADR, or Page |
-| `rejected` | Decided not to pursue |
+| Status      | Description                            |
+| ----------- | -------------------------------------- |
+| `seed`      | Initial idea capture, minimal research |
+| `exploring` | Active research and investigation      |
+| `validated` | Research complete, ready for decision  |
+| `accepted`  | Graduated to Project, ADR, or Page     |
+| `rejected`  | Decided not to pursue                  |
 
 ### Incubator Domains
 
 Use these controlled domain values:
+
 - `architecture` - Architecture patterns and approaches
 - `governance` - Governance processes and standards
 - `tooling` - Tools and developer experience
@@ -522,16 +557,16 @@ Use these controlled domain values:
 
 ### Incubator Commands
 
-| Command | Description |
-|---------|-------------|
-| `incubator <title>` | Create new idea (no prompts) |
-| `incubator <title> [domain]` | Create with domain keywords |
-| `incubator note <title> for <idea>` | Create research note |
-| `incubator list [filter]` | List active ideas by status or domain |
-| `incubator list all` | Include archived (graduated/rejected) |
-| `incubator status <idea> <status>` | Update lifecycle status |
-| `incubator graduate <idea>` | Graduate to Project/ADR/Page (archives idea) |
-| `incubator reject <idea>` | Reject with reason (archives idea) |
+| Command                             | Description                                  |
+| ----------------------------------- | -------------------------------------------- |
+| `incubator <title>`                 | Create new idea (no prompts)                 |
+| `incubator <title> [domain]`        | Create with domain keywords                  |
+| `incubator note <title> for <idea>` | Create research note                         |
+| `incubator list [filter]`           | List active ideas by status or domain        |
+| `incubator list all`                | Include archived (graduated/rejected)        |
+| `incubator status <idea> <status>`  | Update lifecycle status                      |
+| `incubator graduate <idea>`         | Graduate to Project/ADR/Page (archives idea) |
+| `incubator reject <idea>`           | Reject with reason (archives idea)           |
 
 ## Archive System
 
@@ -568,88 +603,103 @@ The Archive provides soft-deletion for completed or abandoned notes while preser
 User-invocable skills are defined in `.claude/skills/`. When the user invokes a skill, read the corresponding file for instructions.
 
 ### Daily Workflow
-| Command | Description |
-|---------|-------------|
-| `/daily` | Create today's daily note |
+
+| Command            | Description                                |
+| ------------------ | ------------------------------------------ |
+| `/daily`           | Create today's daily note                  |
 | `/meeting <title>` | Create meeting note with attendees/project |
-| `/weekly-summary` | Generate weekly summary from notes |
+| `/weekly-summary`  | Generate weekly summary from notes         |
 
 ### Architecture Work
-| Command | Description |
-|---------|-------------|
-| `/adr <title>` | Create new ADR with guided prompts |
-| `/project-status <project>` | Generate project status report (uses sub-agents) |
-| `/find-decisions <topic>` | Find all decisions about a topic (uses sub-agents) |
+
+| Command                     | Description                                        |
+| --------------------------- | -------------------------------------------------- |
+| `/adr <title>`              | Create new ADR with guided prompts                 |
+| `/project-status <project>` | Generate project status report (uses sub-agents)   |
+| `/find-decisions <topic>`   | Find all decisions about a topic (uses sub-agents) |
 
 ### Architecture Documentation & Analysis
-| Command | Description |
-|---------|-------------|
-| `/system <name>` | Create comprehensive System note with guided prompts (checks duplicates, gathers tech stack, metrics, SLAs) |
-| `/integration <source> <target>` | Document system-to-system integration with pattern, latency, data volume, quality checks |
-| `/architecture <title>` | Create Architecture HLD/LLD with systems, components, NFRs, deployment topology |
-| `/scenario <name>` | Create what-if scenarios, future-state plans, cost/benefit analysis, risk assessment |
-| `/datasource <name>` | Document databases, tables, APIs, datasets with schema and access info |
-| `/diagram <type>` | Generate C4, system landscape, data flow, or AWS architecture diagrams |
-| `/canvas <name>` | Create visual Canvas diagrams (system landscape, C4 context, data flows) |
-| `/architecture-report [filter]` | Generate architecture documentation report with system inventory, integration matrix, cost analysis |
-| `/cost-optimization [scope]` | Identify cost savings across systems (underutilized resources, right-sizing, contract optimization) |
-| `/dependency-graph [system]` | Visualize system dependencies, identify single points of failure, plan impact analysis |
-| `/impact-analysis <system>` | Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation) |
-| `/scenario-compare <baseline> <options>` | Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits) |
-| `/system-sync [source]` | Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library) |
-| `/tag-management [action]` | Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy) |
+
+| Command                                  | Description                                                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `/system <name>`                         | Create comprehensive System note with guided prompts (checks duplicates, gathers tech stack, metrics, SLAs) |
+| `/integration <source> <target>`         | Document system-to-system integration with pattern, latency, data volume, quality checks                    |
+| `/architecture <title>`                  | Create Architecture HLD/LLD with systems, components, NFRs, deployment topology                             |
+| `/scenario <name>`                       | Create what-if scenarios, future-state plans, cost/benefit analysis, risk assessment                        |
+| `/datasource <name>`                     | Document databases, tables, APIs, datasets with schema and access info                                      |
+| `/diagram <type>`                        | Generate C4, system landscape, data flow, or AWS architecture diagrams                                      |
+| `/canvas <name>`                         | Create visual Canvas diagrams (system landscape, C4 context, data flows)                                    |
+| `/architecture-report [filter]`          | Generate architecture documentation report with system inventory, integration matrix, cost analysis         |
+| `/cost-optimization [scope]`             | Identify cost savings across systems (underutilized resources, right-sizing, contract optimization)         |
+| `/dependency-graph [system]`             | Visualize system dependencies, identify single points of failure, plan impact analysis                      |
+| `/impact-analysis <system>`              | Analyze what breaks if a system fails (downstream consumers, integration paths, risk mitigation)            |
+| `/scenario-compare <baseline> <options>` | Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)                       |
+| `/dataasset <name>`                      | Document data assets (tables, APIs, topics) with producers, consumers, lineage                              |
+| `/system-roadmap`                        | Generate system lifecycle roadmap visualisation (Gartner TIME categories)                                   |
+| `/system-sync [source]`                  | Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)                         |
+| `/tag-management [action]`               | Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)    |
 
 ### Engineering Management
-| Command | Description |
-|---------|-------------|
-| `/adr-report [period]` | ADR activity report (week/month/all) |
-| `/dpia-status [filter]` | DPIA compliance status across projects |
-| `/project-snapshot [name]` | Quick status of all active projects |
+
+| Command                    | Description                            |
+| -------------------------- | -------------------------------------- |
+| `/adr-report [period]`     | ADR activity report (week/month/all)   |
+| `/dpia-status [filter]`    | DPIA compliance status across projects |
+| `/project-snapshot [name]` | Quick status of all active projects    |
 
 ### Research & Discovery
-| Command | Description |
-|---------|-------------|
-| `/related <topic>` | Find all notes mentioning a topic (uses sub-agents) |
-| `/summarize <note>` | Summarise a note or set of notes |
-| `/timeline <project>` | Chronological project history (uses sub-agents) |
-| `/exec-summary <note>` | Generate non-technical executive summary |
+
+| Command                | Description                                                          |
+| ---------------------- | -------------------------------------------------------------------- |
+| `/related <topic>`     | Find all notes mentioning a topic (uses sub-agents)                  |
+| `/summarize <note>`    | Summarise a note or set of notes                                     |
+| `/timeline <project>`  | Chronological project history (uses sub-agents)                      |
+| `/exec-summary <note>` | Generate non-technical executive summary                             |
+| `/book-search <topic>` | Search indexed book/PDF content by topic (graph-only, no file reads) |
 
 ### Governance & Compliance
-| Command | Description |
-|---------|-------------|
-| `/form <type> <name>` | Quick-create form submission tracking note |
-| `/form-status [filter]` | Check status of form submissions |
+
+| Command                 | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `/form <type> <name>`   | Quick-create form submission tracking note |
+| `/form-status [filter]` | Check status of form submissions           |
 
 ### Maintenance
-| Command | Description |
-|---------|-------------|
-| `/wipe` | Generate context handoff, clear session, resume fresh (auto-detects tmux) |
-| `/vault-maintenance` | Quarterly health check - all quality checks (uses sub-agents) |
-| `/check-weblinks` | Test all weblink URLs for dead/redirected links (uses sub-agents) |
-| `/archive <note>` | Soft archive a note (Project, Task, Page, Person) |
-| `/orphans` | Find notes with no backlinks (uses sub-agents) |
-| `/broken-links` | Find broken wiki-links (uses sub-agents) |
-| `/rename <pattern>` | Batch rename files with link updates |
-| `/quality-report` | Generate comprehensive quality metrics (uses sub-agents) |
+
+| Command              | Description                                                               |
+| -------------------- | ------------------------------------------------------------------------- |
+| `/wipe`              | Generate context handoff, clear session, resume fresh (auto-detects tmux) |
+| `/vault-maintenance` | Quarterly health check - all quality checks (uses sub-agents)             |
+| `/check-weblinks`    | Test all weblink URLs for dead/redirected links (uses sub-agents)         |
+| `/archive <note>`    | Soft archive a note (Project, Task, Page, Person)                         |
+| `/orphans`           | Find notes with no backlinks (uses sub-agents)                            |
+| `/broken-links`      | Find broken wiki-links (uses sub-agents)                                  |
+| `/sync-notion-pages` | Bidirectional sync between Obsidian notes and Notion pages                |
+| `/rename <pattern>`  | Batch rename files with link updates                                      |
+| `/quality-report`    | Generate comprehensive quality metrics (uses sub-agents)                  |
 
 ### Document Processing
-| Command | Description |
-|---------|-------------|
-| `/pdf-to-page <path>` | Convert PDF to Page note with extracted PNG images |
-| `/pptx-to-page <path>` | Convert PowerPoint to Page note with slide images |
-| `/screenshot-analyze <path>` | Comprehensive screenshot analysis with OCR |
-| `/diagram-review <path>` | Analyse architecture diagrams and flowcharts |
-| `/document-extract <path>` | Extract text from scanned documents/photos |
-| `/attachment-audit` | Audit all vault attachments with visual analysis |
+
+| Command                      | Description                                        |
+| ---------------------------- | -------------------------------------------------- |
+| `/pdf-to-page <path>`        | Convert PDF to Page note with extracted PNG images |
+| `/pptx-to-page <path>`       | Convert PowerPoint to Page note with slide images  |
+| `/screenshot-analyze <path>` | Comprehensive screenshot analysis with OCR         |
+| `/diagram-review <path>`     | Analyse architecture diagrams and flowcharts       |
+| `/document-extract <path>`   | Extract text from scanned documents/photos         |
+| `/attachment-audit`          | Audit all vault attachments with visual analysis   |
 
 ### Quick Capture
-| Command | Description |
-|---------|-------------|
-| `/task <title>` | Quick-create task with project/due date |
-| `/person <name>` | Create person note from template |
-| `/weblink <url>` | Save URL with analysis and summary |
-| `/youtube <url>` | Save YouTube video with transcript analysis |
-| `incubator <title>` | Quick-create incubator idea |
+
+| Command               | Description                                                     |
+| --------------------- | --------------------------------------------------------------- |
+| `/task <title>`       | Quick-create task with project/due date                         |
+| `/person <name>`      | Create person note from template                                |
+| `/weblink <url>`      | Save URL with analysis and summary                              |
+| `/youtube <url>`      | Save YouTube video with transcript analysis                     |
+| `/article <title>`    | Quick-create article (blog post, video, podcast, LinkedIn post) |
+| `/trip <destination>` | Create trip planning note with flights and accommodation        |
+| `incubator <title>`   | Quick-create incubator idea                                     |
 
 **Usage**: These are instruction files, not registered Claude Code commands. When the user types a skill command (e.g., `/meeting`) or asks naturally (e.g., "create a meeting note"), read `.claude/skills/<skill>.md` and follow its instructions. Skills marked "uses sub-agents" should launch parallel Task agents for efficiency.
 
@@ -659,16 +709,17 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 
 Additional context files are available in `.claude/context/` to provide deeper domain knowledge without bloating the main context. **Load these files as needed based on user queries:**
 
-| File | Load When User Asks About |
-|------|---------------------------|
-| `projects-template.md` | Specific project details and status |
-| `technology-template.md` | Technical systems, platforms, and tools |
-| `people-template.md` | People, teams, stakeholders |
-| `acronyms-template.md` | Unknown abbreviations and terminology |
-| `architecture-template.md` | ADRs, patterns, governance, compliance |
-| `organisations-template.md` | External companies and vendors |
+| File                        | Load When User Asks About               |
+| --------------------------- | --------------------------------------- |
+| `projects-template.md`      | Specific project details and status     |
+| `technology-template.md`    | Technical systems, platforms, and tools |
+| `people-template.md`        | People, teams, stakeholders             |
+| `acronyms-template.md`      | Unknown abbreviations and terminology   |
+| `architecture-template.md`  | ADRs, patterns, governance, compliance  |
+| `organisations-template.md` | External companies and vendors          |
 
 **Usage**: When a query involves specific domain knowledge, read the relevant context file(s) first:
+
 ```
 Read .claude/context/projects-template.md   # For project-specific queries
 Read .claude/context/acronyms-template.md   # When encountering unknown terms
@@ -680,11 +731,12 @@ Read .claude/context/acronyms-template.md   # When encountering unknown terms
 
 Detailed reference documentation is split into focused files in `.claude/rules/`:
 
-| File | Purpose |
-|------|---------|
-| `frontmatter-reference.md` | Quick reference for all frontmatter fields by type |
-| `naming-conventions.md` | File and folder naming patterns |
-| `quality-patterns.md` | Quality indicators, relationships, and tag taxonomy |
+| File                       | Purpose                                                      |
+| -------------------------- | ------------------------------------------------------------ |
+| `frontmatter-reference.md` | Quick reference for all frontmatter fields by type           |
+| `naming-conventions.md`    | File and folder naming patterns                              |
+| `quality-patterns.md`      | Quality indicators, relationships, and tag taxonomy          |
+| `tag-taxonomy.md`          | Comprehensive hierarchical tag taxonomy and validation rules |
 
 These provide deeper detail than this main file - load when working on specific conventions.
 
@@ -699,6 +751,7 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 ### Graph-First Search Order
 
 1. **First: Query the graph index** (fast, ranked results)
+
    ```bash
    node scripts/graph-query.js --search "<term>"      # BM25 ranked search
    node scripts/graph-query.js --type <Type>          # Filter by type
@@ -719,16 +772,16 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 
 ### Common Graph Queries
 
-| Need | Graph Command |
-|------|---------------|
-| Find all ADRs | `node scripts/graph-query.js --type Adr` |
-| Active projects | `node scripts/graph-query.js --type Project --status active` |
-| High priority tasks | `node scripts/graph-query.js --type Task --priority high` |
-| Search for "kafka" | `node scripts/graph-query.js --search kafka` |
-| Orphaned notes | `node scripts/graph-query.js --orphans` |
-| Broken links | `node scripts/graph-query.js --broken-links` |
-| Notes linking to X | `node scripts/graph-query.js --backlinks "Project - MyProject"` |
-| Vault statistics | `node scripts/graph-query.js --stats` |
+| Need                | Graph Command                                                   |
+| ------------------- | --------------------------------------------------------------- |
+| Find all ADRs       | `node scripts/graph-query.js --type Adr`                        |
+| Active projects     | `node scripts/graph-query.js --type Project --status active`    |
+| High priority tasks | `node scripts/graph-query.js --type Task --priority high`       |
+| Search for "kafka"  | `node scripts/graph-query.js --search kafka`                    |
+| Orphaned notes      | `node scripts/graph-query.js --orphans`                         |
+| Broken links        | `node scripts/graph-query.js --broken-links`                    |
+| Notes linking to X  | `node scripts/graph-query.js --backlinks "Project - MyProject"` |
+| Vault statistics    | `node scripts/graph-query.js --stats`                           |
 
 ### When to Skip the Graph
 
@@ -739,11 +792,13 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 ## Working with This Vault
 
 ### Linking Conventions
+
 - Internal links use Obsidian wiki-link syntax: `[[Note Title]]`
 - Cross-references between notes create a knowledge graph (use backlinks)
 - Status/priority values use simple strings: `active`, `high`, `medium`, `low`
 
 ### Creating/Editing Notes
+
 1. Always include appropriate YAML frontmatter with `type` field
 2. Place most content notes in the **root directory**
 3. Place daily notes in **+Daily/[year]/** folder (e.g., `+Daily/2026/`)
@@ -761,33 +816,37 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 
 ### Filename Conventions
 
-| Type | Filename Pattern | Location | Example |
-|------|------------------|----------|---------|
-| Person | `{{Name}}.md` | +People/ | `+People/John Smith.md` |
-| Meeting | `Meeting - YYYY-MM-DD {{Title}}.md` | +Meetings/ | `+Meetings/Meeting - 2026-01-06 Architecture Review.md` |
-| Project | `Project - {{Name}}.md` | root | `Project - Cloud Migration.md` |
-| Task | `Task - {{Title}}.md` | root | `Task - Review ADR draft.md` |
-| Weblink | `Weblink - {{Title}}.md` | root | `Weblink - AWS Well-Architected Framework.md` |
-| ADR | `ADR - {{Title}}.md` | root | `ADR - API Gateway Selection.md` |
-| DailyNote | `YYYY-MM-DD.md` | +Daily/[year]/ | `+Daily/2026/2026-01-06.md` |
-| Incubator | `Incubator - {{Title}}.md` | +Incubator/ | `+Incubator/Incubator - Event-Driven Architecture.md` |
-| IncubatorNote | `Incubator Note - {{Title}}.md` | +Incubator/ | `+Incubator/Incubator Note - Kafka vs RabbitMQ.md` |
-| OKR | `OKR - {{Title}}.md` | root | `OKR - Cloud Certification Training.md` |
-| Query | `Query - {{Title}}.md` | root | `Query - Open Tasks.md` |
-| Course | `Course - {{Title}}.md` | root | `Course - AWS Solutions Architect.md` |
-| MOC | `MOC - {{Title}}.md` | root | `MOC - Projects MOC.md` |
-| Dashboard | `Dashboard - {{Title}}.md` | root | `Dashboard - Dashboard.md` |
-| CodeSnippet | `CodeSnippet - {{Title}}.md` | root | `CodeSnippet - API Authentication.md` |
-| FormSubmission | `Form - {{Type}} - {{Name}}.md` | root | `Form - DPIA - Customer Portal.md` |
-| Page | `Page - {{Title}}.md` | root | `Page - Architecture Principles.md` |
-| Organisation | `Organisation - {{Name}}.md` | root | `Organisation - CloudVendor Inc.md` |
-| AtomicNote | `Atomic Note - {{Title}}.md` | root | `Atomic Note - CAP Theorem.md` |
+| Type           | Filename Pattern                    | Location       | Example                                                 |
+| -------------- | ----------------------------------- | -------------- | ------------------------------------------------------- |
+| Person         | `{{Name}}.md`                       | +People/       | `+People/John Smith.md`                                 |
+| Meeting        | `Meeting - YYYY-MM-DD {{Title}}.md` | +Meetings/     | `+Meetings/Meeting - 2026-01-06 Architecture Review.md` |
+| Project        | `Project - {{Name}}.md`             | root           | `Project - Cloud Migration.md`                          |
+| Task           | `Task - {{Title}}.md`               | root           | `Task - Review ADR draft.md`                            |
+| Weblink        | `Weblink - {{Title}}.md`            | root           | `Weblink - AWS Well-Architected Framework.md`           |
+| ADR            | `ADR - {{Title}}.md`                | root           | `ADR - API Gateway Selection.md`                        |
+| DailyNote      | `YYYY-MM-DD.md`                     | +Daily/[year]/ | `+Daily/2026/2026-01-06.md`                             |
+| Incubator      | `Incubator - {{Title}}.md`          | +Incubator/    | `+Incubator/Incubator - Event-Driven Architecture.md`   |
+| IncubatorNote  | `Incubator Note - {{Title}}.md`     | +Incubator/    | `+Incubator/Incubator Note - Kafka vs RabbitMQ.md`      |
+| OKR            | `OKR - {{Title}}.md`                | root           | `OKR - Cloud Certification Training.md`                 |
+| Query          | `Query - {{Title}}.md`              | root           | `Query - Open Tasks.md`                                 |
+| Course         | `Course - {{Title}}.md`             | root           | `Course - AWS Solutions Architect.md`                   |
+| MOC            | `MOC - {{Title}}.md`                | root           | `MOC - Projects MOC.md`                                 |
+| Dashboard      | `Dashboard - {{Title}}.md`          | root           | `Dashboard - Dashboard.md`                              |
+| CodeSnippet    | `CodeSnippet - {{Title}}.md`        | root           | `CodeSnippet - API Authentication.md`                   |
+| FormSubmission | `Form - {{Type}} - {{Name}}.md`     | root           | `Form - DPIA - Customer Portal.md`                      |
+| Article        | `Article - {{Title}}.md`            | root           | `Article - Cloud Migration Best Practices.md`           |
+| DataAsset      | `DataAsset - {{Name}}.md`           | root           | `DataAsset - Customer Orders API.md`                    |
+| Trip           | `Trip - {{Destination}}.md`         | root           | `Trip - Barcelona.md`                                   |
+| Page           | `Page - {{Title}}.md`               | root           | `Page - Architecture Principles.md`                     |
+| Organisation   | `Organisation - {{Name}}.md`        | root           | `Organisation - CloudVendor Inc.md`                     |
+| AtomicNote     | `Atomic Note - {{Title}}.md`        | root           | `Atomic Note - CAP Theorem.md`                          |
 
 **Note**: Person notes use just the name (no prefix) since the type is in frontmatter. This allows cleaner wiki-links like `[[John Smith]]` - Obsidian resolves links by filename regardless of folder.
 
 ### Finding Notes
 
 Use Dataview queries or the MOC files to find notes by type:
+
 ```dataview
 TABLE title, status, priority
 FROM ""
@@ -801,15 +860,16 @@ The vault can sync between desktop and mobile via Git and/or Obsidian Sync.
 
 Python scripts for vault maintenance are in `scripts/`:
 
-| Script | Purpose |
-|--------|---------|
-| `rename_daily_notes.py` | Rename daily notes from `Daily Note - YYYY-MM-DD.md` to `YYYY-MM-DD.md` |
-| `standardize_meetings.py` | Standardise meeting filenames to `Meeting - YYYY-MM-DD Title.md` |
-| `extract_pptx.py` | Extract text content from PowerPoint files |
-| `pptx_to_page.py` | Convert PowerPoint slides to PNG images and create Page note |
-| `pdf_to_page.py` | Convert PDF pages to PNG images and create Page note |
-| `analyze_links.py` | Analyse wiki-link connectivity across vault |
-| `analyze_structure.js` | Comprehensive vault structure analysis |
+| Script                    | Purpose                                                                 |
+| ------------------------- | ----------------------------------------------------------------------- |
+| `rename_daily_notes.py`   | Rename daily notes from `Daily Note - YYYY-MM-DD.md` to `YYYY-MM-DD.md` |
+| `standardize_meetings.py` | Standardise meeting filenames to `Meeting - YYYY-MM-DD Title.md`        |
+| `extract_pptx.py`         | Extract text content from PowerPoint files                              |
+| `pptx_to_page.py`         | Convert PowerPoint slides to PNG images and create Page note            |
+| `pdf_to_page.py`          | Convert PDF pages to PNG images and create Page note                    |
+| `system_roadmap.py`       | Generate system lifecycle roadmap PNG/SVG (Gartner TIME categories)     |
+| `analyze_links.py`        | Analyse wiki-link connectivity across vault                             |
+| `analyze_structure.js`    | Comprehensive vault structure analysis                                  |
 
 Run with `python3 scripts/<script>.py [arguments]`. Most scripts support `--dry-run` flag to preview changes.
 
