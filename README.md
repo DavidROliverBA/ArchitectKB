@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.8.2 Release:** 54 AI-assisted skills + 11 Claude Code hooks + 23 note templates with BM25 relevance-ranked search, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, Visualisations), automated quality enforcement, and session management ready to customise for any organisation.
+> **v1.8.3 Release:** 60 AI-assisted skills + 11 Claude Code hooks + 26 note templates with BM25 relevance-ranked search, PDF content indexing, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, DataAssets, Visualisations), automated quality enforcement, and session management ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -15,13 +15,13 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
 - **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
-- **AI-Assisted Workflows** - 54 Claude Code skills for architecture analysis, document processing, and automation
+- **AI-Assisted Workflows** - 60 Claude Code skills for architecture analysis, document processing, and automation
 
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 54 AI-assisted workflows + Node.js automation
+- **Claude Code Integration** - 60 AI-assisted workflows + Node.js automation
 - **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
@@ -140,7 +140,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 54 AI-assisted workflows
+│   ├── skills/             # 60 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
@@ -404,7 +404,6 @@ Query - Your System Inventory.md
 Query - Your Integration Paths.md
 (+ other queries specific to your architecture)
 ```
-
 
 ### Getting Started
 
@@ -781,7 +780,7 @@ Follow this structured approach to build your enterprise architecture knowledge 
 
 ## 🤖 Claude Code Skills
 
-This vault includes **54 AI-assisted workflows** accessible via Claude Code:
+This vault includes **60 AI-assisted workflows** accessible via Claude Code:
 
 ### Daily Workflow
 
@@ -809,6 +808,8 @@ This vault includes **54 AI-assisted workflows** accessible via Claude Code:
 - `/dependency-graph [system]` - Visualise system dependencies, identify single points of failure, plan impact analysis
 - `/impact-analysis <system>` - Analyse what breaks if a system fails (downstream consumers, integration paths, risk mitigation)
 - `/scenario-compare <baseline> <options>` - Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)
+- `/dataasset <name>` - Document data assets (tables, APIs, Kafka topics) with producers, consumers, lineage, and Mermaid diagrams
+- `/system-roadmap` - Generate system lifecycle roadmap visualisation (Gartner TIME categories: Tolerate, Invest, Migrate, Eliminate)
 - `/system-sync [source]` - Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)
 - `/tag-management [action]` - Audit, migrate, normalise tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
 
@@ -825,6 +826,7 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `/related <topic>` - Find all notes mentioning a topic (sub-agents)
 - `/summarize <note>` - Summarise a note or set of notes
 - `/timeline <project>` - Chronological project history (sub-agents)
+- `/book-search <topic>` - Search indexed book/PDF content by topic (graph-only, no file reads)
 
 ### Document Processing
 
@@ -837,6 +839,7 @@ These skills enable comprehensive architecture documentation and knowledge graph
 
 - `/sync-governance` - Sync policies, guardrails, and org ADRs from Confluence (MCP)
 - `/sync-notion` - Sync meetings from Notion database
+- `/sync-notion-pages` - Bidirectional sync between Obsidian notes and Notion pages
 
 ### Visual Analysis
 
@@ -849,6 +852,8 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `/person <name>` - Create person note (clean links without prefix)
 - `/weblink <url>` - Save URL with AI summary
 - `/youtube <url>` - Save YouTube video with transcript analysis
+- `/article <title>` - Quick-create article (blog post, video, podcast, LinkedIn post)
+- `/trip <destination>` - Create trip planning note with flights and accommodation
 
 ### Incubator (Idea Lifecycle)
 
@@ -1454,6 +1459,32 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ Notification helper: notify.sh for macOS desktop alerts
 - ✅ All hooks include CUSTOMIZE comments for organisation-specific configuration
 - ✅ Configuration example for `.claude/settings.json`
+
+**v1.8.3** (Released 2026-01-24):
+
+- ✅ **6 new skills**: article, book-search, dataasset, system-roadmap, trip, sync-notion-pages
+- ✅ **3 new templates**: Article, DataAsset, Trip
+- ✅ **Tag taxonomy v2.0** - Comprehensive hierarchical tag taxonomy rules file
+- ✅ **Enhanced graph index** - PDF content indexing, exclusions system, tag validation
+- ✅ **System lifecycle** - Gartner TIME model with roadmap generation script
+- ✅ **Subtask support** - Task skill and template with parent/child relationships
+- ✅ 60 total Claude Code skills, 26 templates, 4 rules files
+
+**v1.9** (Planned):
+
+- Video walkthrough and tutorials
+- More domain-specific MOC examples
+- Mobile optimisation and mobile-first workflows
+- Integration templates (Jira, ADO, GitHub Issues)
+- Community skill contributions
+
+**v2.0** (Future):
+
+- Obsidian Publish demo site
+- Historical quality trend tracking
+- Alternative theme support
+- Web dashboard for quality metrics
+- Docker-based setup for automation
 
 ---
 

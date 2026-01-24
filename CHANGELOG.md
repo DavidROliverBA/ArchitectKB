@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.3] - 2026-01-24
+
+### Added
+
+#### New Skills (6)
+
+- **`/article <title>`** - Quick-create article notes (blog posts, videos, podcasts, LinkedIn posts) with platform, audience, and publication tracking
+- **`/book-search <topic>`** - Search indexed book/PDF content by topic using BM25 graph search (no file reads required)
+- **`/dataasset <name>`** - Document data assets (database tables, APIs, Kafka topics) with producers, consumers, lineage, and Mermaid diagrams
+- **`/system-roadmap`** - Generate system lifecycle roadmap visualisation using Gartner TIME categories (Tolerate, Invest, Migrate, Eliminate)
+- **`/trip <destination>`** - Create trip planning notes with flights, accommodation, activities, and packing list
+- **`/sync-notion-pages`** - Bidirectional sync between Obsidian notes and Notion pages with conflict detection
+
+#### New Templates (3)
+
+- **Article.md** - Article/content creation template with classification, publication fields, and quality indicators
+- **DataAsset.md** - Data asset documentation template with consumer relationships, lineage tracking, and Mermaid flow diagrams
+- **Trip.md** - Trip planning template with flights, accommodation, activities, budget, and packing list sections
+
+#### New Rules
+
+- **`tag-taxonomy.md`** - Comprehensive hierarchical tag taxonomy v2.0 with 11 core hierarchies, migration rules, anti-patterns, and combination patterns
+
+#### New Scripts
+
+- **`system_roadmap.py`** - Python script using `roadmapper` library to generate PNG/SVG system lifecycle roadmaps from vault System notes
+
+### Changed
+
+#### Enhanced Graph Index
+
+- **PDF content indexing** - `generate-graph-enhanced.js` now indexes PDF book content (from docling output) for BM25 search
+- **Exclusions system** - New `.graph/exclusions.json` support for filtering known broken links by extension, path, or template variable
+- **Tag validation** - Graph health score now includes tag taxonomy compliance (10 points)
+- **Search index** - PDF keywords included in search index for richer results
+
+#### Updated Skills (3)
+
+- **`/task`** - Added subtask support with `parentTask` and `subtasks` fields, subtask creation workflow
+- **`/daily`** - Changed to year-based folder structure (`+Daily/YYYY/`), added dynamic task completion detection
+- **`/incubator`** - Added Article as graduation outcome, tip about `/article <title> from <idea>`
+
+#### Updated Templates (2)
+
+- **Task.md** - Added `parentTask`, `subtasks`, `doDate`, `dueBy` fields
+- **System.md** - Added lifecycle fields: `timeCategory`, `replacedBy`, `predecessors` (Gartner TIME model)
+
+#### Updated Rules
+
+- **`frontmatter-reference.md`** - Added complete schemas for System (with lifecycle/TIME fields), DataAsset, Article, and Trip note types
+
+### Technical
+
+- Total skills: 60 (up from 54)
+- Total templates: 26 (up from 23)
+- Total rules files: 4 (up from 3)
+- Graph index script grew from ~780 to ~1500 lines with 3 major new features
+
 ## [1.8.2] - 2026-01-21
 
 ### Added
