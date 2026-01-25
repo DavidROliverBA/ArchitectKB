@@ -21,7 +21,7 @@ phone: null
 
 ## Notes
 
-Alex is a senior engineer on the platform team with deep expertise in Kubernetes and microservices. Key collaborator on [[Project - Cloud Migration]] and [[Project - API Gateway Modernization]].
+Alex is a senior engineer on the platform team with deep expertise in Kubernetes and microservices. Key collaborator on [[Project - Cloud Migration]] and [[Project - API Gateway Modernisation]].
 
 **Expertise:**
 - Kubernetes and container orchestration

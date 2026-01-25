@@ -4,39 +4,44 @@ title: Adopt GraphQL for API Layer
 description: Replace REST APIs with GraphQL to improve developer experience and reduce over-fetching
 status: proposed
 category: technology
-tags: [ADR, activity/architecture, technology/graphql, technology/api, project/api-modernization]
+tags:
+  - ADR
+  - activity/architecture
+  - technology/graphql
+  - technology/api
+  - project/api-modernization
 created: 2025-12-01
 modified: 2026-01-07
-
-# Decision Makers
-deciders: ["[[Alex Johnson]]", API Working Group]
+deciders:
+  - "[[Alex Johnson]]"
+  - API Working Group
 approvers:
   - Architecture Lead
   - API Platform Owner
   - Security Architect
   - Development Team Leads (4 teams)
-
-# Relationships
-relatedTo: ["[[Project - API Gateway Modernization]]", "[[Task - Review GraphQL ADR]]"]
+relatedTo:
+  - "[[Project - API Gateway Modernisation]]"
+  - "[[Task - Review GraphQL ADR]]"
 supersedes: []
 dependsOn: []
-
-# Quality Indicators
 confidence: medium
 freshness: current
 source: primary
 verified: false
 reviewed: 2026-01-07
-
-# Context
 summary: Adopt GraphQL as the standard API technology to consolidate fragmented REST APIs, improve developer experience, and enable more efficient data fetching
 assumptions:
   - Development teams willing to learn GraphQL
   - Existing REST APIs can be wrapped initially before migrating to native GraphQL
   - Performance benefits justify migration effort
-stakeholders: [Development Teams, Mobile Team, Web Team, Partner Integration Team]
-project: "[[Project - API Gateway Modernization]]"
-externalRef: null
+stakeholders:
+  - Development Teams
+  - Mobile Team
+  - Web Team
+  - Partner Integration Team
+project: "[[Project - API Gateway Modernisation]]"
+externalRef:
 ---
 
 # ADR - Adopt GraphQL for API Layer
@@ -401,7 +406,7 @@ We need an API layer that:
 
 ## Related
 
-**Project:** [[Project - API Gateway Modernization]]
+**Project:** [[Project - API Gateway Modernisation]]
 
 **Related Tasks:**
 - [[Task - Review GraphQL ADR]]

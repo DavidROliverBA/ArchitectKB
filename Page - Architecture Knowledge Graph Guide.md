@@ -17,7 +17,7 @@ reviewed: 2026-01-14
 
 ## Overview
 
-The Architecture Knowledge Graph is a comprehensive template system for building enterprise architecture documentation in Obsidian. It provides generic, customizable examples of Systems, Integrations, High-Level Designs, Scenarios, and Visual Diagrams that you can adapt for any organisation.
+The Architecture Knowledge Graph is a comprehensive template system for building enterprise architecture documentation in Obsidian. It provides generic, customisable examples of Systems, Integrations, High-Level Designs, Scenarios, and Visual Diagrams that you can adapt for any organisation.
 
 **This guide explains:**
 - What each note type is for

@@ -3,11 +3,14 @@ type: Task
 title: Document API standards
 created: 2025-12-20
 modified: 2026-01-07
-tags: [task, documentation, api-standards]
+tags:
+  - task
+  - documentation
+  - api-standards
 completed: false
 priority: medium
 due: 2026-02-15
-project: "[[Project - API Gateway Modernization]]"
+project: "[[Project - API Gateway Modernisation]]"
 assignee: "[[Alex Johnson]]"
 ---
 

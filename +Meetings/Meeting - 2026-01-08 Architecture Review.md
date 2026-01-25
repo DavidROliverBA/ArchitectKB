@@ -3,10 +3,15 @@ type: Meeting
 title: Architecture Review
 created: 2026-01-08
 modified: 2026-01-08
-tags: [meeting, architecture-review, graphql]
+tags:
+  - meeting
+  - architecture-review
+  - graphql
 date: 2026-01-08
-project: "[[Project - API Gateway Modernization]]"
-attendees: ["[[Jane Smith]]", "[[Alex Johnson]]"]
+project: "[[Project - API Gateway Modernisation]]"
+attendees:
+  - "[[Jane Smith]]"
+  - "[[Alex Johnson]]"
 summary: Technical review of GraphQL proof-of-concept results and ADR evaluation
 meetingType: Technical Review
 ---
@@ -14,7 +19,7 @@ meetingType: Technical Review
 # GraphQL PoC - Architecture Review
 
 **Date:** Wednesday, January 8th 2026, 2:00-3:30 PM
-**Project:** [[Project - API Gateway Modernization]]
+**Project:** [[Project - API Gateway Modernisation]]
 
 ## Attendees
 
@@ -259,7 +264,7 @@ Previously required 4 REST calls and complex client-side data joining.
 
 ## Related
 
-**Project:** [[Project - API Gateway Modernization]]
+**Project:** [[Project - API Gateway Modernisation]]
 
 **ADR:** [[ADR - Adopt GraphQL for API Layer]]
 

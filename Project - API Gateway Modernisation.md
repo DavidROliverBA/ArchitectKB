@@ -11,19 +11,19 @@ end-date: 2026-04-30
 category: Platform Engineering
 ---
 
-# API Gateway Modernization
+# API Gateway Modernisation
 
 ## Overview
 
-Replace aging API gateway infrastructure with modern GraphQL-based API layer. This project will consolidate multiple REST APIs, improve developer experience, and enable better API governance.
+Replace ageing API gateway infrastructure with a modern GraphQL-based API layer. This project will consolidate multiple REST APIs, improve developer experience, and enable better API governance.
 
 **Problem Statement:**
-Current API landscape is fragmented with 15+ REST APIs, inconsistent authentication, no rate limiting, and poor documentation. This creates friction for internal teams and external partners.
+The current API landscape is fragmented with 15+ REST APIs, inconsistent authentication, no rate limiting, and poor documentation. This creates friction for internal teams and external partners.
 
 ## Objectives
 
 - Implement unified GraphQL API gateway
-- Consolidate authentication and authorization
+- Consolidate authentication and authorisation
 - Improve API documentation and developer portal
 - Establish API versioning and lifecycle management
 - Reduce API response times by 40%

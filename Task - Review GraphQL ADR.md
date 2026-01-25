@@ -3,11 +3,14 @@ type: Task
 title: Review GraphQL ADR
 created: 2026-01-05
 modified: 2026-01-07
-tags: [task, adr-review, high-priority]
+tags:
+  - task
+  - adr-review
+  - high-priority
 completed: false
 priority: high
 due: 2026-01-15
-project: "[[Project - API Gateway Modernization]]"
+project: "[[Project - API Gateway Modernisation]]"
 assignee: "[[Jane Smith]]"
 ---
 
