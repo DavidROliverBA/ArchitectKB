@@ -36,7 +36,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ### Complete Capabilities Overview
 
-![ArchitectKB Abilities](ArchitectKB-Abilities.jpg)
+![ArchitectKB Abilities](screenshots/ArchitectKB-Abilities.jpg)
 
 _All 61 AI-assisted skills, 26 note types, 10 automation hooks, and integrations at a glance._
 

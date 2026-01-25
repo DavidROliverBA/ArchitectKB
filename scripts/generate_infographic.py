@@ -361,8 +361,11 @@ def create_infographic():
             fontsize=8, color=COLORS['text_dim'], ha='center', va='center')
 
     # Save as PNG first, then convert to JPEG
-    png_path = '/Users/david.oliver/Documents/GitHub/ArchitectKB/ArchitectKB-Abilities.png'
-    output_path = '/Users/david.oliver/Documents/GitHub/ArchitectKB/ArchitectKB-Abilities.jpg'
+    import os
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.dirname(script_dir)
+    png_path = os.path.join(repo_root, 'screenshots', 'ArchitectKB-Abilities.png')
+    output_path = os.path.join(repo_root, 'screenshots', 'ArchitectKB-Abilities.jpg')
 
     plt.savefig(png_path,
                 facecolor=COLORS['bg'],
@@ -378,7 +381,6 @@ def create_infographic():
     rgb_img.save(output_path, 'JPEG', quality=95)
 
     # Remove PNG
-    import os
     os.remove(png_path)
 
     print(f"Infographic saved to: {output_path}")

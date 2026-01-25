@@ -24,7 +24,7 @@ Generates a visual capabilities reference showing all ArchitectKB features:
 ## Output
 
 - **File**: `ArchitectKB-Abilities.jpg`
-- **Location**: Repository root
+- **Location**: `screenshots/` folder
 - **Size**: ~1 MB at 200 DPI
 
 ## Implementation
