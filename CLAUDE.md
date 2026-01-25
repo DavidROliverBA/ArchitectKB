@@ -801,6 +801,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/sync-notion-pages` | Bidirectional sync between Obsidian notes and Notion pages                |
 | `/rename <pattern>`  | Batch rename files with link updates                                      |
 | `/quality-report`    | Generate comprehensive quality metrics (uses sub-agents)                  |
+| `/infographic`       | Regenerate the ArchitectKB capabilities infographic                       |
 
 ### Document Processing
 
