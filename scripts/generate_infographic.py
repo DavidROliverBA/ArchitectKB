@@ -226,10 +226,17 @@ FEATURES = {
 def draw_card(ax, x, y, width, height, feature_key, feature_data):
     """Draw a single feature card with title and items."""
 
+    # Inset the border by 0.005 on each side to prevent overlap
+    inset = 0.005
+    x_inset = x + inset
+    y_inset = y + inset
+    width_inset = width - 2 * inset
+    height_inset = height - 2 * inset
+
     # Card background with rounded corners
     card = FancyBboxPatch(
-        (x, y), width, height,
-        boxstyle="round,pad=0.01,rounding_size=0.015",
+        (x_inset, y_inset), width_inset, height_inset,
+        boxstyle="round,pad=0,rounding_size=0.015",
         facecolor=COLORS['card_bg'],
         edgecolor=feature_data['color'],
         linewidth=2.5,
@@ -238,9 +245,9 @@ def draw_card(ax, x, y, width, height, feature_key, feature_data):
     ax.add_patch(card)
 
     # Header bar
-    header_height = height * 0.16
+    header_height = height_inset * 0.16
     header = FancyBboxPatch(
-        (x, y + height - header_height), width, header_height,
+        (x_inset, y_inset + height_inset - header_height), width_inset, header_height,
         boxstyle="round,pad=0,rounding_size=0.015",
         facecolor=feature_data['color'],
         edgecolor='none',
@@ -249,37 +256,37 @@ def draw_card(ax, x, y, width, height, feature_key, feature_data):
     ax.add_patch(header)
 
     # Title in header (left side)
-    header_y = y + height - header_height/2
-    ax.text(x + 0.012, header_y + 0.005, feature_data['title'],
+    header_y = y_inset + height_inset - header_height/2
+    ax.text(x_inset + 0.012, header_y + 0.005, feature_data['title'],
             fontsize=10, fontweight='bold', color=COLORS['text_white'],
             va='center', ha='left')
     # Subtitle/count badge (right side)
-    ax.text(x + width - 0.012, header_y + 0.005, feature_data['subtitle'],
+    ax.text(x_inset + width_inset - 0.012, header_y + 0.005, feature_data['subtitle'],
             fontsize=7, color='white',
             va='center', ha='right',
             bbox=dict(boxstyle='round,pad=0.15', facecolor='black', alpha=0.3, edgecolor='none'))
 
     # Items list - use full height
     items = feature_data['items']
-    content_height = height - header_height - 0.015
+    content_height = height_inset - header_height - 0.015
     item_height = content_height / len(items)
-    item_start_y = y + height - header_height - 0.012
+    item_start_y = y_inset + height_inset - header_height - 0.012
 
     for i, (marker, name, desc) in enumerate(items):
         item_y = item_start_y - i * item_height
 
         # Colored bullet
-        bullet = Circle((x + 0.015, item_y - 0.003), 0.004,
+        bullet = Circle((x_inset + 0.015, item_y - 0.003), 0.004,
                         facecolor=feature_data['color'], edgecolor='none', alpha=0.8)
         ax.add_patch(bullet)
 
         # Name (bold, larger)
-        ax.text(x + 0.028, item_y + 0.004, name,
+        ax.text(x_inset + 0.028, item_y + 0.004, name,
                 fontsize=7, fontweight='bold', color=COLORS['text_white'],
                 va='center', ha='left')
 
         # Description (lighter, below name)
-        ax.text(x + 0.028, item_y - 0.009, desc,
+        ax.text(x_inset + 0.028, item_y - 0.009, desc,
                 fontsize=5.5, color=COLORS['text_light'],
                 va='center', ha='left')
 
