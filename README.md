@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.8.3 Release:** 60 AI-assisted skills + 11 Claude Code hooks + 26 note templates with BM25 relevance-ranked search, PDF content indexing, comprehensive architecture documentation workflow (Systems, Integrations, HLDs, Scenarios, DataSources, DataAssets, Visualisations), automated quality enforcement, and session management ready to customise for any organisation.
+> **v1.9.0 Release:** 61 AI-assisted skills + 11 Claude Code hooks + 26 note templates with BM25 relevance-ranked search, PDF content indexing, comprehensive architecture documentation workflow, **security framework with Bitwarden integration**, pre-commit secret detection, and automated quality enforcement ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -15,13 +15,15 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
 - **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
-- **AI-Assisted Workflows** - 60 Claude Code skills for architecture analysis, document processing, and automation
+- **AI-Assisted Workflows** - 61 Claude Code skills for architecture analysis, document processing, and automation
+- **Security Framework** - Pre-commit secret detection, Bitwarden integration, and credential protection hooks
 
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 60 AI-assisted workflows via integrated Obsidian terminal + Node.js automation
+- **Claude Code Integration** - 61 AI-assisted workflows via integrated Obsidian terminal + Node.js automation
+- **Security & Credentials** - Bitwarden integration, pre-commit hooks, secret detection, credential protection
 - **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
 - **Relationship Tracking** - Link ADRs, projects, and decisions
@@ -38,7 +40,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ![ArchitectKB Abilities](screenshots/ArchitectKB-Abilities.jpg)
 
-_All 61 AI-assisted skills, 26 note types, 10 automation hooks, and integrations at a glance._
+_All 61 AI-assisted skills, 26 note types, 11 automation hooks, and integrations at a glance._
 
 ### Dashboard - Your Central Hub
 
@@ -890,7 +892,7 @@ Once Claude Code is running, you have access to all vault skills:
 
 ## 🤖 Claude Code Skills
 
-This vault includes **60 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
+This vault includes **61 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
 
 ### Daily Workflow
 
@@ -990,6 +992,14 @@ These skills enable comprehensive architecture documentation and knowledge graph
 - `/archive <note>` - Soft archive a note (Project, Task, Page, Person)
 - `/rename <pattern>` - Batch rename files with link updates
 - `/quality-report` - Content quality analysis with scores (5 parallel Sonnet sub-agents)
+
+### Security & Credentials
+
+- `/secrets status` - Check Bitwarden CLI installation and session status
+- `/secrets get <name>` - Retrieve a specific secret from Bitwarden
+- `/secrets list` - List all vault secrets in Bitwarden
+- `/secrets env` - Generate environment variable exports for scripts
+- `/secrets setup` - Initial Bitwarden CLI setup and configuration
 
 ### Reference
 
@@ -1583,7 +1593,18 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ **Subtask support** - Task skill and template with parent/child relationships
 - ✅ 60 total Claude Code skills, 26 templates, 4 rules files
 
-**v1.9** (Planned):
+**v1.9.0** (Released 2026-01-27):
+
+- ✅ **Security Framework** - Comprehensive credential protection and secret management
+- ✅ `/secrets` skill - Bitwarden CLI integration for secure credential retrieval
+- ✅ **Pre-commit hooks** - detect-secrets, private key detection, large file prevention
+- ✅ **Enhanced security hooks** - secret-detection.py (UserPromptSubmit), secret-file-scanner.py (PreToolUse), file-protection.py (PreToolUse)
+- ✅ **Migration tooling** - migrate-to-bitwarden.cjs for exporting secrets to password manager
+- ✅ **Security documentation** - Page - Vault Security Hardening with setup guides and best practices
+- ✅ `.secrets.baseline` - detect-secrets baseline file with known false positives
+- ✅ 61 total Claude Code skills
+
+**v2.0** (Planned):
 
 - Video walkthrough and tutorials
 - More domain-specific MOC examples
@@ -1591,7 +1612,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - Integration templates (Jira, ADO, GitHub Issues)
 - Community skill contributions
 
-**v2.0** (Future):
+**v2.1** (Future):
 
 - Obsidian Publish demo site
 - Historical quality trend tracking
