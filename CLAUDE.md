@@ -803,6 +803,18 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/quality-report`    | Generate comprehensive quality metrics (uses sub-agents)                  |
 | `/infographic`       | Regenerate the ArchitectKB capabilities infographic                       |
 
+### Security & Credentials
+
+| Command               | Description                                         |
+| --------------------- | --------------------------------------------------- |
+| `/secrets status`     | Check Bitwarden CLI installation and session status |
+| `/secrets get <name>` | Retrieve a secret by name from Bitwarden            |
+| `/secrets list`       | List all secrets in your Bitwarden vault folder     |
+| `/secrets env`        | Output export commands for environment variables    |
+| `/secrets setup`      | Guide through initial Bitwarden CLI setup           |
+
+**Important**: This vault does NOT store credentials. All secrets are kept in Bitwarden and accessed on-demand via environment variables. See [[Page - Vault Security Hardening]] for setup.
+
 ### Document Processing
 
 | Command                      | Description                                        |

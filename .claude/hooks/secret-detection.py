@@ -32,11 +32,35 @@ SECRET_PATTERNS = [
     (r"AKIA[0-9A-Z]{16}", "AWS access key ID"),
     (r"(?i)aws_secret_access_key\s*[:=]\s*\S+", "AWS secret key"),
 
+    # Notion tokens (internal integration tokens)
+    (r"ntn_[a-zA-Z0-9]{40,}", "Notion integration token"),
+    (r"secret_[a-zA-Z0-9]{40,}", "Notion internal token"),
+
+    # Atlassian/Confluence tokens
+    (r"(?i)atlassian[-_]?token\s*[:=]\s*\S+", "Atlassian token"),
+    (r"(?i)confluence[-_]?token\s*[:=]\s*\S+", "Confluence token"),
+    (r"(?i)jira[-_]?token\s*[:=]\s*\S+", "Jira token"),
+    (r"ATATT[a-zA-Z0-9]{20,}", "Atlassian API token"),
+
+    # Slack tokens
+    (r"xox[baprs]-[0-9A-Za-z\-]{10,}", "Slack token"),
+
+    # Google API keys
+    (r"AIza[0-9A-Za-z\-_]{35}", "Google API key"),
+
     # Bearer tokens
     (r"(?i)bearer\s+[a-zA-Z0-9\-_\.]{20,}", "Bearer token"),
 
     # Connection strings
     (r"(?i)(mongodb|postgres|mysql|redis)://[^\s]+:[^\s]+@", "database connection string"),
+
+    # Private keys (PEM format headers)
+    (r"-----BEGIN\s+(RSA\s+)?PRIVATE\s+KEY-----", "private key (PEM)"),
+    (r"-----BEGIN\s+OPENSSH\s+PRIVATE\s+KEY-----", "SSH private key"),
+
+    # Generic high-entropy patterns (base64-like with sufficient length)
+    # Only match if it looks like a standalone token/key, not regular text
+    (r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"]?[A-Za-z0-9+/=]{32,}['\"]?", "high-entropy credential"),
 ]
 
 

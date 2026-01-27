@@ -57,3 +57,36 @@ vault-graph-viz.json
 VAULT_STATS.md
 VALIDATION_REPORT.md
 .graph/
+
+# ============================================
+# SECURITY: Secret and sensitive files
+# ============================================
+
+# Secret notes by pattern (CRITICAL - prevents accidental commits)
+**/Atomic Note - *API*Key*.md
+**/Atomic Note - *PAT*.md
+**/Atomic Note - *Token*.md
+**/Atomic Note - *Password*.md
+**/Atomic Note - *password*.md
+**/Atomic Note - *Secret*.md
+**/Atomic Note - *PIN*.md
+**/Atomic Note - *Credential*.md
+**/Atomic Note - *Key.md
+
+# Database files (may contain embeddings or sensitive data)
+.data/
+*.db
+*.db-wal
+*.db-shm
+
+# Local configuration (contains environment-specific secrets)
+.claude/config.local.json
+.env
+.env.local
+.env.*.local
+
+# Credential export files (contains plaintext credentials!)
+bitwarden-import.csv
+*-export.csv
+
+# Note: .secrets.baseline is tracked - it contains hashed locations, not actual secrets
