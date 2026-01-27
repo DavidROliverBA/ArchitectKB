@@ -1,4 +1,5 @@
 {
+  "$schema": "https://code.claude.com/schemas/settings.json",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -101,6 +102,19 @@
           }
         ]
       }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/*)",
+      "Bash(npm run *)",
+      "Bash(python3 scripts/*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(gh *)"
     ]
   }
 }

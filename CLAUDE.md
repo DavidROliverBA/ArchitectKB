@@ -6,6 +6,75 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 All generated text must be in UK English.
 
+## Model Preferences
+
+At the start of each new question thread, ask which Claude model the user would like to use (unless they explicitly specify one). Use this guidance:
+
+- **Haiku**: Fast research, straightforward queries, quick analysis
+- **Sonnet**: Balanced for complex tasks, code review, planning
+- **Opus**: Deep analysis, complex multi-step tasks, extended reasoning
+
+### Model Selection Guide
+
+Use this rubric for automatic model selection when users don't specify:
+
+| Task Type                                                | Model                              | Rationale                            |
+| -------------------------------------------------------- | ---------------------------------- | ------------------------------------ |
+| Quick capture (`/daily`, `/meeting`, `/task`, `/person`) | Haiku                              | Speed, low cost, simple templates    |
+| Research & exploration (read-only search)                | Haiku subagents                    | Parallel execution, isolated context |
+| Document processing (`/pdf-to-page`, `/pptx-to-page`)    | Sonnet                             | Balanced extraction quality          |
+| Code review, analysis, summarisation                     | Sonnet                             | Good reasoning, moderate cost        |
+| Architecture decisions, ADRs                             | Opus                               | Deep analysis, extended thinking     |
+| Complex multi-step orchestration                         | Sonnet coordinator + Haiku workers | Cost-effective parallelism           |
+| Vendor evaluation (`/score-rfi`)                         | Sonnet                             | Consistent scoring, parallel agents  |
+| Quality reports, audits                                  | Sonnet                             | Comprehensive analysis               |
+
+**Cost Considerations:**
+
+- Haiku: ~$1/$5 per MTok (input/output) - use for high-volume, simple tasks
+- Sonnet: ~$3/$15 per MTok - default for most work
+- Opus: ~$15/$75 per MTok - reserve for complex reasoning
+
+**Prompt Caching:** For repeated operations, structure prompts with static context first to benefit from 90% cache savings after 2+ requests.
+
+## Task Management
+
+Always use the task list tools to track work items during sessions. For any request involving 2 or more steps, create tasks to track progress. This provides visibility of progress and ensures complex work is properly organised.
+
+### Task Tool Reference
+
+| Tool         | Purpose                                   | When to Use                          |
+| ------------ | ----------------------------------------- | ------------------------------------ |
+| `TaskCreate` | Create new task with subject, description | Starting any multi-step work         |
+| `TaskUpdate` | Update status, add dependencies, modify   | Marking progress, setting blockers   |
+| `TaskList`   | View all tasks and their status           | Checking what's pending/blocked      |
+| `TaskGet`    | Retrieve full task details by ID          | Getting context before starting work |
+
+### Task Workflow
+
+```
+1. TaskCreate - Create tasks for each major step
+2. TaskUpdate (addBlockedBy) - Set dependencies between tasks
+3. TaskUpdate (status: in_progress) - Mark task as started
+4. [Do the work]
+5. TaskUpdate (status: completed) - Mark task as done
+6. TaskList - Check for next available task
+```
+
+### Status Values
+
+- `pending` - Not started, waiting for dependencies
+- `in_progress` - Currently being worked on
+- `completed` - Successfully finished
+- `deleted` - Removed (use sparingly)
+
+### Best Practices
+
+- Use `activeForm` for spinner text (present continuous: "Creating meeting note")
+- Set `blockedBy` for tasks that depend on others completing first
+- Update status to `in_progress` before starting work
+- Always mark tasks `completed` when done (don't leave orphaned tasks)
+
 ## Repository Overview
 
 This is an Obsidian vault template designed for **Solutions Architects** to manage professional knowledge effectively. The vault supports architecture decisions, project documentation, meeting notes, research ideas, and personal productivity tracking.
@@ -726,7 +795,9 @@ The Archive provides soft-deletion for completed or abandoned notes while preser
 
 User-invocable skills are defined in `.claude/skills/`. When the user invokes a skill, read the corresponding file for instructions.
 
-### Daily Workflow
+**Model Key:** 🟢 Haiku (fast) | 🟡 Sonnet (balanced) | 🔴 Opus (deep)
+
+### Daily Workflow (🟢 Haiku)
 
 | Command            | Description                                |
 | ------------------ | ------------------------------------------ |
@@ -734,15 +805,15 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/meeting <title>` | Create meeting note with attendees/project |
 | `/weekly-summary`  | Generate weekly summary from notes         |
 
-### Architecture Work
+### Architecture Work (🔴 Opus for ADRs, 🟡 Sonnet for others)
 
-| Command                     | Description                                        |
-| --------------------------- | -------------------------------------------------- |
-| `/adr <title>`              | Create new ADR with guided prompts                 |
-| `/project-status <project>` | Generate project status report (uses sub-agents)   |
-| `/find-decisions <topic>`   | Find all decisions about a topic (uses sub-agents) |
+| Command                     | Model | Description                                        |
+| --------------------------- | ----- | -------------------------------------------------- |
+| `/adr <title>`              | 🔴    | Create new ADR with guided prompts                 |
+| `/project-status <project>` | 🟡    | Generate project status report (uses sub-agents)   |
+| `/find-decisions <topic>`   | 🟡    | Find all decisions about a topic (uses sub-agents) |
 
-### Architecture Documentation & Analysis
+### Architecture Documentation & Analysis (🟡 Sonnet)
 
 | Command                                  | Description                                                                                                 |
 | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -763,7 +834,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/system-sync [source]`                  | Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)                         |
 | `/tag-management [action]`               | Audit, migrate, normalize tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)    |
 
-### Engineering Management
+### Engineering Management (🟢 Haiku)
 
 | Command                    | Description                            |
 | -------------------------- | -------------------------------------- |
@@ -771,7 +842,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/dpia-status [filter]`    | DPIA compliance status across projects |
 | `/project-snapshot [name]` | Quick status of all active projects    |
 
-### Research & Discovery
+### Research & Discovery (🟡 Sonnet)
 
 | Command                | Description                                                          |
 | ---------------------- | -------------------------------------------------------------------- |
@@ -781,27 +852,27 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/exec-summary <note>` | Generate non-technical executive summary                             |
 | `/book-search <topic>` | Search indexed book/PDF content by topic (graph-only, no file reads) |
 
-### Governance & Compliance
+### Governance & Compliance (🟢 Haiku)
 
 | Command                 | Description                                |
 | ----------------------- | ------------------------------------------ |
 | `/form <type> <name>`   | Quick-create form submission tracking note |
 | `/form-status [filter]` | Check status of form submissions           |
 
-### Maintenance
+### Maintenance (🟢 Haiku coordinators, 🟡 Sonnet for quality)
 
-| Command              | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
-| `/wipe`              | Generate context handoff, clear session, resume fresh (auto-detects tmux) |
-| `/vault-maintenance` | Quarterly health check - all quality checks (uses sub-agents)             |
-| `/check-weblinks`    | Test all weblink URLs for dead/redirected links (uses sub-agents)         |
-| `/archive <note>`    | Soft archive a note (Project, Task, Page, Person)                         |
-| `/orphans`           | Find notes with no backlinks (uses sub-agents)                            |
-| `/broken-links`      | Find broken wiki-links (uses sub-agents)                                  |
-| `/sync-notion-pages` | Bidirectional sync between Obsidian notes and Notion pages                |
-| `/rename <pattern>`  | Batch rename files with link updates                                      |
-| `/quality-report`    | Generate comprehensive quality metrics (uses sub-agents)                  |
-| `/infographic`       | Regenerate the ArchitectKB capabilities infographic                       |
+| Command              | Model | Description                                                               |
+| -------------------- | ----- | ------------------------------------------------------------------------- |
+| `/wipe`              | 🟢    | Generate context handoff, clear session, resume fresh (auto-detects tmux) |
+| `/vault-maintenance` | 🟢    | Quarterly health check - all quality checks (uses sub-agents)             |
+| `/check-weblinks`    | 🟢    | Test all weblink URLs for dead/redirected links (uses sub-agents)         |
+| `/archive <note>`    | 🟢    | Soft archive a note (Project, Task, Page, Person)                         |
+| `/orphans`           | 🟢    | Find notes with no backlinks (uses sub-agents)                            |
+| `/broken-links`      | 🟢    | Find broken wiki-links (uses sub-agents)                                  |
+| `/sync-notion-pages` | 🟢    | Bidirectional sync between Obsidian notes and Notion pages                |
+| `/rename <pattern>`  | 🟢    | Batch rename files with link updates                                      |
+| `/quality-report`    | 🟡    | Generate comprehensive quality metrics (uses sub-agents)                  |
+| `/infographic`       | 🟢    | Regenerate the ArchitectKB capabilities infographic                       |
 
 ### Security & Credentials
 
@@ -815,7 +886,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 
 **Important**: This vault does NOT store credentials. All secrets are kept in Bitwarden and accessed on-demand via environment variables. See [[Page - Vault Security Hardening]] for setup.
 
-### Document Processing
+### Document Processing (🟡 Sonnet)
 
 | Command                      | Description                                        |
 | ---------------------------- | -------------------------------------------------- |
@@ -826,7 +897,7 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 | `/document-extract <path>`   | Extract text from scanned documents/photos         |
 | `/attachment-audit`          | Audit all vault attachments with visual analysis   |
 
-### Quick Capture
+### Quick Capture (🟢 Haiku)
 
 | Command               | Description                                                     |
 | --------------------- | --------------------------------------------------------------- |
@@ -841,6 +912,41 @@ User-invocable skills are defined in `.claude/skills/`. When the user invokes a 
 **Usage**: These are instruction files, not registered Claude Code commands. When the user types a skill command (e.g., `/meeting`) or asks naturally (e.g., "create a meeting note"), read `.claude/skills/<skill>.md` and follow its instructions. Skills marked "uses sub-agents" should launch parallel Task agents for efficiency.
 
 **Note**: Skills work by the assistant reading and executing the instructions - they won't appear in Claude Code's built-in `/` command list.
+
+## MCP Server Integrations
+
+This vault can connect to MCP (Model Context Protocol) servers for extended capabilities.
+
+### Configuring MCP Servers
+
+Add servers to `.mcp.json` in your vault root:
+
+```json
+{
+  "mcpServers": {
+    "server-name": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-name"]
+    }
+  }
+}
+```
+
+### Common MCP Servers
+
+| Server       | Purpose                          | Installation                            |
+| ------------ | -------------------------------- | --------------------------------------- |
+| **GitHub**   | PR, issue, repo management       | `@modelcontextprotocol/server-github`   |
+| **Postgres** | Database queries                 | `@modelcontextprotocol/server-postgres` |
+| **Notion**   | Sync with Notion databases/pages | Configure with Notion integration token |
+| **Diagrams** | Generate architecture diagrams   | Enables diagram generation via Python   |
+
+### MCP Best Practices
+
+- Use `mcp-find` to discover available servers in the catalog
+- Use `mcp-add` to enable a server for the session
+- MCP tools are NOT available in background subagents
+- Check server documentation for required configuration
 
 ## Dynamic Context Loading
 
@@ -1036,6 +1142,55 @@ Run Python scripts with `python3 scripts/<script>.py [arguments]` and Node.js sc
 3. Create your first Project note
 4. Try the `/adr` skill to create an Architecture Decision Record
 5. Explore the MOC files to understand navigation
+
+## Autonomous Workflows
+
+Claude Code supports autonomous operation modes for reduced prompting and extended sessions.
+
+### Plan Mode
+
+Activate with `Shift+Tab` (twice from Normal Mode) to enter read-only exploration:
+
+- **Indicator:** `⏸` in prompt
+- **Behaviour:** Read-only operations, no file modifications
+- **Use for:** Research, understanding code, planning changes
+- **Exit:** Use `ExitPlanMode` tool when plan is ready for approval
+
+### Workflow: Explore → Plan → Code → Commit
+
+1. **Explore** - Have Claude read files without coding (use Explore subagent)
+2. **Plan** - Request detailed implementation plan (use "think hard" for extended reasoning)
+3. **Code** - Implement the solution with verification
+4. **Commit** - Request commit and PR creation
+
+### Context Management
+
+- **Auto-compaction:** Triggers at 95% context capacity
+- **Manual compaction:** Use `/compact` between phases
+- **Session wipe:** Use `/wipe` to generate handoff and start fresh
+- **Autonomous duration:** ~10-20 minutes before context fills
+
+### Sub-Agent Patterns
+
+Launch parallel subagents for independent research:
+
+```
+Task tool with:
+- subagent_type: "Explore" - Fast, read-only (Haiku)
+- subagent_type: "general-purpose" - Full capabilities
+- subagent_type: "Plan" - Research for planning
+- run_in_background: true - Non-blocking execution
+```
+
+### Permission Modes
+
+| Mode          | Behaviour                    |
+| ------------- | ---------------------------- |
+| `default`     | Standard permission checking |
+| `acceptEdits` | Auto-accept file edits       |
+| `plan`        | Read-only exploration        |
+
+Configure permissions in `.claude/settings.json` or via Claude Code settings.
 
 ## Reference Documentation
 
