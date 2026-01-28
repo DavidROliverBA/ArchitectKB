@@ -18,7 +18,7 @@ Last Updated: 2026-01-07
 
 ### Your First 15 Minutes
 
-1. **Open [[Dashboard - Main Dashboard]]** - Your central navigation hub
+1. **Open [Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md)** - Your central navigation hub
 2. **Review example notes** - See how different note types work
 3. **Create your first daily note** - Type `/daily` and start capturing
 4. **Explore MOCs** - Maps of Content organize everything
@@ -26,7 +26,7 @@ Last Updated: 2026-01-07
 
 ### Your First Day
 
-1. **Complete [[Page - Vault Setup Checklist]]** - Systematic setup
+1. **Complete [Page - Vault Setup Checklist](Page%20-%20Vault%20Setup%20Checklist.md)** - Systematic setup
 2. **Create Person notes** - Add your team members
 3. **Create Project notes** - Document your active projects
 4. **Try Claude skills** - Use `/meeting`, `/task`, `/adr`
@@ -41,6 +41,7 @@ Last Updated: 2026-01-07
 This vault uses **metadata (frontmatter) over folders** for organization:
 
 **Traditional folder approach:**
+
 ```
 Projects/
   Active/
@@ -50,12 +51,14 @@ Projects/
 ```
 
 **This vault's approach:**
+
 ```
 Project - Cloud Migration.md       (status: active)
 Project - Legacy Decommission.md   (status: completed)
 ```
 
 **Why?** Because:
+
 - Dataview can filter/sort by any field
 - No need to move files when status changes
 - Multiple dimensions of organization (status, priority, category, etc.)
@@ -76,6 +79,7 @@ type: Page       # Long-form documentation
 ```
 
 **MOCs use Dataview to query by type:**
+
 ```dataview
 TABLE status, priority
 FROM ""
@@ -86,13 +90,13 @@ WHERE type = "Project" AND status = "active"
 
 Folders prefixed with `+` have special purposes:
 
-| Folder | Purpose |
-|--------|---------|
-| `+Daily/` | Daily journal entries (organized by year) |
-| `+Meetings/` | All meeting notes |
-| `+Attachments/` | Images, PDFs, documents |
-| `+Templates/` | Note templates |
-| `+Inbox/` | Quick capture landing zone |
+| Folder          | Purpose                                   |
+| --------------- | ----------------------------------------- |
+| `+Daily/`       | Daily journal entries (organized by year) |
+| `+Meetings/`    | All meeting notes                         |
+| `+Attachments/` | Images, PDFs, documents                   |
+| `+Templates/`   | Note templates                            |
+| `+Inbox/`       | Quick capture landing zone                |
 
 **Everything else** lives in the root directory!
 
@@ -103,26 +107,31 @@ Folders prefixed with `+` have special purposes:
 ### Core Types (Use Daily)
 
 **1. DailyNote** (`+Daily/YYYY/YYYY-MM-DD.md`)
+
 - Personal journal and daily log
 - Task tracking, reflections, ideas
 - Create with: `/daily`
 
 **2. Meeting** (`+Meetings/Meeting - YYYY-MM-DD Title.md`)
+
 - Capture discussions, decisions, action items
 - Link attendees and projects
 - Create with: `/meeting <title>`
 
 **3. Task** (`Task - [Title].md`)
+
 - Actionable work items
 - Track priority, due date, assignee
 - Create with: `/task <title>`
 
 **4. Project** (`Project - [Name].md`)
+
 - Major initiatives and workstreams
 - Track status, stakeholders, timeline
 - Create manually from template
 
 **5. Person** (`[Full Name].md`)
+
 - Contact info and collaboration notes
 - NO "Person -" prefix for clean links
 - Create with: `/person <name>`
@@ -130,11 +139,13 @@ Folders prefixed with `+` have special purposes:
 ### Architecture Types
 
 **6. Adr** (`ADR - [Decision].md`)
+
 - Architecture Decision Records
 - Document context, decision, rationale, consequences
 - Create with: `/adr <title>`
 
 **7. Page** (`Page - [Title].md`)
+
 - Long-form documentation and guides
 - Reference material, how-tos, standards
 - Create manually from template
@@ -142,16 +153,19 @@ Folders prefixed with `+` have special purposes:
 ### Organization Types
 
 **8. Organisation** (`Organisation - [Name].md`)
+
 - Vendors, partners, consultancies
 - Track contracts, key contacts, projects
 - Create manually from template
 
 **9. Weblink** (`Weblink - [Title].md`)
+
 - Saved URLs with summaries
 - External resources and references
 - Create with: `/weblink <url>`
 
 **10. MOC** (`MOC - [Topic] MOC.md`)
+
 - Maps of Content (navigation hubs)
 - Dataview-powered filtered views
 - 12 MOCs provided, customize as needed
@@ -159,15 +173,18 @@ Folders prefixed with `+` have special purposes:
 ### Advanced Types
 
 **11. AtomicNote** (`[Topic].md`)
+
 - Small, focused notes on single topics
 - Building blocks for larger ideas
 - Zettelkasten-style notes
 
 **12. Course** (`Course - [Name].md`)
+
 - Online courses, training, certifications
 - Track progress and learnings
 
 **13. CodeSnippet** (`Snippet - [Language] - [Description].md`)
+
 - Reusable code examples
 - Code recipes and patterns
 
@@ -216,6 +233,7 @@ Folders prefixed with `+` have special purposes:
 ### Creating Notes
 
 **Via Claude Skills** (Fastest):
+
 - `/daily` - Today's daily note
 - `/meeting <title>` - Meeting note with prompts
 - `/task <title>` - Quick task creation
@@ -224,6 +242,7 @@ Folders prefixed with `+` have special purposes:
 - `/weblink <url>` - Save URL with AI summary
 
 **Via Templates** (More control):
+
 1. Open `+Templates/` folder
 2. Copy desired template
 3. Paste in root directory (or appropriate folder)
@@ -233,13 +252,15 @@ Folders prefixed with `+` have special purposes:
 ### Linking Notes
 
 **Wiki-link syntax:**
+
 ```markdown
-[[Note Title]]              # Link to note
+[[Note Title]] # Link to note
 [[Note Title|Display Text]] # Link with custom text
-[[Note Title#Section]]      # Link to specific section
+[[Note Title#Section]] # Link to specific section
 ```
 
 **Best practices:**
+
 - Link liberally - more connections = more valuable
 - Link people in meetings: `attendees: ["[[Jane Smith]]"]`
 - Link projects in tasks: `project: "[[Project - Cloud Migration]]"`
@@ -248,17 +269,20 @@ Folders prefixed with `+` have special purposes:
 ### Using Tags
 
 **In frontmatter (NO # prefix):**
+
 ```yaml
 tags: [project, cloud, infrastructure]
 tags: [adr, technology/database]  # Hierarchical tags
 ```
 
 **In content:**
+
 ```markdown
 This is a note about #cloud-architecture and #kubernetes
 ```
 
 **Hierarchical tags:**
+
 ```
 #domain/infrastructure
 #technology/aws/eks
@@ -272,7 +296,8 @@ This is a note about #cloud-architecture and #kubernetes
 
 ### The Dashboard
 
-**[[Dashboard - Main Dashboard]]** is your home base:
+**[Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md)** is your home base:
+
 - Quick stats (open tasks, active projects)
 - Recent activity
 - Links to all MOCs
@@ -285,39 +310,38 @@ This is a note about #cloud-architecture and #kubernetes
 **12 MOCs organize your vault:**
 
 **Core Navigation:**
-1. [[MOC - Tasks MOC]] - All tasks by priority/status
-2. [[MOC - Projects MOC]] - Project portfolio
-3. [[MOC - People MOC]] - Contact directory
-4. [[MOC - Meetings MOC]] - Meeting history
-5. [[MOC - ADRs MOC]] - Architecture decisions
 
-**Content & Organization:**
-6. [[MOC - Weblinks MOC]] - External resources
-7. [[MOC - Technology & Architecture MOC]] - Tech standards
-8. [[MOC - Organisations MOC]] - Vendors/partners
+1. [MOC - Tasks MOC](MOC%20-%20Tasks%20MOC.md) - All tasks by priority/status
+2. [MOC - Projects MOC](MOC%20-%20Projects%20MOC.md) - Project portfolio
+3. [MOC - People MOC](MOC%20-%20People%20MOC.md) - Contact directory
+4. [MOC - Meetings MOC](MOC%20-%20Meetings%20MOC.md) - Meeting history
+5. [MOC - ADRs MOC](MOC%20-%20ADRs%20MOC.md) - Architecture decisions
 
-**Vault Management:**
-9. [[MOC - Vault Quality Dashboard]] - Health monitoring
+**Content & Organization:** 6. [MOC - Weblinks MOC](MOC%20-%20Weblinks%20MOC.md) - External resources 7. [MOC - Technology & Architecture MOC](MOC%20-%20Technology%20&%20Architecture%20MOC.md) - Tech standards 8. [MOC - Organisations MOC](MOC%20-%20Organisations%20MOC.md) - Vendors/partners
 
-**Domain Examples** (Customize for your needs):
-10. [[MOC - Cloud Architecture]] - Cloud infrastructure knowledge
-11. [[MOC - Data Platform]] - Data engineering knowledge
+**Vault Management:** 9. [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md) - Health monitoring
+
+**Domain Examples** (Customize for your needs): 10. [MOC - Cloud Architecture](MOC%20-%20Cloud%20Architecture.md) - Cloud infrastructure knowledge 11. [MOC - Data Platform](MOC%20-%20Data%20Platform.md) - Data engineering knowledge
 
 ### Search Strategies
 
 **Find by type:**
+
 - Search: `type: Project` - All projects
 - Search: `type: Adr` - All ADRs
 
 **Find by metadata:**
+
 - Search: `status: active` - Active items
 - Search: `priority: high` - High priority
 
 **Find by links:**
+
 - Search: `[[Jane Smith]]` - All mentions of Jane
 - Search: `[[Project - Cloud Migration]]` - All references to project
 
 **Find by content:**
+
 - Just search keywords - Obsidian's full-text search is excellent
 
 ### Graph View
@@ -325,12 +349,14 @@ This is a note about #cloud-architecture and #kubernetes
 **Open graph**: Click graph icon or `Ctrl/Cmd + G`
 
 **What it shows:**
+
 - Visual representation of note connections
 - Hub notes (heavily linked) appear large
 - Clusters show related content
 - Orphaned notes are isolated
 
 **Use it to:**
+
 - Discover unexpected connections
 - Identify hub content
 - Find orphaned notes
@@ -343,6 +369,7 @@ This is a note about #cloud-architecture and #kubernetes
 ### What is Claude Code?
 
 Claude Code is an AI coding assistant that integrates with this vault through:
+
 - **Skills** - Workflows like `/daily`, `/meeting`, `/adr`
 - **Context** - Domain knowledge in `.claude/context/`
 - **Assistance** - Help with queries, summaries, searches
@@ -350,6 +377,7 @@ Claude Code is an AI coding assistant that integrates with this vault through:
 ### Using Skills
 
 **Invoke via slash commands:**
+
 ```
 /daily              # Create today's note
 /meeting Review     # Create meeting note
@@ -360,6 +388,7 @@ Claude Code is an AI coding assistant that integrates with this vault through:
 ```
 
 **Or just ask naturally:**
+
 ```
 "Create a meeting note for architecture review"
 "Find all decisions about Kubernetes"
@@ -381,6 +410,7 @@ Claude Code is an AI coding assistant that integrates with this vault through:
 ```
 
 **Why?** So Claude can:
+
 - Answer questions about your specific projects
 - Recommend approved technologies
 - Know your team structure
@@ -389,6 +419,7 @@ Claude Code is an AI coding assistant that integrates with this vault through:
 ### Getting Help from Claude
 
 **Ask about:**
+
 - "What projects am I working on?"
 - "Who should approve this ADR?"
 - "What's our standard database?"
@@ -397,6 +428,7 @@ Claude Code is an AI coding assistant that integrates with this vault through:
 - "Find all meetings with Jane Smith"
 
 Claude has access to:
+
 - Your entire vault
 - Context files
 - Vault conventions
@@ -408,7 +440,7 @@ Claude has access to:
 
 ### Weekly Maintenance (15 min)
 
-**Use [[MOC - Vault Quality Dashboard]]:**
+**Use [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md):**
 
 1. **Fix critical issues**:
    - Broken links
@@ -436,13 +468,14 @@ Claude has access to:
 ### Quality Metrics
 
 **Health indicators:**
+
 - Notes with type: 100%
 - Orphaned notes: <5%
 - Broken links: 0
 - ADRs with status: 100%
 - Active projects updated <30 days: >90%
 
-**Check via:** [[MOC - Vault Quality Dashboard]]
+**Check via:** [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md)
 
 ---
 
@@ -453,21 +486,25 @@ Claude has access to:
 **This vault is a starting point!** Customize it:
 
 **1. Adjust note types**:
+
 - Remove unused types
 - Add custom types
 - Modify templates
 
 **2. Create domain MOCs**:
-- [[MOC - Cloud Architecture]] (example provided)
-- [[MOC - Data Platform]] (example provided)
+
+- [MOC - Cloud Architecture](MOC%20-%20Cloud%20Architecture.md) (example provided)
+- [MOC - Data Platform](MOC%20-%20Data%20Platform.md) (example provided)
 - Add your own (Security, Mobile, IoT, etc.)
 
 **3. Modify workflows**:
+
 - Adjust daily note structure
 - Customize meeting templates
 - Add sections to ADR template
 
 **4. Add fields**:
+
 - Extra frontmatter fields for your needs
 - Custom tags
 - Additional metadata
@@ -475,6 +512,7 @@ Claude has access to:
 ### Team Adaptation
 
 **If using as a team:**
+
 - Add team-specific People notes
 - Document team projects
 - Create team ADRs
@@ -482,6 +520,7 @@ Claude has access to:
 - Team architecture principles
 
 **Keep individual:**
+
 - Daily notes (personal reflection)
 - Some tasks (personal to-dos)
 - Learning notes
@@ -494,6 +533,7 @@ Claude has access to:
 ### Start Simple
 
 Don't create everything at once:
+
 1. Week 1: Daily notes + meetings
 2. Week 2: Add tasks and people
 3. Week 3: Start ADRs for decisions
@@ -503,11 +543,13 @@ Don't create everything at once:
 ### Be Consistent
 
 **Daily habits:**
+
 - Morning: Create daily note, plan day
 - During: Capture in real-time
 - Evening: Review, reflect, plan tomorrow
 
 **Weekly habits:**
+
 - Weekly review: Tasks, projects, priorities
 - Update stale content
 - Archive completed work
@@ -515,6 +557,7 @@ Don't create everything at once:
 ### Link Everything
 
 **The power is in connections:**
+
 - Daily notes → projects, tasks, people
 - Meetings → projects, attendees, decisions
 - Tasks → projects, assignees
@@ -525,6 +568,7 @@ Don't create everything at once:
 ### Trust the System
 
 **Don't overthink:**
+
 - Capture first, organize later
 - Use +Inbox for quick capture
 - Refine during weekly review
@@ -537,7 +581,7 @@ Don't create everything at once:
 ### Resources
 
 - **This guide** - You're reading it!
-- **[[Page - Vault Setup Checklist]]** - Step-by-step setup
+- **[Page - Vault Setup Checklist](Page%20-%20Vault%20Setup%20Checklist.md)** - Step-by-step setup
 - **Individual README files**:
   - `+Daily/README.md` - Daily note guide
   - `+Meetings/README.md` - Meeting capture guide
@@ -573,13 +617,15 @@ A: Use Git (recommended), Obsidian Sync, or cloud folder sync (Dropbox/iCloud/On
 ## Next Steps
 
 **If you're new:**
-1. Complete [[Page - Vault Setup Checklist]]
+
+1. Complete [Page - Vault Setup Checklist](Page%20-%20Vault%20Setup%20Checklist.md)
 2. Create your first daily note
 3. Add 2-3 people you work with
 4. Document 1-2 active projects
 5. Use it daily for a week
 
 **If you're experienced:**
+
 1. Customize MOCs for your domains
 2. Update Claude context files
 3. Create team-specific content

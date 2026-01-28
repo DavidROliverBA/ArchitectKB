@@ -425,7 +425,7 @@ api_key = "example-not-real-key"  # pragma: allowlist secret
 
 ## Related
 
-- [[CLAUDE.md]] - Main vault guide with security warning
+- [CLAUDE.md](CLAUDE.md) - Main vault guide with security warning
 - `.claude/skills/secrets.md` - Full `/secrets` skill documentation
 - `.claude/hooks/` - Security hook implementations
 - `scripts/migrate-to-bitwarden.cjs` - Migration script

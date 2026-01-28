@@ -3,7 +3,13 @@ type: Page
 title: JSON Graph Index Technical Reference
 created: 2026-01-15
 modified: 2026-01-15
-tags: [type/technical-reference, domain/architecture, activity/documentation, domain/tooling]
+tags:
+  [
+    type/technical-reference,
+    domain/architecture,
+    activity/documentation,
+    domain/tooling,
+  ]
 
 # Quality Indicators
 summary: Comprehensive technical documentation for the ArchitectKB JSON Graph Index System, covering architecture, schemas, query patterns, and integration
@@ -14,7 +20,19 @@ verified: true
 reviewed: 2026-01-15
 
 # Semantic Discovery
-keywords: [graph-index, json-schema, query-tool, vault-search, knowledge-graph, node-edge, backlinks, orphans, broken-links, type-clusters]
+keywords:
+  [
+    graph-index,
+    json-schema,
+    query-tool,
+    vault-search,
+    knowledge-graph,
+    node-edge,
+    backlinks,
+    orphans,
+    broken-links,
+    type-clusters,
+  ]
 
 # Relationships
 relatedTo: []
@@ -28,16 +46,17 @@ The ArchitectKB JSON Graph Index System is a pre-computed knowledge graph that p
 
 ### Purpose and Benefits
 
-| Capability | Grep-Based | Graph Index |
-|------------|------------|-------------|
-| Find all ADRs | ~2-5 seconds | ~5-20ms |
-| Filter by status | Requires full scan | Instant lookup |
-| Find broken links | Complex regex | Pre-computed |
-| Orphan detection | Multi-pass scan | Pre-computed |
-| Backlink lookup | Reverse scan | O(1) lookup |
-| Type distribution | Count + parse | Pre-computed |
+| Capability        | Grep-Based         | Graph Index    |
+| ----------------- | ------------------ | -------------- |
+| Find all ADRs     | ~2-5 seconds       | ~5-20ms        |
+| Filter by status  | Requires full scan | Instant lookup |
+| Find broken links | Complex regex      | Pre-computed   |
+| Orphan detection  | Multi-pass scan    | Pre-computed   |
+| Backlink lookup   | Reverse scan       | O(1) lookup    |
+| Type distribution | Count + parse      | Pre-computed   |
 
 **Key Benefits:**
+
 - **Instant structured queries** - Filter by type, status, priority, tags
 - **Pre-computed relationships** - Backlinks, broken links, orphans ready to use
 - **Type-specific indexes** - Dedicated files per note type for fast filtering
@@ -144,9 +163,9 @@ interface GraphIndex {
 }
 
 interface IndexMetadata {
-  generated: string;         // ISO 8601 timestamp
-  vault: string;             // Vault name (e.g., "ArchitectKB")
-  version: string;           // Schema version (currently "2.0")
+  generated: string; // ISO 8601 timestamp
+  vault: string; // Vault name (e.g., "ArchitectKB")
+  version: string; // Schema version (currently "2.0")
   stats: IndexStats;
 }
 
@@ -158,9 +177,9 @@ interface IndexStats {
   brokenLinksCount: number;
   typeDistribution: Record<string, number>;
   freshness: {
-    current: number;         // Modified within 30 days
-    recent: number;          // Modified 30-180 days ago
-    stale: number;           // Not modified in 180+ days
+    current: number; // Modified within 30 days
+    recent: number; // Modified 30-180 days ago
+    stale: number; // Not modified in 180+ days
   };
   qualityIndicators: {
     withTags: number;
@@ -170,11 +189,11 @@ interface IndexStats {
     totalADRs: number;
   };
   averages: {
-    linksPerNote: string;    // Decimal string (e.g., "5.86")
+    linksPerNote: string; // Decimal string (e.g., "5.86")
     wordCount: number;
     backlinksPerNote: string;
   };
-  healthScore: number;       // 0-100 composite score
+  healthScore: number; // 0-100 composite score
 }
 ```
 
@@ -223,31 +242,31 @@ Each node represents a markdown file in the vault.
 ```typescript
 interface Node {
   // Identity
-  id: string;                    // Filename without .md extension
-  path: string;                  // Relative path from vault root
-  type: string;                  // Frontmatter type (e.g., "Adr", "Project")
+  id: string; // Filename without .md extension
+  path: string; // Relative path from vault root
+  type: string; // Frontmatter type (e.g., "Adr", "Project")
 
   // Frontmatter Fields
   frontmatter: {
-    title: string;               // Display title
-    status: string | null;       // Lifecycle status
-    priority: string | null;     // Priority level
-    created: string | null;      // ISO date string
-    modified: string | null;     // ISO date string
-    tags: string[];              // Tag array
-    project: string | null;      // Project wiki-link
-    confidence: string | null;   // Quality indicator
-    freshness: string | null;    // Quality indicator
-    relatedTo: string[];         // Relationship links
-    supersedes: string[];        // Superseded ADRs
-    dependsOn: string[];         // Dependency links
+    title: string; // Display title
+    status: string | null; // Lifecycle status
+    priority: string | null; // Priority level
+    created: string | null; // ISO date string
+    modified: string | null; // ISO date string
+    tags: string[]; // Tag array
+    project: string | null; // Project wiki-link
+    confidence: string | null; // Quality indicator
+    freshness: string | null; // Quality indicator
+    relatedTo: string[]; // Relationship links
+    supersedes: string[]; // Superseded ADRs
+    dependsOn: string[]; // Dependency links
   };
 
   // Extracted Relationships
   relationships: {
-    wikilinks: string[];         // All extracted wiki-links
-    mentionedPeople: string[];   // Person references detected
-    projects: string[];          // Project references detected
+    wikilinks: string[]; // All extracted wiki-links
+    mentionedPeople: string[]; // Person references detected
+    projects: string[]; // Project references detected
   };
 
   // Content Statistics
@@ -258,8 +277,8 @@ interface Node {
 
   // File Metadata
   meta: {
-    fileModified: string;        // ISO 8601 timestamp
-    fileSize: number;            // Bytes
+    fileModified: string; // ISO 8601 timestamp
+    fileSize: number; // Bytes
   };
 }
 ```
@@ -321,37 +340,37 @@ Edges represent directed relationships between nodes (wiki-links).
 
 ```typescript
 interface Edge {
-  source: string;              // Source node ID (the file containing the link)
-  target: string;              // Target node ID (the linked file)
-  type: EdgeType;              // Semantic edge type
-  exists: boolean;             // Whether target file exists
+  source: string; // Source node ID (the file containing the link)
+  target: string; // Target node ID (the linked file)
+  type: EdgeType; // Semantic edge type
+  exists: boolean; // Whether target file exists
 }
 
 type EdgeType =
-  | "links-to"      // Generic link (default)
-  | "broken"        // Target does not exist
-  | "belongs-to"    // Task -> Project
-  | "discusses"     // Meeting -> Project
-  | "impacts"       // ADR -> Project
-  | "relates-to"    // ADR -> ADR
-  | "involves"      // Meeting/Task -> Person
-  | "works-for"     // Person -> Organisation
-  | "references";   // Any -> Weblink
+  | "links-to" // Generic link (default)
+  | "broken" // Target does not exist
+  | "belongs-to" // Task -> Project
+  | "discusses" // Meeting -> Project
+  | "impacts" // ADR -> Project
+  | "relates-to" // ADR -> ADR
+  | "involves" // Meeting/Task -> Person
+  | "works-for" // Person -> Organisation
+  | "references"; // Any -> Weblink
 ```
 
 #### Edge Type Assignment Logic
 
-| Source Type | Target Type | Edge Type |
-|-------------|-------------|-----------|
-| Any | (non-existent) | `broken` |
-| Task | Project | `belongs-to` |
-| Meeting | Project | `discusses` |
-| Adr | Project | `impacts` |
-| Adr | Adr | `relates-to` |
-| Meeting/Task | Person | `involves` |
-| Person | Organisation | `works-for` |
-| Any | Weblink | `references` |
-| Any | Any | `links-to` |
+| Source Type  | Target Type    | Edge Type    |
+| ------------ | -------------- | ------------ |
+| Any          | (non-existent) | `broken`     |
+| Task         | Project        | `belongs-to` |
+| Meeting      | Project        | `discusses`  |
+| Adr          | Project        | `impacts`    |
+| Adr          | Adr            | `relates-to` |
+| Meeting/Task | Person         | `involves`   |
+| Person       | Organisation   | `works-for`  |
+| Any          | Weblink        | `references` |
+| Any          | Any            | `links-to`   |
 
 #### Example Edges
 
@@ -415,6 +434,7 @@ interface Backlinks {
 ```
 
 **Usage**: To find all notes that reference "Project - Cloud Migration":
+
 ```javascript
 const referencingNotes = index.backlinks["Project - Cloud Migration"];
 // Returns: ["ADR - Use Kubernetes...", "Weblink - AWS...", ...]
@@ -429,7 +449,7 @@ Pre-computed groupings of nodes by type with status/priority breakdowns.
 ```typescript
 interface TypeCluster {
   count: number;
-  nodes: string[];             // Node IDs of this type
+  nodes: string[]; // Node IDs of this type
   byStatus: Record<string, number>;
   byPriority: Record<string, number>;
 }
@@ -486,11 +506,12 @@ interface OrphanedNode {
   type: string;
   title: string;
   created: string | null;
-  modified: string;            // Date portion only (YYYY-MM-DD)
+  modified: string; // Date portion only (YYYY-MM-DD)
 }
 ```
 
 **Exclusions**: The following are NOT considered orphans:
+
 - MOC notes (navigation hubs)
 - Dashboard notes
 - README files
@@ -531,9 +552,9 @@ Wiki-links that reference non-existent files.
 
 ```typescript
 interface BrokenLink {
-  source: string;              // Note containing the broken link
-  target: string;              // The non-existent target
-  sourcePath: string;          // Full path to source file
+  source: string; // Note containing the broken link
+  target: string; // The non-existent target
+  sourcePath: string; // Full path to source file
 }
 ```
 
@@ -570,11 +591,11 @@ interface SearchEntry {
   path: string;
   type: string;
   title: string;
-  keywords: string[];          // Stemmed/normalized keywords
+  keywords: string[]; // Stemmed/normalized keywords
   tags: string[];
   status: string | null;
   priority: string | null;
-  excerpt: string;             // Currently equals title
+  excerpt: string; // Currently equals title
 }
 ```
 
@@ -639,13 +660,13 @@ interface StaleNote {
   id: string;
   path: string;
   type: string;
-  modified: string;            // YYYY-MM-DD
+  modified: string; // YYYY-MM-DD
 }
 
 interface MissingFieldsEntry {
   id: string;
   type: string;
-  missing: string[];           // Field names
+  missing: string[]; // Field names
 }
 
 interface QualityIndicators {
@@ -657,9 +678,9 @@ interface QualityIndicators {
 }
 
 interface FreshnessStats {
-  current: number;             // < 30 days
-  recent: number;              // 30-180 days
-  stale: number;               // > 180 days
+  current: number; // < 30 days
+  recent: number; // 30-180 days
+  stale: number; // > 180 days
 }
 ```
 
@@ -667,11 +688,11 @@ interface FreshnessStats {
 
 The health score (0-100) is computed from four weighted components:
 
-| Component | Weight | Factors |
-|-----------|--------|---------|
-| **Connectivity** | 25 pts | Orphan rate (15), avg links/note (10) |
-| **Freshness** | 25 pts | Stale rate (15), current rate (10) |
-| **Quality** | 25 pts | Tags rate (15), broken link rate (10) |
+| Component        | Weight | Factors                                 |
+| ---------------- | ------ | --------------------------------------- |
+| **Connectivity** | 25 pts | Orphan rate (15), avg links/note (10)   |
+| **Freshness**    | 25 pts | Stale rate (15), current rate (10)      |
+| **Quality**      | 25 pts | Tags rate (15), broken link rate (10)   |
 | **Completeness** | 25 pts | Status rate (15), ADR quality rate (10) |
 
 ```javascript
@@ -699,7 +720,7 @@ return Math.min(Math.round(score), 100);
 
 ---
 
-## types/*.json - Per-Type Indexes
+## types/\*.json - Per-Type Indexes
 
 Individual JSON files for each note type, optimized for type-specific queries.
 
@@ -721,36 +742,36 @@ interface TypeNode {
   status: string | null;
   priority: string | null;
   created: string | null;
-  modified: string;            // YYYY-MM-DD
+  modified: string; // YYYY-MM-DD
   tags: string[];
-  backlinks: number;           // Count of backlinks to this node
+  backlinks: number; // Count of backlinks to this node
 }
 ```
 
 ### Available Type Files
 
-| File | Note Type | Description |
-|------|-----------|-------------|
-| `adr.json` | Adr | Architecture Decision Records |
-| `project.json` | Project | Project documentation |
-| `task.json` | Task | Task tracking notes |
-| `meeting.json` | Meeting | Meeting notes |
-| `page.json` | Page | Long-form documentation |
-| `person.json` | Person | Contact/colleague notes |
-| `weblink.json` | Weblink | Saved URLs |
-| `system.json` | System | System documentation |
-| `integration.json` | Integration | Integration specs |
-| `architecture.json` | Architecture | Architecture documents |
-| `scenario.json` | Scenario | What-if scenarios |
-| `canvas.json` | Canvas | Obsidian canvas files |
-| `moc.json` | MOC | Maps of Content |
-| `dashboard.json` | Dashboard | Dashboard views |
-| `incubator.json` | Incubator | Research ideas |
-| `query.json` | Query | Saved Dataview queries |
-| `organisation.json` | Organisation | Organisation notes |
-| `formsubmission.json` | FormSubmission | Form tracking |
-| `dailynote.json` | DailyNote | Daily notes |
-| `unknown.json` | Unknown | Notes without type |
+| File                  | Note Type      | Description                   |
+| --------------------- | -------------- | ----------------------------- |
+| `adr.json`            | Adr            | Architecture Decision Records |
+| `project.json`        | Project        | Project documentation         |
+| `task.json`           | Task           | Task tracking notes           |
+| `meeting.json`        | Meeting        | Meeting notes                 |
+| `page.json`           | Page           | Long-form documentation       |
+| `person.json`         | Person         | Contact/colleague notes       |
+| `weblink.json`        | Weblink        | Saved URLs                    |
+| `system.json`         | System         | System documentation          |
+| `integration.json`    | Integration    | Integration specs             |
+| `architecture.json`   | Architecture   | Architecture documents        |
+| `scenario.json`       | Scenario       | What-if scenarios             |
+| `canvas.json`         | Canvas         | Obsidian canvas files         |
+| `moc.json`            | MOC            | Maps of Content               |
+| `dashboard.json`      | Dashboard      | Dashboard views               |
+| `incubator.json`      | Incubator      | Research ideas                |
+| `query.json`          | Query          | Saved Dataview queries        |
+| `organisation.json`   | Organisation   | Organisation notes            |
+| `formsubmission.json` | FormSubmission | Form tracking                 |
+| `dailynote.json`      | DailyNote      | Daily notes                   |
+| `unknown.json`        | Unknown        | Notes without type            |
 
 ### Example: adr.json
 
@@ -817,19 +838,19 @@ node scripts/graph-query.js "meetings about kafka"
 
 The query tool includes a natural language parser that extracts filters from free-form queries.
 
-| Pattern | Extracted Filter |
-|---------|-----------------|
-| "ADRs", "adr", "adrs" | `type: Adr` |
-| "projects", "project" | `type: Project` |
-| "tasks", "task" | `type: Task` |
-| "meetings", "meeting" | `type: Meeting` |
-| "status proposed" | `status: proposed` |
-| "high priority" | `priority: high` |
-| "orphaned", "orphans" | `orphans: true` |
-| "broken links" | `brokenLinks: true` |
-| "stale" | `stale: true` |
-| `"quoted text"` | `search: quoted text` |
-| "backlinks to X" | `backlinks: X` |
+| Pattern               | Extracted Filter      |
+| --------------------- | --------------------- |
+| "ADRs", "adr", "adrs" | `type: Adr`           |
+| "projects", "project" | `type: Project`       |
+| "tasks", "task"       | `type: Task`          |
+| "meetings", "meeting" | `type: Meeting`       |
+| "status proposed"     | `status: proposed`    |
+| "high priority"       | `priority: high`      |
+| "orphaned", "orphans" | `orphans: true`       |
+| "broken links"        | `brokenLinks: true`   |
+| "stale"               | `stale: true`         |
+| `"quoted text"`       | `search: quoted text` |
+| "backlinks to X"      | `backlinks: X`        |
 
 ### Query Examples
 
@@ -840,6 +861,7 @@ node scripts/graph-query.js --type=Adr --status=proposed
 ```
 
 Output:
+
 ```
 Found 1 result(s)
 
@@ -861,6 +883,7 @@ node scripts/graph-query.js --stats
 ```
 
 Output:
+
 ```
 Graph Index Statistics
 
@@ -935,6 +958,7 @@ sequenceDiagram
 ### Excluded Directories
 
 The generator skips these directories:
+
 - `.git`
 - `.obsidian`
 - `node_modules`
@@ -946,6 +970,7 @@ The generator skips these directories:
 ### When to Rebuild
 
 Rebuild the index when:
+
 - After adding/removing markdown files
 - After significant frontmatter changes
 - Before running vault health checks
@@ -957,30 +982,31 @@ Rebuild the index when:
 
 ### Generation Performance
 
-| Vault Size | Generation Time | Index Size |
-|------------|-----------------|------------|
-| ~100 notes | 0.3-0.5s | ~250 KB |
-| ~500 notes | 1-2s | ~1.2 MB |
-| ~1000 notes | 2-4s | ~2.5 MB |
-| ~5000 notes | 10-20s | ~12 MB |
+| Vault Size  | Generation Time | Index Size |
+| ----------- | --------------- | ---------- |
+| ~100 notes  | 0.3-0.5s        | ~250 KB    |
+| ~500 notes  | 1-2s            | ~1.2 MB    |
+| ~1000 notes | 2-4s            | ~2.5 MB    |
+| ~5000 notes | 10-20s          | ~12 MB     |
 
 ### Query Performance
 
-| Operation | Time Complexity | Typical Time |
-|-----------|-----------------|--------------|
-| Load index | O(n) | 10-50ms |
-| Type filter | O(n) | 1-5ms |
-| Status filter | O(n) | 1-5ms |
-| Backlink lookup | O(1) | <1ms |
-| Orphan list | O(1) | <1ms |
-| Broken links | O(1) | <1ms |
-| Keyword search | O(n*k) | 5-20ms |
+| Operation       | Time Complexity | Typical Time |
+| --------------- | --------------- | ------------ |
+| Load index      | O(n)            | 10-50ms      |
+| Type filter     | O(n)            | 1-5ms        |
+| Status filter   | O(n)            | 1-5ms        |
+| Backlink lookup | O(1)            | <1ms         |
+| Orphan list     | O(1)            | <1ms         |
+| Broken links    | O(1)            | <1ms         |
+| Keyword search  | O(n\*k)         | 5-20ms       |
 
 Where n = number of nodes, k = search terms
 
 ### Memory Usage
 
 The query tool loads indexes into memory:
+
 - `index.json`: Primary consumption (~250KB for 100 notes)
 - `search.json`: Additional ~40KB for 100 notes
 - `quality.json`: Additional ~40KB for 100 notes
@@ -999,7 +1025,7 @@ Skills should query the graph before using grep:
 async function findRelatedContent(topic) {
   // 1. First: Query graph index
   const graphResults = execSync(
-    `node scripts/graph-query.js --search="${topic}" --json`
+    `node scripts/graph-query.js --search="${topic}" --json`,
   );
 
   // 2. Only use grep if graph doesn't have needed data
@@ -1035,11 +1061,9 @@ node scripts/graph-query.js --broken-links --json
 Load type-specific index for faster filtering:
 
 ```javascript
-const adrIndex = JSON.parse(
-  fs.readFileSync('.graph/types/adr.json', 'utf8')
-);
+const adrIndex = JSON.parse(fs.readFileSync(".graph/types/adr.json", "utf8"));
 
-const proposedADRs = adrIndex.nodes.filter(n => n.status === 'proposed');
+const proposedADRs = adrIndex.nodes.filter((n) => n.status === "proposed");
 ```
 
 ---
@@ -1086,14 +1110,15 @@ The `.graph/` directory includes a `.gitignore` to prevent committing generated 
 
 ### Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2025-01 | Initial graph generator |
-| 2.0 | 2026-01 | Enhanced schema with type clusters, quality metrics, search index |
+| Version | Date    | Changes                                                           |
+| ------- | ------- | ----------------------------------------------------------------- |
+| 1.0     | 2025-01 | Initial graph generator                                           |
+| 2.0     | 2026-01 | Enhanced schema with type clusters, quality metrics, search index |
 
 ### Future Considerations
 
 Potential schema enhancements:
+
 - **Content excerpts**: First 200 characters of body text
 - **Section headings**: Extract H2/H3 structure
 - **Embedding vectors**: For semantic search
@@ -1105,7 +1130,7 @@ Potential schema enhancements:
 The `version` field in metadata allows tools to handle schema changes:
 
 ```javascript
-if (index.metadata.version === '2.0') {
+if (index.metadata.version === "2.0") {
   // Use new type clusters
 } else {
   // Fall back to manual type filtering
@@ -1128,12 +1153,14 @@ Run 'npm run graph:build' to generate the index.
 ### Stale Index
 
 If query results don't match expected files:
+
 1. Check file modification times vs `metadata.generated`
 2. Rebuild index: `npm run graph:build`
 
 ### High Broken Link Count
 
 Many broken links often indicate:
+
 - Template files with placeholder links
 - Imported notes with unresolved references
 - Renamed files without link updates
@@ -1143,6 +1170,7 @@ Review broken links: `node scripts/graph-query.js --broken-links`
 ### Memory Issues on Large Vaults
 
 For vaults with 5000+ notes:
+
 1. Use type-specific indexes instead of main index
 2. Implement streaming JSON parser
 3. Consider SQLite-based index
@@ -1151,7 +1179,7 @@ For vaults with 5000+ notes:
 
 ## Related Documentation
 
-- [[Page - How to Use This Vault]] - General vault usage
-- [[Page - Vault Setup Checklist]] - Initial configuration
-- [[Dashboard - Architecture Knowledge Graph]] - Visual graph exploration
-- [[MOC - Vault Quality Dashboard]] - Quality metrics and maintenance
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage
+- [Page - Vault Setup Checklist](Page%20-%20Vault%20Setup%20Checklist.md) - Initial configuration
+- [Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md) - Visual graph exploration
+- [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md) - Quality metrics and maintenance

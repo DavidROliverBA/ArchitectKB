@@ -20,6 +20,7 @@ reviewed: 2026-01-14
 The Architecture Knowledge Graph is a comprehensive template system for building enterprise architecture documentation in Obsidian. It provides generic, customisable examples of Systems, Integrations, High-Level Designs, Scenarios, and Visual Diagrams that you can adapt for any organisation.
 
 **This guide explains:**
+
 - What each note type is for
 - How to customise examples for your organisation
 - Best practices for building your architecture knowledge base
@@ -34,12 +35,12 @@ The Architecture Knowledge Graph is a comprehensive template system for building
 
 Start by reading the sample notes in this order:
 
-1. **[[Dashboard - Architecture Knowledge Graph]]** - Central navigation hub
-2. **[[Canvas - Sample System Landscape]]** - Visual overview of all systems
-3. **[[Canvas - Sample Data Flow Diagram]]** - How data flows through the architecture
-4. **[[System - Sample ERP Application]]** - Example of a core system
-5. **[[Integration - Sample ERP to Data Platform Real-time]]** - Example real-time integration
-6. **[[Architecture - Sample Data Integration Platform HLD]]** - Enterprise-wide architecture
+1. **[Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md)** - Central navigation hub
+2. **[Canvas - Sample System Landscape](Canvas%20-%20Sample%20System%20Landscape.md)** - Visual overview of all systems
+3. **[Canvas - Sample Data Flow Diagram](Canvas%20-%20Sample%20Data%20Flow%20Diagram.md)** - How data flows through the architecture
+4. **[System - Sample ERP Application](System%20-%20Sample%20ERP%20Application.md)** - Example of a core system
+5. **[Integration - Sample ERP to Data Platform Real-time](Integration%20-%20Sample%20ERP%20to%20Data%20Platform%20Real-time.md)** - Example real-time integration
+6. **[Architecture - Sample Data Integration Platform HLD](Architecture%20-%20Sample%20Data%20Integration%20Platform%20HLD.md)** - Enterprise-wide architecture
 
 This 15-20 minute review will give you the mental model you need.
 
@@ -47,15 +48,16 @@ This 15-20 minute review will give you the mental model you need.
 
 The Architecture Knowledge Graph consists of 5 core note types:
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| **System** | Documents a software system, service, or platform | ERP, data warehouse, API gateway |
-| **Integration** | Documents how two systems connect and exchange data | Kafka event bus, ETL pipeline |
-| **Architecture** | Enterprise-wide design document (HLD) | Data platform architecture, cloud strategy |
-| **Scenario** | Plan for expansion, migration, or optimization | Q1-Q3 roadmap, cloud migration plan |
-| **Canvas** | Visual diagram for system landscape or data flows | System landscape, C4 diagram, data flow |
+| Type             | Purpose                                             | Example                                    |
+| ---------------- | --------------------------------------------------- | ------------------------------------------ |
+| **System**       | Documents a software system, service, or platform   | ERP, data warehouse, API gateway           |
+| **Integration**  | Documents how two systems connect and exchange data | Kafka event bus, ETL pipeline              |
+| **Architecture** | Enterprise-wide design document (HLD)               | Data platform architecture, cloud strategy |
+| **Scenario**     | Plan for expansion, migration, or optimization      | Q1-Q3 roadmap, cloud migration plan        |
+| **Canvas**       | Visual diagram for system landscape or data flows   | System landscape, C4 diagram, data flow    |
 
 These are supported by:
+
 - **Dashboard**: Central navigation with Dataview queries
 - **Queries**: Filtered views (critical systems, real-time integrations, costs, etc.)
 
@@ -79,6 +81,7 @@ If you just want to document one system initially, create a System note first, t
 **Purpose**: Document a major software system, service, or infrastructure component.
 
 **Use for**:
+
 - ERP systems (SAP, Oracle, NetSuite)
 - Data platforms and data warehouses
 - APIs and middleware
@@ -87,6 +90,7 @@ If you just want to document one system initially, create a System note first, t
 - Third-party SaaS services
 
 **What to include**:
+
 - Overview and key responsibilities
 - Technology stack
 - Key metrics (throughput, users, availability)
@@ -98,9 +102,10 @@ If you just want to document one system initially, create a System note first, t
 - Monitoring and operations
 - Customization guide
 
-**Real example**: Read [[System - Sample ERP Application]] or [[System - Sample Data Integration Platform]]
+**Real example**: Read [System - Sample ERP Application](System%20-%20Sample%20ERP%20Application.md) or [System - Sample Data Integration Platform](System%20-%20Sample%20Data%20Integration%20Platform.md)
 
 **Creating your own**:
+
 1. Copy an example System note
 2. Rename: `System - <Your System Name>.md`
 3. Update frontmatter:
@@ -117,6 +122,7 @@ If you just want to document one system initially, create a System note first, t
 7. Customize for your organisation (see section below)
 
 **Linking to other notes**:
+
 - Link integrations that source/target this system
 - Link to architecture HLDs that include this system
 - Link to projects that work on this system
@@ -127,6 +133,7 @@ If you just want to document one system initially, create a System note first, t
 **Purpose**: Document how data flows between two systems (source → target).
 
 **Use for**:
+
 - Real-time event streaming (Kafka, pub/sub)
 - Batch ETL pipelines
 - API integrations
@@ -135,6 +142,7 @@ If you just want to document one system initially, create a System note first, t
 - Message queues
 
 **What to include**:
+
 - Overview of the data flow
 - Source and target systems
 - Integration pattern (real-time, batch, API, etc.)
@@ -147,10 +155,12 @@ If you just want to document one system initially, create a System note first, t
 - Customization guide
 
 **Real examples**:
-- [[Integration - Sample ERP to Data Platform Real-time]] (event-driven, <5 sec)
-- [[Integration - Sample Data Platform to Analytics Batch]] (daily ETL, 4 hours)
+
+- [Integration - Sample ERP to Data Platform Real-time](Integration%20-%20Sample%20ERP%20to%20Data%20Platform%20Real-time.md) (event-driven, <5 sec)
+- [Integration - Sample Data Platform to Analytics Batch](Integration%20-%20Sample%20Data%20Platform%20to%20Analytics%20Batch.md) (daily ETL, 4 hours)
 
 **Creating your own**:
+
 1. Copy an example Integration note (pick real-time or batch based on your pattern)
 2. Rename: `Integration - <Source> to <Target>.md`
 3. Update frontmatter:
@@ -169,6 +179,7 @@ If you just want to document one system initially, create a System note first, t
 8. List operational procedures and monitoring
 
 **Linking**:
+
 - Link to source system (in `source` field)
 - Link to target system (in `target` field)
 - Link to architecture HLD that includes this integration
@@ -179,6 +190,7 @@ If you just want to document one system initially, create a System note first, t
 **Purpose**: Enterprise-wide high-level design (HLD) document for a major architecture component.
 
 **Use for**:
+
 - Data integration platform architecture
 - Cloud infrastructure design
 - Microservices architecture
@@ -187,6 +199,7 @@ If you just want to document one system initially, create a System note first, t
 - Data governance architecture
 
 **What to include**:
+
 - Executive summary
 - Architecture vision and diagram
 - Technology stack by layer
@@ -198,9 +211,10 @@ If you just want to document one system initially, create a System note first, t
 - Decision records (links to related ADRs)
 - Customization guide
 
-**Real example**: [[Architecture - Sample Data Integration Platform HLD]] (1,500+ lines)
+**Real example**: [Architecture - Sample Data Integration Platform HLD](Architecture%20-%20Sample%20Data%20Integration%20Platform%20HLD.md) (1,500+ lines)
 
 **Creating your own**:
+
 1. Copy the sample Architecture HLD
 2. Rename: `Architecture - <Your Component> HLD.md`
 3. Update frontmatter:
@@ -222,6 +236,7 @@ If you just want to document one system initially, create a System note first, t
 **Important**: The architecture HLD is where you bring together all your systems, integrations, and design decisions. It should reference your specific systems and answer "how does everything fit together?"
 
 **Linking**:
+
 - List all relevant systems in `systems` field
 - List all relevant integrations in `integrations` field
 - Link to related ADRs (decisions that support this architecture)
@@ -232,6 +247,7 @@ If you just want to document one system initially, create a System note first, t
 **Purpose**: Plan for an expansion, optimization, migration, or major change to the architecture.
 
 **Use for**:
+
 - Expansion roadmaps (adding new data sources, capabilities)
 - Optimization plans (cost reduction, performance improvement)
 - Migration strategies (moving systems, changing technologies)
@@ -239,6 +255,7 @@ If you just want to document one system initially, create a System note first, t
 - Major upgrades or infrastructure changes
 
 **What to include**:
+
 - Executive summary with business case
 - Current state (baseline) description
 - Future state (after scenario) description
@@ -249,9 +266,10 @@ If you just want to document one system initially, create a System note first, t
 - Success criteria and KPIs
 - Customization guide
 
-**Real example**: [[Scenario - Sample Real-time Analytics Expansion]] (1,200+ lines with 9-month roadmap, £301K setup, £1.7M annual benefits)
+**Real example**: [Scenario - Sample Real-time Analytics Expansion](Scenario%20-%20Sample%20Real-time%20Analytics%20Expansion.md) (1,200+ lines with 9-month roadmap, £301K setup, £1.7M annual benefits)
 
 **Creating your own**:
+
 1. Copy the sample Scenario note
 2. Rename: `Scenario - <Your Scenario>.md`
 3. Update frontmatter:
@@ -273,6 +291,7 @@ If you just want to document one system initially, create a System note first, t
 **Tip**: Use scenarios to evaluate "should we do this?" You can create multiple scenarios (Conservative, Aggressive, etc.) and compare them.
 
 **Linking**:
+
 - Link to parent architecture (in `parent-architecture` field)
 - Link to related systems and integrations being added
 - Link to related projects that will implement the scenario
@@ -282,6 +301,7 @@ If you just want to document one system initially, create a System note first, t
 **Purpose**: Visual diagrams showing system landscape, data flows, or architecture context.
 
 **Use for**:
+
 - System landscape overview (all systems and how they connect)
 - C4 Context Diagram (system boundary and external dependencies)
 - Data Flow Diagram (how data moves through the architecture)
@@ -289,6 +309,7 @@ If you just want to document one system initially, create a System note first, t
 - Disaster Recovery (failover paths)
 
 **What to include**:
+
 - Mermaid diagram (or ASCII art) showing visual relationships
 - Legend (colors, symbols, meanings)
 - Key metrics (latency, throughput, volume)
@@ -296,11 +317,13 @@ If you just want to document one system initially, create a System note first, t
 - Customization guide
 
 **Real examples**:
-- [[Canvas - Sample System Landscape]] - All systems, criticality coding, connections
-- [[Canvas - Sample C4 Context Diagram]] - System boundary, external actors, deployment context
-- [[Canvas - Sample Data Flow Diagram]] - Real-time, batch, API paths with detailed latency
+
+- [Canvas - Sample System Landscape](Canvas%20-%20Sample%20System%20Landscape.md) - All systems, criticality coding, connections
+- [Canvas - Sample C4 Context Diagram](Canvas%20-%20Sample%20C4%20Context%20Diagram.md) - System boundary, external actors, deployment context
+- [Canvas - Sample Data Flow Diagram](Canvas%20-%20Sample%20Data%20Flow%20Diagram.md) - Real-time, batch, API paths with detailed latency
 
 **Creating your own**:
+
 1. Copy the sample Canvas that's closest to your need
 2. Rename: `Canvas - Your Name.md`
 3. Update frontmatter:
@@ -317,12 +340,14 @@ If you just want to document one system initially, create a System note first, t
 6. Add customization instructions
 
 **Viewing Canvas in Obsidian**:
+
 - The Mermaid diagrams render as text flowcharts
 - For full Canvas (interactive node-based) editing:
   - You can manually create nodes and connections in Obsidian Canvas interface
   - Or keep the Mermaid diagrams as fast ASCII representations
 
 **Linking**:
+
 - Reference the systems and integrations shown in the canvas
 - Link to related architecture HLD
 - Link to data flow documentation
@@ -336,6 +361,7 @@ Every sample note includes a "Customization Guide" section. Here's how to use it
 ### Step 1: Replace Generic Names
 
 **Before**:
+
 ```yaml
 title: "System - Sample ERP Application"
 systemId: erp-001
@@ -343,6 +369,7 @@ hostedOn: "[[System - Sample Cloud Infrastructure]]"
 ```
 
 **After**:
+
 ```yaml
 title: "System - SAP S/4HANA"
 systemId: sap-s4h-001
@@ -350,6 +377,7 @@ hostedOn: "[[System - AWS Cloud Infrastructure]]"
 ```
 
 Use find-and-replace in Obsidian to replace all instances:
+
 - "Sample ERP Application" → "SAP S/4HANA" (or your actual ERP)
 - "Sample Data Integration Platform" → "Talend Integration" (or your actual platform)
 - "Sample Analytics Warehouse" → "Snowflake" (or your actual warehouse)
@@ -357,57 +385,69 @@ Use find-and-replace in Obsidian to replace all instances:
 ### Step 2: Update Technologies
 
 **ERP System**:
+
 - Replace "ABAP, Java, REST APIs" with your actual tech (or keep if similar)
 - Update to your ERP version/edition
 
 **Data Integration Platform**:
+
 - Replace "Kafka-style" → "Apache Kafka" or "AWS MSK" or "Azure Event Hubs"
 - Replace "Spark" → Your actual technology (Talend, Informatica, custom Spark, etc.)
 - Update orchestration tool (Airflow, Kubernetes CronJob, AWS Glue, etc.)
 
 **Analytics Warehouse**:
+
 - Replace "Cloud data warehouse" → "Snowflake" or "Redshift" or "BigQuery"
 - Update regions and availability zones
 
 **Cloud Infrastructure**:
+
 - Replace "Cloud provider" with your actual provider (AWS, Azure, GCP)
 - Update regions, instance types, services used
 
 ### Step 3: Update Metrics
 
 **Daily Data Volume**:
+
 - Replace "250,000 events/day" with YOUR actual volume
 - Multiply all downstream volumes proportionally
 
 **Example**: If your ERP generates 100,000 transactions/day (not 250K):
+
 - Event Bus: Scale down to 40K orders, 20K invoices, 40K GL posts (adjust proportionally)
 - Storage: 150 TB active becomes 60 TB (scaled)
 - Annual cost: £5.2M becomes ~£2.1M (scaled)
 
 **Throughput**:
+
 - Replace "500 events/sec" with YOUR peak events/sec
 - Update burst capacity accordingly
 
 **Latency**:
+
 - Your real-time SLA might be different (< 10 sec instead of <5 sec)
 - Your batch window might be different (6 hours instead of 4)
 
 **Users & Concurrency**:
+
 - Replace "500 concurrent users" with YOUR actual analytics users
 - Update dashboard count and table count
 
 ### Step 4: Adapt to Your Business
 
 **Financial**:
+
 - Replace costs with YOUR cloud provider's actual pricing
 - Use AWS calculator, GCP pricing estimator, or Snowflake pricing guide
 - Adjust staffing costs based on YOUR team size
 
 **Compliance**:
+
 - Replace "ISO 27001, SOX" with YOUR actual requirements (GDPR, HIPAA, PCI-DSS, industry-specific, etc.)
 - Update retention policies (7 years might be different for you)
 
 **Operational**:
+
 - Replace "3-broker Kafka cluster" with your actual cluster size
 - Update on-call rotation and support model
 - Adjust SLA targets (99.95% might be higher or lower for you)
@@ -565,6 +605,7 @@ target: "[[System - Talend Data Integration]]"
 When you update metrics in one note, update related notes:
 
 If System A produces 100K events/day:
+
 - Update System A (source) with this volume
 - Update Integration A→B with "100K events/day from A"
 - Update System B (target) with "receives 100K events/day from A"
@@ -582,6 +623,7 @@ The power of this system is the connections:
 ### 4. Keep Things Current
 
 Review quarterly:
+
 - Are system metrics still accurate? (data volumes, user counts)
 - Have integrations changed? (new real-time paths? batch schedule changes?)
 - Is architecture still valid? (technology changes?)
@@ -620,17 +662,20 @@ status: deprecated  # No longer used, keeping for history
 Many architectures have both:
 
 **System Design**:
+
 - System A: Source system (generates transactions)
 - System B: Data platform (processes real-time + batch)
 - System C: Analytics warehouse (stores results)
 
 **Integrations**:
+
 - A → B Real-time (events via Kafka, <5 sec latency)
 - A → B Batch (daily extract, 10 TB/day)
 - B → C Real-time (stream to analytics, 30 sec lag)
 - B → C Batch (nightly load, 4 hour latency)
 
 **Use Cases**:
+
 - Real-time: Operational dashboards, alerts, monitoring
 - Batch: Analytics, reporting, compliance, historical analysis
 
@@ -646,6 +691,7 @@ Salesforce┘
 ```
 
 Create separate Integration notes for each source:
+
 - Integration - SAP to Data Platform
 - Integration - NetSuite to Data Platform
 - Integration - Salesforce to Data Platform
@@ -659,6 +705,7 @@ ERP → Event Bus → Data Platform → Data Lake → Analytics → BI Tools
 ```
 
 Create separate Integration notes:
+
 - Integration - ERP to Event Bus
 - Integration - Event Bus to Data Platform
 - Integration - Data Platform to Data Lake (implicit)
@@ -672,6 +719,7 @@ Create separate Integration notes:
 Let's say you're documenting a Snowflake-based data architecture. Here's what you'd create:
 
 **Systems**:
+
 ```
 System - Salesforce CRM.md (source system)
 System - Stripe Payments.md (source system)
@@ -682,6 +730,7 @@ System - AWS Cloud Infrastructure.md (hosting)
 ```
 
 **Integrations**:
+
 ```
 Integration - Salesforce to Fivetran Real-time.md
 Integration - Stripe to Fivetran Real-time.md
@@ -690,24 +739,28 @@ Integration - Snowflake to Tableau API.md
 ```
 
 **Architecture**:
+
 ```
 Architecture - Snowflake Data Warehouse HLD.md
 (Describes all 6 systems, 4 integrations, deployment topology, costs, NFRs)
 ```
 
 **Scenarios**:
+
 ```
 Scenario - Real-time Analytics Initiative.md
 (Plan to add real-time dashboards, add more sources, etc.)
 ```
 
 **Visualisations**:
+
 ```
 Canvas - Data Integration Landscape.md (all systems)
 Canvas - Salesforce to Snowflake Data Flow.md (specific path)
 ```
 
 **Navigation**:
+
 ```
 Dashboard - Data Architecture.md (updated queries)
 Query - Salesforce Integration Health.md (custom)
@@ -721,18 +774,21 @@ Query - Snowflake Cost Analysis.md (custom)
 Once you've documented your architecture, link it to your other work:
 
 **In Project notes**:
+
 ```yaml
 relatedArchitecture: "[[Architecture - Your Data Platform HLD]]"
 systems: ["[[System - Your ERP]]", "[[System - Your Data Platform]]"]
 ```
 
 **In ADR notes**:
+
 ```yaml
 relatedArchitecture: "[[Architecture - Your Data Platform HLD]]"
 context: "As described in [[Architecture - Your Data Platform HLD]], we needed to decide..."
 ```
 
 **In Meeting notes**:
+
 ```yaml
 discussion: "Reviewed [[Architecture - Your Data Platform HLD]] and discussed [[System - Your ERP]] integration timing"
 ```
@@ -744,6 +800,7 @@ discussion: "Reviewed [[Architecture - Your Data Platform HLD]] and discussed [[
 ### Problem: Too Many Systems to Document
 
 **Solution**: Start with critical path only
+
 - Document your source system
 - Document your core integration
 - Document your analytics system
@@ -754,6 +811,7 @@ You don't need everything at once.
 ### Problem: Metrics Are Constantly Changing
 
 **Solution**: Document ranges and trends, not precise numbers
+
 ```yaml
 dailyEventVolume: "100K-150K (peak depends on month-end close)"
 annualCost: "~£2.1M (varies with usage)"
@@ -764,6 +822,7 @@ Update quarterly when you refresh metrics.
 ### Problem: System Relationships Are Complex
 
 **Solution**: Create multiple visualisations
+
 - One Canvas showing all systems
 - Additional Canvas notes showing specific data flows
 - System notes explain relationships in text
@@ -771,6 +830,7 @@ Update quarterly when you refresh metrics.
 ### Problem: Architecture Keeps Evolving
 
 **Solution**: Use Scenario notes
+
 - Keep current architecture HLD stable
 - Create new Scenario notes for future plans
 - When scenario is approved, update HLD
@@ -812,12 +872,12 @@ Update quarterly when you refresh metrics.
 
 ## Related Notes
 
-- **Dashboard**: [[Dashboard - Architecture Knowledge Graph]]
-- **System Examples**: [[System - Sample ERP Application]], [[System - Sample Data Integration Platform]]
-- **Integration Examples**: [[Integration - Sample ERP to Data Platform Real-time]], [[Integration - Sample Data Platform to Analytics Batch]]
-- **Architecture Example**: [[Architecture - Sample Data Integration Platform HLD]]
-- **Scenario Example**: [[Scenario - Sample Real-time Analytics Expansion]]
-- **Canvas Examples**: [[Canvas - Sample System Landscape]], [[Canvas - Sample C4 Context Diagram]], [[Canvas - Sample Data Flow Diagram]]
+- **Dashboard**: [Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md)
+- **System Examples**: [System - Sample ERP Application](System%20-%20Sample%20ERP%20Application.md), [System - Sample Data Integration Platform](System%20-%20Sample%20Data%20Integration%20Platform.md)
+- **Integration Examples**: [Integration - Sample ERP to Data Platform Real-time](Integration%20-%20Sample%20ERP%20to%20Data%20Platform%20Real-time.md), [Integration - Sample Data Platform to Analytics Batch](Integration%20-%20Sample%20Data%20Platform%20to%20Analytics%20Batch.md)
+- **Architecture Example**: [Architecture - Sample Data Integration Platform HLD](Architecture%20-%20Sample%20Data%20Integration%20Platform%20HLD.md)
+- **Scenario Example**: [Scenario - Sample Real-time Analytics Expansion](Scenario%20-%20Sample%20Real-time%20Analytics%20Expansion.md)
+- **Canvas Examples**: [Canvas - Sample System Landscape](Canvas%20-%20Sample%20System%20Landscape.md), [Canvas - Sample C4 Context Diagram](Canvas%20-%20Sample%20C4%20Context%20Diagram.md), [Canvas - Sample Data Flow Diagram](Canvas%20-%20Sample%20Data%20Flow%20Diagram.md)
 
 ---
 

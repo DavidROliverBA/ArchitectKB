@@ -19,6 +19,7 @@ Last Updated: 2026-01-07
 ### Download and Install
 
 - [ ] **Download/clone this vault template**
+
   ```bash
   git clone https://github.com/yourorg/obsidian-architect-vault-template.git
   cd obsidian-architect-vault-template
@@ -114,6 +115,7 @@ Last Updated: 2026-01-07
 ### Replace Example Content
 
 **People:**
+
 - [ ] **Delete example people** (or keep as examples)
   - `Jane Smith.md`
   - `Alex Johnson.md`
@@ -125,6 +127,7 @@ Last Updated: 2026-01-07
   - Minimum: 3-5 people to start
 
 **Projects:**
+
 - [ ] **Delete or archive example projects**
   - Move to an `_Examples/` folder if you want to keep them
 
@@ -134,6 +137,7 @@ Last Updated: 2026-01-07
   - Include: Status, priority, timeline, stakeholders
 
 **Organisations:**
+
 - [ ] **Delete example organizations**
   - `Organisation - Your Company.md`
   - `Organisation - CloudVendor Inc.md`
@@ -144,6 +148,7 @@ Last Updated: 2026-01-07
   - Consulting partners
 
 **ADRs:**
+
 - [ ] **Keep example ADRs** (as reference) OR delete them
   - They show good ADR practices
   - Delete if they're confusing for your context
@@ -314,6 +319,7 @@ Last Updated: 2026-01-07
   - Install Python dependencies if needed
 
 - [ ] **Set up Git version control** (recommended)
+
   ```bash
   git init
   git add .
@@ -397,6 +403,7 @@ Last Updated: 2026-01-07
 **Problem:** MOCs show "No results" or error messages
 
 **Solution:**
+
 1. Verify Dataview plugin is installed and enabled
 2. Check if example notes exist (they should show in queries)
 3. Verify frontmatter has `type` field
@@ -407,6 +414,7 @@ Last Updated: 2026-01-07
 **Problem:** Templates don't prompt for input
 
 **Solution:**
+
 1. Verify Templater plugin is installed and enabled
 2. Check Templater settings:
    - Template folder: `+Templates`
@@ -418,6 +426,7 @@ Last Updated: 2026-01-07
 **Problem:** Links show as plain text or with `[[]]` visible
 
 **Solution:**
+
 1. Verify wiki-link syntax: `[[Note Name]]` not `[Note Name](path)`
 2. Check file exists with exact name
 3. Use Obsidian's link autocomplete (type `[[` and select)
@@ -427,6 +436,7 @@ Last Updated: 2026-01-07
 **Problem:** `/daily` or `/meeting` commands don't work
 
 **Solution:**
+
 1. These are Claude Code skills, not built-in Obsidian commands
 2. Use Claude Code (claude.ai/code) to invoke them
 3. Or create notes manually using templates
@@ -456,11 +466,13 @@ After setup, you should have:
 4. **Iterate** - Customize as you learn
 
 **Resources:**
-- [[Page - How to Use This Vault]] - Comprehensive guide
-- [[Dashboard - Main Dashboard]] - Your daily starting point
-- [[MOC - Vault Quality Dashboard]] - Maintenance help
+
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - Comprehensive guide
+- [Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md) - Your daily starting point
+- [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md) - Maintenance help
 
 **Get help:**
+
 - GitHub Issues - Report problems or request features
 - Obsidian Forums - General Obsidian questions
 - Claude Code - Ask questions about your vault
