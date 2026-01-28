@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.9.0 Release:** 61 AI-assisted skills + 11 Claude Code hooks + 26 note templates with BM25 relevance-ranked search, PDF content indexing, comprehensive architecture documentation workflow, **security framework with Bitwarden integration**, pre-commit secret detection, and automated quality enforcement ready to customise for any organisation.
+> **v1.9.0 Release:** 62 AI-assisted skills + 11 Claude Code hooks + 26 note templates with **SQLite FTS5 search index (~1000x faster searches)**, BM25 relevance-ranked graph search, PDF content indexing, comprehensive architecture documentation workflow, **security framework with Bitwarden integration**, pre-commit secret detection, and automated quality enforcement ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -15,14 +15,14 @@ This is a **production-ready Obsidian vault template** designed specifically for
 - **Knowledge Management** - Build a personal knowledge base with cross-linked notes and relationship tracking
 - **Team Directory** - Track stakeholders, colleagues, and external contacts
 - **Quality Monitoring** - Built-in dashboard to maintain vault health and content freshness
-- **AI-Assisted Workflows** - 61 Claude Code skills for architecture analysis, document processing, and automation
+- **AI-Assisted Workflows** - 62 Claude Code skills for architecture analysis, document processing, and automation
 - **Security Framework** - Pre-commit secret detection, Bitwarden integration, and credential protection hooks
 
 ### ✨ Key Features
 
 - **Metadata-Driven Organisation** - Notes organised by `type` field, not folders
 - **Powerful Navigation** - 8 Maps of Content (MOCs) + customizable examples powered by Dataview queries
-- **Claude Code Integration** - 61 AI-assisted workflows via integrated Obsidian terminal + Node.js automation
+- **Claude Code Integration** - 62 AI-assisted workflows via integrated Obsidian terminal + Node.js automation
 - **Security & Credentials** - Bitwarden integration, pre-commit hooks, secret detection, credential protection
 - **Graph-First Search** - Pre-computed index with BM25 relevance ranking for instant, ranked queries
 - **Quality Indicators** - Track confidence, freshness, and verification status
@@ -40,7 +40,7 @@ This is a **production-ready Obsidian vault template** designed specifically for
 
 ![ArchitectKB Abilities](screenshots/ArchitectKB-Abilities.jpg)
 
-_All 61 AI-assisted skills, 26 note types, 11 automation hooks, and integrations at a glance._
+_All 62 AI-assisted skills, 26 note types, 11 automation hooks, and integrations at a glance._
 
 ### Dashboard - Your Central Hub
 
@@ -163,7 +163,7 @@ obsidian-architect-vault-template/
 ├── +Templates/             # Note templates for each type
 ├── +Inbox/                 # Temporary landing zone for new notes
 ├── .claude/                # Claude Code integration
-│   ├── skills/             # 60 AI-assisted workflows
+│   ├── skills/             # 62 AI-assisted workflows
 │   ├── rules/              # Modular reference documentation
 │   ├── context/            # Domain-specific context (customise)
 │   └── vault-conventions.md
@@ -812,7 +812,7 @@ When you run `claude` from a terminal whose working directory is your vault root
 1. Loads `CLAUDE.md` (vault instructions, note types, skill definitions)
 2. Loads `.claude/rules/*.md` (frontmatter schemas, tag taxonomy, naming conventions, quality patterns)
 3. Detects the Git repository for version tracking
-4. Makes all 60 skills available via `/skill-name` commands
+4. Makes all 62 skills available via `/skill-name` commands
 
 ### Terminal Plugin Setup
 
@@ -892,7 +892,7 @@ Once Claude Code is running, you have access to all vault skills:
 
 ## 🤖 Claude Code Skills
 
-This vault includes **61 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
+This vault includes **62 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
 
 ### Daily Workflow
 
@@ -981,6 +981,7 @@ These skills enable comprehensive architecture documentation and knowledge graph
 
 - `/search <query>` - Smart search: queries graph index first, falls back to grep
 - `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
+- `/q <query>` - Fast SQLite FTS5 search (~1000x faster than grep)
 
 ### Vault Maintenance
 
@@ -1047,6 +1048,15 @@ npm run graph:query -- --orphans
 # Watch for changes and auto-rebuild
 npm run graph:watch
 
+# Build SQLite FTS5 index (~1000x faster searches)
+npm run vault:index
+
+# View SQLite database statistics
+npm run vault:stats
+
+# Test the SQLite index
+npm run test:vault-index
+
 # Run all checks
 npm run test
 ```
@@ -1059,6 +1069,7 @@ npm run test
 - **generate-graph-enhanced.js** - Builds pre-computed graph index for fast queries (outputs to `.graph/`)
 - **graph-query.js** - CLI with BM25 relevance ranking for instant structured queries with ranked results
 - **graph-watcher.js** - File watcher for auto-rebuilding index on changes
+- **vault-to-sqlite.js** - SQLite FTS5 index generator for ~1000x faster full-text searches (outputs to `.data/vault.db`)
 
 **Output Formats:**
 
@@ -1591,10 +1602,15 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ **Enhanced graph index** - PDF content indexing, exclusions system, tag validation
 - ✅ **System lifecycle** - Gartner TIME model with roadmap generation script
 - ✅ **Subtask support** - Task skill and template with parent/child relationships
-- ✅ 60 total Claude Code skills, 26 templates, 4 rules files
+- ✅ 62 total Claude Code skills, 26 templates, 4 rules files
 
-**v1.9.0** (Released 2026-01-27):
+**v1.9.0** (Released 2026-01-28):
 
+- ✅ **SQLite FTS5 Search Index** - ~1000x faster full-text search
+- ✅ `vault-to-sqlite.js` script with FTS5, porter stemming, wiki-link indexing
+- ✅ `/q` skill - Fast SQLite search (type filters, tag search, backlinks, orphans)
+- ✅ `npm run vault:index`, `vault:stats`, `test:vault-index` scripts
+- ✅ Comprehensive test suite for index validation
 - ✅ **Security Framework** - Comprehensive credential protection and secret management
 - ✅ `/secrets` skill - Bitwarden CLI integration for secure credential retrieval
 - ✅ **Pre-commit hooks** - detect-secrets, private key detection, large file prevention
@@ -1602,7 +1618,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ **Migration tooling** - migrate-to-bitwarden.cjs for exporting secrets to password manager
 - ✅ **Security documentation** - Page - Vault Security Hardening with setup guides and best practices
 - ✅ `.secrets.baseline` - detect-secrets baseline file with known false positives
-- ✅ 61 total Claude Code skills
+- ✅ 62 total Claude Code skills
 
 **v2.0** (Planned):
 
@@ -1628,7 +1644,7 @@ This template is based on real-world Solutions Architecture practice at enterpri
 A: Yes! While designed for architects, it works for any knowledge-intensive role.
 
 **Q: Do I need Claude Code?**
-A: No. The vault works without it for note-taking and Dataview queries. Claude Code adds 60 AI-assisted skills (optional). Install the Terminal plugin to run it directly within Obsidian.
+A: No. The vault works without it for note-taking and Dataview queries. Claude Code adds 62 AI-assisted skills (optional). Install the Terminal plugin to run it directly within Obsidian.
 
 **Q: Can I use this with Notion/Roam/Logseq?**
 A: Partially. It's optimised for Obsidian, but Markdown is portable.

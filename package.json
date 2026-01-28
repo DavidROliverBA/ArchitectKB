@@ -19,7 +19,10 @@
     "graph:query": "node scripts/graph-query.js",
     "stats": "node scripts/health-check.js --format markdown > VAULT_STATS.md && echo 'Statistics exported to VAULT_STATS.md'",
     "test": "npm run validate && npm run health",
-    "audit": "npm run validate:all && npm run health && npm run graph:build"
+    "test:vault-index": "node scripts/tests/test-vault-to-sqlite.cjs",
+    "audit": "npm run validate:all && npm run health && npm run graph:build",
+    "vault:index": "node scripts/vault-to-sqlite.js",
+    "vault:stats": "node scripts/vault-to-sqlite.js --stats"
   },
   "keywords": [
     "obsidian",
@@ -33,6 +36,7 @@
   "author": "Solutions Architecture Team",
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^12.6.2",
     "chalk": "^5.3.0",
     "glob": "^10.3.10",
     "gray-matter": "^4.0.3"

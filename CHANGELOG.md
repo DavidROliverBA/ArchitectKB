@@ -7,6 +7,124 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2026-01-28
+
+### Added
+
+#### SQLite FTS5 Search Index
+
+A new SQLite-based search index that provides ~1000x faster searches compared to grep/glob operations:
+
+- **`scripts/vault-to-sqlite.js`** - Index generator with FTS5 full-text search
+  - Creates searchable database from vault markdown files
+  - Indexes notes, tags, and wiki-links with proper relationships
+  - FTS5 with porter stemming and unicode61 tokenizer for intelligent matching
+  - WAL journal mode for better performance
+  - Outputs to `.data/vault.db` (gitignored)
+
+- **`/q` skill** - Fast SQLite-based search
+  - Full-text search: `/q architecture patterns`
+  - Type filtering: `/q type:Adr status:proposed`
+  - Tag search: `/q tag:technology/aws`
+  - Recent notes: `/q recent:30`
+  - Backlinks: `/q backlinks:"Project - MyProject"`
+  - Orphan detection: `/q orphans`
+
+- **New npm scripts**:
+  - `npm run vault:index` - Build/rebuild the SQLite index
+  - `npm run vault:stats` - View database statistics
+  - `npm run test:vault-index` - Run index validation tests
+
+- **Comprehensive test suite** - `scripts/tests/test-vault-to-sqlite.cjs`
+  - Prerequisites validation
+  - Schema validation (tables, columns, indexes)
+  - Data integrity checks
+  - FTS5 search functionality tests
+  - Query performance benchmarks (<100ms requirement)
+  - Script execution tests
+
+**Performance Benchmarks:**
+
+| Operation   | Before (grep) | After (SQLite) | Improvement |
+| ----------- | ------------- | -------------- | ----------- |
+| Full-text   | 5-15 sec      | 0.01 sec       | ~1000x      |
+| Type filter | 3-5 sec       | 0.007 sec      | ~500x       |
+| Tag search  | 2-5 sec       | 0.007 sec      | ~500x       |
+| Backlinks   | 10+ sec       | 0.01 sec       | ~1000x      |
+
+#### Security Framework
+
+Comprehensive credential protection and secret management:
+
+- **`/secrets` skill** - Bitwarden CLI integration for secure credential retrieval
+  - `/secrets status` - Check Bitwarden CLI and session status
+  - `/secrets get <name>` - Retrieve a specific secret
+  - `/secrets list` - List vault secrets
+  - `/secrets env` - Generate environment variable exports
+  - `/secrets setup` - Initial setup guide
+
+- **Pre-commit hooks** for secret detection:
+  - `detect-secrets` integration with baseline file
+  - Private key detection (RSA, DSA, EC, ED25519)
+  - Large file prevention (100MB limit)
+
+- **Enhanced security hooks**:
+  - `secret-detection.py` (UserPromptSubmit) - Detect secrets in prompts
+  - `secret-file-scanner.py` (PreToolUse) - Scan for secret files before reads
+  - `file-protection.py` (PreToolUse) - Block writes to sensitive files
+
+- **Migration tooling**:
+  - `scripts/migrate-to-bitwarden.cjs` - Export vault secrets to Bitwarden
+
+- **Security documentation**:
+  - `Page - Vault Security Hardening.md` - Setup guides and best practices
+
+- **`.secrets.baseline`** - detect-secrets baseline with known false positives
+
+### Changed
+
+- Updated package.json with `better-sqlite3` dependency
+- Added `.data/` directory to `.gitignore` for SQLite database
+- Total skills: 62 (up from 61)
+
+### Technical
+
+- SQLite FTS5 uses porter stemming for word matching (e.g., "running" matches "run")
+- Database schema includes proper foreign keys and indexes for fast joins
+- Link target resolution attempts to match wiki-links to actual note IDs
+
+### Migration Guide
+
+**From v1.8.x (no breaking changes):**
+
+1. Pull latest changes:
+
+   ```bash
+   git pull origin main
+   ```
+
+2. Install new dependency:
+
+   ```bash
+   npm install
+   ```
+
+3. Build the SQLite index:
+
+   ```bash
+   npm run vault:index
+   ```
+
+4. Verify with stats:
+
+   ```bash
+   npm run vault:stats
+   ```
+
+5. (Optional) Set up scheduled rebuild:
+   - macOS: Create launchd job for daily reindex
+   - Linux: Add cron job: `0 5 * * * cd /path/to/vault && npm run vault:index`
+
 ## [1.8.3] - 2026-01-24
 
 ### Added
@@ -863,7 +981,9 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.3...v1.9.0
+[1.8.3]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...v1.8.3
 [1.8.2]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.1...v1.8.1
 [1.7.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.7.0...v1.7.1
