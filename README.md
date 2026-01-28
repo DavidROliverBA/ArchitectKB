@@ -104,7 +104,7 @@ Common tasks, automated:
 /q kafka integration      # Search vault instantly
 ```
 
-**Full reference:** [Page - Claude Code Skills Quick Reference](Page - Claude Code Skills Quick Reference)
+**Full reference:** [Page - Claude Code Skills Quick Reference](Page - Claude Code Skills Quick Reference.md)
 
 ### Architecture Knowledge Graph
 
