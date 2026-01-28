@@ -7,6 +7,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.1] - 2026-01-28
+
+### Added
+
+#### Comprehensive User Guides (7 New Documentation Pages)
+
+Created 7 detailed user guides to address documentation gaps and help users effectively use the 62 Claude Code skills:
+
+- **`Page - Claude Code Skills Quick Reference.md`** (~540 lines)
+  - All 62 skills organised by category (Daily Workflow, Architecture, Research, Maintenance, etc.)
+  - Model recommendations (🟢 Haiku, 🟡 Sonnet, 🔴 Opus) for each skill
+  - Usage examples and command syntax
+  - Decision tree for skill selection
+  - Multi-skill workflow patterns
+
+- **`Page - Daily Workflow Guide.md`** (~370 lines)
+  - Morning routine (5-10 minutes): `/daily`, task review, meeting prep
+  - During-day capture: `/meeting`, `/task`, `/weblink`, `/person`
+  - End of day review: task status, daily note updates
+  - Weekly review (30 minutes): `/weekly-summary`, `/quality-report`
+  - Monthly maintenance (1 hour): `/vault-maintenance`, `/orphans`
+  - Complete day walkthrough example
+
+- **`Page - Search and Discovery Guide.md`** (~400 lines)
+  - Search strategy overview (SQLite vs Graph vs Grep)
+  - SQLite FTS5 queries with `/q` skill: type filters, tag search, backlinks, orphans
+  - Graph index queries with `/graph-query`: BM25 ranking, orphan detection
+  - Discovery skills: `/related`, `/find-decisions`, `/timeline`
+  - Performance comparison table (~1000x faster than grep)
+  - Index maintenance commands
+
+- **`Page - Architecture Workflow Guide.md`** (~400 lines)
+  - Workflow 1: Document a new system (`/system` → `/integration` → `/diagram`)
+  - Workflow 2: Create an ADR with relationships
+  - Workflow 3: Build data flow documentation
+  - Workflow 4: Enterprise landscape documentation
+  - Architecture analysis skills: `/impact-analysis`, `/dependency-graph`, `/cost-optimization`
+  - Real example: Data Platform documentation walkthrough
+
+- **`Page - Diagram and Visualisation Guide.md`** (~400 lines)
+  - C4 Context and Container diagram examples
+  - System Landscape and Data Flow diagrams
+  - AWS Architecture diagrams (Python diagrams library)
+  - Canvas file format and best practices
+  - Critical warning about linter corruption of `.canvas` files
+  - Mermaid integration and styling options
+
+- **`Page - Claude Code with AWS Bedrock Guide.md`** (~350 lines)
+  - Prerequisites: AWS account, CLI, model access
+  - Environment variables and configuration
+  - Bedrock model IDs mapping to Claude Code models
+  - Pricing considerations and cost management
+  - Troubleshooting: Access Denied, Model Not Available, Throttling
+  - Security: IAM policies, VPC endpoints, CloudTrail logging
+
+- **`Page - Secrets and Security Setup Guide.md`** (~350 lines)
+  - Bitwarden CLI setup: installation, login, vault folder creation
+  - `/secrets` skill commands: status, get, list, env, setup
+  - Pre-commit hooks: detect-secrets, private key detection
+  - Claude Code security hooks: secret-detection.py, file-protection.py
+  - Migrating existing secrets with migrate-to-bitwarden.cjs
+  - Security best practices and audit checklist
+
+### Changed
+
+- Updated README.md Quick Start section with User Guides list
+- Updated README.md Additional Resources section with new guides
+- Total documentation: ~2,800 lines of new user-facing content
+
 ## [1.9.0] - 2026-01-28
 
 ### Added
@@ -981,7 +1050,8 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...HEAD
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.1...HEAD
+[1.9.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.3...v1.9.0
 [1.8.3]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...v1.8.3
 [1.8.2]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...v1.8.2

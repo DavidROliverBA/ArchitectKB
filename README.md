@@ -134,7 +134,16 @@ _Built-in quality monitoring tracks orphaned notes, stale content, missing metad
    - Explore the Maps of Content (MOCs)
    - Review example notes
 
-6. **Choose Your Starting Point**:
+6. **Read the User Guides** (recommended):
+   - [[Page - Claude Code Skills Quick Reference]] - All 62 skills with examples and model recommendations
+   - [[Page - Daily Workflow Guide]] - Morning routine, meeting capture, weekly reviews
+   - [[Page - Search and Discovery Guide]] - SQLite FTS5, graph queries, discovery skills
+   - [[Page - Architecture Workflow Guide]] - Multi-skill workflows for systems, integrations, ADRs
+   - [[Page - Diagram and Visualisation Guide]] - C4 diagrams, Canvas, Mermaid
+   - [[Page - Claude Code with AWS Bedrock Guide]] - Enterprise deployment with Bedrock
+   - [[Page - Secrets and Security Setup Guide]] - Bitwarden integration, pre-commit hooks
+
+7. **Choose Your Starting Point**:
    - **For Architecture Documentation**: Open `[[Dashboard - Architecture Knowledge Graph]]` and read `[[Page - Architecture Knowledge Graph Guide]]`
    - **For General Knowledge Management**: Continue to Customization Guide below
    - **For Examples**: Review projects, ADRs, and daily notes in the vault
@@ -1407,6 +1416,18 @@ capacityMetrics:
 - `+Daily/README.md` - Daily note practice guide
 - `+Meetings/README.md` - Meeting capture guide
 - `.claude/vault-conventions.md` - Metadata formatting rules
+
+### User Guides (NEW in v1.9.1)
+
+Comprehensive guides for effective vault usage:
+
+- **`Page - Claude Code Skills Quick Reference.md`** - All 62 skills organised by category with examples and model recommendations
+- **`Page - Daily Workflow Guide.md`** - Practical routines for morning setup, meeting capture, weekly reviews
+- **`Page - Search and Discovery Guide.md`** - SQLite FTS5 queries, graph index, discovery skills
+- **`Page - Architecture Workflow Guide.md`** - Multi-skill workflows for documenting systems, integrations, ADRs
+- **`Page - Diagram and Visualisation Guide.md`** - C4 diagrams, Canvas files, Mermaid integration
+- **`Page - Claude Code with AWS Bedrock Guide.md`** - Enterprise deployment with AWS Bedrock
+- **`Page - Secrets and Security Setup Guide.md`** - Bitwarden CLI integration, pre-commit hooks, credential management
 
 ### Example Notes by Type
 

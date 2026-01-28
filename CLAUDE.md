@@ -1194,6 +1194,18 @@ Configure permissions in `.claude/settings.json` or via Claude Code settings.
 
 ## Reference Documentation
 
+### User Guides
+
+- **[[Page - Claude Code Skills Quick Reference]]** - All 62 skills with examples and model recommendations
+- **[[Page - Daily Workflow Guide]]** - Practical routines for morning, meetings, weekly reviews
+- **[[Page - Search and Discovery Guide]]** - SQLite FTS5, graph queries, discovery skills
+- **[[Page - Architecture Workflow Guide]]** - Multi-skill workflows for systems, integrations, ADRs
+- **[[Page - Diagram and Visualisation Guide]]** - C4 diagrams, Canvas, Mermaid
+- **[[Page - Claude Code with AWS Bedrock Guide]]** - Enterprise deployment with AWS Bedrock
+- **[[Page - Secrets and Security Setup Guide]]** - Bitwarden CLI, pre-commit hooks, credentials
+
+### General Documentation
+
 - **[[Page - How to Use This Vault]]** - General vault usage guide
 - **[[Page - Vault Setup Checklist]]** - Setup verification checklist
 - **[[Page - Architecture Principles]]** - Example architecture principles
@@ -1212,6 +1224,6 @@ This template is designed to be customised for your organisation's needs. Key ar
 
 ---
 
-**Version:** 1.8.3
+**Version:** 1.9.1
 **Template Maintained by:** Solutions Architecture Community
 **Review Frequency:** Update as conventions evolve
