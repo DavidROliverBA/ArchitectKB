@@ -77,15 +77,15 @@ Install from Obsidian → Settings → Community Plugins:
 
 ## User Guides
 
-| Guide                                             | Purpose                                               |
-| ------------------------------------------------- | ----------------------------------------------------- |
-| **[[Page - Claude Code Skills Quick Reference]]** | All 62 skills with examples and model recommendations |
-| **[[Page - Daily Workflow Guide]]**               | Morning routine, meeting capture, weekly reviews      |
-| **[[Page - Architecture Workflow Guide]]**        | Multi-skill workflows for systems, integrations, ADRs |
-| **[[Page - Search and Discovery Guide]]**         | SQLite FTS5, graph queries, discovery patterns        |
-| **[[Page - Diagram and Visualisation Guide]]**    | C4 diagrams, Canvas, Mermaid                          |
-| **[[Page - Claude Code with AWS Bedrock Guide]]** | Enterprise deployment with AWS Bedrock                |
-| **[[Page - Secrets and Security Setup Guide]]**   | Bitwarden CLI, pre-commit hooks, credentials          |
+| Guide                                                                                      | Purpose                                               |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| **[Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)**     | All 62 skills with examples and model recommendations |
+| **[Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md)**                         | Morning routine, meeting capture, weekly reviews      |
+| **[Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md)**           | Multi-skill workflows for systems, integrations, ADRs |
+| **[Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md)**           | SQLite FTS5, graph queries, discovery patterns        |
+| **[Diagram and Visualisation Guide](Page%20-%20Diagram%20and%20Visualisation%20Guide.md)** | C4 diagrams, Canvas, Mermaid                          |
+| **[AWS Bedrock Guide](Page%20-%20Claude%20Code%20with%20AWS%20Bedrock%20Guide.md)**        | Enterprise deployment with AWS Bedrock                |
+| **[Secrets and Security Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md)**   | Bitwarden CLI, pre-commit hooks, credentials          |
 
 ---
 
@@ -104,7 +104,7 @@ Common tasks, automated:
 /q kafka integration      # Search vault instantly
 ```
 
-**Full reference:** [Page - Claude Code Skills Quick Reference](Page - Claude Code Skills Quick Reference.md)
+**Full reference:** [Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)
 
 ### Architecture Knowledge Graph
 
@@ -115,7 +115,7 @@ Document enterprise architecture with structured templates:
 - **ADRs** - Architecture decisions with relationships and approvals
 - **Scenarios** - Future-state plans with cost/benefit analysis
 
-**Getting started:** [[Page - Architecture Workflow Guide]]
+**Getting started:** [Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md)
 
 ### Instant Search
 
@@ -126,7 +126,7 @@ Two search indexes for different needs:
 | SQLite FTS5 | ~0.01s | Full-text search, filters, backlinks           |
 | Graph Index | ~1s    | Orphan detection, quality checks, BM25 ranking |
 
-**Query guide:** [[Page - Search and Discovery Guide]]
+**Query guide:** [Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md)
 
 ### Quality Monitoring
 
@@ -146,7 +146,7 @@ Credential protection built-in:
 - **Pre-commit hooks** - Detect secrets before they're committed
 - **Claude Code hooks** - Block access to sensitive file patterns
 
-**Setup guide:** [[Page - Secrets and Security Setup Guide]]
+**Setup guide:** [Secrets and Security Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md)
 
 ---
 
