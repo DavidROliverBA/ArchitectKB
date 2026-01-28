@@ -27,10 +27,10 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - How to Use This Vault]]"
-  - "[[Dashboard - Main Dashboard]]"
-  - "[[MOC - Tasks MOC]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md)"
+  - "[Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md)"
+  - "[MOC - Tasks MOC](MOC%20-%20Tasks%20MOC.md)"
 ---
 
 # Daily Workflow Guide
@@ -57,7 +57,7 @@ This creates `+Daily/2026/2026-01-28.md` with:
 
 ### Step 2: Review Open Tasks
 
-Open [[MOC - Tasks MOC]] or run:
+Open [MOC - Tasks MOC](MOC%20-%20Tasks%20MOC.md) or run:
 
 ```
 /q type:Task completed:false priority:high
@@ -587,8 +587,8 @@ Set calendar reminders:
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All 62 skills with examples
-- [[Page - Search and Discovery Guide]] - Deep dive on search
-- [[Page - How to Use This Vault]] - General vault usage
-- [[Dashboard - Main Dashboard]] - Central navigation hub
-- [[MOC - Tasks MOC]] - Task tracking view
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All 62 skills with examples
+- [Page - Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md) - Deep dive on search
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage
+- [Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md) - Central navigation hub
+- [MOC - Tasks MOC](MOC%20-%20Tasks%20MOC.md) - Task tracking view

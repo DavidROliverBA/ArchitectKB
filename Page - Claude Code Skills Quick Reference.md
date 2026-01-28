@@ -27,9 +27,9 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - How to Use This Vault]]"
-  - "[[Page - Daily Workflow Guide]]"
-  - "[[Dashboard - Main Dashboard]]"
+  - "[Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md)"
+  - "[Page - Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md)"
+  - "[Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md)"
 ---
 
 # Claude Code Skills Quick Reference
@@ -224,7 +224,7 @@ Returns all proposed ADRs in milliseconds:
 | ADR - API Gateway Selection.md | API Gateway Selection | proposed |
 | ADR - Event Streaming.md       | Event Streaming       | proposed |
 
-See [[Page - Search and Discovery Guide]] for detailed query syntax.
+See [Page - Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md) for detailed query syntax.
 
 ---
 
@@ -396,7 +396,7 @@ Skills for managing secrets via Bitwarden.
 | `/secrets env`        | Generate environment exports | `/secrets env`         |
 | `/secrets setup`      | Initial Bitwarden setup      | `/secrets setup`       |
 
-See [[Page - Secrets and Security Setup Guide]] for detailed setup.
+See [Page - Secrets and Security Setup Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md) for detailed setup.
 
 ---
 
@@ -520,13 +520,13 @@ For high-volume tasks (bulk imports, large audits), prefer Haiku.
 
 ## Related Guides
 
-- [[Page - Daily Workflow Guide]] - How to use skills in your daily routine
-- [[Page - Search and Discovery Guide]] - Deep dive on search skills
-- [[Page - Architecture Workflow Guide]] - Multi-skill architecture workflows
-- [[Page - Diagram and Visualisation Guide]] - Creating diagrams
-- [[Page - Claude Code with AWS Bedrock Guide]] - Using Bedrock models
-- [[Page - Secrets and Security Setup Guide]] - Credential management
-- [[Page - How to Use This Vault]] - General vault usage
+- [Page - Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md) - How to use skills in your daily routine
+- [Page - Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md) - Deep dive on search skills
+- [Page - Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md) - Multi-skill architecture workflows
+- [Page - Diagram and Visualisation Guide](Page%20-%20Diagram%20and%20Visualisation%20Guide.md) - Creating diagrams
+- [Page - Claude Code with AWS Bedrock Guide](Page%20-%20Claude%20Code%20with%20AWS%20Bedrock%20Guide.md) - Using Bedrock models
+- [Page - Secrets and Security Setup Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md) - Credential management
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage
 
 ---
 

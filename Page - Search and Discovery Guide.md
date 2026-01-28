@@ -27,9 +27,9 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - Daily Workflow Guide]]"
-  - "[[Dashboard - Main Dashboard]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md)"
+  - "[Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md)"
 ---
 
 # Search and Discovery Guide
@@ -557,7 +557,7 @@ Set up cron or launchd for automatic rebuilding:
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All skills reference
-- [[Page - Daily Workflow Guide]] - Using search in daily workflow
-- [[Page - Architecture Workflow Guide]] - Finding architecture content
-- [[Page - How to Use This Vault]] - General vault usage
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All skills reference
+- [Page - Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md) - Using search in daily workflow
+- [Page - Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md) - Finding architecture content
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage

@@ -28,9 +28,9 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - Architecture Workflow Guide]]"
-  - "[[Dashboard - Architecture Knowledge Graph]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md)"
+  - "[Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md)"
 ---
 
 # Diagram and Visualisation Guide
@@ -580,7 +580,7 @@ Standard C4 colours are applied automatically:
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All skills reference
-- [[Page - Architecture Workflow Guide]] - Multi-skill workflows
-- [[Dashboard - Architecture Knowledge Graph]] - Architecture navigation
-- [[Canvas - Sample System Landscape]] - Example canvas
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All skills reference
+- [Page - Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md) - Multi-skill workflows
+- [Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md) - Architecture navigation
+- [Canvas - Sample System Landscape](Canvas%20-%20Sample%20System%20Landscape.md) - Example canvas

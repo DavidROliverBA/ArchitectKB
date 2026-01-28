@@ -29,10 +29,10 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - Diagram and Visualisation Guide]]"
-  - "[[Dashboard - Architecture Knowledge Graph]]"
-  - "[[Page - Architecture Knowledge Graph Guide]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - Diagram and Visualisation Guide](Page%20-%20Diagram%20and%20Visualisation%20Guide.md)"
+  - "[Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md)"
+  - "[Page - Architecture Knowledge Graph Guide](Page%20-%20Architecture%20Knowledge%20Graph%20Guide.md)"
 ---
 
 # Architecture Workflow Guide
@@ -573,7 +573,7 @@ Use hierarchical tags:
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All skills reference
-- [[Page - Diagram and Visualisation Guide]] - Diagram creation guide
-- [[Page - Architecture Knowledge Graph Guide]] - Knowledge graph patterns
-- [[Dashboard - Architecture Knowledge Graph]] - Architecture navigation
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All skills reference
+- [Page - Diagram and Visualisation Guide](Page%20-%20Diagram%20and%20Visualisation%20Guide.md) - Diagram creation guide
+- [Page - Architecture Knowledge Graph Guide](Page%20-%20Architecture%20Knowledge%20Graph%20Guide.md) - Knowledge graph patterns
+- [Dashboard - Architecture Knowledge Graph](Dashboard%20-%20Architecture%20Knowledge%20Graph.md) - Architecture navigation

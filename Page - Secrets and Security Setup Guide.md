@@ -28,8 +28,8 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - How to Use This Vault]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md)"
 ---
 
 # Secrets and Security Setup Guide
@@ -583,6 +583,6 @@ bw create folder '{"name":"Obsidian Vault"}' --session $BW_SESSION
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All skills reference
-- [[Page - How to Use This Vault]] - General vault usage
-- [[Page - Claude Code with AWS Bedrock Guide]] - AWS credential setup
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All skills reference
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage
+- [Page - Claude Code with AWS Bedrock Guide](Page%20-%20Claude%20Code%20with%20AWS%20Bedrock%20Guide.md) - AWS credential setup

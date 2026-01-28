@@ -28,9 +28,9 @@ keywords:
 
 # Relationships
 relatedTo:
-  - "[[Page - Claude Code Skills Quick Reference]]"
-  - "[[Page - Secrets and Security Setup Guide]]"
-  - "[[Page - How to Use This Vault]]"
+  - "[Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)"
+  - "[Page - Secrets and Security Setup Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md)"
+  - "[Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md)"
 ---
 
 # Claude Code with AWS Bedrock Guide
@@ -503,6 +503,6 @@ aws bedrock-runtime invoke-model \
 
 ## Related Guides
 
-- [[Page - Claude Code Skills Quick Reference]] - All skills reference
-- [[Page - Secrets and Security Setup Guide]] - Credential management
-- [[Page - How to Use This Vault]] - General vault usage
+- [Page - Claude Code Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md) - All skills reference
+- [Page - Secrets and Security Setup Guide](Page%20-%20Secrets%20and%20Security%20Setup%20Guide.md) - Credential management
+- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - General vault usage
