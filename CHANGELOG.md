@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.9.1] - 2026-01-28
+## [1.9.4] - 2026-01-28
 
 ### Added
 
@@ -72,8 +72,14 @@ Created 7 detailed user guides to address documentation gaps and help users effe
 
 ### Changed
 
-- Updated README.md Quick Start section with User Guides list
-- Updated README.md Additional Resources section with new guides
+- **README Refactoring** - Simplified documentation with guide references
+  - Best Practices section reduced from ~175 lines to ~45 lines with workflow tables and guide links
+  - Claude Code Skills section reduced from ~115 lines to ~55 lines with category overview table
+  - Additional Resources reorganised with User Guides as primary entry point
+  - Version header updated to highlight 7 comprehensive user guides
+  - Roadmap section updated with v1.9.4 release notes
+- Updated README.md Quick Start section with User Guides list (step 6)
+- Updated CLAUDE.md Reference Documentation with User Guides subsection
 - Total documentation: ~2,800 lines of new user-facing content
 
 ## [1.9.0] - 2026-01-28
@@ -1050,8 +1056,8 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.1...HEAD
-[1.9.1]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...v1.9.1
+[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.4...HEAD
+[1.9.4]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...v1.9.4
 [1.9.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.3...v1.9.0
 [1.8.3]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...v1.8.3
 [1.8.2]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...v1.8.2

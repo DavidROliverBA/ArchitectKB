@@ -2,7 +2,7 @@
 
 > A production-ready Obsidian vault template for Solutions Architects to manage architecture documentation, decisions, projects, meetings, and build enterprise architecture knowledge graphs.
 >
-> **v1.9.0 Release:** 62 AI-assisted skills + 11 Claude Code hooks + 26 note templates with **SQLite FTS5 search index (~1000x faster searches)**, BM25 relevance-ranked graph search, PDF content indexing, comprehensive architecture documentation workflow, **security framework with Bitwarden integration**, pre-commit secret detection, and automated quality enforcement ready to customise for any organisation.
+> **v1.9.4 Release:** 62 AI-assisted skills + 11 Claude Code hooks + 26 note templates with **7 comprehensive user guides**, **SQLite FTS5 search index (~1000x faster searches)**, BM25 relevance-ranked graph search, PDF content indexing, comprehensive architecture documentation workflow, **security framework with Bitwarden integration**, pre-commit secret detection, and automated quality enforcement ready to customise for any organisation.
 
 ## 🎯 What is This?
 
@@ -636,177 +636,47 @@ Replace with your organisation's approval structure.
 
 ## 📝 Best Practices
 
-### Daily Note Workflow
+> **📖 Detailed workflow guides are available in the User Guides section.** This section provides a quick overview—see the comprehensive guides for step-by-step instructions, examples, and model recommendations.
 
-1. **Create daily note**: Use `/daily` skill or Templater
-2. **Capture**:
-   - Tasks for today
-   - Notes from meetings
-   - Reflections and learnings
-3. **Link**: Connect to projects, people, meetings
-4. **Review**: End-of-day reflection
+### Daily Workflow (Quick Reference)
 
-See `+Daily/README.md` for a detailed guide.
+| Activity        | Skill              | Guide                           |
+| --------------- | ------------------ | ------------------------------- |
+| Morning setup   | `/daily`           | [[Page - Daily Workflow Guide]] |
+| Meeting capture | `/meeting <title>` | [[Page - Daily Workflow Guide]] |
+| Task tracking   | `/task <title>`    | [[Page - Daily Workflow Guide]] |
+| Weekly review   | `/weekly-summary`  | [[Page - Daily Workflow Guide]] |
 
-### Meeting Capture Process
+See `+Daily/README.md` and **[[Page - Daily Workflow Guide]]** for detailed workflows.
 
-1. **Before meeting**: Create a note with `/meeting` skill
-2. **During meeting**:
-   - Capture key points
-   - Note action items
-   - Link attendees: `[[Person Name]]`
-3. **After meeting**:
-   - Link to related project: `project: "[[Project - Name]]"`
-   - Extract tasks to Task notes
-   - Add to Meeting MOC (automatic via Dataview)
+### Architecture Workflow (Quick Reference)
 
-See `+Meetings/README.md` for a detailed guide.
+| Activity             | Skills                                  | Guide                                      |
+| -------------------- | --------------------------------------- | ------------------------------------------ |
+| Document systems     | `/system`, `/integration`               | [[Page - Architecture Workflow Guide]]     |
+| Create ADRs          | `/adr <title>`                          | [[Page - Architecture Workflow Guide]]     |
+| Generate diagrams    | `/diagram`, `/canvas`                   | [[Page - Diagram and Visualisation Guide]] |
+| Analyse dependencies | `/impact-analysis`, `/dependency-graph` | [[Page - Architecture Workflow Guide]]     |
 
-### ADR Creation Workflow
-
-1. **Identify decision**: Technical choice requiring documentation
-2. **Create ADR**: Use `/adr` skill
-3. **Fill sections**:
-   - **Context**: Problem statement
-   - **Decision**: What was decided
-   - **Rationale**: Why this decision
-   - **Consequences**: Positive/negative impacts
-   - **Alternatives**: Options considered
-4. **Link relationships**: `relatedTo`, `supersedes`, `dependsOn`
-5. **Get approval**: Update `approvers` and `status`
-6. **Publish**: Set `status: accepted`
+See **[[Page - Architecture Workflow Guide]]** for multi-skill workflows and **[[Page - Diagram and Visualisation Guide]]** for C4, Canvas, and Mermaid diagrams.
 
 ### Project Tracking
 
 1. **Create project**: Use template from `+Templates/Project.md`
-2. **Set metadata**:
-   - `status: active | paused | completed`
-   - `priority: high | medium | low`
-   - `category: <program-name>` (optional)
-3. **Link related items**:
-   - Tasks: `project: "[[Project - Name]]"`
-   - Meetings: `project: "[[Project - Name]]"`
-   - ADRs: `project: "[[Project - Name]]"`
+2. **Set metadata**: `status`, `priority`, `category`
+3. **Link related items**: Tasks, Meetings, ADRs all reference `project: "[[Project - Name]]"`
 4. **Track in MOC**: Projects MOC auto-updates via Dataview
 
-### Architecture Documentation Workflow
+### Search & Discovery (Quick Reference)
 
-Follow this structured approach to build your enterprise architecture knowledge graph:
+| Need               | Tool                            | Guide                                 |
+| ------------------ | ------------------------------- | ------------------------------------- |
+| Fast text search   | `/q <query>` (SQLite FTS5)      | [[Page - Search and Discovery Guide]] |
+| Relevance-ranked   | `/search <query>` (Graph index) | [[Page - Search and Discovery Guide]] |
+| Find relationships | `/related <topic>`              | [[Page - Search and Discovery Guide]] |
+| Book/PDF content   | `/book-search <topic>`          | [[Page - Search and Discovery Guide]] |
 
-#### 1. Start with Systems
-
-1. **Create System notes** for each system in your landscape
-2. **Set critical fields**:
-   - `systemId`: Unique identifier (e.g., "erp-prod-sap")
-   - `systemType`: application, platform, infrastructure, data-warehouse, middleware
-   - `criticality`: critical, high, medium, low
-   - `annualCost`: Total annual cost in £
-3. **Document**:
-   - Technology stack and versions
-   - Performance metrics (transactions/sec, data volume, users, capacity)
-   - SLAs and availability targets
-   - Integration points (what systems connect to this one)
-   - Disaster recovery and failover procedures
-   - Security controls and compliance
-4. **Link**: Reference other systems you integrate with
-5. **Explore**: Use `Dashboard - Architecture Knowledge Graph.md` to view relationships
-
-#### 2. Document Integrations
-
-1. **Create Integration notes** for each system-to-system connection
-2. **Set critical fields**:
-   - `integrationPattern`: real-time, batch-etl, api-gateway, event-streaming, etc.
-   - `sourceSystem` and `targetSystem`: Link to your System notes
-   - `criticality`: Based on the impact if integration fails
-   - `latencyTarget`: Required latency (e.g., "<5 seconds")
-3. **Document**:
-   - Data volume and frequency (events/sec, records/day, etc.)
-   - Data quality validation rules and failure handling
-   - Topic/queue/table schemas for your platforms
-   - Failure scenarios and recovery procedures
-   - SLAs and monitoring thresholds
-4. **Example patterns**:
-   - **Real-time**: Event streaming (Kafka, Kinesis), <5 second latency
-   - **Batch**: Scheduled ETL (Spark, NiFi), 4-24 hour window
-   - **API**: Synchronous requests via gateway, <500ms latency
-5. **Track lineage**: Create `Query - Integration Dependency Chain.md` to show data flow
-
-#### 3. Create Architecture HLD
-
-1. **Create one Architecture note** for major components (data platform, APIs, etc.)
-2. **Include**:
-   - Executive summary (business context, objectives)
-   - Architecture diagram (C4 Level 2: containers and major components)
-   - Technology stack by layer (application, data, infrastructure)
-   - Functional architecture (your integration patterns and data flows)
-   - NFR targets (availability %, latency ms, throughput, capacity growth)
-   - Deployment topology (regions, cloud accounts, failover strategy)
-   - Cost model (annual cost by system, optimisation opportunities)
-   - Risk assessment and mitigation
-   - Quarterly roadmap and evolution plan
-3. **Link to**: Systems, Integrations, and related ADRs
-4. **Keep current**: Review quarterly, update NFR achievements vs targets
-
-#### 4. Plan Expansion Scenarios
-
-1. **Create Scenario notes** for transformation/expansion plans
-2. **Include**:
-   - Timeline and phases (e.g., Q1/Q2/Q3 2026)
-   - Systems/data sources you plan to add
-   - New capabilities (analytics, dashboards, APIs, ML models)
-   - Financial analysis: setup cost, annual incremental cost, benefits, ROI
-   - Risk assessment: dependencies, failure modes, mitigations
-   - Success criteria and KPIs by phase
-   - Alternative scenarios (Conservative, Standard, Aggressive)
-3. **Publish**: Share Architecture HLD + Scenario with stakeholders for buy-in
-
-#### 5. Visualise with Canvas Diagrams
-
-1. **Create Canvas visualisations** for system landscape, C4 context, and data flows
-2. **Best practices**:
-   - **System Landscape**: Show all systems with colour-coded criticality (red=critical, yellow=high, etc.)
-   - **C4 Context**: External actors, bounded systems, and major integrations
-   - **Data Flow**: Stages (source → transform → load), latency per stage, SLAs
-3. **Keep updated**: Refresh when systems change, or new integrations are added
-
-#### 6. Create Navigation Queries
-
-1. **Customise the 7 sample Query notes** for your systems
-2. **Each query filters specific architecture aspects**:
-   - Critical systems (99.95% SLA)
-   - Real-time integrations (<5 sec latency)
-   - Systems by cloud provider
-   - Integration dependency chain (data lineage)
-   - Architecture by business domain
-   - Data volume and storage capacity
-   - Annual cost breakdown by system
-3. **Create additional queries** for your specific needs:
-   - Systems with pending capacity review
-   - Integrations above the cost threshold
-   - Systems due for renewal/upgrade
-   - Technology stack inventory
-
-#### 7. Use the Dashboard for Discovery
-
-1. **Open `Dashboard - Architecture Knowledge Graph.md`** as your starting point
-2. **Use for**:
-   - Quick overview of all systems and integrations
-   - System relationships and criticality
-   - Technology stack summary
-   - Entry point to detailed System, Integration, and Architecture notes
-3. **Customise**: Add your own sections and queries specific to your context
-
-#### Best Practices for Architecture Documentation
-
-✅ **Keep systems updated**: Review quarterly, update metrics and costs annually
-✅ **Link everything**: Use `relatedTo`, `dependsOn` relationships to show architecture flow
-✅ **Document trade-offs**: In each System and Integration note, explain why this approach
-✅ **Include realistic numbers**: Performance benchmarks, cost models, and data volumes make architecture credible
-✅ **Track risk**: Include failure scenarios, SLAs, disaster recovery procedures
-✅ **Show alternatives**: Document options considered and why you chose this approach
-✅ **Publish visualisations**: Canvas diagrams and C4 context help stakeholders understand architecture
-✅ **Create scenarios**: Planned expansions and roadmaps demonstrate architecture evolution
-✅ **Use queries**: Custom queries reveal patterns and guide future decisions
+See **[[Page - Search and Discovery Guide]]** for query syntax, filters, and advanced patterns.
 
 ---
 
@@ -901,121 +771,58 @@ Once Claude Code is running, you have access to all vault skills:
 
 ## 🤖 Claude Code Skills
 
-This vault includes **62 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command:
+This vault includes **62 AI-assisted workflows** accessible via Claude Code. Open a terminal in Obsidian and type any skill command.
 
-### Daily Workflow
+> **📖 Complete Reference:** See **[[Page - Claude Code Skills Quick Reference]]** for all 62 skills with examples, model recommendations (Haiku/Sonnet/Opus), and usage patterns.
 
-- `/daily` - Create today's daily note
-- `/meeting <title>` - Create meeting note with prompts
-- `/weekly-summary` - Generate comprehensive weekly summary (5 parallel sub-agents)
+### Skills by Category (Overview)
 
-### Architecture Work
+| Category                | Count | Key Skills                                             | Guide                                         |
+| ----------------------- | ----- | ------------------------------------------------------ | --------------------------------------------- |
+| **Daily Workflow**      | 3     | `/daily`, `/meeting`, `/weekly-summary`                | [[Page - Daily Workflow Guide]]               |
+| **Architecture**        | 16    | `/system`, `/integration`, `/adr`, `/diagram`          | [[Page - Architecture Workflow Guide]]        |
+| **Search & Discovery**  | 6     | `/q`, `/search`, `/related`, `/book-search`            | [[Page - Search and Discovery Guide]]         |
+| **Document Processing** | 6     | `/pdf-to-page`, `/pptx-to-page`, `/screenshot-analyze` | [[Page - Claude Code Skills Quick Reference]] |
+| **Quick Capture**       | 8     | `/task`, `/person`, `/weblink`, `/youtube`             | [[Page - Claude Code Skills Quick Reference]] |
+| **Vault Maintenance**   | 12    | `/vault-maintenance`, `/quality-report`, `/orphans`    | [[Page - Claude Code Skills Quick Reference]] |
+| **Incubator**           | 7     | `incubator`, `incubator graduate`, `incubator list`    | [[Page - Claude Code Skills Quick Reference]] |
+| **Security**            | 5     | `/secrets status`, `/secrets get`, `/secrets list`     | [[Page - Secrets and Security Setup Guide]]   |
 
-- `/adr <title>` - Create new Architecture Decision Record
-- `/adr-report [period]` - ADR activity report (week/month/all)
-- `/find-decisions <topic>` - Find all decisions about a topic (sub-agents)
+### Most Used Skills (Quick Reference)
 
-### Architecture Documentation & Analysis
+**Daily Workflow:**
 
-- `/system <name>` - Create comprehensive System note with guided prompts (checks for duplicates, gathers tech stack, metrics, SLAs)
-- `/integration <source> <target>` - Document system-to-system integration with pattern, latency, data volume, quality checks
-- `/architecture <title>` - Create Architecture HLD/LLD with systems, components, NFRs, deployment topology
-- `/scenario <name>` - Create what-if scenarios, future-state plans, cost/benefit analysis, risk assessment
-- `/datasource <name>` - Document databases, tables, APIs, datasets with schema and access info
-- `/diagram <type>` - Generate C4, system landscape, data flow, or AWS architecture diagrams
-- `/canvas <name>` - Create visual Canvas diagrams (system landscape, C4 context, data flows)
-- `/architecture-report [filter]` - Generate architecture documentation report with system inventory, integration matrix, cost analysis
-- `/cost-optimization [scope]` - Identify cost savings across systems (underutilised resources, right-sizing, contract optimisation)
-- `/dependency-graph [system]` - Visualise system dependencies, identify single points of failure, plan impact analysis
-- `/impact-analysis <system>` - Analyse what breaks if a system fails (downstream consumers, integration paths, risk mitigation)
-- `/scenario-compare <baseline> <options>` - Compare multiple architecture scenarios side-by-side (cost, risk, timeline, benefits)
-- `/dataasset <name>` - Document data assets (tables, APIs, Kafka topics) with producers, consumers, lineage, and Mermaid diagrams
-- `/system-roadmap` - Generate system lifecycle roadmap visualisation (Gartner TIME categories: Tolerate, Invest, Migrate, Eliminate)
-- `/system-sync [source]` - Sync systems from external CMDBs (ServiceNow, Jira, Confluence Application Library)
-- `/tag-management [action]` - Audit, migrate, normalise tags across vault (find flat tags, migrate to hierarchical, validate taxonomy)
+```
+/daily                    # Create today's daily note
+/meeting Sprint Planning  # Create meeting note
+/task Review ADR          # Quick-create task
+```
 
-These skills enable comprehensive architecture documentation and knowledge graph building. Create systems, document integrations, design architectures, plan scenarios, analyse costs, visualise dependencies, and maintain quality—all with AI assistance and graph index integration.
+**Architecture:**
 
-### Engineering Management
+```
+/adr API Gateway Selection   # Create ADR
+/system Payment Service      # Document a system
+/diagram c4-context MyApp    # Generate C4 diagram
+```
 
-- `/project-status <project>` - Generate project status report (sub-agents)
-- `/project-snapshot [name]` - Quick status of all active projects
-- `/dpia-status [filter]` - DPIA compliance status across projects
+**Search:**
 
-### Research & Discovery
+```
+/q kafka                     # Fast SQLite FTS5 search
+/search event streaming      # Relevance-ranked graph search
+/related authentication      # Find all related notes
+```
 
-- `/related <topic>` - Find all notes mentioning a topic (sub-agents)
-- `/summarize <note>` - Summarise a note or set of notes
-- `/timeline <project>` - Chronological project history (sub-agents)
-- `/book-search <topic>` - Search indexed book/PDF content by topic (graph-only, no file reads)
+**Maintenance:**
 
-### Document Processing
+```
+/vault-maintenance           # Quarterly health check
+/quality-report              # Content quality scores
+/secrets status              # Check Bitwarden session
+```
 
-- `/pdf-to-page <path>` - Convert PDF to Page note with docling (Sonnet or Opus analysis)
-- `/pptx-to-page <path>` - Convert PowerPoint to Page note (quick or visual mode)
-- `/document-extract <path>` - Extract text from scanned documents/photos (Sonnet sub-agents)
-- `/attachment-audit` - Audit all vault attachments with visual analysis (Sonnet sub-agents)
-
-### Sync & Integration
-
-- `/sync-governance` - Sync policies, guardrails, and org ADRs from Confluence (MCP)
-- `/sync-notion` - Sync meetings from Notion database
-- `/sync-notion-pages` - Bidirectional sync between Obsidian notes and Notion pages
-
-### Visual Analysis
-
-- `/screenshot-analyze <path>` - Analyse screenshots with OCR and visual inspection (3 Sonnet sub-agents)
-- `/diagram-review <path>` - Analyse architecture diagrams and technical drawings (4 Sonnet sub-agents)
-
-### Quick Capture
-
-- `/task <title>` - Quick-create task with priority
-- `/person <name>` - Create person note (clean links without prefix)
-- `/weblink <url>` - Save URL with AI summary
-- `/youtube <url>` - Save YouTube video with transcript analysis
-- `/article <title>` - Quick-create article (blog post, video, podcast, LinkedIn post)
-- `/trip <destination>` - Create trip planning note with flights and accommodation
-
-### Incubator (Idea Lifecycle)
-
-- `incubator <title>` - Quick-create incubator idea
-- `incubator <title> [domain]` - Create with domain keywords
-- `incubator note <title> for <idea>` - Create research note
-- `incubator list [filter]` - List active ideas by status/domain
-- `incubator list all` - Include archived (graduated/rejected)
-- `incubator graduate <idea>` - Graduate to Project/ADR/Page (archive idea)
-- `incubator reject <idea>` - Reject with reason (archives idea)
-
-### Search & Discovery
-
-- `/search <query>` - Smart search: queries graph index first, falls back to grep
-- `/graph-query <query>` - Direct graph queries with filters (type, status, priority)
-- `/q <query>` - Fast SQLite FTS5 search (~1000x faster than grep)
-
-### Vault Maintenance
-
-- `/wipe` - Generate context handoff, clear session, resume fresh (auto-detects tmux vs manual workflow)
-- `/vault-maintenance` - Quarterly health check - all quality checks (sub-agents)
-- `/orphans` - Find notes with no backlinks (sub-agents)
-- `/broken-links` - Comprehensive broken link detection (3 parallel Sonnet sub-agents)
-- `/check-weblinks` - Test all weblink URLs for dead/redirected links (sub-agents)
-- `/archive <note>` - Soft archive a note (Project, Task, Page, Person)
-- `/rename <pattern>` - Batch rename files with link updates
-- `/quality-report` - Content quality analysis with scores (5 parallel Sonnet sub-agents)
-
-### Security & Credentials
-
-- `/secrets status` - Check Bitwarden CLI installation and session status
-- `/secrets get <name>` - Retrieve a specific secret from Bitwarden
-- `/secrets list` - List all vault secrets in Bitwarden
-- `/secrets env` - Generate environment variable exports for scripts
-- `/secrets setup` - Initial Bitwarden CLI setup and configuration
-
-### Reference
-
-- `todos` - Guidelines for Claude Code todo list usage and best practices
-
-**See** `.claude/skills/` directory for all skill definitions.
+**See** `.claude/skills/` directory for all skill definitions, or **[[Page - Claude Code Skills Quick Reference]]** for the complete reference guide.
 
 ---
 
@@ -1379,6 +1186,20 @@ capacityMetrics:
 
 ## 📚 Additional Resources
 
+### 📖 User Guides (Start Here)
+
+These comprehensive guides help you get the most from ArchitectKB:
+
+| Guide                                             | Purpose                                               | Best For                         |
+| ------------------------------------------------- | ----------------------------------------------------- | -------------------------------- |
+| **[[Page - Claude Code Skills Quick Reference]]** | All 62 skills with examples and model recommendations | Daily reference, skill discovery |
+| **[[Page - Daily Workflow Guide]]**               | Morning routine, meeting capture, weekly reviews      | New users, establishing habits   |
+| **[[Page - Search and Discovery Guide]]**         | SQLite FTS5, graph queries, discovery patterns        | Finding information quickly      |
+| **[[Page - Architecture Workflow Guide]]**        | Multi-skill workflows for systems, integrations, ADRs | Architecture documentation       |
+| **[[Page - Diagram and Visualisation Guide]]**    | C4 diagrams, Canvas, Mermaid                          | Visual architecture              |
+| **[[Page - Claude Code with AWS Bedrock Guide]]** | Enterprise deployment with AWS Bedrock                | Corporate environments           |
+| **[[Page - Secrets and Security Setup Guide]]**   | Bitwarden CLI, pre-commit hooks, credentials          | Security setup                   |
+
 ### Architecture Knowledge Graph
 
 **Getting started with architecture documentation:**
@@ -1397,11 +1218,9 @@ capacityMetrics:
 - `System - Sample Data Integration Platform.md` - Platform example with 450 pipelines
 - `System - Sample Cloud Infrastructure.md` - Multi-region infrastructure example
 - `Integration - Sample ERP to Data Platform Real-time.md` - Real-time event-driven example
-- `Integration - Sample Data Platform to Analytics Batch.md` - Batch ETL example
 - `Architecture - Sample Data Integration Platform HLD.md` - Enterprise HLD example
 - `Scenario - Sample Real-time Analytics Expansion.md` - Roadmap & ROI example
 - `Dashboard - Architecture Knowledge Graph.md` - Navigation hub
-- `Query - Critical Systems Inventory.md` - Example Dataview query
 
 **Canvas visualisations:**
 
@@ -1416,18 +1235,6 @@ capacityMetrics:
 - `+Daily/README.md` - Daily note practice guide
 - `+Meetings/README.md` - Meeting capture guide
 - `.claude/vault-conventions.md` - Metadata formatting rules
-
-### User Guides (NEW in v1.9.1)
-
-Comprehensive guides for effective vault usage:
-
-- **`Page - Claude Code Skills Quick Reference.md`** - All 62 skills organised by category with examples and model recommendations
-- **`Page - Daily Workflow Guide.md`** - Practical routines for morning setup, meeting capture, weekly reviews
-- **`Page - Search and Discovery Guide.md`** - SQLite FTS5 queries, graph index, discovery skills
-- **`Page - Architecture Workflow Guide.md`** - Multi-skill workflows for documenting systems, integrations, ADRs
-- **`Page - Diagram and Visualisation Guide.md`** - C4 diagrams, Canvas files, Mermaid integration
-- **`Page - Claude Code with AWS Bedrock Guide.md`** - Enterprise deployment with AWS Bedrock
-- **`Page - Secrets and Security Setup Guide.md`** - Bitwarden CLI integration, pre-commit hooks, credential management
 
 ### Example Notes by Type
 
@@ -1640,6 +1447,19 @@ This template is based on real-world Solutions Architecture practice at enterpri
 - ✅ **Security documentation** - Page - Vault Security Hardening with setup guides and best practices
 - ✅ `.secrets.baseline` - detect-secrets baseline file with known false positives
 - ✅ 62 total Claude Code skills
+
+**v1.9.4** (Released 2026-01-28):
+
+- ✅ **7 Comprehensive User Guides** - Complete documentation for vault usage
+- ✅ Page - Claude Code Skills Quick Reference (all 62 skills with examples)
+- ✅ Page - Daily Workflow Guide (morning routine, meeting capture, weekly reviews)
+- ✅ Page - Search and Discovery Guide (SQLite FTS5, graph queries)
+- ✅ Page - Architecture Workflow Guide (multi-skill workflows)
+- ✅ Page - Diagram and Visualisation Guide (C4, Canvas, Mermaid)
+- ✅ Page - Claude Code with AWS Bedrock Guide (enterprise deployment)
+- ✅ Page - Secrets and Security Setup Guide (Bitwarden, pre-commit hooks)
+- ✅ **README Refactoring** - Simplified with guide references, reduced duplication
+- ✅ Updated CLAUDE.md and CHANGELOG.md with guide references
 
 **v2.0** (Planned):
 
