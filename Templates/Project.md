@@ -1,29 +1,47 @@
-<%*
+<%\*
 const name = await tp.system.prompt("Project name:");
 if (name) {
-  await tp.file.rename("Project - " + name);
+await tp.file.move("Projects/Project - " + name);
 }
-_%>
+\_%>
+
 ---
+
 type: Project
+pillar: event
 title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 status: active
 priority: medium
-start-date: <% tp.date.now("YYYY-MM-DD") %>
-end-date: null
+timeFrame: <% tp.date.now("YYYY-MM-DD") %> - null
+collections: null
+
 # Transformation Classification
+
 transformationType: null
 transformationScope: null
 aiInvolved: false
+
+# Relationships
+
+nodeRelationships: []
+entityRelationships: []
+
+# Quality
+
+summary: null
+confidence: medium
+freshness: current
+verified: false
+reviewed: null
+
 ---
 
 # <% name %>
 
 ## Overview
-
 
 ## Objectives
 
@@ -52,4 +70,3 @@ SORT date DESC
 ```
 
 ## Notes
-

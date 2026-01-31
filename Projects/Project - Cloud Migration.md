@@ -1,14 +1,36 @@
 ---
 type: Project
+pillar: event
 title: Cloud Migration
 created: 2025-09-01
 modified: 2026-01-07
-tags: [project/cloud-migration, domain/infrastructure, activity/migration]
+tags:
+  [
+    project/cloud-migration,
+    domain/cloud,
+    domain/infrastructure,
+    activity/modernisation,
+  ]
 status: active
 priority: high
-start-date: 2025-09-01
-end-date: 2026-06-30
-category: Digital Transformation
+timeFrame: 2025-09-01 - 2026-06-30
+collections: Digital Transformation
+transformationType: migration
+transformationScope: enterprise
+aiInvolved: false
+nodeRelationships: []
+entityRelationships:
+  - "[[Person - Jane Smith]]"
+  - "[[Person - Alex Johnson]]"
+  - "[[Person - Dr Sarah Chen]]"
+  - "[[Organisation - CloudVendor Inc]]"
+
+# Quality
+summary: Strategic initiative to migrate on-premises workloads to AWS cloud infrastructure
+confidence: high
+freshness: current
+verified: false
+reviewed: null
 ---
 
 # Cloud Migration
@@ -18,6 +40,7 @@ category: Digital Transformation
 Strategic initiative to migrate on-premises workloads to AWS cloud infrastructure. This project aims to improve scalability, reduce infrastructure costs, and enable faster deployment cycles.
 
 **Business Drivers:**
+
 - Aging datacenter hardware requiring replacement
 - Need for improved disaster recovery capabilities
 - Pressure to accelerate time-to-market for new features
@@ -46,6 +69,7 @@ Strategic initiative to migrate on-premises workloads to AWS cloud infrastructur
 **Status:** Active - On Track
 
 **Milestones:**
+
 - [x] Phase 1: Assessment & Planning (Completed Oct 2025)
 - [x] Phase 2: Landing Zone Setup (Completed Nov 2025)
 - [ ] Phase 3: Application Migration (In Progress - Jan 2026)
@@ -55,6 +79,7 @@ Strategic initiative to migrate on-premises workloads to AWS cloud infrastructur
 ## Current Focus
 
 **This Month (January 2026):**
+
 - Migrating first production application (Customer Portal)
 - Establishing monitoring and observability practices
 - Training development teams on cloud-native patterns
@@ -88,11 +113,11 @@ SORT status ASC
 
 ## Risks & Issues
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Legacy application dependencies | High | Phased migration with API gateway |
+| Risk                             | Impact | Mitigation                              |
+| -------------------------------- | ------ | --------------------------------------- |
+| Legacy application dependencies  | High   | Phased migration with API gateway       |
 | Skills gap in cloud technologies | Medium | Training program + external consultants |
-| Data migration complexity | High | Comprehensive testing strategy |
+| Data migration complexity        | High   | Comprehensive testing strategy          |
 
 ## Success Metrics
 

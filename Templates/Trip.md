@@ -1,10 +1,12 @@
 ---
 type: Trip
+pillar: event
 title: "Trip - {{destination}}"
-created: {{date}}
-modified: {{date}}
-status: idea
-tripType: null
+created: { { date } }
+modified: { { date } }
+tags: []
+status: idea # idea | planning | booked | completed | cancelled
+tripType: null # holiday | city-break | adventure | family-visit | business
 destination: null
 country: null
 startDate: null
@@ -12,15 +14,8 @@ endDate: null
 travellers: []
 budget: null
 currency: GBP
-accommodation: null
-flights: null
-notes: null
-tags: [type/trip]
-# Notion Sync (optional - for collaborative planning)
-notionPageId: null
-notionUrl: null
-lastSynced: null
-syncStatus: untracked
+nodeRelationships: []
+entityRelationships: []
 ---
 
 # {{destination}}
@@ -52,10 +47,10 @@ syncStatus: untracked
 
 ## Booking References
 
-| Item | Reference | Confirmation |
-|------|-----------|--------------|
-| Flights | | |
-| Hotel | | |
-| Car hire | | |
+| Item     | Reference | Confirmation |
+| -------- | --------- | ------------ |
+| Flights  |           |              |
+| Hotel    |           |              |
+| Car hire |           |              |
 
 ## Notes

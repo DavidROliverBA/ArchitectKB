@@ -1,19 +1,25 @@
-<%*
+<%\*
 const name = await tp.system.prompt("Person's name:");
 if (name) {
-  await tp.file.rename("Person - " + name);
+await tp.file.rename("Person - " + name);
 }
-_%>
+\_%>
+
 ---
+
 type: Person
+pillar: entity
 title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-role:
-organisation:
-email:
-phone:
+role: null
+organisation: null
+emailAddress: null
+aliases: []
+nodeRelationships: []
+entityRelationships: []
+
 ---
 
 # <% name %>
@@ -27,7 +33,6 @@ phone:
 
 ## Notes
 
-
 ## Interactions
 
 ```dataview
@@ -36,4 +41,3 @@ FROM ""
 WHERE type = "Meeting" AND contains(attendees, this.file.name)
 SORT date DESC
 ```
-

@@ -1,33 +1,34 @@
 ---
 type: FormSubmission
+pillar: event
 title: "{{title}}"
-formType: null
-status: draft
+created: "{{date}}"
+modified: "{{date}}"
+tags: []
+formType: null # DPIA | CyberRisk | TPRM | IAF | ChangeRequest | Other
+status: draft # draft | submitted | pending | approved | rejected | expired
 project: null
-requestingTeam: null
 submittedDate: null
 responseDate: null
 expiryDate: null
 referenceNumber: null
-attachments: []
-created: "{{date}}"
-modified: "{{date}}"
-tags: []
+nodeRelationships: []
+entityRelationships: []
 ---
 
 # {{title}}
 
 ## Form Details
 
-| Field | Value |
-|-------|-------|
-| **Form Type** | `= this.formType` |
-| **Status** | `= this.status` |
-| **Project** | `= this.project` |
-| **Requesting Team** | `= this.requestingTeam` |
-| **Submitted** | `= this.submittedDate` |
-| **Response** | `= this.responseDate` |
-| **Reference** | `= this.referenceNumber` |
+| Field               | Value                    |
+| ------------------- | ------------------------ |
+| **Form Type**       | `= this.formType`        |
+| **Status**          | `= this.status`          |
+| **Project**         | `= this.project`         |
+| **Requesting Team** | `= this.requestingTeam`  |
+| **Submitted**       | `= this.submittedDate`   |
+| **Response**        | `= this.responseDate`    |
+| **Reference**       | `= this.referenceNumber` |
 
 ## Summary
 

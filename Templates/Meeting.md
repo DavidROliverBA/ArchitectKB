@@ -1,21 +1,29 @@
-<%*
+<%\*
 const name = await tp.system.prompt("Meeting name:");
 if (name) {
-  const date = tp.date.now("YYYY-MM-DD");
-  const filename = "Meeting - " + date + " " + name;
-  await tp.file.move("+Meetings/" + filename);
+const date = tp.date.now("YYYY-MM-DD");
+const year = tp.date.now("YYYY");
+const filename = "Meeting - " + date + " " + name;
+await tp.file.move("Meetings/" + year + "/" + filename);
 }
-_%>
+\_%>
+
 ---
+
 type: Meeting
+pillar: event
 title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 date: <% tp.date.now("YYYY-MM-DD") %>
-project:
+time: null
+project: null
 attendees: []
-summary:
+summary: null
+nodeRelationships: []
+entityRelationships: []
+
 ---
 
 # <% name %>
@@ -30,7 +38,6 @@ summary:
 
 ## Discussion Notes
 
-
 ## Action Items
 
 - [ ]
@@ -40,4 +47,3 @@ summary:
 -
 
 ## Follow-up
-

@@ -1,13 +1,16 @@
-<%*
+<%\*
 const name = await tp.system.prompt("ADR topic:");
 if (name) {
-  await tp.file.rename("ADR - " + name);
+await tp.file.move("ADRs/ADR - " + name);
 }
-_%>
+\_%>
+
 ---
-type: Adr
+
+type: ADR
+pillar: event
 title: <% name %>
-description:
+description: null
 status: draft
 adrType: # Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 tags: [ADR, architecture]
@@ -15,55 +18,68 @@ created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 deciders: []
 approvers:
-  # Core Assessors (Required)
-  - Head of Architecture or Engineering
-  - Principal Solution Architect
-  - Cyber Assurance (John Smith or delegate)
-  # Subject-Specific SMEs (add as appropriate - see Page - YourOrg ADR Approvers and SME)
-  # Stakeholders
+
+# Core Assessors (Required)
+
+- Head of Architecture or Engineering
+- Principal Solution Architect
+- Cyber Assurance (John Smith or delegate)
+
+# Subject-Specific SMEs (add as appropriate - see Page - YourOrg ADR Approvers and SME)
+
+# Stakeholders
+
 project:
-jiraTicket: null  # To be added when JIRA ticket created
+jiraTicket: null # To be added when JIRA ticket created
 
 # Source/Provenance
-source: local                         # local | confluence
-sourcePageId: null                    # Confluence page ID (if synced)
-sourceSpace: null                     # Confluence space key (if synced)
-sourceUrl: null                       # Link to authoritative version
-sourceVersion: null                   # Confluence version number
+
+source: local # local | confluence
+sourcePageId: null # Confluence page ID (if synced)
+sourceSpace: null # Confluence space key (if synced)
+sourceUrl: null # Link to authoritative version
+sourceVersion: null # Confluence version number
 
 # Publication (for local ADRs)
-isPublished: false                    # Has been published to Confluence?
-publishedDate: null                   # When published (YYYY-MM-DD)
-publishedUrl: null                    # Confluence URL when published
+
+isPublished: false # Has been published to Confluence?
+publishedDate: null # When published (YYYY-MM-DD)
+publishedUrl: null # Confluence URL when published
 
 # Authority Level
-authority: draft                      # draft | local | team | organizational
+
+authority: draft # draft | local | team | organizational
 
 # Relationships
+
 relatedTo: []
 supersedes: []
 dependsOn: []
 
 # Quality Indicators
+
 confidence: medium
 freshness: current
 verified: false
 reviewed: <% tp.date.now("YYYY-MM-DD") %>
 
 # Context
+
 summary:
 assumptions: []
 stakeholders: []
 
 # AI-Specific Fields (for AI_ADR type)
-aiProvider: null          # aws-bedrock | azure-openai | openai | google | anthropic | custom | null
-aiModel: null             # claude-3 | gpt-4 | llama | custom | null
-aiUseCase: null           # generation | classification | extraction | conversation | agents | null
-aiRiskLevel: null         # high | medium | low | null
-ethicsReviewed: false     # Has AI ethics been considered?
-biasAssessed: false       # Has bias/fairness been assessed?
+
+aiProvider: null # aws-bedrock | azure-openai | openai | google | anthropic | custom | null
+aiModel: null # claude-3 | gpt-4 | llama | custom | null
+aiUseCase: null # generation | classification | extraction | conversation | agents | null
+aiRiskLevel: null # high | medium | low | null
+ethicsReviewed: false # Has AI ethics been considered?
+biasAssessed: false # Has bias/fairness been assessed?
 dataPrivacyReviewed: false # DPIA completed for AI data usage?
-humanOversight: null      # full | partial | minimal | none | null
+humanOversight: null # full | partial | minimal | none | null
+
 ---
 
 # ADR - <% name %>
@@ -85,6 +101,7 @@ humanOversight: null      # full | partial | minimal | none | null
 **Following Official YourOrg ADR Process**: [[Page - YourOrg ADR Process (Official)]]
 
 **Workflow Progress:**
+
 1. ⏳ Check for Existing Guardrail
 2. ⏳ Draft ADR Content
 3. ⏳ Create JIRA Ticket in [PROJECT] (pending - **CRITICAL STEP**)
@@ -94,6 +111,7 @@ humanOversight: null      # full | partial | minimal | none | null
 7. ⏳ Post-Approval Actions
 
 **Next Steps:**
+
 1. **Complete ADR content** (all sections below)
 2. **Create JIRA ticket** - Type: ADR, Label: "[adrType]"
 3. **Add approvers** (see [[Page - YourOrg ADR Approvers and SME (Official)]])
@@ -105,47 +123,39 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ### Background
 
-* Describe the architectural context
-* Explain the problem or challenge that led to this decision
-* Provide relevant historical or technical background
+- Describe the architectural context
+- Explain the problem or challenge that led to this decision
+- Provide relevant historical or technical background
 
 **Business Problem:**
 
-
 **Current Constraints:**
-
 
 **Technical Context:**
 
-
 ### Problem Statement
 
-* Clearly articulate the specific problem or requirement
-* Outline the constraints and limitations
-* Describe the goals and desired outcomes
+- Clearly articulate the specific problem or requirement
+- Outline the constraints and limitations
+- Describe the goals and desired outcomes
 
 **Key Challenges:**
 
-
 **Requirements:**
-
 
 ---
 
 ## Decision
 
-* Clearly state the architectural decision
-* Explain the rationale behind the choice
-* Describe how this decision addresses the problem statement
+- Clearly state the architectural decision
+- Explain the rationale behind the choice
+- Describe how this decision addresses the problem statement
 
 **Decision:**
 
-
 **Rationale:**
 
-
 **Implementation Approach:**
-
 
 ---
 
@@ -153,20 +163,19 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ### Alternative 1: [Name]
 
-* **Description**:
-* **Pros**:
-* **Cons**:
-* **Fit with requirements**:
+- **Description**:
+- **Pros**:
+- **Cons**:
+- **Fit with requirements**:
 
 **Rejected Because:**
 
-
 ### Alternative 2: [Name]
 
-* **Description**:
-* **Pros**:
-* **Cons**:
-* **Fit with requirements**:
+- **Description**:
+- **Pros**:
+- **Cons**:
+- **Fit with requirements**:
 
 **Rejected Because:**
 
@@ -178,52 +187,47 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ### Positive Impacts
 
-* List potential positive outcomes
-* Describe benefits to system architecture
-* Note improvements in performance, maintainability, etc.
+- List potential positive outcomes
+- Describe benefits to system architecture
+- Note improvements in performance, maintainability, etc.
 
-**Benefits:**
--
+## **Benefits:**
+
 -
 -
 
 ### Negative Impacts
 
-* Identify potential drawbacks
-* Outline risks or challenges
-* Discuss technical debt or implementation complexity
+- Identify potential drawbacks
+- Outline risks or challenges
+- Discuss technical debt or implementation complexity
 
-**Drawbacks:**
--
+## **Drawbacks:**
+
 -
 -
 
 ### Mitigation Strategies
 
-* Propose ways to address negative consequences
-* Suggest follow-up actions or monitoring
+- Propose ways to address negative consequences
+- Suggest follow-up actions or monitoring
 
-**Mitigations:**
--
--
--
+## **Mitigations:**
 
----
+-
+- ***
 
 ## Compliance
 
-* List any regulatory or organizational standards met
-* Note alignment with existing architectural principles
-* Reference related architectural decisions
+- List any regulatory or organizational standards met
+- Note alignment with existing architectural principles
+- Reference related architectural decisions
 
 ### GDPR Compliance
 
-
 ### Security Classification
 
-
 ### Audit and Traceability
-
 
 ---
 
@@ -238,36 +242,39 @@ humanOversight: null      # full | partial | minimal | none | null
 **Model:** [Specific model name and version]
 
 **Use Case:**
+
 - [ ] Text generation
 - [ ] Classification
 - [ ] Information extraction
 - [ ] Conversational AI
 - [ ] Agentic workflows
-- [ ] Other: ___
+- [ ] Other: \_\_\_
 
 ### AI Risk Assessment
 
 **Risk Level:** [High | Medium | Low]
 
-| Risk Factor | Assessment | Mitigation |
-|-------------|------------|------------|
-| Data sensitivity | | |
-| Decision impact | | |
-| Autonomy level | | |
-| Reversibility | | |
+| Risk Factor      | Assessment | Mitigation |
+| ---------------- | ---------- | ---------- |
+| Data sensitivity |            |            |
+| Decision impact  |            |            |
+| Autonomy level   |            |            |
+| Reversibility    |            |            |
 
 ### Ethics and Bias
 
 **Ethics Review:**
+
 - [ ] Reviewed against AI ethics principles
 - [ ] Stakeholder impact assessed
-- [ ] Documented in: ___
+- [ ] Documented in: \_\_\_
 
 **Bias Assessment:**
+
 - [ ] Training data bias reviewed
 - [ ] Output bias testing completed
 - [ ] Fairness metrics defined
-- [ ] Documented in: ___
+- [ ] Documented in: \_\_\_
 
 ### Data Privacy (AI-specific)
 
@@ -280,22 +287,17 @@ humanOversight: null      # full | partial | minimal | none | null
 
 **Oversight Level:** [Full | Partial | Minimal | None]
 
-**Human-in-the-loop points:**
--
+## **Human-in-the-loop points:**
 
-**Escalation triggers:**
--
+## **Escalation triggers:**
 
 ### Model Governance
 
-**Monitoring:**
--
+## **Monitoring:**
 
-**Retraining triggers:**
--
+## **Retraining triggers:**
 
-**Version control:**
--
+## **Version control:**
 
 ---
 
@@ -303,35 +305,30 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ### Deployment Approach
 
-
 ### Operational Model
-
 
 ### Support and Maintenance
 
-
 ### Cost Model
 
-
 ### Migration and Rollout
-
 
 ---
 
 ## Risks and Mitigations
 
 | Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
+| ---- | ------ | ----------- | ---------- |
 |      |        |             |            |
 
 ---
 
 ## Additional Notes
 
-* Include any supplementary information
-* Reference related documentation
-* Note date of decision
-* List decision makers and stakeholders
+- Include any supplementary information
+- Reference related documentation
+- Note date of decision
+- List decision makers and stakeholders
 
 ---
 
@@ -339,11 +336,10 @@ humanOversight: null      # full | partial | minimal | none | null
 
 **Project:**
 
-
 **Compliance:**
 
-
 **Official YourOrg ADR Process:**
+
 - [[Page - YourOrg ADR Process (Official)]] - Main ADR workflow
 - [[Page - YourOrg ADR Approvers and SME (Official)]] - Required approvers by domain
 - [[Page - YourOrg ADR Template (Official)]] - Official template structure
@@ -352,15 +348,14 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ## Related ADRs
 
-* [ADR-XXX]: Related previous decision
-* [ADR-YYY]: Dependent or impacted decision
+- [ADR-XXX]: Related previous decision
+- [ADR-YYY]: Dependent or impacted decision
 
 ---
 
 ## Approval
 
 **Approvers** (from JIRA ticket):
-
 
 **Date**: [YYYY-MM-DD]
 
@@ -370,9 +365,9 @@ humanOversight: null      # full | partial | minimal | none | null
 
 ## Revision History
 
-| Version | Date | Description | Author |
-|---------|------|-------------|--------|
-| 1.0 | <% tp.date.now("YYYY-MM-DD") %> | Initial version | <% tp.user.name %> |
+| Version | Date                            | Description     | Author             |
+| ------- | ------------------------------- | --------------- | ------------------ |
+| 1.0     | <% tp.date.now("YYYY-MM-DD") %> | Initial version | <% tp.user.name %> |
 
 ---
 
@@ -381,6 +376,7 @@ humanOversight: null      # full | partial | minimal | none | null
 **Next Review Date**: <% tp.date.now("YYYY-MM-DD", 180) %> (6 months)
 
 **Review Triggers**:
+
 - Status change
 - Dependency changes
 - Compliance requirement changes

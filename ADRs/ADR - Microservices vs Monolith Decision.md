@@ -1,16 +1,17 @@
 ---
-type: Adr
+type: ADR
+pillar: event
 title: Microservices vs Monolith Decision
 description: Initial decision to adopt microservices architecture (superseded by modular monolith approach)
 status: superseded
-category: architecture
-tags:
-  - ADR
-  - activity/architecture
-  - domain/architecture-pattern
-  - historical
+adrType: Architecture_ADR
 created: 2024-03-01
 modified: 2025-06-15
+tags:
+  - type/adr
+  - activity/architecture
+  - domain/platform
+  - status/deprecated
 deciders:
   - Architecture Team
   - Engineering Leadership
@@ -18,27 +19,28 @@ approvers:
   - CTO
   - Engineering Director
   - Technical Architect
+project: "[[Project - Legacy System Decommission]]"
+jiraTicket: null
+
+# ADR Relationships
 relatedTo:
   - "[[Project - Legacy System Decommission]]"
 supersedes: []
 dependsOn: []
-supersededBy: ADR - Adopt Modular Monolith Architecture
+
+# Relationships
+nodeRelationships: []
+entityRelationships:
+  - "[[Person - Jane Smith]]"
+
+# Quality
+summary: Original decision to decompose monolithic application into microservices. Superseded after discovering premature decomposition led to operational complexity without corresponding benefits.
+keywords: [microservices, monolith, architecture-patterns, decomposition]
 confidence: medium
 freshness: stale
 source: primary
 verified: true
 reviewed: 2025-06-15
-summary: Original decision to decompose monolithic application into microservices. Superseded after discovering premature decomposition led to operational complexity without corresponding benefits.
-assumptions:
-  - Team has expertise to manage distributed systems
-  - Benefits of microservices outweigh operational costs
-  - Application domain boundaries are well understood
-stakeholders:
-  - Development Teams
-  - Operations
-  - Architecture
-project: "[[Project - Legacy System Decommission]]"
-externalRef:
 ---
 
 # ADR - Microservices vs Monolith Decision
@@ -66,13 +68,14 @@ After 15 months of implementation, we discovered that our team size, domain unde
 
 ## Historical Context
 
-*This ADR is preserved for historical reference and to document lessons learned. The decision below was valid at the time but has been superseded by new learnings.*
+_This ADR is preserved for historical reference and to document lessons learned. The decision below was valid at the time but has been superseded by new learnings._
 
 ### Background (March 2024)
 
 We had a 10-year-old monolithic e-commerce application (Customer Order Management System - COMS) that had grown to 500,000 lines of code. The application was becoming increasingly difficult to maintain and deploy.
 
 **Business Problem:**
+
 - Long deployment cycles (monthly releases taking 8+ hours)
 - Tight coupling made changes risky
 - Scaling required scaling entire application
@@ -80,6 +83,7 @@ We had a 10-year-old monolithic e-commerce application (Customer Order Managemen
 - Difficult to adopt new technologies
 
 **Original Technical Context:**
+
 - Monolithic Java application with 500K LOC
 - Single PostgreSQL database
 - 5 development teams working on same codebase
@@ -89,6 +93,7 @@ We had a 10-year-old monolithic e-commerce application (Customer Order Managemen
 ### Original Problem Statement (March 2024)
 
 We needed an architecture that:
+
 - Enabled independent deployment of features
 - Allowed teams to work autonomously
 - Supported scaling specific components
@@ -102,6 +107,7 @@ We needed an architecture that:
 **We will decompose the monolithic COMS application into microservices organized around business capabilities.**
 
 **Original Rationale:**
+
 1. **Team Autonomy**: Each team owns end-to-end service lifecycle
 2. **Independent Deployment**: Deploy services independently, reduce release coordination
 3. **Technology Flexibility**: Use appropriate technology for each service
@@ -109,6 +115,7 @@ We needed an architecture that:
 5. **Industry Best Practice**: Following successful patterns from Netflix, Amazon, etc.
 
 **Planned Decomposition:**
+
 1. Order Service
 2. Inventory Service
 3. Customer Service
@@ -122,42 +129,47 @@ We needed an architecture that:
 ### Challenges Encountered
 
 **Operational Complexity (Severe):**
+
 - Went from deploying 1 application to managing 5+ services
 - Distributed debugging extremely difficult
 - Needed new tooling: service mesh, distributed tracing, centralized logging
 - On-call burden increased dramatically (5 services to monitor vs 1)
 
 **Performance Issues (Moderate):**
+
 - Network latency between services degraded response times
 - What was a single database query became multiple service calls
 - Increased infrastructure costs (5 deployments vs 1)
 
 **Data Consistency Challenges (Severe):**
+
 - Distributed transactions proved very complex
 - Eventually consistent data led to bugs
 - Compensating transactions added significant complexity
 
 **Development Velocity (Negative Impact):**
+
 - Features spanning multiple services took longer to develop
 - API versioning complexity
 - Contract testing overhead
 - More coordination needed between teams (not less!)
 
 **Team Challenges:**
+
 - Steep learning curve for distributed systems patterns
 - Insufficient operations expertise for microservices
 - Small team size (15 engineers) spread too thin
 
 ### Actual Results After 15 Months
 
-| Metric | Monolith (Before) | Microservices (After) | Target | Status |
-|--------|-------------------|----------------------|--------|--------|
-| Deployment Frequency | Monthly | Weekly per service | Daily | ❌ Missed |
-| Deployment Time | 8 hours | 30 min per service | 15 min | ❌ Worse overall |
-| Incident Rate | 2/month | 8/month | 1/month | ❌ Significantly worse |
-| Mean Time to Recovery | 2 hours | 4 hours | 30 min | ❌ Worse |
-| Development Velocity | Baseline | -30% | +50% | ❌ Significantly worse |
-| Infrastructure Cost | $15K/month | $35K/month | $15K | ❌ 133% increase |
+| Metric                | Monolith (Before) | Microservices (After) | Target  | Status                 |
+| --------------------- | ----------------- | --------------------- | ------- | ---------------------- |
+| Deployment Frequency  | Monthly           | Weekly per service    | Daily   | ❌ Missed              |
+| Deployment Time       | 8 hours           | 30 min per service    | 15 min  | ❌ Worse overall       |
+| Incident Rate         | 2/month           | 8/month               | 1/month | ❌ Significantly worse |
+| Mean Time to Recovery | 2 hours           | 4 hours               | 30 min  | ❌ Worse               |
+| Development Velocity  | Baseline          | -30%                  | +50%    | ❌ Significantly worse |
+| Infrastructure Cost   | $15K/month        | $35K/month            | $15K    | ❌ 133% increase       |
 
 ---
 
@@ -181,6 +193,7 @@ We needed an architecture that:
 ### Key Insights
 
 **Microservices are not inherently better** - They trade monolith complexity for distributed system complexity. This trade only makes sense when:
+
 - Team is large enough (50+ engineers as rule of thumb)
 - Operational maturity is high (SRE team, advanced monitoring, etc.)
 - Domain boundaries are stable and well-understood
@@ -196,6 +209,7 @@ We needed an architecture that:
 **New Approach (June 2025):** Modular Monolith Architecture
 
 **What Changed:**
+
 - Merged 5 microservices back into single deployable unit
 - Retained strong module boundaries (from microservices decomposition)
 - Kept separate databases but accessed via module boundaries
@@ -203,6 +217,7 @@ We needed an architecture that:
 - Focused on monorepo with clear module ownership
 
 **Results After 6 Months:**
+
 - Incident rate decreased from 8/month to 1/month
 - MTTR improved from 4 hours to 45 minutes
 - Development velocity recovered (+20% vs original monolith)
@@ -215,11 +230,13 @@ We needed an architecture that:
 ## Historical References
 
 **Original Approval:**
+
 - ✅ Former CTO - 2024-03-10
 - ✅ Engineering Director - 2024-03-12
 - ✅ Technical Architect - 2024-03-15
 
 **Superseding Decision:**
+
 - ✅ [[Jane Smith]] - Head of Architecture - 2025-06-10
 - ✅ Engineering Director - 2025-06-12
 - ✅ Development Teams - 2025-06-15
@@ -229,6 +246,7 @@ We needed an architecture that:
 ## Recommendations for Others
 
 **Before choosing microservices, ask:**
+
 1. Do we have 50+ engineers? (If no, probably don't need microservices)
 2. Is our operations maturity high? (Monitoring, observability, incident response)
 3. Do we have stable, well-understood domain boundaries?
@@ -246,9 +264,11 @@ We needed an architecture that:
 **Project:** [[Project - Legacy System Decommission]]
 
 **Superseded By:**
+
 - ADR - Adopt Modular Monolith Architecture (June 2025)
 
 **Related Documentation:**
+
 - "Our Microservices Journey: What We Learned" (blog post)
 - Incident retrospectives 2024-2025
 - Architecture decision timeline
@@ -257,11 +277,11 @@ We needed an architecture that:
 
 ## Revision History
 
-| Version | Date | Description | Author |
-|---------|------|-------------|--------|
-| 1.0 | 2024-03-01 | Initial draft | Architecture Team |
-| 2.0 | 2024-03-15 | Approved | Former CTO |
-| 3.0 | 2025-06-15 | Marked as superseded, added lessons learned | [[Jane Smith]] |
+| Version | Date       | Description                                 | Author            |
+| ------- | ---------- | ------------------------------------------- | ----------------- |
+| 1.0     | 2024-03-01 | Initial draft                               | Architecture Team |
+| 2.0     | 2024-03-15 | Approved                                    | Former CTO        |
+| 3.0     | 2025-06-15 | Marked as superseded, added lessons learned | [[Jane Smith]]    |
 
 ---
 

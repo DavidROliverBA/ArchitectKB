@@ -1,64 +1,50 @@
 ---
 type: DataAsset
+pillar: entity
 title: "{{name}}"
+created: "{{date}}"
+modified: "{{date}}"
+tags: [type/data-asset, domain/data]
 assetId: null
 
 # Classification
-domain: engineering | data | operations | finance | hr | supply-chain | maintenance
-dataType: database-table | database-view | api-endpoint | kafka-topic | data-product | data-lake | file | report | cache
-classification: public | internal | confidential | secret
+domain: null # engineering | data | operations | finance | hr | supply-chain | maintenance
+dataType: null # database-table | database-view | api-endpoint | kafka-topic | data-product | data-lake | file | report | cache
+classification: null # public | internal | confidential | secret
 
 # Location & Format
-sourceSystem: null # "[[System - X]]"
-storageLocation: null # path/table/endpoint
-format: sql | json | parquet | avro | csv | xml | binary
+sourceSystem: null
+storageLocation: null
+format: null # sql | json | parquet | avro | csv | xml | binary
 
 # Ownership
-owner: null # "[[Person - X]]"
-steward: null # "[[Person - Y]]" - data governance contact
+owner: null
+steward: null
 
-# Relationships - Current State
-producedBy: [] # ["[[System - X]]"]
-consumedBy: [] # ["[[System - Y]]", "[[System - Z]]"]
-exposedVia: [] # [rest-api, kafka-topic, direct-query, batch-export, odata, sftp]
+# Data Relationships
+producedBy: []
+consumedBy: []
+derivedFrom: []
+feedsInto: []
 
-# Relationships - Future State
-plannedConsumers: [] # ["[[System - Future]]"] - systems that WILL consume
-deprecatingConsumers: [] # ["[[System - Legacy]]"] - systems moving away
-
-# Lineage
-derivedFrom: [] # Upstream data assets
-feedsInto: [] # Downstream data assets
-
-# Operational Metrics
-refreshFrequency: real-time | hourly | daily | weekly | monthly | ad-hoc | null
-recordCount: null
-volumePerDay: null
-retentionPeriod: null
-
-# Data Quality (optional - for full detail captures)
-completeness: null # percentage
-uniqueness: null # percentage
-accuracy: high | medium | low | null
-timeliness: null # e.g., "< 5 minutes"
-
-# SLAs
-slaAvailability: null # e.g., "99.9%"
-slaLatency: null # e.g., "< 500ms"
+# Operational
+refreshFrequency: null # real-time | hourly | daily | weekly | monthly | ad-hoc
+slaAvailability: null
+slaLatency: null
 
 # Governance
 gdprApplicable: false
 piiFields: []
+
+# Relationships
+nodeRelationships: []
+entityRelationships: []
 
 # Quality Indicators
 confidence: medium
 freshness: current
 verified: false
 reviewed: null
-
-created: { { date } }
-modified: { { date } }
-tags: [type/data-asset, domain/data]
 ---
 
 # {{name}}

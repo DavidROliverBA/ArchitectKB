@@ -81,11 +81,29 @@ This is an Obsidian vault template designed for **Solutions Architects** to mana
 
 **Key Features:**
 
-- Metadata-driven organisation using frontmatter `type` fields
+- Seven-pillar ontology (Entities, Nodes, Events, Views, Artifacts, Governance, Navigation)
 - Architecture Decision Records (ADRs) with relationship tracking
 - Incubator system for research and idea development
 - Quality indicators for content freshness and confidence
 - Claude Code skills for automation and AI-assisted workflows
+
+### Knowledge Model: Seven Pillars
+
+The vault is organised around a **node-centric ontology** with seven pillars:
+
+| Pillar         | Nature             | Location          | Purpose                          |
+| -------------- | ------------------ | ----------------- | -------------------------------- |
+| **Entities**   | Things that exist  | Root              | Actors and objects in the world  |
+| **Nodes**      | Units of knowledge | Root              | Understanding that persists      |
+| **Events**     | Things that happen | Folders           | Temporal occurrences             |
+| **Views**      | Aggregated data    | Root              | Reports and dashboards into data |
+| **Artifacts**  | External resources | `Attachments/`    | Reference materials collected    |
+| **Governance** | Rules & standards  | `Sync/`           | Policies and guardrails          |
+| **Navigation** | Finding aids       | Root (`_` prefix) | Help locate content              |
+
+**Core Principle:** _Events happen TO entities and ABOUT nodes. Views aggregate data. Governance constrains decisions. Artifacts provide reference._ Projects end, but knowledge persists.
+
+See **[[Concept - Vault Ontology]]** for the full model.
 
 ## Important: This Template is Organisation-Agnostic
 
@@ -105,80 +123,102 @@ This is an Obsidian vault template designed for **Solutions Architects** to mana
 
 ## Directory Structure
 
-The vault uses a **metadata-driven organisation** where notes are organised by their `type` frontmatter field rather than folders. This enables powerful Dataview queries for navigation.
+The vault uses a **pillar-based organisation** where Entities and Nodes live at the root, Events live in folders, and Navigation uses `_` prefix for sorting.
 
 ```
-obsidian-architect-vault-template/
-├── +Archive/          # Soft-archived notes (organised by type)
-│   ├── People/        # Archived person notes
-│   ├── Projects/      # Archived project notes
-│   └── Tasks/         # Archived task notes
-├── +Attachments/      # All media files (images, PDFs, documents)
-├── +Daily/            # Daily journal entries (organised by year)
-│   ├── 2024/          # 2024 daily notes
-│   ├── 2025/          # 2025 daily notes
-│   └── [current year] # Current year daily notes
-├── +Inbox/            # Landing zone for new notes
-├── +Incubator/        # Idea incubator for research and exploration
-├── +Meetings/         # All meeting notes
-├── +PDFs/             # PDF storage (architecture books, RFI documents)
-├── +People/           # Person notes (colleagues, contacts)
-├── +Templates/        # Note templates for each type
-├── .obsidian/         # Obsidian configuration
-├── .claude/           # Claude Code configuration
-│   ├── context/       # Dynamic context files
-│   ├── rules/         # Modular convention rules
-│   └── skills/        # Skill instruction files
-└── [root]             # All other content notes
+ArchitectKB/
+│
+├── Meetings/                    # Events
+│   ├── 2024/
+│   ├── 2025/
+│   └── 2026/
+├── Projects/                    # Events (includes Workstreams, Forums)
+├── Tasks/                       # Events
+├── ADRs/                        # Events
+├── Emails/                      # Events
+├── Trips/                       # Events
+├── Daily/                       # Events
+│   ├── 2024/
+│   ├── 2025/
+│   └── 2026/
+├── Incubator/                   # Events (research that spawns nodes)
+├── Forms/                       # Events (governance submissions)
+│
+├── Attachments/                 # Artifacts (media, PDFs, images)
+├── Archive/                     # Archived content
+│   ├── Entities/
+│   ├── Nodes/
+│   └── Events/
+├── Templates/                   # Note templates
+├── Sync/                        # Governance (synced content)
+│   ├── Policies/
+│   ├── Guardrails/
+│   └── Org-ADRs/
+│
+├── .claude/                     # Claude Code configuration
+│   ├── context/                 # Dynamic context files
+│   ├── rules/                   # Modular convention rules
+│   └── skills/                  # Skill instruction files
+├── .graph/                      # Graph indexes
+├── .obsidian/                   # Obsidian configuration
+│
+├── Person - *.md                # Entities (root)
+├── System - *.md                # Entities (root)
+├── Organisation - *.md          # Entities (root)
+├── DataAsset - *.md             # Entities (root)
+├── Location - *.md              # Entities (root)
+│
+├── Concept - *.md               # Nodes (root)
+├── Pattern - *.md               # Nodes (root)
+├── Capability - *.md            # Nodes (root)
+├── Theme - *.md                 # Nodes (root)
+├── Weblink - *.md               # Nodes (root)
+│
+├── Dashboard - *.md             # Views (root)
+├── Query - *.md                 # Views (root)
+├── ArchModel - *.md             # Views (root)
+│
+└── _MOC - *.md                  # Navigation (root, sorted first)
 ```
 
-### Note Types
+### Note Types by Pillar
 
-Notes are identified by their `type` frontmatter field:
+Notes are identified by their `type` and `pillar` frontmatter fields. **See `.claude/rules/frontmatter-reference.md` for complete schemas.**
 
-| Type             | Description                                            | Location       |
-| ---------------- | ------------------------------------------------------ | -------------- |
-| `Task`           | Task tracking and to-dos                               | root           |
-| `Project`        | Project documentation                                  | root           |
-| `Meeting`        | Meeting notes and minutes                              | +Meetings/     |
-| `Person`         | Contact info and notes on colleagues                   | +People/       |
-| `Weblink`        | Saved web links with descriptions                      | root           |
-| `Page`           | Long-form documentation and guides                     | root           |
-| `Adr`            | Architecture Decision Records                          | root           |
-| `Organisation`   | Notes about organisations and vendors                  | root           |
-| `AtomicNote`     | Small focused notes on specific topics                 | root           |
-| `Zettel`         | Zettelkasten-style notes (may contain sensitive info)  | root           |
-| `DailyNote`      | Daily journal entries                                  | +Daily/[year]/ |
-| `Incubator`      | Research ideas and concepts being explored             | +Incubator/    |
-| `IncubatorNote`  | Supporting research for incubator ideas                | +Incubator/    |
-| `System`         | Enterprise systems, applications, platforms            | root           |
-| `Integration`    | System-to-system data integrations                     | root           |
-| `Architecture`   | High-level designs (HLD), low-level designs (LLD)      | root           |
-| `Scenario`       | What-if scenarios, future-state planning               | root           |
-| `DataSource`     | Databases, tables, APIs, data entities                 | root           |
-| `Okr`            | OKR and goal tracking notes                            | root           |
-| `Query`          | Saved Dataview queries                                 | root           |
-| `Course`         | Training and course notes                              | root           |
-| `MOC`            | Maps of Content for navigation                         | root           |
-| `Dashboard`      | Dashboard views with aggregated queries                | root           |
-| `CodeSnippet`    | Reusable code snippets and examples                    | root           |
-| `Article`        | Communications: articles, blog posts, videos, podcasts | root           |
-| `DataAsset`      | Data asset documentation (tables, APIs, topics)        | root           |
-| `Trip`           | Personal trip planning and itineraries                 | root           |
-| `FormSubmission` | Governance and compliance form tracking                | root           |
+| Pillar         | Types                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------- |
+| **Entity**     | Person, System, Organisation, DataAsset, Location                                             |
+| **Node**       | Concept, Pattern, Capability, Theme, Weblink                                                  |
+| **Event**      | Meeting, Project, Task, ADR, Email, Trip, Daily, Incubator, Workstream, Forum, FormSubmission |
+| **View**       | Dashboard, Query, ArchModel                                                                   |
+| **Artifact**   | PDF, Presentation, Document, Image (stored in Attachments/)                                   |
+| **Governance** | Policy, Guardrail (synced from external sources to Sync/)                                     |
+| **Navigation** | MOC                                                                                           |
+
+### Legacy Types (Being Migrated)
+
+| Old Type        | New Type                        | Pillar | Action              |
+| --------------- | ------------------------------- | ------ | ------------------- |
+| `Page`          | `Concept` / `Pattern` / `Theme` | Node   | Classify by content |
+| `DailyNote`     | `Daily`                         | Event  | Rename              |
+| `AtomicNote`    | `Concept`                       | Node   | Reclassify          |
+| `IncubatorNote` | Part of `Incubator`             | Event  | Merge               |
+| `CodeSnippet`   | `Pattern` or archive            | Node   | Case by case        |
+| `Course`        | `Incubator` or archive          | Event  | Case by case        |
 
 ### Navigation
 
 Use these Maps of Content (MOC) files to navigate:
 
-- **[[Dashboard - Main Dashboard]]** - Main hub with Dataview queries
-- **[[MOC - Tasks MOC]]** - All tasks by priority/due date
-- **[[MOC - Projects MOC]]** - Projects by status
-- **[[MOC - People MOC]]** - People directory
-- **[[MOC - Meetings MOC]]** - Meeting history
-- **[[MOC - ADRs MOC]]** - Architecture Decision Records
-- **[[MOC - Vault Quality Dashboard]]** - Quality metrics and freshness tracking
-- **[[MOC - Form Submissions]]** - Governance form tracking
+- **[[_Dashboard - Main Dashboard]]** - Main hub with Dataview queries
+- **[[_MOC - Tasks MOC]]** - All tasks by priority/due date
+- **[[_MOC - Projects MOC]]** - Projects by status
+- **[[_MOC - People MOC]]** - People directory
+- **[[_MOC - Meetings MOC]]** - Meeting history
+- **[[_MOC - ADRs MOC]]** - Architecture Decision Records
+- **[[_MOC - Vault Quality Dashboard]]** - Quality metrics and freshness tracking
+- **[[_MOC - Form Submissions]]** - Governance form tracking
+- **[[_MOC - Incubator]]** - Idea incubator (research and exploration)
 
 ## Frontmatter Schema
 
@@ -187,11 +227,26 @@ All notes use YAML frontmatter with a `type` field. Common properties by type:
 ### Universal Fields (All Notes)
 
 ```yaml
-type: <note-type> # Required: Task, Project, Meeting, Person, etc.
-title: <title> # Required: Display title
-created: YYYY-MM-DD # Creation date
-modified: YYYY-MM-DD # Last modified date
-tags: [] # Optional tags for categorisation
+type: <NoteType> # Required - identifies note type
+pillar: entity | node | event | view | governance | navigation # Required - identifies pillar
+title: <Title> # Required
+created: YYYY-MM-DD
+modified: YYYY-MM-DD
+tags: [] # Hierarchical tags
+```
+
+### Relationship Fields (All Content Notes)
+
+All Entities, Nodes, and Events should include relationship fields:
+
+```yaml
+nodeRelationships: [] # Links to knowledge nodes
+  # - "[[Concept - Data Quality]]"
+  # - "[[Pattern - Event-Driven Architecture]]"
+
+entityRelationships: [] # Links to entities
+  # - "[[Person - Jane Smith]]"
+  # - "[[System - Sample ERP]]"
 ```
 
 ### Tag Syntax
@@ -782,13 +837,13 @@ The Archive provides soft-deletion for completed or abandoned notes while preser
 
 ### Archive Structure
 
+Archived notes are organised by pillar:
+
 ```
-+Archive/
-├── Incubator/   # Graduated and rejected ideas
-├── People/      # Former colleagues, contacts
-├── Projects/    # Completed or cancelled projects
-├── Tasks/       # Completed tasks (optional)
-└── Pages/       # Superseded documentation
+Archive/
+├── Entities/    # Archived people, systems, organisations
+├── Nodes/       # Archived concepts, patterns, weblinks
+└── Events/      # Archived projects, tasks, incubator ideas
 ```
 
 ## Custom Skills
@@ -1042,49 +1097,73 @@ Notes with `type: Zettel` and some `type: Page` notes may contain API keys, toke
 
 ### Creating/Editing Notes
 
-1. Always include appropriate YAML frontmatter with `type` field
-2. Place most content notes in the **root directory**
-3. Place daily notes in **+Daily/[year]/** folder (e.g., `+Daily/2026/`)
-4. Place meeting notes in **+Meetings/** folder
-5. Place person notes in **+People/** folder
-6. Place incubator ideas and research in **+Incubator/** folder
-7. Place attachments in **+Attachments/** folder
-8. Place PDF documents in **+PDFs/** folder
-9. Use `/archive` to move notes to **+Archive/<Type>s/** folder
-10. Use `[[wiki-links]]` for cross-references to other notes
-11. Daily notes follow `YYYY-MM-DD.md` naming convention
-12. Meeting notes follow `Meeting - YYYY-MM-DD Title.md` naming convention
-13. Incubator ideas follow `Incubator - {{Title}}.md` naming convention
-14. Include `created` and `modified` date fields
+1. Always include YAML frontmatter with `type` and `pillar` fields
+2. Include `nodeRelationships` and `entityRelationships` for content notes
+3. **Entities and Nodes** go in root with type prefix: `Person - Name.md`, `Concept - Title.md`
+4. **Events** go in folders: `Meetings/YYYY/`, `Projects/`, `Tasks/`, `ADRs/`, `Daily/YYYY/`, etc.
+5. **Navigation** uses `_` prefix: `_MOC - Scope.md`
+6. Place attachments in **Attachments/** folder
+7. Use `/archive` to move notes to **Archive/<Pillar>/** folder (Entities, Nodes, Events)
+8. Use `[[wiki-links]]` for cross-references to other notes
+9. Daily notes follow `Daily - YYYY-MM-DD.md` naming convention
+10. Meeting notes follow `Meeting - YYYY-MM-DD Title.md` naming convention
+11. Include `created` and `modified` date fields
 
-### Filename Conventions
+**See `.claude/rules/naming-conventions.md` for complete patterns.**
 
-| Type           | Filename Pattern                    | Location       | Example                                                 |
-| -------------- | ----------------------------------- | -------------- | ------------------------------------------------------- |
-| Person         | `{{Name}}.md`                       | +People/       | `+People/John Smith.md`                                 |
-| Meeting        | `Meeting - YYYY-MM-DD {{Title}}.md` | +Meetings/     | `+Meetings/Meeting - 2026-01-06 Architecture Review.md` |
-| Project        | `Project - {{Name}}.md`             | root           | `Project - Cloud Migration.md`                          |
-| Task           | `Task - {{Title}}.md`               | root           | `Task - Review ADR draft.md`                            |
-| Weblink        | `Weblink - {{Title}}.md`            | root           | `Weblink - AWS Well-Architected Framework.md`           |
-| ADR            | `ADR - {{Title}}.md`                | root           | `ADR - API Gateway Selection.md`                        |
-| DailyNote      | `YYYY-MM-DD.md`                     | +Daily/[year]/ | `+Daily/2026/2026-01-06.md`                             |
-| Incubator      | `Incubator - {{Title}}.md`          | +Incubator/    | `+Incubator/Incubator - Event-Driven Architecture.md`   |
-| IncubatorNote  | `Incubator Note - {{Title}}.md`     | +Incubator/    | `+Incubator/Incubator Note - Kafka vs RabbitMQ.md`      |
-| OKR            | `OKR - {{Title}}.md`                | root           | `OKR - Cloud Certification Training.md`                 |
-| Query          | `Query - {{Title}}.md`              | root           | `Query - Open Tasks.md`                                 |
-| Course         | `Course - {{Title}}.md`             | root           | `Course - AWS Solutions Architect.md`                   |
-| MOC            | `MOC - {{Title}}.md`                | root           | `MOC - Projects MOC.md`                                 |
-| Dashboard      | `Dashboard - {{Title}}.md`          | root           | `Dashboard - Dashboard.md`                              |
-| CodeSnippet    | `CodeSnippet - {{Title}}.md`        | root           | `CodeSnippet - API Authentication.md`                   |
-| FormSubmission | `Form - {{Type}} - {{Name}}.md`     | root           | `Form - DPIA - Customer Portal.md`                      |
-| Article        | `Article - {{Title}}.md`            | root           | `Article - Cloud Migration Best Practices.md`           |
-| DataAsset      | `DataAsset - {{Name}}.md`           | root           | `DataAsset - Customer Orders API.md`                    |
-| Trip           | `Trip - {{Destination}}.md`         | root           | `Trip - Barcelona.md`                                   |
-| Page           | `Page - {{Title}}.md`               | root           | `Page - Architecture Principles.md`                     |
-| Organisation   | `Organisation - {{Name}}.md`        | root           | `Organisation - CloudVendor Inc.md`                     |
-| AtomicNote     | `Atomic Note - {{Title}}.md`        | root           | `Atomic Note - CAP Theorem.md`                          |
+### Filename Conventions by Pillar
 
-**Note**: Person notes use just the name (no prefix) since the type is in frontmatter. This allows cleaner wiki-links like `[[John Smith]]` - Obsidian resolves links by filename regardless of folder.
+**Entities (Root):**
+
+| Type         | Pattern                      | Example                          |
+| ------------ | ---------------------------- | -------------------------------- |
+| Person       | `Person - {{Name}}.md`       | `Person - Jane Smith.md`         |
+| System       | `System - {{Name}}.md`       | `System - Sample ERP.md`         |
+| Organisation | `Organisation - {{Name}}.md` | `Organisation - Your Company.md` |
+| DataAsset    | `DataAsset - {{Name}}.md`    | `DataAsset - Customer Orders.md` |
+| Location     | `Location - {{Name}}.md`     | `Location - Main Office.md`      |
+
+**Nodes (Root):**
+
+| Type       | Pattern                     | Example                                  |
+| ---------- | --------------------------- | ---------------------------------------- |
+| Concept    | `Concept - {{Title}}.md`    | `Concept - Data Quality.md`              |
+| Pattern    | `Pattern - {{Title}}.md`    | `Pattern - Event-Driven Architecture.md` |
+| Capability | `Capability - {{Title}}.md` | `Capability - Real-time Integration.md`  |
+| Theme      | `Theme - {{Title}}.md`      | `Theme - Technical Debt.md`              |
+| Weblink    | `Weblink - {{Title}}.md`    | `Weblink - AWS Well-Architected.md`      |
+
+**Events (Folders):**
+
+| Type           | Pattern                                        | Location         |
+| -------------- | ---------------------------------------------- | ---------------- |
+| Meeting        | `Meeting - YYYY-MM-DD {{Title}}.md`            | `Meetings/YYYY/` |
+| Project        | `Project - {{Name}}.md`                        | `Projects/`      |
+| Workstream     | `Workstream - {{Name}}.md`                     | `Projects/`      |
+| Forum          | `Forum - {{Name}}.md`                          | `Projects/`      |
+| Task           | `Task - {{Title}}.md`                          | `Tasks/`         |
+| ADR            | `ADR - {{Title}}.md`                           | `ADRs/`          |
+| Email          | `Email - {{From/To}} - {{Subject}}.md`         | `Emails/`        |
+| Trip           | `Trip - {{Destination}}.md`                    | `Trips/`         |
+| Daily          | `Daily - YYYY-MM-DD.md`                        | `Daily/YYYY/`    |
+| Incubator      | `Incubator - {{Title}}.md`                     | `Incubator/`     |
+| FormSubmission | `FormSubmission - {{Type}} for {{Project}}.md` | `Forms/`         |
+
+**Views (Root):**
+
+| Type      | Pattern                    | Example                         |
+| --------- | -------------------------- | ------------------------------- |
+| Dashboard | `Dashboard - {{Scope}}.md` | `Dashboard - Main Dashboard.md` |
+| Query     | `Query - {{Title}}.md`     | `Query - Critical Systems.md`   |
+| ArchModel | `ArchModel - {{Title}}.md` | `ArchModel - Data Flow.md`      |
+
+**Navigation (Root, sorted first):**
+
+| Type | Pattern               | Example              |
+| ---- | --------------------- | -------------------- |
+| MOC  | `_MOC - {{Scope}}.md` | `_MOC - Projects.md` |
+
+**Note**: All notes now use type prefixes. Use aliases in frontmatter for shorter wiki-links: `aliases: [Jane Smith]` allows `[[Jane Smith]]` to resolve to `Person - Jane Smith.md`.
 
 ### Finding Notes
 
@@ -1224,6 +1303,6 @@ This template is designed to be customised for your organisation's needs. Key ar
 
 ---
 
-**Version:** 1.9.4
+**Version:** 2.0.0
 **Template Maintained by:** Solutions Architecture Community
 **Review Frequency:** Update as conventions evolve

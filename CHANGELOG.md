@@ -7,6 +7,205 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-01-31
+
+### Added
+
+#### Seven-Pillar Ontology
+
+A complete reorganisation of how knowledge is structured in the vault:
+
+| Pillar         | Nature             | Location          | Purpose                         |
+| -------------- | ------------------ | ----------------- | ------------------------------- |
+| **Entities**   | Things that exist  | Root              | Actors and objects in the world |
+| **Nodes**      | Units of knowledge | Root              | Understanding that persists     |
+| **Events**     | Things that happen | Folders           | Temporal occurrences            |
+| **Views**      | Aggregated data    | Root              | Reports and dashboards          |
+| **Artifacts**  | External resources | `Attachments/`    | Reference materials collected   |
+| **Governance** | Rules & standards  | `Sync/`           | Policies and guardrails         |
+| **Navigation** | Finding aids       | Root (`_` prefix) | Help locate content             |
+
+**Core Principle:** _Events happen TO entities and ABOUT nodes. Views aggregate data. Governance constrains decisions. Artifacts provide reference._
+
+#### New Note Types (11)
+
+**Entity Types:**
+
+- `Location` - Physical locations (airports, offices, data centres)
+
+**Node Types:**
+
+- `Concept` - What is X? Definitions, explanations
+- `Pattern` - How to do X. Approaches, methods
+- `Capability` - What we can do. Skills, abilities
+- `Theme` - Cross-cutting concerns
+
+**Event Types:**
+
+- `Workstream` - Project sub-divisions
+- `Forum` - Recurring meeting series
+- `Email` - Email correspondence tracking
+
+**View Types:**
+
+- `ArchModel` - Architecture diagram view definitions
+
+**Governance Types:**
+
+- `Policy` - Organisational policies
+- `Guardrail` - Technical guardrails
+
+#### New Templates (12)
+
+- `Templates/Concept.md` - Knowledge definition template
+- `Templates/Pattern.md` - Approach/method documentation
+- `Templates/Capability.md` - Capability documentation
+- `Templates/Theme.md` - Cross-cutting concern tracking
+- `Templates/Location.md` - Physical location documentation
+- `Templates/ArchModel.md` - Architecture model view definition
+- `Templates/Workstream.md` - Project sub-division template
+- `Templates/Forum.md` - Recurring meeting series template
+- `Templates/Email.md` - Email correspondence template
+- `Templates/Policy.md` - Policy documentation template
+- `Templates/Guardrail.md` - Technical guardrail template
+
+#### New Frontmatter Fields
+
+All notes now include:
+
+- `pillar` field (entity | node | event | view | governance | navigation)
+- `nodeRelationships: []` - Links to knowledge nodes
+- `entityRelationships: []` - Links to entities
+
+### Changed
+
+#### Folder Structure (BREAKING)
+
+Removed `+` prefix from all folders:
+
+| Old             | New            |
+| --------------- | -------------- |
+| `+Archive/`     | `Archive/`     |
+| `+Attachments/` | `Attachments/` |
+| `+Daily/`       | `Daily/`       |
+| `+Inbox/`       | `Inbox/`       |
+| `+Incubator/`   | `Incubator/`   |
+| `+Meetings/`    | `Meetings/`    |
+| `+Templates/`   | `Templates/`   |
+
+#### New Event Folders
+
+- `Projects/` - Project notes (moved from root)
+- `Tasks/` - Task notes (moved from root)
+- `ADRs/` - Architecture Decision Records (moved from root)
+- `Emails/` - Email correspondence
+- `Trips/` - Trip planning notes
+- `Forms/` - Form submission tracking
+
+#### New Governance Folders
+
+- `Sync/Policies/` - Synced policy documents
+- `Sync/Guardrails/` - Synced guardrails
+- `Sync/Org-ADRs/` - Organisation-wide ADRs
+
+#### Archive Structure
+
+Reorganised by pillar:
+
+- `Archive/Entities/` - Archived entity notes
+- `Archive/Nodes/` - Archived knowledge nodes
+- `Archive/Events/` - Archived event notes
+
+#### Navigation Prefix
+
+MOCs and Dashboards now use `_` prefix for alphabetical sorting:
+
+| Old                   | New                  |
+| --------------------- | -------------------- |
+| `MOC - Projects.md`   | `_MOC - Projects.md` |
+| `Dashboard - Main.md` | `_Dashboard.md`      |
+
+#### Person Notes
+
+Person notes now use type prefix:
+
+| Old             | New                      |
+| --------------- | ------------------------ |
+| `Jane Smith.md` | `Person - Jane Smith.md` |
+
+#### Type Field Updates
+
+- `DailyNote` → `Daily`
+- `Adr` → `ADR` (uppercase)
+
+#### Template Updates
+
+All templates updated with:
+
+- `pillar` field added
+- `nodeRelationships` and `entityRelationships` arrays added
+- Folder paths updated for new structure
+- Legacy fields removed or renamed
+
+### Migration Guide
+
+**From v1.9.x (BREAKING CHANGES):**
+
+1. **Rename folders** (remove `+` prefix):
+
+   ```bash
+   mv "+Archive" "Archive"
+   mv "+Attachments" "Attachments"
+   mv "+Daily" "Daily"
+   mv "+Inbox" "Inbox"
+   mv "+Incubator" "Incubator"
+   mv "+Meetings" "Meetings"
+   mv "+Templates" "Templates"
+   ```
+
+2. **Create new folders**:
+
+   ```bash
+   mkdir -p Projects Tasks ADRs Emails Trips Forms
+   mkdir -p Sync/Policies Sync/Guardrails Sync/Org-ADRs
+   mkdir -p Archive/Entities Archive/Nodes Archive/Events
+   ```
+
+3. **Move event notes to folders**:
+
+   ```bash
+   mv "Project - "*.md Projects/
+   mv "Task - "*.md Tasks/
+   mv "ADR - "*.md ADRs/
+   ```
+
+4. **Rename Person notes**:
+
+   ```bash
+   # Add "Person - " prefix to person notes without it
+   ```
+
+5. **Rename MOCs**:
+
+   ```bash
+   for f in "MOC - "*.md; do mv "$f" "_$f"; done
+   ```
+
+6. **Update frontmatter** in existing notes:
+   - Add `pillar` field
+   - Add `nodeRelationships: []` and `entityRelationships: []`
+   - Change `type: DailyNote` to `type: Daily`
+   - Change `type: Adr` to `type: ADR`
+
+7. **Update wiki-links** throughout vault to use new paths
+
+### Technical
+
+- Total templates: 32 (up from 26)
+- Total note types: 24 (up from 13)
+- All documentation updated for seven-pillar ontology
+- Rules files updated with complete frontmatter schemas
+
 ## [1.9.4] - 2026-01-28
 
 ### Added

@@ -1,13 +1,16 @@
 ---
 type: Person
+pillar: entity
 title: Jane Smith
 created: 2026-01-07
 modified: 2026-01-07
-tags: [stakeholder, leadership]
+tags: [audience/executive]
 role: Head of Architecture
 organisation: "[[Organisation - Your Company]]"
-email: jane.smith@example.com
-phone: null
+emailAddress: jane.smith@example.com
+aliases: []
+nodeRelationships: []
+entityRelationships: []
 ---
 
 # Jane Smith
@@ -24,11 +27,13 @@ phone: null
 Jane leads the architecture function and is responsible for strategic technical direction. She has 15+ years of experience in enterprise architecture and specializes in cloud transformation and platform modernization.
 
 **Expertise:**
+
 - Cloud architecture (AWS, Azure)
 - Enterprise integration patterns
 - Architecture governance
 
 **Working Style:**
+
 - Prefers data-driven decisions
 - Values clear documentation
 - Expects ADRs for major technical decisions

@@ -1,18 +1,24 @@
-<%*
+<%\*
 const name = await tp.system.prompt("Organisation name:");
 if (name) {
-  await tp.file.rename("Organisation - " + name);
+await tp.file.rename("Organisation - " + name);
 }
-_%>
+\_%>
+
 ---
+
 type: Organisation
+pillar: entity
 title: <% name %>
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-website:
-industry:
-relationship:
+organisationType: null # company | vendor | partner | department | team
+industry: null
+website: null
+nodeRelationships: []
+entityRelationships: []
+
 ---
 
 # <% name %>
@@ -24,8 +30,6 @@ relationship:
 - **Relationship:** Customer | Partner | Vendor | Competitor
 
 ## Description
-
-
 
 ## Key Contacts
 

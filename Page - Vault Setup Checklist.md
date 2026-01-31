@@ -1,16 +1,19 @@
 ---
 type: Page
+pillar: node
 title: Vault Setup Checklist
 created: 2026-01-07
-modified: 2026-01-07
-tags: [guide, setup, onboarding]
+modified: 2026-01-31
+tags: [activity/documentation, audience/architect]
+nodeRelationships: []
+entityRelationships: []
 ---
 
-# ✅ Vault Setup Checklist
+# Vault Setup Checklist
 
-> **Follow this checklist to set up and customize your architect vault**
+> **Follow this checklist to set up and customise your ArchitectKB vault**
 
-Last Updated: 2026-01-07
+Last Updated: 2026-01-31 | Version 2.0.0
 
 ---
 
@@ -21,8 +24,15 @@ Last Updated: 2026-01-07
 - [ ] **Download/clone this vault template**
 
   ```bash
-  git clone https://github.com/yourorg/obsidian-architect-vault-template.git
-  cd obsidian-architect-vault-template
+  git clone https://github.com/DavidROliverBA/ArchitectKB.git
+  cd ArchitectKB
+  ```
+
+- [ ] **Install dependencies**
+
+  ```bash
+  npm install
+  npm run vault:index
   ```
 
 - [ ] **Install Obsidian** (if not already installed)
@@ -31,7 +41,7 @@ Last Updated: 2026-01-07
 
 - [ ] **Open vault in Obsidian**
   - File → Open Vault
-  - Select the template directory
+  - Select the ArchitectKB directory
   - Click "Open"
 
 ### Install Required Plugins
@@ -43,30 +53,26 @@ Last Updated: 2026-01-07
 
 - [ ] **Install Dataview**
   - Search: "Dataview"
-  - Click "Install"
-  - Click "Enable"
+  - Click "Install" → "Enable"
   - **CRITICAL**: Required for all MOCs to work!
 
 - [ ] **Install Templater**
   - Search: "Templater"
-  - Click "Install"
-  - Click "Enable"
+  - Click "Install" → "Enable"
   - Configure: Settings → Templater
-    - Template folder location: `+Templates`
+    - Template folder location: `Templates`
     - Enable "Trigger Templater on new file creation"
 
 ### Optional but Recommended Plugins
 
 - [ ] **Calendar** - Visual daily note creation
-  - Settings: Daily notes folder = `+Daily/[current-year]`
+  - Settings: Daily notes folder = `Daily/[current-year]`
 
 - [ ] **Tag Wrangler** - Manage hierarchical tags
 
 - [ ] **Recent Files** - Quick access to recent notes
 
-- [ ] **Excalidraw** - Draw diagrams in notes (if you make diagrams)
-
-- [ ] **Kanban** - Kanban boards from markdown (optional)
+- [ ] **Excalidraw** - Draw diagrams in notes
 
 ### Configure Obsidian Settings
 
@@ -77,49 +83,77 @@ Last Updated: 2026-01-07
 
 - [ ] **Daily Notes** (if using Calendar plugin)
   - Date format: `YYYY-MM-DD`
-  - New file location: `+Daily/[current-year]`
-  - Template file location: `+Templates/Daily.md`
-
-- [ ] **Appearance** (personal preference)
-  - Choose theme
-  - Adjust font size
-  - Enable/disable features
+  - New file location: `Daily/[current-year]`
+  - Template file location: `Templates/Daily.md`
 
 ### Verify Setup
 
 - [ ] **Open Dashboard**
-  - Navigate to `Dashboard - Dashboard.md`
-  - Verify Dataview queries load (may show empty tables - that's OK)
+  - Navigate to `_Dashboard.md`
+  - Verify Dataview queries load
 
 - [ ] **Open a MOC**
-  - Try `MOC - Tasks MOC.md`
-  - Verify Dataview tables appear (will be empty)
+  - Try `_MOC - Tasks.md`
+  - Verify Dataview tables appear
 
 - [ ] **Test template**
-  - Create new note from `+Templates/Task.md`
+  - Create new note from `Templates/Task.md`
   - Verify Templater prompts appear
   - Delete test note after verification
 
 ---
 
-## Phase 2: Personalization (1 hour)
+## Phase 2: Understand the Structure (15 minutes)
 
-### Update README
+### The Seven Pillars
 
-- [ ] **Edit README.md**
-  - Replace "Obsidian Architect Vault Template" with your vault name
-  - Update "Your Name/Organization" placeholders
-  - Add your email/contact if sharing with team
-  - Update customization sections
+Review the seven-pillar ontology:
+
+| Pillar         | Location          | Content                                           |
+| -------------- | ----------------- | ------------------------------------------------- |
+| **Entities**   | Root              | Person, System, Organisation, DataAsset, Location |
+| **Nodes**      | Root              | Concept, Pattern, Capability, Theme, Weblink      |
+| **Events**     | Folders           | Meeting, Project, Task, ADR, Daily, etc.          |
+| **Views**      | Root              | Dashboard, Query, ArchModel                       |
+| **Artifacts**  | `Attachments/`    | PDFs, images, documents                           |
+| **Governance** | `Sync/`           | Policy, Guardrail, Org-ADR                        |
+| **Navigation** | Root (`_` prefix) | MOC                                               |
+
+### Folder Structure
+
+```
+ArchitectKB/
+├── Meetings/YYYY/       # Meeting notes by year
+├── Projects/            # Project and workstream notes
+├── Tasks/               # Task notes
+├── ADRs/                # Architecture Decision Records
+├── Daily/YYYY/          # Daily notes by year
+├── Incubator/           # Research ideas
+├── Emails/              # Email correspondence
+├── Trips/               # Trip planning
+├── Forms/               # Form submissions
+├── Attachments/         # Media and documents
+├── Archive/             # Archived content (by pillar)
+├── Templates/           # Note templates
+├── Sync/                # Governance (policies, guardrails)
+├── [Entity notes]       # Person -, System -, etc.
+├── [Node notes]         # Concept -, Pattern -, etc.
+├── _MOC - *.md          # Navigation (sorted first)
+└── _Dashboard*.md       # Dashboards (sorted first)
+```
+
+---
+
+## Phase 3: Personalisation (1 hour)
 
 ### Replace Example Content
 
 **People:**
 
-- [ ] **Delete example people** (or keep as examples)
-  - `Jane Smith.md`
-  - `Alex Johnson.md`
-  - `Dr. Sarah Chen.md`
+- [ ] **Delete or keep example people**
+  - `Person - Jane Smith.md`
+  - `Person - Alex Johnson.md`
+  - `Person - Dr Sarah Chen.md`
 
 - [ ] **Add your real people**
   - Use `/person` skill or template
@@ -128,79 +162,61 @@ Last Updated: 2026-01-07
 
 **Projects:**
 
-- [ ] **Delete or archive example projects**
-  - Move to an `_Examples/` folder if you want to keep them
+- [ ] **Archive example projects** (in `Projects/`)
 
 - [ ] **Add your real projects**
-  - Use `+Templates/Project.md`
+  - Use `Templates/Project.md`
   - Add: 2-3 current active projects
-  - Include: Status, priority, timeline, stakeholders
 
 **Organisations:**
 
-- [ ] **Delete example organizations**
-  - `Organisation - Your Company.md`
+- [ ] **Replace example organisations**
   - `Organisation - CloudVendor Inc.md`
 
-- [ ] **Add your real organizations**
+- [ ] **Add your real organisations**
   - Your company/division
-  - Key vendors (cloud provider, SaaS tools)
+  - Key vendors
   - Consulting partners
 
 **ADRs:**
 
-- [ ] **Keep example ADRs** (as reference) OR delete them
-  - They show good ADR practices
-  - Delete if they're confusing for your context
+- [ ] **Keep example ADRs** (as reference) OR archive them
 
-- [ ] **Create your first real ADR** (optional now, important later)
+- [ ] **Create your first real ADR**
   - Use `/adr` skill
-  - Document a recent or upcoming decision
+  - Document a recent decision
 
 ### Update Claude Context Files
 
 **Critical for Claude Code integration:**
 
-- [ ] **`.claude/context/projects-template.md`**
+- [ ] **`.claude/context/projects.md`**
   - Replace example projects with your actual projects
   - Add project details: timeline, stakeholders, goals
-  - Remove template suffix from filename: `projects.md`
 
-- [ ] **`.claude/context/technology-template.md`**
-  - Document your tech stack (cloud, databases, languages, tools)
+- [ ] **`.claude/context/technology.md`**
+  - Document your tech stack
   - List approved vs pilot vs deprecated technologies
-  - Link to relevant ADRs
-  - Remove template suffix: `technology.md`
 
-- [ ] **`.claude/context/people-template.md`**
+- [ ] **`.claude/context/people.md`**
   - Add your team structure
   - List key stakeholders and leadership
-  - Document approval workflows
-  - Remove template suffix: `people.md`
 
-- [ ] **`.claude/context/acronyms-template.md`**
-  - Add your organization/domain-specific acronyms
+- [ ] **`.claude/context/acronyms.md`**
+  - Add your organisation/domain-specific acronyms
   - Include project code names
-  - Document any jargon
-  - Remove template suffix: `acronyms.md`
 
-- [ ] **`.claude/context/architecture-template.md`**
+- [ ] **`.claude/context/architecture.md`**
   - Document your architecture principles
   - List approved patterns
-  - Define governance processes
-  - Remove template suffix: `architecture.md`
 
-- [ ] **`.claude/context/organisations-template.md`**
+- [ ] **`.claude/context/organisations.md`**
   - List key vendors and partners
   - Add contract information
-  - Document procurement processes
-  - Remove template suffix: `organisations.md`
 
-**Important:** Rename files by removing `-template` suffix so Claude Code finds them!
+### Customise Templates
 
-### Customize Templates
-
-- [ ] **Review all templates** in `+Templates/`
+- [ ] **Review all templates** in `Templates/`
   - Adjust frontmatter fields to your needs
   - Add/remove sections
   - Update inline instructions
@@ -208,19 +224,16 @@ Last Updated: 2026-01-07
 - [ ] **ADR template**
   - Update `approvers` list to your actual approvers
   - Adjust approval workflow documentation
-  - Modify sections if needed
 
 - [ ] **Meeting template**
   - Add standard sections for your meeting types
-  - Customize for recurring meetings
 
 - [ ] **Project template**
   - Add custom fields (budget, team size, etc.)
-  - Adjust sections to your project management approach
 
 ---
 
-## Phase 3: First Week Usage (Daily)
+## Phase 4: First Week Usage (Daily)
 
 ### Day 1: Get Comfortable
 
@@ -230,9 +243,9 @@ Last Updated: 2026-01-07
   - Link to any projects or people
 
 - [ ] **Explore MOCs**
-  - Open each MOC
+  - Open each MOC (files starting with `_MOC`)
   - Understand the views
-  - Bookmark favorites
+  - Bookmark favourites
 
 - [ ] **Create 2-3 tasks**
   - Use `/task` skill
@@ -264,59 +277,40 @@ Last Updated: 2026-01-07
   - Plan next week
 
 - [ ] **Check Vault Quality Dashboard**
+  - Open `_MOC - Vault Quality Dashboard.md`
   - See what's working
   - Identify cleanup needed
-  - Fix any broken links or missing metadata
 
 - [ ] **Adjust your workflow**
   - What's working well?
   - What feels clunky?
-  - Customize templates/workflows
+  - Customise templates/workflows
 
 ---
 
-## Phase 4: Advanced Setup (Month 1)
+## Phase 5: Advanced Setup (Month 1)
 
 ### Architecture Documentation
 
 - [ ] **Document your architecture**
-  - Create `Page - Architecture Principles.md` (example provided)
-  - Create `Page - Tech Stack Overview.md` (example provided)
-  - Add pages for key architectural concepts
+  - Create Concept notes for key ideas
+  - Create Pattern notes for approaches
+  - Add Pages for detailed documentation
 
 - [ ] **Create ADRs for major decisions**
   - Document recent major technology choices
-  - Standardize on ADR format
-  - Link ADRs to projects
+  - Standardise on ADR format
+  - Link ADRs to projects and systems
 
 - [ ] **Build MOC for your domains**
-  - Customize `MOC - Cloud Architecture` for your cloud setup
-  - Customize `MOC - Data Platform` if you have data projects
-  - Create new domain MOCs for your specializations
-
-### Team Collaboration (if applicable)
-
-- [ ] **Share vault setup with team**
-  - Git repository for team vault
-  - Document team conventions
-  - Train team on vault usage
-
-- [ ] **Define team processes**
-  - ADR approval workflow
-  - Meeting note standards
-  - Task assignment conventions
-  - Project update frequency
-
-- [ ] **Create team-specific content**
-  - Team roster (Person notes)
-  - Team projects
-  - Team ADRs and standards
+  - Customise existing MOCs
+  - Create new domain MOCs for your specialisations
 
 ### Automation and Scripts
 
 - [ ] **Review available scripts** (`scripts/README.md`)
   - Identify useful automation
-  - Install Python dependencies if needed
+  - Set up scheduled index rebuilds
 
 - [ ] **Set up Git version control** (recommended)
 
@@ -332,11 +326,10 @@ Last Updated: 2026-01-07
   - Option 1: Git + GitHub (recommended)
   - Option 2: Obsidian Sync
   - Option 3: Cloud storage (Dropbox, iCloud, OneDrive)
-  - Set up automated backups
 
 ---
 
-## Phase 5: Ongoing Maintenance
+## Phase 6: Ongoing Maintenance
 
 ### Weekly Tasks (15 min)
 
@@ -348,7 +341,6 @@ Last Updated: 2026-01-07
 - [ ] **Update project statuses**
   - Review all active projects
   - Update progress notes
-  - Adjust timelines if needed
 
 - [ ] **Check Vault Quality Dashboard**
   - Fix broken links
@@ -360,17 +352,10 @@ Last Updated: 2026-01-07
 - [ ] **Review ADRs**
   - Check if decisions are still valid
   - Update `reviewed` dates
-  - Deprecate if needed
 
-- [ ] **Update people and organizations**
+- [ ] **Update people and organisations**
   - Add new team members
   - Update roles/titles
-  - Add new vendors
-
-- [ ] **Clean up attachments**
-  - Remove unused files
-  - Optimize large images
-  - Organize by project if needed
 
 - [ ] **Update Claude context files**
   - Refresh project list
@@ -379,20 +364,17 @@ Last Updated: 2026-01-07
 
 ### Quarterly Tasks (1 hour)
 
+- [ ] **Run /vault-maintenance**
+  - Comprehensive health check
+  - Follow recommendations
+
 - [ ] **Strategic review**
-  - Analyze vault usage patterns
-  - Identify what's working vs not
+  - Analyse vault usage patterns
   - Adjust structure if needed
 
 - [ ] **Archive old content**
-  - Move completed projects to archive
-  - Clean up old daily notes (>1 year)
-  - Remove obsolete documentation
-
-- [ ] **Review and refine**
-  - Update templates based on usage
-  - Improve MOC queries
-  - Simplify workflows
+  - Move completed projects to `Archive/Events/`
+  - Clean up old daily notes
 
 ---
 
@@ -405,8 +387,8 @@ Last Updated: 2026-01-07
 **Solution:**
 
 1. Verify Dataview plugin is installed and enabled
-2. Check if example notes exist (they should show in queries)
-3. Verify frontmatter has `type` field
+2. Check if example notes exist
+3. Verify frontmatter has `type` and `pillar` fields
 4. Check for YAML syntax errors in frontmatter
 
 ### Templates Not Working
@@ -417,19 +399,9 @@ Last Updated: 2026-01-07
 
 1. Verify Templater plugin is installed and enabled
 2. Check Templater settings:
-   - Template folder: `+Templates`
+   - Template folder: `Templates`
    - "Trigger on new file creation" enabled
 3. Try manually: Right-click note → Templater → Replace templates
-
-### Broken Links
-
-**Problem:** Links show as plain text or with `[[]]` visible
-
-**Solution:**
-
-1. Verify wiki-link syntax: `[[Note Name]]` not `[Note Name](path)`
-2. Check file exists with exact name
-3. Use Obsidian's link autocomplete (type `[[` and select)
 
 ### Claude Skills Not Working
 
@@ -450,7 +422,7 @@ After setup, you should have:
 - [ ] **10-15 notes** created (daily notes, meetings, tasks, people)
 - [ ] **5+ links** between notes (knowledge graph forming)
 - [ ] **All MOCs** loading without errors
-- [ ] **Personalized context** files (removed `-template` suffix)
+- [ ] **Personalised context** files updated
 - [ ] **Daily note habit** established
 - [ ] **No critical quality issues** (per Quality Dashboard)
 
@@ -463,13 +435,13 @@ After setup, you should have:
 1. **Use it daily** - Build the habit
 2. **Link aggressively** - Connect everything
 3. **Review weekly** - Keep it clean
-4. **Iterate** - Customize as you learn
+4. **Iterate** - Customise as you learn
 
 **Resources:**
 
-- [Page - How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md) - Comprehensive guide
-- [Dashboard - Main Dashboard](Dashboard%20-%20Main%20Dashboard.md) - Your daily starting point
-- [MOC - Vault Quality Dashboard](MOC%20-%20Vault%20Quality%20Dashboard.md) - Maintenance help
+- [[Page - How to Use This Vault]] - Comprehensive guide
+- [[_Dashboard]] - Your daily starting point
+- [[_MOC - Vault Quality Dashboard]] - Maintenance help
 
 **Get help:**
 
@@ -479,4 +451,4 @@ After setup, you should have:
 
 ---
 
-**Happy note-taking! You're now equipped with a powerful knowledge management system.** 🚀
+**Happy note-taking! You're now equipped with a powerful knowledge management system.**
