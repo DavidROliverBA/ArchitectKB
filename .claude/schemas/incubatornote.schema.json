@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/incubatornote.schema.json",
+  "title": "IncubatorNote Note",
+  "description": "Schema for IncubatorNote note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "IncubatorNote",
+      "description": "Note type identifier"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/policy.schema.json",
+  "title": "Policy Note",
+  "description": "Schema for Policy note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Policy",
+      "description": "Note type identifier"
+    },
+    "source": {
+      "type": "string"
+    },
+    "sourceSpace": {
+      "type": "string",
+      "description": "space key"
+    },
+    "sourcePageId": {
+      "type": "string",
+      "examples": [
+        "<page id>"
+      ]
+    },
+    "sourceVersion": {
+      "type": "string",
+      "description": "version"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "description": "URL"
+    },
+    "lastSynced": {
+      "type": "string",
+      "description": "ISO timestamp"
+    },
+    "owner": {
+      "type": "string",
+      "description": "team"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "deprecated"
+      ]
+    },
+    "effectiveDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "readOnly": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

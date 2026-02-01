@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/project.schema.json",
+  "title": "Project Note",
+  "description": "Schema for Project note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Project",
+      "description": "Note type identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "paused",
+        "completed"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "timeFrame": {
+      "type": "string"
+    },
+    "collections": {
+      "type": "string",
+      "description": "program"
+    },
+    "transformationType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "modernisation",
+        "migration",
+        "greenfield",
+        "integration",
+        "decommission",
+        "uplift"
+      ]
+    },
+    "transformationScope": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "enterprise",
+        "department",
+        "team",
+        "application"
+      ]
+    },
+    "aiInvolved": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/pattern.schema.json",
+  "title": "Pattern Note",
+  "description": "Schema for Pattern note type - How to do X. Approaches, architectures.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Pattern",
+      "description": "Note type identifier"
+    },
+    "pillar": {
+      "type": "string",
+      "const": "node",
+      "description": "Ontology pillar"
+    },
+    "title": {
+      "type": "string",
+      "description": "Pattern title"
+    },
+    "patternType": {
+      "type": ["string", "null"],
+      "enum": ["architecture", "integration", "data", "security", "process", null],
+      "description": "Category of pattern"
+    },
+    "description": {
+      "type": ["string", "null"]
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "nodeRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": []
+    },
+    "entityRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": []
+    },
+    "summary": {
+      "type": ["string", "null"]
+    },
+    "confidence": {
+      "type": ["string", "null"],
+      "enum": ["high", "medium", "low", null]
+    },
+    "freshness": {
+      "type": ["string", "null"],
+      "enum": ["current", "recent", "stale", null]
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "reviewed": {
+      "type": ["string", "null"]
+    },
+    "created": {
+      "type": ["string", "null"]
+    },
+    "modified": {
+      "type": ["string", "null"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["type", "pillar", "title"],
+  "additionalProperties": true
+}

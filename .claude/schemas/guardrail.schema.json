@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/guardrail.schema.json",
+  "title": "Guardrail Note",
+  "description": "Schema for Guardrail note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "archived": {
+      "type": "boolean",
+      "default": true
+    },
+    "archivedDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "archivedReason": {
+      "type": "string",
+      "examples": [
+        "<reason>"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "const": "Guardrail",
+      "description": "Note type identifier"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

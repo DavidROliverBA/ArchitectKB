@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/location.schema.json",
+  "title": "Location Note",
+  "description": "Schema for Location entity type - Physical locations.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Location",
+      "description": "Note type identifier"
+    },
+    "pillar": {
+      "type": "string",
+      "const": "entity",
+      "description": "Ontology pillar"
+    },
+    "title": {
+      "type": "string",
+      "description": "Location name"
+    },
+    "locationType": {
+      "type": ["string", "null"],
+      "enum": ["airport", "hangar", "office", "data-centre", null],
+      "description": "Type of location"
+    },
+    "address": {
+      "type": ["string", "null"]
+    },
+    "country": {
+      "type": ["string", "null"]
+    },
+    "nodeRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": []
+    },
+    "entityRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": [],
+      "description": "Organisations at this location"
+    },
+    "created": {
+      "type": ["string", "null"]
+    },
+    "modified": {
+      "type": ["string", "null"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["type", "pillar", "title"],
+  "additionalProperties": true
+}

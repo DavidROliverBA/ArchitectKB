@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/archmodel.schema.json",
+  "title": "ArchModel Note",
+  "description": "Schema for ArchModel view type - Architecture diagram view definitions.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "ArchModel",
+      "description": "Note type identifier"
+    },
+    "pillar": {
+      "type": "string",
+      "const": "view",
+      "description": "Ontology pillar"
+    },
+    "title": {
+      "type": "string",
+      "description": "View name"
+    },
+    "viewType": {
+      "type": ["string", "null"],
+      "enum": ["context", "container", "landscape", "data-flow", null],
+      "description": "Type of architecture view"
+    },
+    "focusSystem": {
+      "type": ["string", "null"],
+      "pattern": "^\\[\\[.+\\]\\]$",
+      "description": "Primary system focus"
+    },
+    "includeSystems": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": [],
+      "description": "Systems to include in diagram"
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": ["string", "null"],
+          "enum": ["mermaid", "python-diagrams", "canvas", null]
+        }
+      }
+    },
+    "lastGenerated": {
+      "type": ["string", "null"],
+      "description": "Date last generated"
+    },
+    "created": {
+      "type": ["string", "null"]
+    },
+    "modified": {
+      "type": ["string", "null"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["type", "pillar", "title"],
+  "additionalProperties": true
+}

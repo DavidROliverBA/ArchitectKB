@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/organisation.schema.json",
+  "title": "Organisation Note",
+  "description": "Schema for Organisation entity type - Companies, vendors, teams.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Organisation",
+      "description": "Note type identifier"
+    },
+    "pillar": {
+      "type": "string",
+      "const": "entity",
+      "description": "Ontology pillar"
+    },
+    "title": {
+      "type": "string",
+      "description": "Organisation name"
+    },
+    "organisationType": {
+      "type": ["string", "null"],
+      "enum": ["company", "vendor", "partner", "department", "team", null],
+      "description": "Type of organisation"
+    },
+    "industry": {
+      "type": ["string", "null"]
+    },
+    "website": {
+      "type": ["string", "null"]
+    },
+    "nodeRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": []
+    },
+    "entityRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": [],
+      "description": "Key contacts"
+    },
+    "created": {
+      "type": ["string", "null"]
+    },
+    "modified": {
+      "type": ["string", "null"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["type", "pillar", "title"],
+  "additionalProperties": true
+}

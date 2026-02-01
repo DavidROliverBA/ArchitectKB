@@ -1,0 +1,1932 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/vault-note.schema.json",
+  "title": "Vault Note",
+  "description": "Schema for all note types in Obsidian vault",
+  "definitions": {
+    "Task": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/task.schema.json",
+      "title": "Task Note",
+      "description": "Schema for Task note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Task",
+          "description": "Note type identifier"
+        },
+        "completed": {
+          "type": "boolean",
+          "default": false
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "doDate": {
+          "type": "string"
+        },
+        "dueBy": {
+          "type": "string"
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "assignedTo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "parentTask": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "subtasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Project": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/project.schema.json",
+      "title": "Project Note",
+      "description": "Schema for Project note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Project",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "paused",
+            "completed"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "timeFrame": {
+          "type": "string"
+        },
+        "collections": {
+          "type": "string",
+          "description": "program"
+        },
+        "transformationType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "modernisation",
+            "migration",
+            "greenfield",
+            "integration",
+            "decommission",
+            "uplift"
+          ]
+        },
+        "transformationScope": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "enterprise",
+            "department",
+            "team",
+            "application"
+          ]
+        },
+        "aiInvolved": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Meeting": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/meeting.schema.json",
+      "title": "Meeting Note",
+      "description": "Schema for Meeting note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Meeting",
+          "description": "Note type identifier"
+        },
+        "date": {
+          "type": "string",
+          "examples": [
+            "YYYY-MM-DD"
+          ]
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attendees": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "collections": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ADR": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/adr.schema.json",
+      "title": "ADR Note",
+      "description": "Schema for ADR note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "ADR",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "proposed",
+            "accepted",
+            "deprecated",
+            "superseded"
+          ]
+        },
+        "adrType": {
+          "type": "string",
+          "enum": [
+            "Technology_ADR",
+            "Architecture_ADR",
+            "Integration_ADR",
+            "Security_ADR",
+            "Data_ADR",
+            "AI_ADR"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jiraTicket": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "deciders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "approvers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "stakeholders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "local",
+            "confluence # Where ADR originated"
+          ]
+        },
+        "sourcePageId": {
+          "type": "string"
+        },
+        "sourceSpace": {
+          "type": "string"
+        },
+        "sourceUrl": {
+          "type": "string"
+        },
+        "sourceVersion": {
+          "type": "string"
+        },
+        "isPublished": {
+          "type": "string"
+        },
+        "publishedDate": {
+          "type": "string"
+        },
+        "publishedUrl": {
+          "type": "string"
+        },
+        "lastSynced": {
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "local",
+            "team",
+            "organizational"
+          ]
+        },
+        "relatedTo": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        },
+        "contradicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "freshness": {
+          "type": "string",
+          "enum": [
+            "current",
+            "recent",
+            "stale"
+          ]
+        },
+        "verified": {
+          "type": "boolean",
+          "default": false
+        },
+        "reviewed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aiProvider": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "aws-bedrock",
+            "azure-openai",
+            "openai",
+            "google",
+            "anthropic",
+            "custom"
+          ]
+        },
+        "aiModel": {
+          "type": "string"
+        },
+        "aiUseCase": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "generation",
+            "classification",
+            "extraction",
+            "conversation",
+            "agents"
+          ]
+        },
+        "aiRiskLevel": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "ethicsReviewed": {
+          "type": "boolean",
+          "default": false
+        },
+        "biasAssessed": {
+          "type": "boolean",
+          "default": false
+        },
+        "dataPrivacyReviewed": {
+          "type": "boolean",
+          "default": false
+        },
+        "humanOversight": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "full",
+            "partial",
+            "minimal",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Person": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/person.schema.json",
+      "title": "Person Note",
+      "description": "Schema for Person note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Person",
+          "description": "Note type identifier"
+        },
+        "role": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "organisation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "emailAddress": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Weblink": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/weblink.schema.json",
+      "title": "Weblink Note",
+      "description": "Schema for Weblink note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Weblink",
+          "description": "Note type identifier"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL"
+        },
+        "domain": {
+          "type": "string",
+          "description": "domain"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "DailyNote": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/dailynote.schema.json",
+      "title": "DailyNote Note",
+      "description": "Schema for DailyNote note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "DailyNote",
+          "description": "Note type identifier"
+        },
+        "date": {
+          "type": "string",
+          "examples": [
+            "YYYY-MM-DD"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "AtomicNote": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/atomicnote.schema.json",
+      "title": "AtomicNote Note",
+      "description": "Schema for AtomicNote note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "AtomicNote",
+          "description": "Note type identifier"
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "secret"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "System": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/system.schema.json",
+      "title": "System Note",
+      "description": "Schema for System note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "System",
+          "description": "Note type identifier"
+        },
+        "systemId": {
+          "type": "string",
+          "examples": [
+            "<SYSTEM-ID>"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "apmNumber": {
+          "type": "string"
+        },
+        "systemType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "application",
+            "platform",
+            "database",
+            "middleware",
+            "saas",
+            "infrastructure",
+            "interface"
+          ]
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "active",
+            "planned",
+            "deprecated",
+            "retired"
+          ]
+        },
+        "criticality": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "hosting": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "on-prem",
+            "aws",
+            "azure",
+            "saas",
+            "external",
+            "hybrid"
+          ]
+        },
+        "vendor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "confluenceUrl": {
+          "type": "string"
+        },
+        "cmdbId": {
+          "type": "string"
+        },
+        "documentationUrl": {
+          "type": "string"
+        },
+        "technology": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "connectsTo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "relatedProjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "timeCategory": {
+          "type": "string",
+          "enum": [
+            "tolerate",
+            "invest",
+            "migrate",
+            "eliminate",
+            "null # Gartner TIME model"
+          ]
+        },
+        "replacedBy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "predecessors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "dataClassification": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "secret"
+          ]
+        },
+        "gdprApplicable": {
+          "type": "boolean",
+          "default": false
+        },
+        "piiHandled": {
+          "type": "boolean",
+          "default": false
+        },
+        "containsEmployeeData": {
+          "type": "boolean",
+          "default": false
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "freshness": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "current",
+            "recent",
+            "stale"
+          ]
+        },
+        "verified": {
+          "type": "boolean",
+          "default": false
+        },
+        "reviewed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "DataAsset": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/dataasset.schema.json",
+      "title": "DataAsset Note",
+      "description": "Schema for DataAsset note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "DataAsset",
+          "description": "Note type identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "engineering",
+            "data",
+            "operations",
+            "finance",
+            "hr",
+            "supply-chain",
+            "maintenance"
+          ]
+        },
+        "dataType": {
+          "type": "string",
+          "enum": [
+            "database-table",
+            "database-view",
+            "api-endpoint",
+            "kafka-topic",
+            "data-product",
+            "data-lake",
+            "file",
+            "report",
+            "cache"
+          ]
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "secret"
+          ]
+        },
+        "sourceSystem": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "storageLocation": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "sql",
+            "json",
+            "parquet",
+            "avro",
+            "csv",
+            "xml",
+            "binary"
+          ]
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "steward": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "producedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "consumedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "exposedVia": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "plannedConsumers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "deprecatingConsumers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "derivedFrom": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "feedsInto": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "refreshFrequency": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "real-time",
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "ad-hoc"
+          ]
+        },
+        "recordCount": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "volumePerDay": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retentionPeriod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "completeness": {
+          "type": "string"
+        },
+        "uniqueness": {
+          "type": "string"
+        },
+        "accuracy": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "timeliness": {
+          "type": "string"
+        },
+        "slaAvailability": {
+          "type": "string"
+        },
+        "slaLatency": {
+          "type": "string"
+        },
+        "gdprApplicable": {
+          "type": "boolean",
+          "default": false
+        },
+        "piiFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "confidence": {
+          "type": "string"
+        },
+        "freshness": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "default": false
+        },
+        "reviewed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "title"
+      ],
+      "additionalProperties": true
+    },
+    "Incubator": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/incubator.schema.json",
+      "title": "Incubator Note",
+      "description": "Schema for Incubator note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Incubator",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "seed",
+            "exploring",
+            "validated",
+            "accepted",
+            "rejected"
+          ]
+        },
+        "domain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "outcome": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "IncubatorNote": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/incubatornote.schema.json",
+      "title": "IncubatorNote Note",
+      "description": "Schema for IncubatorNote note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "IncubatorNote",
+          "description": "Note type identifier"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "FormSubmission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/formsubmission.schema.json",
+      "title": "FormSubmission Note",
+      "description": "Schema for FormSubmission note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "FormSubmission",
+          "description": "Note type identifier"
+        },
+        "formType": {
+          "type": "string",
+          "enum": [
+            "DPIA",
+            "CyberRisk",
+            "TPRM",
+            "IAF",
+            "ChangeRequest",
+            "Other"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "submitted",
+            "pending",
+            "approved",
+            "rejected",
+            "expired"
+          ]
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "requestingTeam": {
+          "type": "string"
+        },
+        "submittedDate": {
+          "type": "string"
+        },
+        "responseDate": {
+          "type": "string"
+        },
+        "expiryDate": {
+          "type": "string"
+        },
+        "referenceNumber": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Trip": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/trip.schema.json",
+      "title": "Trip Note",
+      "description": "Schema for Trip note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Trip",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "idea",
+            "planning",
+            "booked",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "tripType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "holiday",
+            "city-break",
+            "adventure",
+            "family-visit",
+            "business"
+          ]
+        },
+        "destination": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "travellers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "budget": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "GBP",
+            "EUR",
+            "USD"
+          ]
+        },
+        "accommodation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "flights": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notionPageId": {
+          "type": "string"
+        },
+        "notionUrl": {
+          "type": "string"
+        },
+        "lastSynced": {
+          "type": "string"
+        },
+        "syncStatus": {
+          "type": "string",
+          "enum": [
+            "untracked # untracked",
+            "unsynced",
+            "synced",
+            "local-ahead",
+            "remote-ahead",
+            "conflict"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "OKR": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/okr.schema.json",
+      "title": "OKR Note",
+      "description": "Schema for OKR note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "OKR",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "completed",
+            "abandoned"
+          ]
+        },
+        "period": {
+          "type": "string",
+          "enum": [
+            "<Q1 2026",
+            "H1 2026",
+            "2026>"
+          ]
+        },
+        "objective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keyResults": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Query": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/query.schema.json",
+      "title": "Query Note",
+      "description": "Schema for Query note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Query",
+          "description": "Note type identifier"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "queryType": {
+          "type": "string",
+          "enum": [
+            "table",
+            "list",
+            "task"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Course": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/course.schema.json",
+      "title": "Course Note",
+      "description": "Schema for Course note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Course",
+          "description": "Note type identifier"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not-started",
+            "in-progress",
+            "completed"
+          ]
+        },
+        "provider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "completedDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "MOC": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/moc.schema.json",
+      "title": "MOC Note",
+      "description": "Schema for MOC note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "MOC",
+          "description": "Note type identifier"
+        },
+        "scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Dashboard": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/dashboard.schema.json",
+      "title": "Dashboard Note",
+      "description": "Schema for Dashboard note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Dashboard",
+          "description": "Note type identifier"
+        },
+        "refreshed": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "CodeSnippet": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/codesnippet.schema.json",
+      "title": "CodeSnippet Note",
+      "description": "Schema for CodeSnippet note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "CodeSnippet",
+          "description": "Note type identifier"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "python",
+            "javascript",
+            "bash",
+            "yaml",
+            "sql",
+            "other"
+          ]
+        },
+        "purpose": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Article": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/article.schema.json",
+      "title": "Article Note",
+      "description": "Schema for Article note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Article",
+          "description": "Note type identifier"
+        },
+        "articleType": {
+          "type": "string",
+          "enum": [
+            "article",
+            "blog-post",
+            "document",
+            "guardrail",
+            "video",
+            "podcast",
+            "linkedin-post"
+          ]
+        },
+        "platform": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "medium",
+            "substack",
+            "confluence",
+            "linkedin",
+            "youtube",
+            "spotify",
+            "internal"
+          ]
+        },
+        "targetAudience": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "external",
+            "both"
+          ]
+        },
+        "parentIdea": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "ready",
+            "published",
+            "archived"
+          ]
+        },
+        "publishedUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publishedDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "confidence": {
+          "type": "string"
+        },
+        "freshness": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean",
+          "default": false
+        },
+        "reviewed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "relatedTo": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Email": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/email.schema.json",
+      "title": "Email Note",
+      "description": "Schema for Email note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Email",
+          "description": "Note type identifier"
+        },
+        "subject": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "time": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "inbound",
+            "outbound",
+            "draft"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "action-required",
+            "waiting",
+            "fyi",
+            "reference",
+            "decision"
+          ]
+        },
+        "originalEmailId": {
+          "type": "string"
+        },
+        "project": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "person": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "relatedTo": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[\\[.+\\]\\]$"
+          },
+          "default": []
+        },
+        "thread": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\[\\[.+\\]\\]$"
+        },
+        "createdTasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "relatedSystems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "relatedDataAssets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "sent",
+            "received",
+            "processed",
+            "archived"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Policy": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/policy.schema.json",
+      "title": "Policy Note",
+      "description": "Schema for Policy note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Policy",
+          "description": "Note type identifier"
+        },
+        "source": {
+          "type": "string"
+        },
+        "sourceSpace": {
+          "type": "string",
+          "description": "space key"
+        },
+        "sourcePageId": {
+          "type": "string",
+          "examples": [
+            "<page id>"
+          ]
+        },
+        "sourceVersion": {
+          "type": "string",
+          "description": "version"
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "URL"
+        },
+        "lastSynced": {
+          "type": "string",
+          "description": "ISO timestamp"
+        },
+        "owner": {
+          "type": "string",
+          "description": "team"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "draft",
+            "deprecated"
+          ]
+        },
+        "effectiveDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewDate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "readOnly": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "Guardrail": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "https://vault.local/schemas/guardrail.schema.json",
+      "title": "Guardrail Note",
+      "description": "Schema for Guardrail note type in Obsidian vault",
+      "type": "object",
+      "properties": {
+        "archived": {
+          "type": "boolean",
+          "default": true
+        },
+        "archivedDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "archivedReason": {
+          "type": "string",
+          "examples": [
+            "<reason>"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "const": "Guardrail",
+          "description": "Note type identifier"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/definitions/Task"
+    },
+    {
+      "$ref": "#/definitions/Project"
+    },
+    {
+      "$ref": "#/definitions/Meeting"
+    },
+    {
+      "$ref": "#/definitions/ADR"
+    },
+    {
+      "$ref": "#/definitions/Person"
+    },
+    {
+      "$ref": "#/definitions/Weblink"
+    },
+    {
+      "$ref": "#/definitions/DailyNote"
+    },
+    {
+      "$ref": "#/definitions/AtomicNote"
+    },
+    {
+      "$ref": "#/definitions/System"
+    },
+    {
+      "$ref": "#/definitions/DataAsset"
+    },
+    {
+      "$ref": "#/definitions/Incubator"
+    },
+    {
+      "$ref": "#/definitions/IncubatorNote"
+    },
+    {
+      "$ref": "#/definitions/FormSubmission"
+    },
+    {
+      "$ref": "#/definitions/Trip"
+    },
+    {
+      "$ref": "#/definitions/OKR"
+    },
+    {
+      "$ref": "#/definitions/Query"
+    },
+    {
+      "$ref": "#/definitions/Course"
+    },
+    {
+      "$ref": "#/definitions/MOC"
+    },
+    {
+      "$ref": "#/definitions/Dashboard"
+    },
+    {
+      "$ref": "#/definitions/CodeSnippet"
+    },
+    {
+      "$ref": "#/definitions/Article"
+    },
+    {
+      "$ref": "#/definitions/Email"
+    },
+    {
+      "$ref": "#/definitions/Policy"
+    },
+    {
+      "$ref": "#/definitions/Guardrail"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/atomicnote.schema.json",
+  "title": "AtomicNote Note",
+  "description": "Schema for AtomicNote note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "AtomicNote",
+      "description": "Note type identifier"
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "secret"
+      ]
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}
