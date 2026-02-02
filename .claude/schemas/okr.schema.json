@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/okr.schema.json",
+  "title": "OKR Note",
+  "description": "Schema for OKR note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "OKR",
+      "description": "Note type identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed",
+        "abandoned"
+      ]
+    },
+    "period": {
+      "type": "string",
+      "enum": [
+        "<Q1 2026",
+        "H1 2026",
+        "2026>"
+      ]
+    },
+    "objective": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keyResults": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "project": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

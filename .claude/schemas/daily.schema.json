@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/daily.schema.json",
+  "title": "Daily Note",
+  "description": "Schema for Daily event type - Daily journal entries.",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Daily",
+      "description": "Note type identifier"
+    },
+    "pillar": {
+      "type": "string",
+      "const": "event",
+      "description": "Ontology pillar"
+    },
+    "title": {
+      "type": "string",
+      "description": "Date in YYYY-MM-DD format"
+    },
+    "date": {
+      "type": "string",
+      "description": "Date in YYYY-MM-DD format"
+    },
+    "nodeRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": [],
+      "description": "Topics worked on"
+    },
+    "entityRelationships": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[.+\\]\\]$" },
+      "default": [],
+      "description": "People interacted with"
+    },
+    "created": {
+      "type": ["string", "null"]
+    },
+    "modified": {
+      "type": ["string", "null"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "required": ["type", "pillar", "title", "date"],
+  "additionalProperties": true
+}

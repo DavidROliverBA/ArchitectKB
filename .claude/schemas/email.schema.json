@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/email.schema.json",
+  "title": "Email Note",
+  "description": "Schema for Email note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "Email",
+      "description": "Note type identifier"
+    },
+    "subject": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "cc": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "time": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "inbound",
+        "outbound",
+        "draft"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "enum": [
+        "action-required",
+        "waiting",
+        "fyi",
+        "reference",
+        "decision"
+      ]
+    },
+    "originalEmailId": {
+      "type": "string"
+    },
+    "project": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "person": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "relatedTo": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\[\\[.+\\]\\]$"
+      },
+      "default": []
+    },
+    "thread": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "createdTasks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "relatedSystems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "relatedDataAssets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "sent",
+        "received",
+        "processed",
+        "archived"
+      ]
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}

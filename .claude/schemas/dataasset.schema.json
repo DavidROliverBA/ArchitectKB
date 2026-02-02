@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/dataasset.schema.json",
+  "title": "DataAsset Note",
+  "description": "Schema for DataAsset note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "DataAsset",
+      "description": "Note type identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Name"
+    },
+    "assetId": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "engineering",
+        "data",
+        "operations",
+        "finance",
+        "hr",
+        "supply-chain",
+        "maintenance"
+      ]
+    },
+    "dataType": {
+      "type": "string",
+      "enum": [
+        "database-table",
+        "database-view",
+        "api-endpoint",
+        "kafka-topic",
+        "data-product",
+        "data-lake",
+        "file",
+        "report",
+        "cache"
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "secret"
+      ]
+    },
+    "sourceSystem": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "storageLocation": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "sql",
+        "json",
+        "parquet",
+        "avro",
+        "csv",
+        "xml",
+        "binary"
+      ]
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "steward": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "producedBy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "consumedBy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "exposedVia": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "plannedConsumers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "deprecatingConsumers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "derivedFrom": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "feedsInto": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "refreshFrequency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "real-time",
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly",
+        "ad-hoc"
+      ]
+    },
+    "recordCount": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "volumePerDay": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retentionPeriod": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "completeness": {
+      "type": "string"
+    },
+    "uniqueness": {
+      "type": "string"
+    },
+    "accuracy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "timeliness": {
+      "type": "string"
+    },
+    "slaAvailability": {
+      "type": "string"
+    },
+    "slaLatency": {
+      "type": "string"
+    },
+    "gdprApplicable": {
+      "type": "boolean",
+      "default": false
+    },
+    "piiFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "confidence": {
+      "type": "string"
+    },
+    "freshness": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "reviewed": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "title"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vault.local/schemas/system.schema.json",
+  "title": "System Note",
+  "description": "Schema for System note type in Obsidian vault",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "System",
+      "description": "Note type identifier"
+    },
+    "systemId": {
+      "type": "string",
+      "examples": [
+        "<SYSTEM-ID>"
+      ]
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "apmNumber": {
+      "type": "string"
+    },
+    "systemType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "application",
+        "platform",
+        "database",
+        "middleware",
+        "saas",
+        "infrastructure",
+        "interface"
+      ]
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "active",
+        "planned",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "criticality": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "hosting": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "on-prem",
+        "aws",
+        "azure",
+        "saas",
+        "external",
+        "hybrid"
+      ]
+    },
+    "vendor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "confluenceUrl": {
+      "type": "string"
+    },
+    "cmdbId": {
+      "type": "string"
+    },
+    "documentationUrl": {
+      "type": "string"
+    },
+    "technology": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "connectsTo": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "relatedProjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "timeCategory": {
+      "type": ["string", "null"],
+      "enum": [
+        "tolerate",
+        "invest",
+        "migrate",
+        "eliminate",
+        null
+      ],
+      "description": "Gartner TIME model category"
+    },
+    "replacedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\[\\[.+\\]\\]$"
+    },
+    "predecessors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "dataClassification": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "secret"
+      ]
+    },
+    "gdprApplicable": {
+      "type": "boolean",
+      "default": false
+    },
+    "piiHandled": {
+      "type": "boolean",
+      "default": false
+    },
+    "containsEmployeeData": {
+      "type": "boolean",
+      "default": false
+    },
+    "confidence": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "freshness": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "current",
+        "recent",
+        "stale"
+      ]
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "reviewed": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "additionalProperties": true
+}
