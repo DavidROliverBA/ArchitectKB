@@ -1275,13 +1275,14 @@ Configure permissions in `.claude/settings.json` or via Claude Code settings.
 
 ### User Guides
 
-- **[[Page - Claude Code Skills Quick Reference]]** - All 62 skills with examples and model recommendations
+- **[[Page - Claude Code Skills Quick Reference]]** - All 75 skills with examples and model recommendations
 - **[[Page - Daily Workflow Guide]]** - Practical routines for morning, meetings, weekly reviews
 - **[[Page - Search and Discovery Guide]]** - SQLite FTS5, graph queries, discovery skills
 - **[[Page - Architecture Workflow Guide]]** - Multi-skill workflows for systems, integrations, ADRs
 - **[[Page - Diagram and Visualisation Guide]]** - C4 diagrams, Canvas, Mermaid
 - **[[Page - Claude Code with AWS Bedrock Guide]]** - Enterprise deployment with AWS Bedrock
 - **[[Page - Secrets and Security Setup Guide]]** - Bitwarden CLI, pre-commit hooks, credentials
+- **[[Page - Claude Code Hooks Guide]]** - 11 hooks for quality enforcement, security, and automation
 
 ### General Documentation
 

@@ -4,7 +4,7 @@
 
 ArchitectKB is an Obsidian vault template designed for Solutions Architects who want to leverage AI assistants in their daily work. It provides a structured framework for architecture documentation, decision records, project tracking, and knowledge management—all optimised for AI-assisted workflows.
 
-**v2.1.0** | Seven-Pillar Ontology | 75 Skills | 40 Templates | 11 Hooks | 7 User Guides
+**v2.1.0** | Seven-Pillar Ontology | 75 Skills | 40 Templates | 11 Hooks | 8 User Guides
 
 ---
 
@@ -35,7 +35,7 @@ ArchitectKB is an Obsidian vault template designed for Solutions Architects who 
 - **Seven-pillar ontology** for organising knowledge that scales with your needs
 - **Structured templates** for ADRs, systems, integrations, and projects that AI can understand
 - **Instant search** across your entire knowledge base with SQLite FTS5 (~1000x faster than grep)
-- **62 AI-assisted skills** that automate common architecture tasks
+- **75 AI-assisted skills** that automate common architecture tasks
 - **Quality tracking** to keep your documentation fresh and trustworthy
 - **Zero lock-in**—it's all plain Markdown files
 
@@ -48,7 +48,7 @@ ArchitectKB is an Obsidian vault template designed for Solutions Architects who 
 
 ## AI Integration
 
-ArchitectKB is built for **[Claude Code](https://claude.ai/code)**, Anthropic's CLI for AI-assisted development. The 62 skills, automation hooks, and search optimisations are designed around Claude Code's capabilities.
+ArchitectKB is built for **[Claude Code](https://claude.ai/code)**, Anthropic's CLI for AI-assisted development. The 75 skills, automation hooks, and search optimisations are designed around Claude Code's capabilities.
 
 **But it's not exclusive.** The underlying structure—Markdown files with YAML frontmatter—works with any AI assistant that can read files. **Contributions to support other AI assistants are welcome!**
 
@@ -231,13 +231,14 @@ ArchitectKB/
 
 | Guide                                                                                      | Purpose                                               |
 | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
-| **[Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)**     | All 62 skills with examples and model recommendations |
+| **[Skills Quick Reference](Page%20-%20Claude%20Code%20Skills%20Quick%20Reference.md)**     | All 75 skills with examples and model recommendations |
 | **[How to Use This Vault](Page%20-%20How%20to%20Use%20This%20Vault.md)**                   | Complete vault usage guide                            |
 | **[Vault Setup Checklist](Page%20-%20Vault%20Setup%20Checklist.md)**                       | Step-by-step setup                                    |
 | **[Daily Workflow Guide](Page%20-%20Daily%20Workflow%20Guide.md)**                         | Morning routine, meeting capture, weekly reviews      |
 | **[Architecture Workflow Guide](Page%20-%20Architecture%20Workflow%20Guide.md)**           | Multi-skill workflows for systems, integrations, ADRs |
 | **[Search and Discovery Guide](Page%20-%20Search%20and%20Discovery%20Guide.md)**           | SQLite FTS5, graph queries, discovery patterns        |
 | **[Diagram and Visualisation Guide](Page%20-%20Diagram%20and%20Visualisation%20Guide.md)** | C4 diagrams, Canvas, Mermaid                          |
+| **[Claude Code Hooks Guide](Page%20-%20Claude%20Code%20Hooks%20Guide.md)**                 | 11 hooks for quality enforcement and automation       |
 
 ---
 
