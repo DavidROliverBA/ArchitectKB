@@ -4,7 +4,7 @@
 
 ArchitectKB is an Obsidian vault template designed for Solutions Architects who want to leverage AI assistants in their daily work. It provides a structured framework for architecture documentation, decision records, project tracking, and knowledge management—all optimised for AI-assisted workflows.
 
-**v2.0.0** | Seven-Pillar Ontology | 62 Skills | 32 Templates | 11 Hooks | 7 User Guides
+**v2.1.0** | Seven-Pillar Ontology | 75 Skills | 40 Templates | 11 Hooks | 7 User Guides
 
 ---
 
@@ -243,7 +243,7 @@ ArchitectKB/
 
 ## Features
 
-### AI-Assisted Skills (62 total)
+### AI-Assisted Skills (75 total)
 
 Common tasks, automated:
 
@@ -291,8 +291,8 @@ Credential protection built-in:
 
 | Component          | Count | Purpose                                     |
 | ------------------ | ----- | ------------------------------------------- |
-| Claude Code Skills | 62    | AI-assisted workflows for common tasks      |
-| Note Templates     | 32    | Structured templates for all note types     |
+| Claude Code Skills | 75    | AI-assisted workflows for common tasks      |
+| Note Templates     | 40    | Structured templates for all note types     |
 | Automation Hooks   | 11    | Quality enforcement and workflow automation |
 | User Guides        | 7     | Comprehensive documentation                 |
 | Sample Notes       | 20+   | Architecture examples to learn from         |

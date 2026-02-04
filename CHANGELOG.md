@@ -7,6 +7,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-02-04
+
+### Added
+
+#### New Skills (8)
+
+Eight new AI-assisted skills for document processing, knowledge capture, and RFI scoring:
+
+- **`/book <title>`** - Create Book notes with reading tracking and knowledge compounding
+  - Modes: Quick capture (Haiku), Spawn (identify concepts/patterns), PDF processing (Sonnet)
+  - Supports `--spawn`, `--preview`, `--enrich`, `--pdf` flags
+  - Knowledge compounding through spawned Concept/Pattern/Theme nodes
+
+- **`/c4-diagram <system>`** - Generate C4 architecture diagrams from System notes
+  - Types: context, container, component, landscape
+  - Uses System frontmatter for automatic relationship discovery
+  - Outputs Mermaid diagrams for embedding in notes
+
+- **`/csv-to-page <path>`** - Convert CSV files to Page notes with markdown tables
+  - Auto-detects headers and data types
+  - Supports filtering and column selection
+  - Creates wiki-links for recognised entities
+
+- **`/csv-to-sql <path>`** - Convert CSV to SQLite database for efficient querying
+  - Creates indexed tables from CSV data
+  - Enables complex filtering and aggregation
+  - Useful for large datasets (RFI responses, vendor data)
+
+- **`/email`** - Process and draft emails with vault context
+  - Inbound: Parse pasted emails into structured Email notes
+  - Outbound: Draft emails using vault knowledge
+  - Links to relevant people, projects, and decisions
+
+- **`/score-rfi <vendor>`** - Score vendor RFI responses with consistent rubric
+  - 0-3 scoring rubric for objective evaluation
+  - Parallel sub-agents for concurrent scoring
+  - Generates comparison matrices and recommendations
+
+- **`/voice-chat`** - Voice-controlled Claude Code interactions
+  - Speak commands naturally, receive audio responses
+  - Requires voice-bridge server setup
+  - Supports custom voice personas
+
+- **`/voice-meeting start|stop|status`** - Voice meeting recording with transcription
+  - Start/stop meeting recordings
+  - Auto-generates meeting notes from transcripts
+  - Links to attendees and projects
+
+#### New Templates (3)
+
+- **`Templates/Book.md`** - Reading tracker with knowledge compounding
+  - Book metadata (author, ISBN, publisher, genre)
+  - Reading tracking (status, dates, rating, format)
+  - Content sections (summary, takeaways, quotes, chapters)
+  - Application sections for work and life contexts
+
+- **`Templates/Research.md`** - Research note for incubator graduation
+  - Scope definition (domain, topic, research question)
+  - Methodology and findings structure
+  - Recommendations and limitations tracking
+  - Source citation management
+
+- **`Templates/Prompt.md`** - AI prompt library template
+  - Classification (category, domain, target AI, audience)
+  - Quality tracking (effectiveness rating, usage count)
+  - Model configuration and version history
+  - Variables documentation
+
+#### New Node Types (3)
+
+| Type     | Pillar | Purpose                                    | Location           |
+| -------- | ------ | ------------------------------------------ | ------------------ |
+| Book     | Node   | Reading tracking with knowledge extraction | Root               |
+| Research | Node   | Research findings (Incubator graduation)   | Root               |
+| Prompt   | Node   | AI prompt library                          | `.claude/prompts/` |
+
+### Changed
+
+- **Skill count**: 67 → 75 (8 new skills)
+- **Template count**: 37 → 40 (3 new templates)
+- **README.md**: Updated counts and version to v2.1.0
+
+### Technical
+
+- All new skills include `context: fork` frontmatter for parallel agent execution
+- Voice skills require external voice-bridge server (optional dependency)
+- CSV skills support both quick parsing and SQLite indexing for large files
+
 ## [2.0.0] - 2026-01-31
 
 ### Added
@@ -1255,8 +1343,10 @@ npm run graph:query -- --broken-links
 - Hierarchical tag taxonomy
 - Comprehensive README and setup guides
 
-[Unreleased]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.4...HEAD
-[1.9.4]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.9.0...v1.9.4
+[Unreleased]: https://github.com/DavidROliverBA/ArchitectKB/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/DavidROliverBA/ArchitectKB/compare/v2.0.0...v2.1.0
+[2.0.0]: https://github.com/DavidROliverBA/ArchitectKB/compare/v1.9.4...v2.0.0
+[1.9.4]: https://github.com/DavidROliverBA/ArchitectKB/compare/v1.9.0...v1.9.4
 [1.9.0]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.3...v1.9.0
 [1.8.3]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.2...v1.8.3
 [1.8.2]: https://github.com/DavidROliverBA/obsidian-architect-vault-template/compare/v1.8.1...v1.8.2
