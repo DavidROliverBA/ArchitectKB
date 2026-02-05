@@ -2,19 +2,19 @@
 type: Page
 title: Claude Code Skills Quick Reference
 created: 2026-01-28
-modified: 2026-01-28
+modified: 2026-02-04
 tags:
   - activity/documentation
   - domain/tooling
   - audience/architect
 
 # Quality Indicators
-summary: Complete reference for all 62 Claude Code skills with examples, model recommendations, and usage patterns
+summary: Complete reference for all 75 Claude Code skills with examples, model recommendations, and usage patterns
 confidence: high
 freshness: current
 source: primary
 verified: true
-reviewed: 2026-01-28
+reviewed: 2026-02-04
 
 # Semantic Discovery
 keywords:
@@ -34,7 +34,7 @@ relatedTo:
 
 # Claude Code Skills Quick Reference
 
-This guide provides a complete reference for all 62 Claude Code skills available in ArchitectKB. Skills are AI-assisted workflows that automate common architecture tasks.
+This guide provides a complete reference for all 75 Claude Code skills available in ArchitectKB. Skills are AI-assisted workflows that automate common architecture tasks.
 
 ---
 
@@ -101,6 +101,7 @@ Skills for creating and maintaining architecture documentation.
 | `/datasource <name>`             | 🟡    | Document database, table, API, or dataset    | `/datasource Customer Orders API`       |
 | `/dataasset <name>`              | 🟡    | Document data asset with lineage             | `/dataasset Revenue Fact Table`         |
 | `/diagram <type>`                | 🟡    | Generate C4, landscape, or AWS diagram       | `/diagram c4-context CustomerPortal`    |
+| `/c4-diagram <system>`           | 🟡    | Generate Mermaid C4 from System frontmatter  | `/c4-diagram CRM both`                  |
 | `/canvas <name>`                 | 🟡    | Create visual Canvas diagram                 | `/canvas System Landscape`              |
 
 **Example: Creating a System Note**
@@ -253,6 +254,36 @@ Creates:
 
 ---
 
+### Data Processing (🟡 Sonnet)
+
+Skills for converting and querying CSV data.
+
+| Command               | Description                              | Example                                     |
+| --------------------- | ---------------------------------------- | ------------------------------------------- |
+| `/csv-to-page <path>` | Convert CSV to Page with markdown tables | `/csv-to-page Inbox/data.csv`               |
+| `/csv-to-sql <path>`  | Convert CSV to SQLite for efficient queries | `/csv-to-sql Inbox/rfi-responses.csv --fts` |
+
+**Example: Processing RFI Responses**
+
+```
+/csv-to-sql Inbox/vendor-rfi-responses.csv --start-row 14 --fts
+```
+
+Creates `.data/vendor-rfi-responses.db` with:
+
+- Full-text search on long text columns
+- Automatic type detection (integers, decimals, text)
+- Indexed columns for fast filtering
+
+**When to Use Each:**
+
+| Mode         | Best For                                        | Output            |
+| ------------ | ----------------------------------------------- | ----------------- |
+| `csv-to-page`| Simple data, cells under 500 chars              | Markdown table    |
+| `csv-to-sql` | Large files, RFI responses, complex queries     | SQLite database   |
+
+---
+
 ### Visual Analysis (🟡 Sonnet)
 
 Skills for analysing images and diagrams.
@@ -289,6 +320,8 @@ Fast note creation skills.
 | `/youtube <url>`   | Save YouTube video with transcript | `/youtube https://youtube.com/...`      |
 | `/article <title>` | Create article note                | `/article Cloud Migration Guide`        |
 | `/trip <dest>`     | Create trip planning note          | `/trip Barcelona`                       |
+| `/email`           | Process email from clipboard       | `/email` (paste email content)          |
+| `/email draft`     | Draft email using vault context    | `/email draft status update to Jane`    |
 
 **Example: Creating a Task**
 
@@ -301,6 +334,40 @@ Creates `Task - Review API Gateway ADR.md` with:
 - High priority
 - Due date set
 - Linked to Cloud Migration project
+
+---
+
+### Knowledge Management (🟡 Sonnet)
+
+Skills for capturing and compounding knowledge from books and research.
+
+| Command                  | Description                              | Example                             |
+| ------------------------ | ---------------------------------------- | ----------------------------------- |
+| `/book <title>`          | Create Book note with reading tracking   | `/book Data Mesh by Zhamak Dehghani`|
+| `/book <title> --spawn`  | Identify Concepts/Patterns/Themes to extract | `/book Data Mesh --spawn`       |
+| `/book <title> --pdf`    | Process PDF with knowledge extraction    | `/book Data Mesh --pdf books/data-mesh.pdf` |
+
+**Example: Knowledge Compounding**
+
+```
+/book Data Mesh by Zhamak Dehghani --spawn
+```
+
+Claude will:
+
+1. Create the Book note with metadata and reading status
+2. Analyse the book for key concepts, patterns, and themes
+3. Check vault for existing coverage (avoid duplicates)
+4. Present candidates with confidence levels (high/medium/low)
+5. Create selected nodes with bidirectional links
+
+**Spawned Knowledge Types:**
+
+| Type    | When to Spawn                                                    |
+| ------- | ---------------------------------------------------------------- |
+| Concept | Definitions, frameworks, models (e.g., "Data Product")           |
+| Pattern | Architectural approaches, solutions (e.g., "Self-Serve Platform")|
+| Theme   | Cross-cutting concerns, paradigm shifts (e.g., "Decentralisation")|
 
 ---
 
@@ -337,6 +404,77 @@ Skills for tracking governance forms.
 | `/form-status [filter]`  | Check form submission status    | `/form-status pending`       |
 
 **Form Types:** DPIA, SecurityReview, RiskAssessment, ChangeRequest, ComplianceCheck
+
+---
+
+### Vendor Evaluation (🟡 Sonnet)
+
+Skills for scoring and comparing vendor RFI responses.
+
+| Command                 | Description                          | Example           |
+| ----------------------- | ------------------------------------ | ----------------- |
+| `/score-rfi <vendor>`   | Score RFI responses with 0-3 rubric  | `/score-rfi pwc`  |
+
+**Example: Scoring Vendor Responses**
+
+```
+/score-rfi accenture
+```
+
+Claude will:
+
+1. Read the vendor's RFI responses from SQLite database
+2. Launch parallel sub-agents to score questions
+3. Apply the 0-3 scoring rubric consistently
+4. Generate summary with strengths, gaps, and risks
+
+**Scoring Rubric:**
+
+| Score | Rating | Meaning                                              |
+| ----- | ------ | ---------------------------------------------------- |
+| 3     | High   | Strong proven experience, detailed response          |
+| 2     | Medium | Some capability, potential but unproven              |
+| 1     | Low    | Insufficient evidence, generic response              |
+| 0     | Zero   | Not demonstrated at all, no evidence                 |
+
+---
+
+### Voice Control (🟡 Sonnet)
+
+Skills for voice-controlled interactions and meeting recording.
+
+| Command                        | Description                          | Example                          |
+| ------------------------------ | ------------------------------------ | -------------------------------- |
+| `/voice-chat`                  | Voice-controlled Claude Code mode    | `/voice-chat`                    |
+| `/voice-chat stop`             | Exit voice mode                      | `/voice-chat stop`               |
+| `/voice-meeting start <title>` | Start recording a meeting            | `/voice-meeting start Sprint Review` |
+| `/voice-meeting stop`          | Stop recording and create note       | `/voice-meeting stop`            |
+| `/voice-meeting status`        | Check recording status               | `/voice-meeting status`          |
+
+**Example: Recording a Meeting**
+
+```
+/voice-meeting start Architecture Review for Project - Alpha
+```
+
+After the meeting:
+
+```
+/voice-meeting stop
+```
+
+Creates `Meeting - 2026-02-04 Architecture Review.md` with:
+
+- Full transcript from voice recording
+- AI-generated summary
+- Extracted action items
+- Linked to project
+
+**Requirements:**
+
+- voice-bridge server running on port 4000
+- Microphone permissions granted
+- Inworld API key configured (for TTS)
 
 ---
 
@@ -499,22 +637,26 @@ For high-volume tasks (bulk imports, large audits), prefer Haiku.
 
 ## Quick Reference Table
 
-| Category       | Count  | Key Skills                                          |
-| -------------- | ------ | --------------------------------------------------- |
-| Daily Workflow | 3      | `/daily`, `/meeting`, `/weekly-summary`             |
-| Architecture   | 9      | `/adr`, `/system`, `/integration`, `/diagram`       |
-| Analysis       | 7      | `/impact-analysis`, `/cost-optimization`            |
-| Management     | 4      | `/project-status`, `/adr-report`                    |
-| Research       | 6      | `/q`, `/related`, `/find-decisions`                 |
-| Documents      | 4      | `/pdf-to-page`, `/pptx-to-page`                     |
-| Visual         | 2      | `/screenshot-analyze`, `/diagram-review`            |
-| Quick Capture  | 6      | `/task`, `/person`, `/weblink`                      |
-| Incubator      | 7      | `incubator`, `incubator list`, `incubator graduate` |
-| Governance     | 2      | `/form`, `/form-status`                             |
-| Maintenance    | 10     | `/vault-maintenance`, `/quality-report`, `/orphans` |
-| Sync           | 3      | `/sync-governance`, `/sync-notion`                  |
-| Security       | 5      | `/secrets status`, `/secrets get`                   |
-| **Total**      | **62** |                                                     |
+| Category        | Count  | Key Skills                                          |
+| --------------- | ------ | --------------------------------------------------- |
+| Daily Workflow  | 3      | `/daily`, `/meeting`, `/weekly-summary`             |
+| Architecture    | 10     | `/adr`, `/system`, `/integration`, `/diagram`, `/c4-diagram` |
+| Analysis        | 7      | `/impact-analysis`, `/cost-optimization`            |
+| Management      | 4      | `/project-status`, `/adr-report`                    |
+| Research        | 6      | `/q`, `/related`, `/find-decisions`                 |
+| Documents       | 4      | `/pdf-to-page`, `/pptx-to-page`                     |
+| Data Processing | 2      | `/csv-to-page`, `/csv-to-sql`                       |
+| Visual          | 2      | `/screenshot-analyze`, `/diagram-review`            |
+| Quick Capture   | 8      | `/task`, `/person`, `/weblink`, `/email`            |
+| Knowledge       | 3      | `/book`, `/book --spawn`, `/book --pdf`             |
+| Incubator       | 7      | `incubator`, `incubator list`, `incubator graduate` |
+| Governance      | 2      | `/form`, `/form-status`                             |
+| Vendor Eval     | 1      | `/score-rfi`                                        |
+| Voice           | 4      | `/voice-chat`, `/voice-meeting start/stop/status`   |
+| Maintenance     | 10     | `/vault-maintenance`, `/quality-report`, `/orphans` |
+| Sync            | 3      | `/sync-governance`, `/sync-notion`                  |
+| Security        | 5      | `/secrets status`, `/secrets get`                   |
+| **Total**       | **75** |                                                     |
 
 ---
 
