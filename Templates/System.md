@@ -74,6 +74,11 @@ currentVersion: null # e.g., "2.5.1"
 supportedVersions: [] # ["2.5.x", "2.4.x"]
 upgradeSchedule: null # e.g., "Q2 2026"
 
+# Lifecycle Classification (for roadmap visualisation)
+timeCategory: tolerate | invest | migrate | eliminate | null # Gartner TIME model
+replacedBy: null # "[[System - Successor]]" - system replacing this one
+predecessors: [] # ["[[System - Dependency]]"] - systems required before this can go live
+
 # Architecture & Patterns
 architecturePattern: monolith | microservices | serverless | event-driven | null
 deploymentPattern: blue-green | canary | rolling | null
@@ -109,6 +114,55 @@ verified: false | true | null
 reviewed: null # YYYY-MM-DD
 lastUpdatedReason: null
 
+# C4 Architecture Data (populate to enable /c4-diagram generation)
+c4:
+  level: system # system | container | component
+  boundary: internal # internal | external
+  description: null # Brief architectural description
+
+  actors: [] # People/roles interacting with this system
+  #  - name: "Actor Name"
+  #    type: person
+  #    description: "What they do"
+  #    relationship: "How they interact"
+
+  containers: [] # Internal services/modules (for L2 diagrams)
+  #  - name: "Container Name"
+  #    technology: "Tech stack"
+  #    description: "What it does"
+
+  externalRelationships: [] # Connections to other systems
+  #  - target: "[[System - Target]]"
+  #    description: "What data/events flow"
+  #    technology: "Protocol/transport"
+  #    type: sync | async | event | batch
+  #    direction: incoming | outgoing | bidirectional
+
+  internalRelationships: [] # Connections between containers
+  #  - source: "Container A"
+  #    target: "Container B"
+  #    description: "What flows between them"
+  #    technology: "Protocol"
+
+# Cloud Deployment (populate to enable /cloud-diagram generation)
+cloudDeployment:
+  provider: aws | azure | gcp | on-prem | hybrid | null
+  region: null
+  account: null
+
+  services: [] # Cloud services used
+  #  - name: "Service Name"
+  #    provider: aws | azure | gcp
+  #    service: EC2 | RDS | S3 | Lambda | EKS | etc.
+  #    description: "What it's used for"
+
+  networking:
+    vpc: null
+    subnets: []
+    connectivity: []
+    #  - type: vpn | peering | privatelink | internet
+    #    target: "Destination"
+
 # Metadata
 created: null # YYYY-MM-DD
 modified: null # YYYY-MM-DD
@@ -123,16 +177,16 @@ Brief description of what this system does, its purpose in the enterprise, and k
 
 ## System Properties
 
-| Property        | Value                                                                         |
-| --------------- | ----------------------------------------------------------------------------- |
-| **System ID**   | `{{systemId}}`                                                                |
-| **APM Number**  | APM0001234                                                                    |
-| **Aliases**     | PAD, Aerospace & Defence                                                      |
-| **Type**        | Application / Platform / Infrastructure                                       |
-| **Status**      | Active / Planned / Deprecated                                                 |
-| **Criticality** | High / Medium / Low                                                           |
-| **Owner**       | [[Person Name]] or Team                                                       |
-| **Vendor**      | Internal / External                                                           |
+| Property        | Value                                                                                |
+| --------------- | ------------------------------------------------------------------------------------ |
+| **System ID**   | `{{systemId}}`                                                                       |
+| **APM Number**  | APM0001234                                                                           |
+| **Aliases**     | PAD, Aerospace & Defence                                                             |
+| **Type**        | Application / Platform / Infrastructure                                              |
+| **Status**      | Active / Planned / Deprecated                                                        |
+| **Criticality** | High / Medium / Low                                                                  |
+| **Owner**       | [[Person Name]] or Team                                                              |
+| **Vendor**      | Internal / External                                                                  |
 | **Confluence**  | [Application Library](https://yourorg.atlassian.net/wiki/spaces/AL/pages/...) |
 
 ## Technology Stack
@@ -152,19 +206,55 @@ Brief description of what this system does, its purpose in the enterprise, and k
 - **Regions**: AWS eu-west-1, us-east-1
 - **Scaling**: Auto-scaling / Manual / Horizontal / Vertical
 
-## Architecture Diagram
+## C4 Architecture Diagrams
+
+> [!tip] Generating C4 diagrams
+> Use `/c4-diagram <system-name>` to auto-generate these diagrams from the `c4:` frontmatter data on this note.
+
+### C4 Context (Level 1)
+
+Shows this system's actors and external relationships at the highest level.
 
 ```mermaid
-graph TB
-    User["Users/Systems"]
-    System["<b>{{title}}</b><br/>Core System"]
-    Deps["Dependencies"]
+C4Context
+    title {{title}} - System Context
 
-    User -->|Uses| System
-    System -->|Depends on| Deps
+    Person(actor1, "Actor Name", "Role description")
 
-    style System fill:#4A90E2,color:#fff
-    style Deps fill:#F5A623,color:#fff
+    System(system, "{{title}}", "Core system description")
+
+    System_Ext(ext1, "External System", "What it does")
+
+    Rel_D(actor1, system, "Uses", "Protocol")
+    Rel_D(system, ext1, "Sends data to", "REST API")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+```
+
+### C4 Container (Level 2)
+
+Shows the internal containers (services, databases, modules) within this system.
+
+```mermaid
+C4Container
+    title {{title}} - Container Diagram
+
+    Person(actor1, "Actor Name", "Role description")
+
+    System_Boundary(boundary, "{{title}}") {
+        Container(c1, "Container 1", "Technology", "What it does")
+        Container(c2, "Container 2", "Technology", "What it does")
+        ContainerDb(db, "Database", "Technology", "Stores data")
+    }
+
+    System_Ext(ext1, "External System", "What it does")
+
+    Rel_D(actor1, c1, "Uses", "HTTPS")
+    Rel(c1, c2, "Calls", "Internal")
+    Rel(c2, db, "Reads/Writes", "SQL")
+    Rel_D(c2, ext1, "Publishes to", "Kafka")
+
+    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
 ## Key Capabilities
@@ -175,11 +265,11 @@ graph TB
 
 ## Integrations
 
-| Target System             | Pattern        | Protocol   | Frequency       | Criticality | Link                                     |
-| ------------------------- | -------------- | ---------- | --------------- | ----------- | ---------------------------------------- |
-| [[System - DataPlatform]] | Real-time sync | REST API   | Continuous      | High        | [[Integration - System to DataPlatform]] |
-| [[System - Snowflake]]    | Batch export   | S3 + Spark | Daily 23:00 UTC | Medium      | [[Integration - System to Snowflake]]    |
-| [[System - Kong]]         | API gateway    | REST       | Always-on       | Critical    | [[Integration - Kong to System]]         |
+| Target System          | Pattern        | Protocol   | Frequency       | Criticality | Link                                  |
+| ---------------------- | -------------- | ---------- | --------------- | ----------- | ------------------------------------- |
+| [[System - DataPlatform]]      | Real-time sync | REST API   | Continuous      | High        | [[Integration - System to DataPlatform]]      |
+| [[System - Snowflake]] | Batch export   | S3 + Spark | Daily 23:00 UTC | Medium      | [[Integration - System to Snowflake]] |
+| [[System - Kong]]      | API gateway    | REST       | Always-on       | Critical    | [[Integration - Kong to System]]      |
 
 **Inbound Integrations:**
 
@@ -354,6 +444,6 @@ SORT type ASC
 
 ## Version History
 
-| Date       | Change           | Author        |
-| ---------- | ---------------- | ------------- |
+| Date       | Change           | Author           |
+| ---------- | ---------------- | ---------------- |
 | 2026-01-14 | Initial creation | [[Your Name]] |
