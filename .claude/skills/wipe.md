@@ -42,31 +42,38 @@ Create a structured summary of the current session. Use this format:
 
 ```markdown
 ## What we're working on
+
 - [Primary task or topic from this session]
 
 ## Current state
+
 - [Where we left off - be specific]
 - [Any pending questions or decisions]
 
 ## Key decisions made
+
 - [Important choices, conclusions, or agreements]
 - [Technical decisions with rationale]
 
 ## Recent changes
+
 - [Files modified with brief description]
 - [Commands run or actions taken]
 
 ## Important context
+
 - [Technical constraints or requirements]
 - [User preferences discovered]
 - [Project-specific facts needed to continue]
 
 ## Next steps
+
 - [Immediate next action to take]
 - [Any blocked items or dependencies]
 ```
 
 **Guidelines for generating the handoff:**
+
 - Be concise but complete - this will be the only context in the new session
 - Include file paths for any files that were being edited
 - Mention any errors encountered and their status (fixed/pending)
@@ -167,6 +174,7 @@ Your terminal (**[TERMINAL_NAME]**) doesn't support automated wipe.
 ### Step 1: Copy the Handoff
 
 Copy the handoff summary above to your clipboard. You can:
+
 - Select all the text in the handoff block and copy (Cmd+C / Ctrl+C)
 - Or I can copy it to your clipboard automatically
 
@@ -174,7 +182,9 @@ Copy the handoff summary above to your clipboard. You can:
 
 Run this command:
 ```
+
 /clear
+
 ```
 
 ### Step 3: Paste the Handoff
@@ -220,12 +230,15 @@ Minimal handoff for simple sessions:
 
 ```markdown
 ## Task
+
 - [One-line description]
 
 ## State
+
 - [Current status]
 
 ## Next
+
 - [Immediate action]
 ```
 
@@ -235,32 +248,39 @@ Comprehensive handoff for complex sessions:
 
 ```markdown
 ## What we're working on
+
 - [Full task description with background]
 
 ## Current state
+
 - [Detailed status]
 - [All pending items]
 - [Blockers or issues]
 
 ## Key decisions made
+
 - [All significant decisions with rationale]
 - [Rejected alternatives and why]
 
 ## Recent changes
+
 - [All files modified with line numbers if relevant]
 - [All commands run]
 - [All errors encountered and resolutions]
 
 ## Important context
+
 - [Technical architecture notes]
 - [User preferences and constraints]
 - [External dependencies]
 - [Project conventions]
 
 ## Code snippets
+
 - [Any important code that was written/discussed]
 
 ## Next steps
+
 - [Prioritised list of remaining work]
 - [Dependencies between tasks]
 ```
@@ -271,13 +291,16 @@ Comprehensive handoff for complex sessions:
 
 ```markdown
 ## Task
+
 - Implementing BM25 search in graph-query.js
 
 ## State
+
 - BM25Index class added and tested
 - Need to update skills documentation
 
 ## Next
+
 - Update search.md and graph-query.md skills
 ```
 
@@ -285,30 +308,36 @@ Comprehensive handoff for complex sessions:
 
 ```markdown
 ## What we're working on
+
 - Adding BM25 relevance ranking to the vault's graph search system
 - Part of improving search quality for Claude Code integration
 
 ## Current state
+
 - BM25Index class implemented in scripts/graph-query.js (lines 36-153)
 - Tested with "kafka integration" query - returns 70 results, top score 14.65
 - Skills documentation not yet updated
 
 ## Key decisions made
+
 - Chose BM25 over semantic search (Claude already has semantic understanding)
 - Parameters: k1=1.5 (saturation), b=0.75 (length normalisation)
 - Pure JS implementation, no new dependencies
 
 ## Recent changes
+
 - Modified: scripts/graph-query.js (added BM25Index class)
 - Modified: .claude/skills/graph-query.md (pending)
 - Modified: .claude/skills/search.md (pending)
 
 ## Important context
+
 - User prefers graph-first search strategy
 - Template repo (ArchitectKB) needs same updates
-- BA-specific content must be removed from template repo
+- Organisation-specific content must be removed from template repo
 
 ## Next steps
+
 - Update graph-query.md skill with BM25 documentation
 - Update search.md skill with relevance score examples
 - Copy changes to ArchitectKB template repo

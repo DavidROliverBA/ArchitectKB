@@ -23,7 +23,7 @@ approvers:
 
 - Head of Architecture or Engineering
 - Principal Solution Architect
-- Cyber Assurance (John Smith or delegate)
+- Cyber Assurance (Security Lead or delegate)
 
 # Subject-Specific SMEs (add as appropriate - see Page - YourOrg ADR Approvers and SME)
 

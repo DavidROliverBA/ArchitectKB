@@ -5,9 +5,11 @@ context: fork
 # ADR Report Skill
 
 ## Purpose
+
 Generate comprehensive Architecture Decision Record (ADR) activity reports for a specified time period.
 
 ## Usage
+
 - `/adr-report` - All ADR activity (default: last 30 days)
 - `/adr-report week` - ADR activity this week
 - `/adr-report month` - ADR activity this month
@@ -18,6 +20,7 @@ Generate comprehensive Architecture Decision Record (ADR) activity reports for a
 When this skill is invoked:
 
 1. **Find all ADRs** in the vault using Glob:
+
    ```
    ADR*.md
    ```
@@ -43,6 +46,7 @@ When this skill is invoked:
 
 ```markdown
 # ADR Activity Report
+
 **Period**: [time period]
 **Generated**: [current date]
 
@@ -59,31 +63,33 @@ When this skill is invoked:
 
 ### Created This Period
 
-| ADR | Status | Project | Created | Deciders |
-|-----|--------|---------|---------|----------|
-| [[ADR - Title]] | accepted | [[Project Name]] | YYYY-MM-DD | Team |
+| ADR             | Status   | Project          | Created    | Deciders |
+| --------------- | -------- | ---------------- | ---------- | -------- |
+| [[ADR - Title]] | accepted | [[Project Name]] | YYYY-MM-DD | Team     |
 
 ### Updated This Period
 
-| ADR | Status | Project | Modified | Changes |
-|-----|--------|---------|----------|---------|
+| ADR             | Status   | Project          | Modified   | Changes        |
+| --------------- | -------- | ---------------- | ---------- | -------------- |
 | [[ADR - Title]] | accepted | [[Project Name]] | YYYY-MM-DD | Status changed |
 
 ## ADRs by Project
 
 ### [Project Name]
+
 - [[ADR - Decision 1]] (accepted)
 - [[ADR - Decision 2]] (proposed)
 
 ## Pending Decisions (Proposed ADRs)
 
-| ADR | Project | Created | Deciders | Next Action |
-|-----|---------|---------|----------|-------------|
-| [[ADR - Title]] | [[Project]] | YYYY-MM-DD | Team | Awaiting approval |
+| ADR             | Project     | Created    | Deciders | Next Action       |
+| --------------- | ----------- | ---------- | -------- | ----------------- |
+| [[ADR - Title]] | [[Project]] | YYYY-MM-DD | Team     | Awaiting approval |
 
 ## Recent Key Decisions
 
 ### [ADR Title]
+
 **Status**: Accepted
 **Project**: [[Project Name]]
 **Decision**: Brief summary of what was decided
@@ -126,7 +132,7 @@ Assistant: [Generates report for past 7 days showing 3 new ADRs created for NewP
 
 **Example 2:**
 User: `/adr-report`
-Assistant: [Generates default 30-day report showing all ADR activity including Snap On ADR completion]
+Assistant: [Generates default 30-day report showing all ADR activity including VendorTooling ADR completion]
 
 **Example 3:**
 User: `/adr-report all`

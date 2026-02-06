@@ -5,9 +5,11 @@ context: fork
 # DPIA Status Skill
 
 ## Purpose
+
 Generate comprehensive GDPR Data Protection Impact Assessment (DPIA) compliance status reports across all engineering projects.
 
 ## Usage
+
 - `/dpia-status` - Current DPIA status for all projects
 - `/dpia-status pending` - Only pending/in-progress DPIAs
 - `/dpia-status project [name]` - DPIA status for specific project
@@ -17,6 +19,7 @@ Generate comprehensive GDPR Data Protection Impact Assessment (DPIA) compliance 
 When this skill is invoked:
 
 1. **Read DPIA Tracker** page:
+
    ```
    Page - DPIA Tracker.md
    ```
@@ -31,6 +34,7 @@ When this skill is invoked:
    - Follow-up owners
 
 3. **Find all projects** with DPIA requirements using Grep:
+
    ```
    pattern: "DPIA"
    output: files_with_matches
@@ -49,6 +53,7 @@ When this skill is invoked:
 
 ```markdown
 # DPIA Compliance Status Report
+
 **Generated**: [current date]
 **Data Source**: [[Page - DPIA Tracker]]
 **OneTrust Platform**: [[Weblink - OneTrust DPIA System]]
@@ -66,34 +71,34 @@ When this skill is invoked:
 
 ### ✅ DPIA Not Required ([count] projects)
 
-| Project | Justification | Reviewed |
-|---------|---------------|----------|
+| Project          | Justification                      | Reviewed   |
+| ---------------- | ---------------------------------- | ---------- |
 | [[Project Name]] | Low risk, no special category data | YYYY-MM-DD |
 
 ### ⏳ Threshold Assessment Complete ([count] projects)
 
-| Project | OneTrust ID | Completed | Next Action |
-|---------|-------------|-----------|-------------|
-| [[Snap On]] | 6285 | YYYY-MM-DD | Awaiting full DPIA decision |
+| Project           | OneTrust ID | Completed  | Next Action                 |
+| ----------------- | ----------- | ---------- | --------------------------- |
+| [[VendorTooling]] | 6285        | YYYY-MM-DD | Awaiting full DPIA decision |
 
 ### 🔄 DPIAs Under Review ([count] projects)
 
-| Project | OneTrust ID | Submitted | Approver | Owner | Days Pending |
-|---------|-------------|-----------|----------|-------|--------------|
-| [[Siemens]] | 6284 | YYYY-MM-DD | DPO | [[Naushin Galmani]] | [X] days |
-| [[SPARK]] | 6276 | YYYY-MM-DD | DPO | [[Naushin Galmani]] | [X] days |
+| Project       | OneTrust ID | Submitted  | Approver | Owner        | Days Pending |
+| ------------- | ----------- | ---------- | -------- | ------------ | ------------ |
+| [[VendorPLM]] | 6284        | YYYY-MM-DD | DPO      | [[Jane Doe]] | [X] days     |
+| [[SPARK]]     | 6276        | YYYY-MM-DD | DPO      | [[Jane Doe]] | [X] days     |
 
 ### ✅ DPIAs Approved ([count] projects)
 
-| Project | OneTrust ID | Approved | Valid Until | Notes |
-|---------|-------------|----------|-------------|-------|
-| [[Project Name]] | XXXX | YYYY-MM-DD | YYYY-MM-DD | Conditions: [...] |
+| Project          | OneTrust ID | Approved   | Valid Until | Notes             |
+| ---------------- | ----------- | ---------- | ----------- | ----------------- |
+| [[Project Name]] | XXXX        | YYYY-MM-DD | YYYY-MM-DD  | Conditions: [...] |
 
 ### ❌ DPIAs Rejected or Requiring Remediation ([count] projects)
 
-| Project | OneTrust ID | Status | Issues | Owner | Action Required |
-|---------|-------------|--------|--------|-------|-----------------|
-| [[Project]] | XXXX | Rejected | Data retention concerns | [[Owner]] | Update retention policy |
+| Project     | OneTrust ID | Status   | Issues                  | Owner     | Action Required         |
+| ----------- | ----------- | -------- | ----------------------- | --------- | ----------------------- |
+| [[Project]] | XXXX        | Rejected | Data retention concerns | [[Owner]] | Update retention policy |
 
 ## Projects Requiring Immediate Action
 
@@ -107,25 +112,27 @@ When this skill is invoked:
 
 ### Medium Priority (DPIAs In Progress >30 days)
 
-1. **[[Siemens Teamcenter X SaaS]]**
+1. **[[VendorPLM SaaS Migration]]**
    - Status: Under review for [X] days
-   - Owner: [[Naushin Galmani]]
+   - Owner: [[Jane Doe]]
    - Action: Follow up with DPO
    - OneTrust ID: 6284
 
 ## DPIA Status by Project
 
-### [[Project - Siemens Teamcenter X SaaS]]
+### [[Project - VendorPLM SaaS Migration]]
+
 - **OneTrust ID**: 6284
 - **Status**: Under review by YourOrg Data Protection Officer
 - **Submitted**: 2025-10-08
-- **Owner**: [[Naushin Galmani]]
+- **Owner**: [[Jane Doe]]
 - **Risk Level**: [High/Medium/Low]
 - **Personal Data**: [Types of data processed]
 - **Next Steps**: Awaiting DPO approval
 - **Timeline**: [Expected approval date]
 
-### [[Project - Snap On Tooling - v9 Upgrade]]
+### [[Project - VendorTooling Tooling - v9 Upgrade]]
+
 - **OneTrust ID**: 6285
 - **Status**: Threshold assessment completed
 - **Completed**: YYYY-MM-DD
@@ -136,11 +143,13 @@ When this skill is invoked:
 ## Compliance Metrics
 
 ### DPIA Timeline Performance
+
 - Average days to complete threshold assessment: [X] days
 - Average days for DPIA approval: [X] days
 - Projects meeting DPIA deadline: [X]%
 
 ### Risk Distribution
+
 - High Risk Projects: [count]
 - Medium Risk Projects: [count]
 - Low Risk Projects: [count]
@@ -161,9 +170,9 @@ When this skill is invoked:
 
 ## Follow-up Schedule
 
-| Project | Owner | Next Review | Action |
-|---------|-------|-------------|--------|
-| [[Project]] | [[Owner]] | YYYY-MM-DD | Follow up with DPO |
+| Project     | Owner     | Next Review | Action             |
+| ----------- | --------- | ----------- | ------------------ |
+| [[Project]] | [[Owner]] | YYYY-MM-DD  | Follow up with DPO |
 
 ## Related Resources
 
@@ -196,12 +205,12 @@ When this skill is invoked:
 
 **Example 1:**
 User: `/dpia-status`
-Assistant: [Generates full report showing 2 DPIAs under review (Siemens, SPARK), 1 threshold complete (Snap On), flags Siemens as >60 days pending]
+Assistant: [Generates full report showing 2 DPIAs under review (VendorPLM, SPARK), 1 threshold complete (VendorTooling), flags VendorPLM as >60 days pending]
 
 **Example 2:**
 User: `/dpia-status pending`
 Assistant: [Shows only the 2 DPIAs under review with follow-up actions needed]
 
 **Example 3:**
-User: `/dpia-status project Siemens`
-Assistant: [Detailed DPIA status for Siemens Teamcenter X project including timeline, owner, next steps]
+User: `/dpia-status project VendorPLM`
+Assistant: [Detailed DPIA status for VendorPLM Teamcenter X project including timeline, owner, next steps]

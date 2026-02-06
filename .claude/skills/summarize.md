@@ -11,7 +11,7 @@ Summarize a note or set of notes.
 ```
 /summarize <note name>
 /summarize Meeting - 2025-01-05 MyDataIntegration Review
-/summarize all meetings about Axia
+/summarize all meetings about CloudMigration
 /summarize last 5 meetings
 ```
 
@@ -58,11 +58,13 @@ Summarize a note or set of notes.
 For "all meetings about X" or "last N meetings":
 
 **Phase 1: Planning**
+
 - Identify which notes to summarize
 - Create list of files to process
 
 **Phase 2: Parallel Processing**
 Launch sub-agents using `model: "haiku"` for efficiency:
+
 - Launch sub-agent per note (max 5 parallel)
 - Each agent extracts: key points, decisions, actions
 
@@ -86,13 +88,15 @@ Launch sub-agents using `model: "haiku"` for efficiency:
 ## All Decisions
 
 | Date | Source | Decision |
-|------|--------|----------|
+| ---- | ------ | -------- |
+
 {{consolidated decisions}}
 
 ## Outstanding Actions
 
 | Action | From | Assigned | Due |
-|--------|------|----------|-----|
+| ------ | ---- | -------- | --- |
+
 {{consolidated actions}}
 
 ## Progression

@@ -26,6 +26,7 @@ Create a new Architecture Decision Record (ADR) following the official YourOrg A
 ### 1. Parse Command and Initial Setup
 
 Parse the command for:
+
 - **title**: The ADR name (required)
 - **project**: Related project (optional)
 
@@ -34,11 +35,13 @@ Parse the command for:
 **IMPORTANT**: Before creating a new ADR, search for existing organisational ADRs that may constrain or inform this decision.
 
 Search the vault for relevant ADRs:
+
 1. Search `+Sync/Org-ADRs/` for ADRs with `authority: organizational`
 2. Search vault root for ADRs with `status: accepted`
 3. Look for keywords matching the decision topic
 
 Display found ADRs to the user:
+
 ```
 📋 Relevant Organisational ADRs Found:
 
@@ -60,6 +63,7 @@ Store selected references for later inclusion in frontmatter.
 **CRITICAL STEP**: Before creating an ADR, check if a relevant guardrail already exists.
 
 Ask the user:
+
 > "Before creating this ADR, have you checked if there's an existing guardrail that covers this decision? If a guardrail exists, you should follow it instead of creating an ADR."
 
 If user confirms no guardrail exists, proceed to step 4.
@@ -71,6 +75,7 @@ Ask the user to select the ADR type (explain each):
 **Question**: "What type of ADR is this?"
 
 **Options**:
+
 1. **Technology_ADR** - New technology/tool or significant change to existing technology
    - Examples: New database, cloud service, development tool, infrastructure component
    - Requires SME approvals for the specific technology area
@@ -91,27 +96,29 @@ Store the selected type in `adrType` frontmatter field.
 Based on the ADR type and subject area, identify required approvers using [[Page - YourOrg ADR Approvers and SME (Official)]].
 
 **Core Assessors (Always Required)**:
+
 - Head of Architecture or Engineering
 - Principal Solution Architect (if not already involved)
-- Cyber Assurance (John Smith or delegate)
+- Cyber Assurance (Security Lead or delegate)
 
 **Ask the user**: "What subject areas does this ADR cover?"
 
 **Common Subject Areas** (select all that apply):
-- Application Database/Storage (Nick Lee / Jane Doe)
-- Application Integration (Nick Lee / Jane Doe)
-- AI (Jake Pearce / Eleanor Armiger)
-- Cloud (AWS/Azure/GCP) (James Dean / Jane Doe)
-- Data Products/Integration (Jonathan Osborne / Jonathan Kemp)
-- Data Platform (Jonathan Osborne / Jonathan Kemp)
+
+- Application Database/Storage (Database SME / Integration Lead)
+- Application Integration (Integration SME / Integration Lead)
+- AI (AI/ML Lead / AI Architect)
+- Cloud (AWS/Azure/GCP) (Cloud Architect / Cloud Lead)
+- Data Products/Integration (Data Product Owner / Data Architect)
+- Data Platform (Data Platform Lead / Data Architect)
 - Data Privacy (Privacy Officer / dataprotection@yourorg.com)
-- PC Hardware/Software (John Smith/Jane Doe/Bob Johnson)
-- Mobile (iOS/Android) (John Smith/Jane Doe/Bob Johnson)
-- Networks (Nick Davey / Drew Urwin)
-- Cyber (John Smith)
-- IT Operations (Indhu Gosal / Claire Dunn)
-- Software Engineering/DevSecOps (Verita Sorsby / Petter Franzen)
-- Power Platform (Terry Hagan / James Cacia)
+- PC Hardware/Software (Endpoint Lead / Desktop Architect)
+- Mobile (iOS/Android) (Mobile Lead / Mobile Architect)
+- Networks (Network Architect / Network Lead)
+- Cyber (Security Lead)
+- IT Operations (Operations Manager / Service Delivery Lead)
+- Software Engineering/DevSecOps (Engineering Lead / DevOps Architect)
+- Power Platform (Low-Code Lead / Platform Owner)
 
 Build the complete approvers list from Core + Subject-Specific SMEs.
 
@@ -120,11 +127,13 @@ Build the complete approvers list from Core + Subject-Specific SMEs.
 Ask the user for key information using the official YourOrg ADR template structure:
 
 #### Context Questions:
+
 1. **Background**: What is the architectural context? What problem led to this decision?
 2. **Problem Statement**: What is the specific problem or requirement? What are the constraints?
 3. **Goals**: What are the desired outcomes?
 
 #### Alternatives Questions:
+
 1. **What alternatives did you consider?** (minimum 2, recommend 3-5)
 2. For each alternative:
    - Description
@@ -134,22 +143,26 @@ Ask the user for key information using the official YourOrg ADR template structu
    - Why was it rejected?
 
 #### Decision Questions:
+
 1. **What is the decision?** (clear, specific statement)
 2. **Why this decision?** (rationale)
 3. **How does this address the problem?**
 
 #### Consequences Questions:
+
 1. **Positive impacts**: What are the benefits?
 2. **Negative impacts**: What are the drawbacks or risks?
 3. **Mitigation strategies**: How will you address negative consequences?
 
 #### Implementation Questions:
+
 1. **Cost model**: What are the costs (one-time, recurring)?
 2. **Deployment approach**: How will this be implemented?
 3. **Operational model**: How will this be operated and supported?
 4. **Migration/rollout**: What are the phases?
 
 #### Compliance Questions:
+
 1. **GDPR compliance**: Does this process personal data?
 2. **Security classification**: What data classification (Official, Official-Sensitive)?
 3. **Audit requirements**: What audit/traceability is needed?
@@ -161,6 +174,7 @@ Generate filename: `ADR - {{title}}.md`
 Create the ADR in vault root using the structure from `+Templates/ADR.md`:
 
 **Frontmatter**:
+
 ```yaml
 ---
 type: Adr
@@ -176,7 +190,7 @@ approvers:
   # Core Assessors (Required)
   - Head of Architecture or Engineering
   - Principal Solution Architect
-  - Cyber Assurance (John Smith or delegate)
+  - Cyber Assurance (Security Lead or delegate)
   # Subject-Specific SMEs (from user selections)
   {{list of SME approvers based on subject areas}}
   # Stakeholders
@@ -220,6 +234,7 @@ stakeholders: {{list from approvers}}
 **Content**: Use official YourOrg ADR template structure with all sections filled in from user responses.
 
 Include at the top:
+
 ```markdown
 > **Based on Official YourOrg ADR Template**: [[Page - YourOrg ADR Template (Official)]]
 >
@@ -243,7 +258,7 @@ After creating the ADR, display:
    - Verify approvers list is correct
 
 2. ⏳ CREATE JIRA TICKET (CRITICAL - ADR not complete without this)
-   - Project: {{user's project or BDOBSTR}}
+   - Project: {{user's project or ARCH}}
    - Issue Type: ADR
    - Label: "{{adrType}}"
    - Summary: "ADR - {{title}}"
@@ -303,6 +318,7 @@ After creating the ADR, display:
 Ask the user: "Would you like me to create a task to track this ADR through the approval process?"
 
 If yes, create a task: `Task - Create ADR - {{title}}.md` with:
+
 - Checklist of all workflow steps above
 - Due date (ask user)
 - Project reference
@@ -327,6 +343,7 @@ If yes, create a task: `Task - Create ADR - {{title}}.md` with:
 ## Reference Documentation
 
 All guidance based on:
+
 - [[Page - YourOrg ADR Process (Official)]]
 - [[Page - YourOrg ADR Approvers and SME (Official)]]
 - [[Page - YourOrg ADR Template (Official)]]

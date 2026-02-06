@@ -68,13 +68,13 @@ Things with independent existence. Located in the **root directory** with type p
 
 ### Entity Types
 
-| Type         | Pattern                  | Example                        |
-| ------------ | ------------------------ | ------------------------------ |
-| Person       | `Person - Name.md`       | `Person - Jane Smith.md`       |
-| System       | `System - Name.md`       | `System - AMOS.md`             |
-| Organisation | `Organisation - Name.md` | `Organisation - Acme Corp.md`  |
-| DataAsset    | `DataAsset - Name.md`    | `DataAsset - Customer Data.md` |
-| Location     | `Location - Name.md`     | `Location - Heathrow T5.md`    |
+| Type         | Pattern                  | Example                              |
+| ------------ | ------------------------ | ------------------------------------ |
+| Person       | `Person - Name.md`       | `Person - Jane Smith.md`             |
+| System       | `System - Name.md`       | `System - Sample ERP Application.md` |
+| Organisation | `Organisation - Name.md` | `Organisation - Acme Corp.md`        |
+| DataAsset    | `DataAsset - Name.md`    | `DataAsset - Customer Data.md`       |
+| Location     | `Location - Name.md`     | `Location - Main Office HQ.md`       |
 
 ### Creating Entities
 

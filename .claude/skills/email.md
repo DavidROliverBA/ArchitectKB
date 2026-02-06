@@ -100,7 +100,7 @@ originalEmailId: null
 project: "[[Project - Alpha]]"
 person: "[[John Smith]]"
 relatedTo: ["[[ADR - Data Integration]]"]
-thread: "[[Email - David Oliver - Project Alpha Data Access Request]]"
+thread: "[[Email - Alex Thompson - Project Alpha Data Access Request]]"
 createdTasks: ["[[Task - Respond to data access request]]"]
 relatedSystems: ["[[System - Data Platform]]", "[[System - ERP]]"]
 relatedDataAssets: []
@@ -148,16 +148,16 @@ Generate draft email content using context from the vault.
 ### Example Draft Command
 
 ```
-/email draft Project Alpha status update to Tom Phillips
+/email draft Project Alpha status update to Sarah Chen
 ```
 
 Would:
 
 1. Search for Project - Alpha notes
 2. Find recent meetings and decisions
-3. Look up Tom Phillips in People
+3. Look up Sarah Chen in People
 4. Generate professional status update email
-5. Create `Email - David Oliver - Project Alpha Status Update.md`
+5. Create `Email - Alex Thompson - Project Alpha Status Update.md`
 
 ## Thread Mode (`/email thread <subject>`)
 
@@ -174,11 +174,11 @@ Find and display all emails in a conversation thread.
 
 ## File Naming Convention
 
-| Direction | Pattern                              | Example                                   |
-| --------- | ------------------------------------ | ----------------------------------------- |
-| Inbound   | `Email - <sender> - <subject>.md`    | `Email - John Smith - Data Request.md`    |
-| Outbound  | `Email - <recipient> - <subject>.md` | `Email - Tom Phillips - Status Update.md` |
-| Draft     | `Email - Draft - <subject>.md`       | `Email - Draft - Architecture Review.md`  |
+| Direction | Pattern                              | Example                                  |
+| --------- | ------------------------------------ | ---------------------------------------- |
+| Inbound   | `Email - <sender> - <subject>.md`    | `Email - John Smith - Data Request.md`   |
+| Outbound  | `Email - <recipient> - <subject>.md` | `Email - Sarah Chen - Status Update.md`  |
+| Draft     | `Email - Draft - <subject>.md`       | `Email - Draft - Architecture Review.md` |
 
 If subject is too long, truncate to 50 characters.
 

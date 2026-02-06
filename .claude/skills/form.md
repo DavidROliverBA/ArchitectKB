@@ -20,7 +20,7 @@ Quick-create a form submission tracking note.
 ```
 /form DPIA MyDataIntegration
 /form CyberRisk "MaintenanceSystem"
-/form TPRM Snap-On
+/form TPRM VendorTooling
 /form IAF "AIIncidentProcessor"
 /form ChangeRequest OpDef
 ```
