@@ -353,17 +353,17 @@ domain: <domain>
 createdAt: ISO timestamp
 ```
 
-**DailyNote:**
+**Daily:**
 
 ```yaml
-type: DailyNote
+type: Daily
 date: "YYYY-MM-DD"
 ```
 
 **ADR (Architecture Decision Record):**
 
 ```yaml
-type: Adr
+type: ADR
 status: draft | proposed | accepted | deprecated | superseded
 adrType: Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 description: <one-line description>
@@ -415,11 +415,13 @@ domain: [] # Controlled list: architecture, governance, tooling, security, data,
 outcome: null # Link to resulting deliverable when accepted
 ```
 
-**IncubatorNote (Supporting Research):**
+**Incubator (Research Ideas):**
 
 ```yaml
-type: IncubatorNote
-parent-ideas: ["[[Incubator - Idea]]"] # Can link to multiple ideas
+type: Incubator
+status: seed | exploring | validated | accepted | rejected
+domain: []
+spawnedNodes: []
 ```
 
 **FormSubmission (Governance Forms):**
@@ -437,15 +439,15 @@ referenceNumber: null             # External ticket reference
 attachments: []                   # Links to related files
 ```
 
-**OKR (Objectives and Key Results):**
+**Objective (Goals and Targets):**
 
 ```yaml
-type: Okr
-status: active | completed | abandoned
-period: Q1 2026 | H1 2026 | 2026       # Time period
-objective: <main objective>
-keyResults: []                          # List of measurable results
-project: "[[Project Name]]" | null
+type: Objective
+objectiveType: performance | development
+status: draft | agreed | in-progress | reviewed | achieved | partial | missed
+period: "YYYY"
+description: null
+measureOfSuccess: null
 ```
 
 **Query (Saved Dataview Query):**
@@ -456,14 +458,14 @@ description: <what this query shows>
 queryType: table | list | task # Dataview query type
 ```
 
-**Course (Training Notes):**
+**Research (Library Knowledge):**
 
 ```yaml
-type: Course
-status: not-started | in-progress | completed
-provider: <course provider>
-url: <course URL> | null
-completedDate: YYYY-MM-DD | null
+type: Research
+domain: null
+topic: null
+question: null
+confidence: medium
 ```
 
 **MOC (Map of Content):**
@@ -480,12 +482,12 @@ type: Dashboard
 refreshed: YYYY-MM-DD # Last refresh date
 ```
 
-**CodeSnippet:**
+**Pattern (How to do X):**
 
 ```yaml
-type: CodeSnippet
-language: python | javascript | bash | yaml | sql | other
-purpose: <what this snippet does>
+type: Pattern
+patternType: architecture | integration | data | security | process
+description: null
 ```
 
 **System (Enterprise Systems):**
@@ -1040,7 +1042,7 @@ These provide deeper detail than this main file - load when working on specific 
 
 ## Sensitive Information Warning
 
-Notes with `type: Zettel` and some `type: Page` notes may contain API keys, tokens, passwords, and credentials. **AI assistants should NEVER expose, copy, or transmit this sensitive information.**
+Notes with `classification: secret` or `classification: confidential` may contain API keys, tokens, passwords, and credentials. **AI assistants should NEVER expose, copy, or transmit this sensitive information.**
 
 ## Search Strategy
 

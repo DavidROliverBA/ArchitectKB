@@ -12,12 +12,10 @@ Create today's daily note in the Obsidian vault.
 1. Get today's date in YYYY-MM-DD format
 2. Check if a daily note already exists at `+Daily/YYYY/YYYY-MM-DD.md`
 3. If it exists, read it and proceed to step 5
-4. If it doesn't exist, create it using the template at `+Templates/DailyNote.md` with these replacements:
-   - Replace DATE placeholder with today's date (YYYY-MM-DD)
-   - Replace DAY_NAME with full day name (e.g., Monday)
-   - Replace MONTH with full month name (e.g., January)
-   - Replace DAY_NUMBER with day of month with ordinal (e.g., 5th)
-   - Replace YEAR with 4-digit year
+4. If it doesn't exist, create it using the template at `Templates/Daily.md`. The template uses Templater syntax (`<% tp.date.now() %>`) which should be resolved to actual values when creating the note:
+   - `<% tp.date.now("YYYY-MM-DD") %>` → today's date (YYYY-MM-DD)
+   - `<% tp.date.now("dddd") %>` → full day name (e.g., Monday)
+   - `<% tp.date.now("D MMMM YYYY") %>` → day and month (e.g., 5 January 2026)
 
 5. **Search for tasks completed today:**
    - Use Grep to find tasks with `completedDate: YYYY-MM-DD` (today's date)
