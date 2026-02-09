@@ -1,42 +1,40 @@
-<%\*
-const today = tp.date.now("YYYY-MM-DD");
-const year = tp.date.now("YYYY");
-await tp.file.move("Daily/" + year + "/Daily - " + today);
-\_%>
-
 ---
-
 type: Daily
 pillar: event
-title: <% tp.date.now("YYYY-MM-DD") %>
+title: "<% tp.date.now("YYYY-MM-DD") %>"
+date: "<% tp.date.now("YYYY-MM-DD") %>"
 created: <% tp.date.now("YYYY-MM-DD") %>
-date: <% tp.date.now("YYYY-MM-DD") %>
-tags: [daily]
+modified: <% tp.date.now("YYYY-MM-DD") %>
+tags:
+  - daily
 nodeRelationships: []
 entityRelationships: []
-
 ---
 
-# <% tp.date.now("dddd, MMMM Do YYYY") %>
+# <% tp.date.now("dddd") %>, <% tp.date.now("D MMMM YYYY") %>
 
 ## Today's Focus
 
 -
 
-## Tasks
+## Reminders
 
-### Due Today
+## Tasks
 
 ```dataview
 TASK
-FROM ""
-WHERE type = "Task" AND due = date("<% tp.date.now("YYYY-MM-DD") %>") AND !completed
+FROM "/"
+WHERE !completed AND (doDate = date("<% tp.date.now("YYYY-MM-DD") %>") OR dueBy = date("<% tp.date.now("YYYY-MM-DD") %>"))
 ```
 
-### Completed Today
+## Meetings
 
-- [ ]
+-
 
 ## Notes
 
-## Reflections
+## Completed Today
+
+## End of Day Review
+
+-

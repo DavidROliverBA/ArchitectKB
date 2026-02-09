@@ -1,45 +1,44 @@
-<%\*
-const name = await tp.system.prompt("Article title:");
-if (name) {
-await tp.file.rename("Article - " + name);
-}
-\_%>
-
 ---
-
 type: Article
 pillar: node
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-articleType: null # article | blog-post | video | podcast | linkedin-post
-platform: null # medium | substack | confluence | linkedin | youtube
-targetAudience: null # internal | external | both
-status: draft # draft | ready | published | archived
+aliases: []
+
+# Classification
+articleType: null # blog-post | linkedin-post | talk | presentation | video | podcast | newsletter
+platform: null
+targetAudience: null # architects | developers | leadership
+
+# Publishing
+status: idea # idea | drafting | review | published | archived
 publishedUrl: null
 publishedDate: null
-parentIdea: null
+parentIdea: null # "[[Incubator - Source Idea]]"
+
+# Content
+summary: null
+keyPoints: []
+wordCount: null
+
+# Relationships
 nodeRelationships: []
 entityRelationships: []
+relatedArticles: []
 
-# Quality Indicators
-
-summary: null
-keywords: []
+# Quality
 confidence: medium
 freshness: current
-source: synthesis
 verified: false
-reviewed: <% tp.date.now("YYYY-MM-DD") %>
-
+reviewed: null
+keywords: []
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
 ## Summary
-
-<!-- One paragraph executive summary -->
 
 ## Key Points
 
@@ -47,11 +46,7 @@ reviewed: <% tp.date.now("YYYY-MM-DD") %>
 
 ## Content
 
-<!-- Main article content -->
-
 ## Call to Action
-
-<!-- What should the reader do next? -->
 
 ## References
 

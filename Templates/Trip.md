@@ -1,9 +1,9 @@
 ---
 type: Trip
 pillar: event
-title: "Trip - {{destination}}"
-created: { { date } }
-modified: { { date } }
+title: null
+created: <% tp.date.now("YYYY-MM-DD") %>
+modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 status: idea # idea | planning | booked | completed | cancelled
 tripType: null # holiday | city-break | adventure | family-visit | business
@@ -13,44 +13,21 @@ startDate: null
 endDate: null
 travellers: []
 budget: null
-currency: GBP
+currency: GBP # GBP | EUR | USD
 nodeRelationships: []
 entityRelationships: []
 ---
 
-# {{destination}}
+# <% tp.file.title %>
 
 ## Overview
 
-- **Dates**: {{startDate}} to {{endDate}}
-- **Travellers**: {{travellers}}
-- **Budget**: {{budget}} {{currency}}
+## Accommodation
 
 ## Flights
 
-## Accommodation
-
-## Activities
-
-- [ ]
-
-## Restaurants / Food
-
-- [ ]
-
-## Packing List
-
-- [ ] Passport
-- [ ] Travel insurance
-- [ ] Phone charger
-- [ ]
-
-## Booking References
-
-| Item     | Reference | Confirmation |
-| -------- | --------- | ------------ |
-| Flights  |           |              |
-| Hotel    |           |              |
-| Car hire |           |              |
+## Itinerary
 
 ## Notes
+
+-

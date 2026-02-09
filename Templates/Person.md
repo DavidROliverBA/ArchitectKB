@@ -1,28 +1,21 @@
-<%\*
-const name = await tp.system.prompt("Person's name:");
-if (name) {
-await tp.file.rename("Person - " + name);
-}
-\_%>
-
 ---
-
 type: Person
 pillar: entity
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 role: null
-organisation: null
+pronouns: null
+organisation: null # "[[Organisation - X]]"
 emailAddress: null
+phone: null
 aliases: []
 nodeRelationships: []
 entityRelationships: []
-
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
 ## Contact Information
 

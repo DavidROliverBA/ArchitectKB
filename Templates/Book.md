@@ -1,10 +1,10 @@
 ---
 type: Book
 pillar: node
-title: "{{title}}"
+title: null
 aliases: []
-created: { { date } }
-modified: { { date } }
+created: <% tp.date.now("YYYY-MM-DD") %>
+modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 
 # Book Metadata
@@ -19,12 +19,12 @@ series: null
 seriesNumber: null
 
 # Reading Tracking
-readingStatus: to-read
+readingStatus: to-read # to-read | reading | completed | abandoned | reference
 startDate: null
 finishDate: null
-rating: null
+rating: null # 1-5
 rereadCount: 0
-format: physical
+format: physical # physical | ebook | audiobook | pdf
 
 # Content
 summary: null
@@ -32,7 +32,7 @@ keyTakeaways: []
 favouriteQuotes: []
 
 # Source & Links
-source: owned
+source: owned # owned | library | kindle | audible | borrowed | gift
 goodreadsUrl: null
 amazonUrl: null
 attachedPdf: null
@@ -50,11 +50,10 @@ verified: false
 reviewed: null
 ---
 
-# {{title}}
+# <% tp.file.title %>
 
 > **Author**:
-> **Status**: to-read | reading | completed | abandoned
-> **Rating**: ⭐⭐⭐⭐⭐
+> **Status**: to-read
 
 ## Why Read This Book?
 

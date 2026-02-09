@@ -1,34 +1,24 @@
-<%\*
-const name = await tp.system.prompt("Weblink title:");
-if (name) {
-await tp.file.rename("Weblink - " + name);
-}
-\_%>
-
 ---
-
 type: Weblink
 pillar: node
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 url: null
 domain: null
+createdAt: null
 description: null
-createdAt: <% tp.date.now() %>
 nodeRelationships: []
 entityRelationships: []
-
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
 ## Source
 
 - **URL:**
-- **Author:**
-- **Source:**
+- **Domain:**
 
 ## Summary
 

@@ -2,8 +2,8 @@
 type: Research
 pillar: node
 title: null
-created: { { date } }
-modified: { { date } }
+created: <% tp.date.now("YYYY-MM-DD") %>
+modified: <% tp.date.now("YYYY-MM-DD") %>
 tags:
   - activity/research
 aliases: []
@@ -14,7 +14,7 @@ topic: null
 question: null
 
 # Source
-incubatorIdea: null
+incubatorIdea: null # "[[Incubator - Origin Idea]]"
 researchPeriod: null
 
 # Quality Indicators
@@ -23,7 +23,7 @@ confidence: medium
 freshness: current
 source: synthesis
 verified: false
-reviewed: { { date } }
+reviewed: <% tp.date.now("YYYY-MM-DD") %>
 keywords: []
 
 # Relationships
@@ -32,7 +32,7 @@ entityRelationships: []
 relatedTo: []
 ---
 
-# {{title}}
+# <% tp.file.title %>
 
 ## Research Question
 
@@ -58,11 +58,7 @@ How the research was conducted:
 
 ### Key Finding 1
 
-Details...
-
 ### Key Finding 2
-
-Details...
 
 ## Analysis
 
@@ -82,8 +78,7 @@ Questions that remain unanswered.
 
 ## Sources
 
-- Source 1
-- Source 2
+-
 
 ---
 
@@ -95,6 +90,4 @@ Questions that remain unanswered.
 
 ### Related Meetings
 
-- ***
-
-  _See [[_MOC - Research]] for all research notes_
+-

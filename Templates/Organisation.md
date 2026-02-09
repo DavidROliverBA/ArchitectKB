@@ -1,15 +1,7 @@
-<%\*
-const name = await tp.system.prompt("Organisation name:");
-if (name) {
-await tp.file.rename("Organisation - " + name);
-}
-\_%>
-
 ---
-
 type: Organisation
 pillar: entity
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
@@ -17,17 +9,16 @@ organisationType: null # company | vendor | partner | department | team
 industry: null
 website: null
 nodeRelationships: []
-entityRelationships: []
-
+entityRelationships: [] # ["[[Person - Contact]]"]
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
 ## Overview
 
 - **Website:**
 - **Industry:**
-- **Relationship:** Customer | Partner | Vendor | Competitor
+- **Type:**
 
 ## Description
 
@@ -48,8 +39,6 @@ WHERE type = "Project" AND contains(file.outlinks, this.file.link)
 ```
 
 ## Notes
-
--
 
 ## Related
 

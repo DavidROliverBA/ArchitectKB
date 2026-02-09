@@ -1,45 +1,33 @@
-<%\*
-const name = await tp.system.prompt("Project name:");
-if (name) {
-await tp.file.move("Projects/Project - " + name);
-}
-\_%>
-
 ---
-
 type: Project
 pillar: event
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-status: active
-priority: medium
-timeFrame: <% tp.date.now("YYYY-MM-DD") %> - null
+status: active # active | paused | completed
+priority: medium # high | medium | low
+timeFrame: null # YYYY-MM-DD - YYYY-MM-DD
 collections: null
 
-# Transformation Classification
-
-transformationType: null
-transformationScope: null
+# Classification
+transformationType: null # modernisation | migration | greenfield | integration | decommission | uplift
+transformationScope: null # enterprise | department | team | application
 aiInvolved: false
 
 # Relationships
-
 nodeRelationships: []
 entityRelationships: []
 
 # Quality
-
 summary: null
 confidence: medium
 freshness: current
 verified: false
 reviewed: null
-
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
 ## Overview
 
@@ -54,7 +42,7 @@ reviewed: null
 ## Related Tasks
 
 ```dataview
-TABLE completed, priority, due
+TABLE completed, priority, dueBy
 FROM ""
 WHERE type = "Task" AND contains(project, this.file.name)
 SORT completed ASC, priority ASC
@@ -66,6 +54,15 @@ SORT completed ASC, priority ASC
 TABLE date, summary
 FROM ""
 WHERE type = "Meeting" AND contains(project, this.file.name)
+SORT date DESC
+```
+
+## Decisions
+
+```dataview
+TABLE status, date
+FROM ""
+WHERE type = "ADR" AND contains(project, this.file.name)
 SORT date DESC
 ```
 

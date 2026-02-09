@@ -1,54 +1,39 @@
-<%\*
-const subject = await tp.system.prompt("Email subject:");
-const direction = await tp.system.suggester(["Inbound", "Outbound", "Draft"], ["inbound", "outbound", "draft"]);
-const prefix = direction === "inbound" ? "From" : "To";
-const contact = await tp.system.prompt(prefix + " (name):");
-if (subject && contact) {
-const date = tp.date.now("YYYY-MM-DD");
-await tp.file.move("Emails/Email - " + contact + " - " + subject);
-}
-\_%>
-
 ---
-
 type: Email
 pillar: event
-title: <% subject %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
-subject: <% subject %>
-from: null
+subject: null
+from: null # "[[Person - X]]" or email address
 to: []
 cc: []
 date: <% tp.date.now("YYYY-MM-DD") %>
 time: null
-direction: <% direction %> # inbound | outbound | draft
+
+# Classification
+direction: null # inbound | outbound | draft
 purpose: null # action-required | waiting | fyi | reference | decision
 status: received # draft | sent | received | processed | archived
-priority: medium
-project: null
-person: null
-thread: null
+priority: medium # high | medium | low
+
+# Relationships
+project: null # "[[Project - X]]"
+person: null # "[[Person - X]]"
+thread: null # "[[Email - Previous]]"
 createdTasks: []
 nodeRelationships: []
 entityRelationships: []
 
 # Quality
-
 summary: null
 keywords: []
-
 ---
 
-# Email: <% subject %>
+# <% tp.file.title %>
 
-## Details
-
-- **From:**
-- **To:**
-- **CC:**
-- **Date:**
+## Summary
 
 ## Content
 
@@ -56,4 +41,6 @@ keywords: []
 
 - [ ]
 
-## Notes
+## Related
+
+-

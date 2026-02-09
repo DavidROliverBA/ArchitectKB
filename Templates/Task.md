@@ -1,12 +1,11 @@
-<%\*
+<%*
 const name = await tp.system.prompt("Task name:");
 if (name) {
 await tp.file.move("Tasks/Task - " + name);
 }
-\_%>
+_%>
 
 ---
-
 type: Task
 pillar: event
 title: <% name %>
@@ -14,16 +13,15 @@ created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 completed: false
-priority: medium
+priority: medium # high | medium | low
 doDate: null
 dueBy: null
-project: null
+project: null # "[[Project - X]]"
 assignedTo: []
 parentTask: null
 subtasks: []
 nodeRelationships: []
 entityRelationships: []
-
 ---
 
 # <% name %>

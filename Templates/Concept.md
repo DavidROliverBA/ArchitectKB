@@ -1,41 +1,37 @@
-<%\*
-const name = await tp.system.prompt("Concept name:");
-if (name) {
-await tp.file.rename("Concept - " + name);
-}
-\_%>
-
 ---
-
 type: Concept
 pillar: node
-title: <% name %>
+title: null
 created: <% tp.date.now("YYYY-MM-DD") %>
 modified: <% tp.date.now("YYYY-MM-DD") %>
 tags: []
 description: null
 aliases: []
 keywords: []
+
+# Relationships
 nodeRelationships: []
 entityRelationships: []
 
 # Quality
-
 summary: null
 confidence: medium
 freshness: current
-source: primary
+source: primary # primary | secondary | synthesis | external
 verified: false
 reviewed: null
-
 ---
 
-# <% name %>
+# <% tp.file.title %>
 
-## Definition
+## Overview
 
-## Context
+## Key Points
 
-## Related Concepts
+-
 
-## References
+## Examples
+
+## Related
+
+-
