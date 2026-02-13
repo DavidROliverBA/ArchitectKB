@@ -212,5 +212,5 @@ Would you like to test this skill now?
 
 ## Related Skills
 
-- [[.claude/skills/archive.md|/archive]] - Skill lifecycle management
-- [[.claude/skills/rename.md|/rename]] - Batch operations pattern
+- [[.claude/skills/archive/skill.md|/archive]] - Skill lifecycle management
+- [[.claude/skills/rename/skill.md|/rename]] - Batch operations pattern

@@ -327,8 +327,8 @@ Comprehensive handoff for complex sessions:
 ## Recent changes
 
 - Modified: scripts/graph-query.js (added BM25Index class)
-- Modified: .claude/skills/graph-query.md (pending)
-- Modified: .claude/skills/search.md (pending)
+- Modified: .claude/skills/graph-query/skill.md (pending)
+- Modified: .claude/skills/search/skill.md (pending)
 
 ## Important context
 

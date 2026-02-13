@@ -45,14 +45,14 @@ Use Task tool to spawn multiple agents in parallel with `model: "haiku"` for eff
 ### 3. Check Descriptions
 
 #### Weblinks Check
-See: `.claude/skills/check-weblinks.md`
+See: `.claude/skills/check-weblinks/skill.md`
 
 - Test all URLs for 404/redirects
 - Flag dead links for review
 - Update `lastChecked` in frontmatter
 
 #### Orphans Check
-See: `.claude/skills/orphans.md`
+See: `.claude/skills/orphans/skill.md`
 
 Find notes with no incoming links:
 ```bash
@@ -71,7 +71,7 @@ Orphaned notes may indicate:
 - Dashboard
 
 #### Broken Links Check
-See: `.claude/skills/broken-links.md`
+See: `.claude/skills/broken-links/skill.md`
 
 Find `[[wiki-links]]` that point to non-existent notes:
 
