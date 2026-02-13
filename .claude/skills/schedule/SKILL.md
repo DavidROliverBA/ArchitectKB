@@ -282,6 +282,6 @@ Log file: .claude/logs/{{job}}.log
 
 ## Related Skills
 
-- [[.claude/skills/vault-maintenance/skill.md|/vault-maintenance]] - Manual maintenance
-- [[.claude/skills/quality-report/skill.md|/quality-report]] - Quality metrics
-- [[.claude/skills/check-weblinks/skill.md|/check-weblinks]] - Weblink validation
+- [[.claude/skills/vault-maintenance/SKILL.md|/vault-maintenance]] - Manual maintenance
+- [[.claude/skills/quality-report/SKILL.md|/quality-report]] - Quality metrics
+- [[.claude/skills/check-weblinks/SKILL.md|/check-weblinks]] - Weblink validation

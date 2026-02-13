@@ -257,5 +257,5 @@ Create a comparison Page: `Page - SI RFI Scoring - Vendor Comparison.md`
 
 ## Related Skills
 
-- [[.claude/skills/csv-to-sql/skill.md]] - Convert CSV to SQLite database
-- [[.claude/skills/csv-to-markdown/skill.md]] - Convert CSV to markdown table
+- [[.claude/skills/csv-to-sql/SKILL.md]] - Convert CSV to SQLite database
+- [[.claude/skills/csv-to-markdown/SKILL.md]] - Convert CSV to markdown table

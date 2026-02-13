@@ -339,7 +339,7 @@ if (args.includes('--last-week')) {
 
 ### Customization
 
-Users can customize by editing `.claude/skills/weekly-summary/skill.md`:
+Users can customize by editing `.claude/skills/weekly-summary/SKILL.md`:
 - Adjust date range defaults
 - Add/remove sections
 - Change prioritization logic
