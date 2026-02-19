@@ -12,6 +12,7 @@ Exit Codes:
 """
 
 import json
+import re
 import sys
 
 # Files and paths to protect
@@ -76,10 +77,15 @@ SENSITIVE_FILENAME_KEYWORDS = [
     "secret",
     "token",
     "credential",
-    "pin",
-    "pat",  # Personal Access Token
     "private key",
     "privatekey",
+]
+
+# Keywords that must match as whole words only (using word boundary regex)
+# to avoid false positives like "pin" in "Mapping" or "pat" in "Pattern"
+SENSITIVE_WHOLE_WORD_KEYWORDS = [
+    "pin",
+    "pat",
 ]
 
 # Files that are allowed exceptions to the sensitive keyword rule
@@ -96,12 +102,17 @@ ALLOWED_EXCEPTIONS = [
 ALLOWED_DIRECTORIES = [
     ".claude/skills/",  # Skill documentation may reference secret management
     ".claude/rules/",  # Rules documentation
+    ".claude/schemas/",  # JSON schemas (pattern.schema.json, etc.)
+    ".claude/hooks/",  # Hook scripts
+    ".claude/scripts/",  # Utility scripts
+    "Secrets/",  # Vault secrets folder (gitignored, synced via Obsidian Sync only)
 ]
 
-# File prefixes that are allowed (task/page notes about credentials, not credentials)
+# File prefixes that are allowed (task/concept notes about credentials, not credentials)
 ALLOWED_PREFIXES = [
-    "Task - ",  # Task notes about credential rotation etc.
-    "Page - ",  # Documentation pages about security
+    "Task - ",     # Task notes about credential rotation etc.
+    "Concept - ",  # Documentation about security concepts
+    "Pattern - ",  # Documentation about security patterns
 ]
 
 
@@ -144,20 +155,32 @@ def is_protected(file_path: str) -> tuple[bool, str]:
             if filename == protected or file_path.endswith("/" + protected):
                 return True, f"Protected file: {protected}"
 
-    # Check for sensitive keywords in filename (case-insensitive)
+    # Check for sensitive keywords in filename (case-insensitive substring match)
     for keyword in SENSITIVE_FILENAME_KEYWORDS:
         if keyword in filename_lower:
+            return True, f"Sensitive keyword in filename: '{keyword}'"
+
+    # Check for whole-word sensitive keywords (avoids "pin" in "Mapping", "pat" in "Pattern")
+    for keyword in SENSITIVE_WHOLE_WORD_KEYWORDS:
+        if re.search(rf'\b{re.escape(keyword)}\b', filename_lower):
             return True, f"Sensitive keyword in filename: '{keyword}'"
 
     return False, ""
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
-        print("Failed to parse input JSON", file=sys.stderr)
-        sys.exit(1)
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        # Exit gracefully during startup or invalid input
+        sys.exit(0)
+    except Exception:
+        # Any other error - exit gracefully
+        sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
     file_path = input_data.get("tool_input", {}).get("file_path", "")
@@ -172,10 +195,20 @@ def main():
     is_blocked, reason = is_protected(file_path)
 
     if is_blocked:
-        print(f"🛡️ {reason}", file=sys.stderr)
-        print(f"   File: {file_path}", file=sys.stderr)
-        print("   Use --force or edit manually if you really need to modify this file.", file=sys.stderr)
-        sys.exit(2)
+        # v2.1.9: Return structured output with decision
+        output = {
+            "decision": "block",
+            "reason": f"🛡️ {reason}\nFile: {file_path}\nUse --force or edit manually if you really need to modify this file."
+        }
+        print(json.dumps(output))
+        sys.exit(0)
+
+    # v2.1.9: Return additionalContext for allowed files with hints
+    if any(kw in file_path.lower() for kw in ["config", "settings", "setup"]):
+        output = {
+            "additionalContext": f"Note: {file_path} may contain configuration. Ensure no secrets are included."
+        }
+        print(json.dumps(output))
 
     sys.exit(0)
 

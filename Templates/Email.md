@@ -1,15 +1,14 @@
 ---
 type: Email
-pillar: event
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 subject: null
-from: null # "[[Person - X]]" or email address
+from: null # "[[X]]" or email address
 to: []
 cc: []
-date: <% tp.date.now("YYYY-MM-DD") %>
+date: '<% tp.date.now("YYYY-MM-DD") %>'
 time: null
 
 # Classification
@@ -20,15 +19,12 @@ priority: medium # high | medium | low
 
 # Relationships
 project: null # "[[Project - X]]"
-person: null # "[[Person - X]]"
+person: null # "[[X]]"
 thread: null # "[[Email - Previous]]"
 createdTasks: []
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality
 summary: null
-keywords: []
 ---
 
 # <% tp.file.title %>

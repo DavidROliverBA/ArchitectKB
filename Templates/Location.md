@@ -1,15 +1,14 @@
 ---
 type: Location
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 locationType: null # airport | hangar | office | data-centre
 address: null
 country: null
-nodeRelationships: []
-entityRelationships: [] # ["[[Organisation - X]]"]
+relatedTo: ["[[Organisation - X]]"]
 ---
 
 # <% tp.file.title %>

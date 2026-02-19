@@ -23,7 +23,6 @@ FORMATTERS = {
     ".ts": ["npx", "prettier", "--write"],
     ".tsx": ["npx", "prettier", "--write"],
     ".json": ["npx", "prettier", "--write"],
-    ".md": ["npx", "prettier", "--write"],
     ".yaml": ["npx", "prettier", "--write"],
     ".yml": ["npx", "prettier", "--write"],
     ".css": ["npx", "prettier", "--write"],
@@ -65,21 +64,21 @@ def should_skip(file_path: str) -> bool:
     return False
 
 
-def format_file(file_path: str) -> bool:
-    """Format file based on extension. Returns True if formatted."""
+def format_file(file_path: str) -> str | None:
+    """Format file based on extension. Returns message if formatted, None otherwise."""
     if should_skip(file_path):
-        return False
+        return None
 
     path = Path(file_path)
 
     # Check file exists
     if not path.exists():
-        return False
+        return None
 
     ext = path.suffix.lower()
 
     if ext not in FORMATTERS:
-        return False
+        return None
 
     formatter_cmd = FORMATTERS[ext] + [file_path]
 
@@ -88,28 +87,33 @@ def format_file(file_path: str) -> bool:
             formatter_cmd,
             capture_output=True,
             text=True,
-            timeout=30
+            timeout=8  # Must be less than hook timeout (10s)
         )
         if result.returncode == 0:
-            print(f"✨ Formatted: {path.name}")
-            return True
+            return f"Formatted {path.name} with {formatter_cmd[0]}"
         else:
             # Formatter failed, but don't block - just log
             if result.stderr:
-                print(f"⚠️ Format warning for {path.name}: {result.stderr[:100]}", file=sys.stderr)
-            return False
+                print(f"Format warning for {path.name}: {result.stderr[:100]}", file=sys.stderr)
+            return None
     except FileNotFoundError:
         # Formatter not installed, skip silently
-        return False
+        return None
     except subprocess.TimeoutExpired:
-        print(f"⚠️ Format timeout for {path.name}", file=sys.stderr)
-        return False
+        print(f"Format timeout for {path.name}", file=sys.stderr)
+        return None
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        sys.exit(0)
+    except Exception:
         sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
@@ -122,7 +126,20 @@ def main():
     if not file_path:
         sys.exit(0)
 
-    format_file(file_path)
+    # Only format files inside the Obsidian vault.
+    # Hooks fire for ALL Edit/Write operations regardless of target repo.
+    # When working cross-repo (e.g. /tmp/claude/), skip silently to avoid
+    # running formatters on files that may have their own formatting config.
+    VAULT_ROOT = "."
+    if not file_path.startswith(VAULT_ROOT):
+        sys.exit(0)
+
+    message = format_file(file_path)
+
+    # Output using additionalContext JSON format
+    if message:
+        output = {"additionalContext": message}
+        print(json.dumps(output))
 
     # Always exit 0 - formatting is non-blocking
     sys.exit(0)

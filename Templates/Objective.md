@@ -1,10 +1,10 @@
 ---
 type: Objective
-pillar: event
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 
 # Classification
 objectiveType: null # performance | development
@@ -15,7 +15,7 @@ strategicTheme: null
 status: draft # draft | agreed | in-progress | reviewed | achieved | partial | missed
 
 # SMART Definition
-description: null
+description: "| Date | Update |"
 measureOfSuccess: null
 targetDate: null
 
@@ -28,8 +28,7 @@ submissionDeadline: null
 # Relationships
 project: null # "[[Project - X]]"
 parentObjective: null # "[[Objective - Cascaded Goal]]"
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 ---
 
 # <% tp.file.title %>

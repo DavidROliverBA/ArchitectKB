@@ -1,9 +1,9 @@
 ---
-type: Article
-pillar: node
+type: Reference
+referenceType: article
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 aliases: []
 
@@ -24,16 +24,8 @@ keyPoints: []
 wordCount: null
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 relatedArticles: []
-
-# Quality
-confidence: medium
-freshness: current
-verified: false
-reviewed: null
-keywords: []
 ---
 
 # <% tp.file.title %>

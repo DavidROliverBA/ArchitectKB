@@ -28,54 +28,63 @@ VALID_HIERARCHIES = {
         "platform", "identity", "analytics", "compliance", "infrastructure"
     ],
     "project": [
-        # CUSTOMIZE: Add your project names here
-        # Example: "cloud-migration", "api-modernization", "data-platform"
+        "axia", "caerus", "dispax-ai", "cyber-uplift", "odie",
+        "mro-pro", "777x", "rfid-scanners", "ecp", "snapon", "datasphere"
         # Note: New projects can be added - this list is not exhaustive
     ],
     "technology": [
         # Platforms & Cloud
-        "aws", "azure", "gcp", "sap", "btp", "salesforce",
+        "aws", "azure", "sap", "btp", "ui5", "datasphere", "s4hana",
         # Data & Integration
-        "kafka", "snowflake", "databricks", "mq", "api", "kong", "apigee",
+        "kafka", "snowflake", "mq", "api", "kong", "axway",
         # AI & ML
-        "bedrock", "openai", "langchain", "ai", "ml",
+        "bedrock", "langchain", "ai", "ml",
         # Databases
-        "oracle", "postgresql", "mysql", "redis", "dynamodb", "mongodb",
+        "oracle", "postgresql", "redis", "dynamodb",
         # Infrastructure
-        "kubernetes", "docker", "terraform", "lambda", "ecs",
+        "kubernetes", "docker", "terraform", "lambda",
         # Applications
-        "erp", "crm", "mdm", "saas",
+        "amos", "ews", "mro-software", "saas",
         # Languages/Frameworks
-        "python", "javascript", "typescript", "java", "go", "rust", "dotnet"
+        "python", "javascript", "typescript", "java", "go", "rust"
     ],
     "type": [
-        "adr", "system", "scenario", "integration", "data-source",
+        "adr", "system", "scenario", "integration", "data-source", "data-asset",
         "hld", "lld", "runbook", "policy", "guardrail", "diagram", "canvas"
     ],
-    "criticality": ["critical", "high", "medium", "low"],
     "status": ["draft", "review", "approved", "deprecated", "archived", "synced"],
-    "vendor": [
-        # CUSTOMIZE: Add your vendor names here
-        # Example: "aws", "microsoft", "oracle", "sap"
-    ],
-    "audience": [
-        "executive", "architect", "developer", "operations",
-        "security", "data", "product", "business"
+    "workstream": [
+        "rfi-scoring", "vendor-selection", "architecture", "integration",
+        "data-migration", "testing", "training", "governance"
+        # Note: New workstreams can be added - this list is not exhaustive
     ],
 }
 
 # Approved special flat tags (no hierarchy required)
 APPROVED_FLAT_TAGS = [
-    "notion-import", "pdf-import", "moc", "daily", "video", "automation"
+    "notion-import", "pdf-import", "ecp", "moc", "daily", "video", "automation"
 ]
 
 # Minimum recommended tags by note type
 MINIMUM_TAGS = {
-    "Adr": {"required": ["activity"], "recommended": ["technology", "domain"]},
+    "ADR": {"required": ["activity"], "recommended": ["technology", "domain"]},
     "Project": {"required": ["project"], "recommended": ["domain"]},
-    "System": {"required": ["type"], "recommended": ["domain", "technology", "criticality"]},
-    "Page": {"required": [], "recommended": ["activity", "domain"]},
+    "System": {"required": ["type"], "recommended": ["domain", "technology"]},
+    "Concept": {"required": [], "recommended": ["activity", "domain"]},
+    "Pattern": {"required": [], "recommended": ["activity", "domain"]},
     "Meeting": {"required": [], "recommended": ["project", "domain"]},
+    "Incubator": {"required": ["activity"], "recommended": ["domain"]},
+    "Research": {"required": ["activity"], "recommended": ["domain"]},
+    "Reference": {"required": [], "recommended": ["domain"]},
+    "Threat": {"required": ["domain"], "recommended": ["technology"]},
+    "Framework": {"required": [], "recommended": ["domain"]},
+    "Tool": {"required": [], "recommended": ["domain", "technology"]},
+    "Objective": {"required": [], "recommended": ["domain"]},
+    "Task": {"required": [], "recommended": ["project"]},
+    "Email": {"required": [], "recommended": ["project"]},
+    "Trip": {"required": [], "recommended": []},
+    "DataAsset": {"required": ["domain"], "recommended": ["technology"]},
+    "Department": {"required": [], "recommended": ["domain"]},
 }
 
 
@@ -160,9 +169,9 @@ def validate_tag(tag: str) -> tuple[bool, str]:
     # Check if value is in known list (warning only for unknown values)
     # Some hierarchies like project/ can have new values
     known_values = VALID_HIERARCHIES[prefix]
-    if value and known_values and value not in known_values:
-        # For project/, vendor/, and technology/, unknown values are just info
-        if prefix in ["project", "vendor", "technology"]:
+    if value and value not in known_values:
+        # For project/ and technology/, unknown values are just info
+        if prefix in ["project", "technology", "workstream"]:
             return True, f"Note: '{value}' is not in known {prefix}/ values (may be new)"
         else:
             return False, f"Unknown value '{value}' for {prefix}/. Known: {', '.join(known_values[:5])}..."
@@ -202,9 +211,16 @@ def check_tag_coverage(tags: list[str], note_type: str) -> list[str]:
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        sys.exit(0)
+    except Exception:
+        # Any other error during startup - exit gracefully
         sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
@@ -217,8 +233,16 @@ def main():
     if not file_path or not file_path.endswith(".md"):
         sys.exit(0)
 
+    # Only validate files inside the Obsidian vault.
+    # Hooks fire for ALL Edit/Write operations regardless of target repo.
+    # When working cross-repo (e.g. /tmp/claude/), skip silently to avoid
+    # spurious tag warnings on non-vault files.
+    VAULT_ROOT = "."
+    if not file_path.startswith(VAULT_ROOT):
+        sys.exit(0)
+
     # Skip template files and special directories
-    skip_paths = ["+Templates/", ".obsidian/", "node_modules/", ".claude/"]
+    skip_paths = ["Templates/", ".obsidian/", "node_modules/", ".claude/"]
     if any(skip in file_path for skip in skip_paths):
         sys.exit(0)
 
@@ -253,13 +277,19 @@ def main():
     coverage_warnings = check_tag_coverage(tags, note_type)
     warnings.extend(coverage_warnings)
 
-    # Output
+    # Output using v2.1.9 additionalContext
     if warnings or infos:
-        print(f"🏷️  Tag validation for {Path(file_path).name}:")
+        output_text = f"🏷️  Tag validation for {Path(file_path).name}:\n"
         for warning in warnings:
-            print(f"   ⚠️  {warning}")
+            output_text += f"   ⚠️  {warning}\n"
         for info in infos:
-            print(f"   ℹ️  {info}")
+            output_text += f"   ℹ️  {info}\n"
+
+        # Return additionalContext to inform Claude about tag issues
+        output = {
+            "additionalContext": output_text.strip()
+        }
+        print(json.dumps(output))
 
     # Always exit 0 - validation is non-blocking
     sys.exit(0)

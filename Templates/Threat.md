@@ -1,9 +1,8 @@
 ---
 type: Threat
-pillar: node
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 aliases: []
 
@@ -30,7 +29,7 @@ realWorldExamples: []
 
 # Mitigations
 mitigations: []
-relatedPatterns: [] # ["[[Pattern - X]]"]
+relatedPatterns: ["[[Pattern - X]]"]
 
 # References
 cweId: null
@@ -38,17 +37,9 @@ owaspCategory: null
 references: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality
-description: null
 summary: null
-confidence: high
-freshness: current
-verified: false
-reviewed: null
-keywords: []
 ---
 
 # <% tp.file.title %>

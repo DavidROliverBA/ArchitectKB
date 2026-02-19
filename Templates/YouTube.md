@@ -1,9 +1,9 @@
 ---
-type: YouTube
-pillar: node
+type: Reference
+referenceType: youtube
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: [video]
 aliases: []
 
@@ -25,18 +25,10 @@ relevanceToBA: null
 spawnedNodes: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 relatedVideos: []
 
-# Quality
 summary: null
-confidence: high
-freshness: current
-source: secondary
-verified: true
-reviewed: null
-keywords: []
 ---
 
 # <% tp.file.title %>

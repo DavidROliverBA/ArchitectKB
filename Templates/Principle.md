@@ -1,9 +1,9 @@
 ---
-type: Principle
-pillar: node
+type: Concept
+conceptType: principle
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 aliases: []
 
@@ -25,18 +25,9 @@ implications: []
 examples: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality
-description: null
 summary: null
-confidence: high
-freshness: current
-source: secondary
-verified: false
-reviewed: null
-keywords: []
 ---
 
 # <% tp.file.title %>

@@ -1,14 +1,12 @@
 ---
 type: Daily
-pillar: event
-title: "<% tp.date.now("YYYY-MM-DD") %>"
-date: "<% tp.date.now("YYYY-MM-DD") %>"
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+title: '<% tp.date.now("YYYY-MM-DD") %>'
+date: '<% tp.date.now("YYYY-MM-DD") %>'
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags:
   - daily
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 ---
 
 # <% tp.date.now("dddd") %>, <% tp.date.now("D MMMM YYYY") %>

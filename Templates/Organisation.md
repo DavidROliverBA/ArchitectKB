@@ -1,15 +1,15 @@
 ---
 type: Organisation
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+description: "- Website:"
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 organisationType: null # company | vendor | partner | department | team
 industry: null
 website: null
-nodeRelationships: []
-entityRelationships: [] # ["[[Person - Contact]]"]
+relatedTo: ["[[Contact]]"]
 ---
 
 # <% tp.file.title %>

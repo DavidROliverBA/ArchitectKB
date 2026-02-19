@@ -1,21 +1,19 @@
 <%*
 const name = await tp.system.prompt("ADR topic:");
 if (name) {
-await tp.file.move("ADRs/ADR - " + name);
+await tp.file.rename("ADR - " + name);
 }
 _%>
 
 ---
 type: ADR
-pillar: event
-title: <% name %>
-description: null
+title: "<% name %>"
 status: draft # draft | proposed | accepted | deprecated | superseded
 adrType: null # Technology_ADR | Architecture_ADR | Integration_ADR | Security_ADR | Data_ADR | AI_ADR
 tags: [type/adr, activity/architecture]
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
-date: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
+date: '<% tp.date.now("YYYY-MM-DD") %>'
 project: null
 jiraTicket: null
 deciders: []
@@ -33,25 +31,31 @@ relatedTo: []
 supersedes: []
 dependsOn: []
 contradicts: []
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality Indicators
 summary: null
-keywords: []
-confidence: medium
-freshness: current
-verified: false
-reviewed: <% tp.date.now("YYYY-MM-DD") %>
 ---
 
 # ADR - <% name %>
+
+> **ADR Process**: [[Concept - BA ADR Process (Official)]]
+>
+> **Required Approvers**: [[Concept - BA ADR Approvers and SME (Official)]]
 
 ---
 
 ## Status
 
 **Draft** - <% tp.date.now("YYYY-MM-DD") %>
+
+**Workflow Progress:**
+
+1. Check for Existing Guardrail
+2. Draft ADR Content
+3. Create JIRA Ticket
+4. Add Approvers in Jira
+5. Stakeholder Review and Approval
+6. ADR Acceptance
 
 ---
 
@@ -109,7 +113,19 @@ reviewed: <% tp.date.now("YYYY-MM-DD") %>
 
 ## Compliance
 
+### GDPR Compliance
+
 ### Security Classification
+
+---
+
+## Production Implementation
+
+### Deployment Approach
+
+### Operational Model
+
+### Cost Model
 
 ---
 
@@ -129,9 +145,11 @@ reviewed: <% tp.date.now("YYYY-MM-DD") %>
 
 ## Approval
 
-**Approvers**:
+**Approvers** (from JIRA ticket):
 
 **Date**:
+
+**JIRA Ticket**:
 
 ---
 

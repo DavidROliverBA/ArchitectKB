@@ -1,18 +1,18 @@
 ---
 type: Person
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+description: "- Role:"
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 role: null
 pronouns: null
 organisation: null # "[[Organisation - X]]"
 emailAddress: null
 phone: null
 aliases: []
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 ---
 
 # <% tp.file.title %>

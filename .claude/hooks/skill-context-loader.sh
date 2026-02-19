@@ -9,7 +9,10 @@
 
 set -e
 
-CONTEXT_DIR=".claude/context"
+# Absolute path required — hooks fire regardless of CWD, and relative paths
+# fail with "No such file or directory" during cross-repo work.
+VAULT_ROOT="."
+CONTEXT_DIR="$VAULT_ROOT/.claude/context"
 CONTEXTS_TO_LOAD=()
 
 # Read JSON input from stdin
@@ -18,8 +21,9 @@ INPUT=$(cat)
 # Extract the prompt from JSON input
 PROMPT=$(echo "$INPUT" | jq -r '.userPrompt // empty')
 
-# Exit early if no prompt
+# Exit early if no prompt - output empty JSON to satisfy parser
 if [[ -z "$PROMPT" ]]; then
+    echo '{}'
     exit 0
 fi
 
@@ -67,20 +71,19 @@ if [[ "$PROMPT_LOWER" =~ /summarize ]]; then
     queue_context "projects.md"
 fi
 
-# Organisation-related queries
-# CUSTOMIZE: Add your vendor/partner names here for auto-loading organisations.md
-# if [[ "$PROMPT" =~ VendorA|VendorB|PartnerCorp ]]; then
-#     queue_context "organisations.md"
-# fi
+# Organisation-related queries (case-sensitive for proper nouns)
+if [[ "$PROMPT" =~ Boeing|SAP|Collins|Axway|Swiss-AS ]]; then
+    queue_context "organisations.md"
+fi
 
-# Acronym detection - common terms in your domain
-# CUSTOMIZE: Add your organization's acronyms here for auto-loading acronyms.md
-# if [[ "$PROMPT" =~ ERP|CRM|MDM|ETL|API ]]; then
-#     queue_context "acronyms.md"
-# fi
+# Acronym detection - common BA/aviation terms (case-sensitive)
+if [[ "$PROMPT" =~ ODIE|EWS|BTP|CMS|EFB|CAMO|MRO|AMOS|AXIA ]]; then
+    queue_context "acronyms.md"
+fi
 
-# If no contexts to load, exit silently
+# If no contexts to load, output empty JSON and exit
 if [[ ${#CONTEXTS_TO_LOAD[@]} -eq 0 ]]; then
+    echo '{}'
     exit 0
 fi
 

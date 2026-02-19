@@ -17,29 +17,49 @@ from pathlib import Path
 
 # Required fields by note type
 REQUIRED_FIELDS = {
+    # Current ontology types
     "Task": ["type", "title", "completed", "priority"],
     "Project": ["type", "title", "status", "priority"],
     "Meeting": ["type", "title", "date", "attendees"],
-    "Person": ["type", "title", "role"],
-    "Adr": ["type", "title", "status", "adrType", "relatedTo", "supersedes", "dependsOn"],
-    "Page": ["type", "title"],
+    "Person": ["type", "title"],
+    "ADR": ["type", "title", "status", "adrType"],
+    # Legacy types (redirect to Reference)
     "Weblink": ["type", "title", "url"],
-    "DailyNote": ["type", "date"],
+    "Daily": ["type", "title", "date"],
     "Incubator": ["type", "title", "status", "domain"],
-    "IncubatorNote": ["type", "title", "parent-ideas"],
     "FormSubmission": ["type", "title", "formType", "status", "project"],
-    "Okr": ["type", "title", "status", "period", "objective"],
-    "System": ["type", "title", "systemId", "status", "criticality"],
-    "Article": ["type", "title", "articleType", "status", "targetAudience"],
-    "MOC": ["type", "title", "scope"],
+    "System": ["type", "title"],
+    "MOC": ["type", "title"],
     "Dashboard": ["type", "title"],
-    "CodeSnippet": ["type", "title", "language", "purpose"],
     "Query": ["type", "title", "queryType"],
-    "Course": ["type", "title", "status", "provider"],
     "Organisation": ["type", "title"],
-    "AtomicNote": ["type", "title"],
     "Policy": ["type", "title", "source", "status"],
     "Guardrail": ["type", "title", "source", "scope", "status"],
+    # New ontology types (four pillars)
+    "Concept": ["type", "title"],
+    "Pattern": ["type", "title"],
+    "Reference": ["type", "title", "referenceType"],
+    "Location": ["type", "title"],
+    "DataAsset": ["type", "title"],
+    "Department": ["type", "title"],
+    "Workstream": ["type", "title"],
+    "Forum": ["type", "title"],
+    "ArchModel": ["type", "title"],
+    "Email": ["type", "title", "subject", "from", "date"],
+    "Trip": ["type", "title", "status"],
+    "Objective": ["type", "title", "objectiveType", "status"],
+    # Node types
+    "Research": ["type", "title"],
+    "Threat": ["type", "title"],
+    "Framework": ["type", "title"],
+    "Tool": ["type", "title"],
+    # Legacy types (still valid but consolidated)
+    "Book": ["type", "title"],
+    "YouTube": ["type", "title", "url"],
+    "Article": ["type", "title"],
+    "Capability": ["type", "title"],
+    "Theme": ["type", "title"],
+    "Principle": ["type", "title"],
 }
 
 # Valid enum values for fields
@@ -47,15 +67,16 @@ VALID_VALUES = {
     "status": {
         "Task": ["active", "completed", "paused"],
         "Project": ["active", "paused", "completed"],
-        "Adr": ["draft", "proposed", "accepted", "deprecated", "superseded"],
+        "ADR": ["draft", "proposed", "accepted", "deprecated", "superseded"],
         "Incubator": ["seed", "exploring", "validated", "accepted", "rejected"],
         "FormSubmission": ["draft", "submitted", "pending", "approved", "rejected", "expired"],
-        "Okr": ["active", "completed", "abandoned"],
-        "Course": ["not-started", "in-progress", "completed"],
-        "Article": ["draft", "ready", "published", "archived"],
+        "Objective": ["draft", "agreed", "in-progress", "reviewed", "achieved", "partial", "missed"],
+        "Article": ["idea", "drafting", "review", "published", "archived"],
         "System": ["active", "planned", "deprecated", "retired"],
         "Policy": ["active", "draft", "deprecated"],
         "Guardrail": ["active", "draft", "deprecated"],
+        "Workstream": ["active", "paused", "completed"],
+        "Trip": ["idea", "planning", "booked", "completed", "cancelled"],
     },
     "priority": ["high", "medium", "low"],
     "adrType": ["Technology_ADR", "Architecture_ADR", "Integration_ADR", "Security_ADR", "Data_ADR", "AI_ADR"],
@@ -63,8 +84,17 @@ VALID_VALUES = {
     "freshness": ["current", "recent", "stale"],
     "source": ["primary", "secondary", "synthesis", "external", "local", "confluence"],
     "criticality": ["critical", "high", "medium", "low"],
-    "articleType": ["article", "blog-post", "document", "guardrail", "video", "podcast", "linkedin-post"],
+    "referenceType": ["weblink", "youtube", "article", "book"],
+    "conceptType": ["concept", "principle", "capability", "theme"],
+    "articleType": ["blog-post", "linkedin-post", "talk", "presentation", "video", "podcast", "newsletter"],
     "targetAudience": ["internal", "external", "both"],
+    "objectiveType": ["performance", "development"],
+    "goalCategory": ["cascaded", "strategic", "personal"],
+    "readingStatus": ["to-read", "reading", "completed", "abandoned", "reference"],
+    "threatType": ["attack", "vulnerability", "weakness", "exploit"],
+    "principleType": ["axiom", "heuristic", "law", "mental-model"],
+    "frameworkType": ["taxonomy", "model", "matrix", "methodology", "reference-architecture"],
+    "toolType": ["ide", "library", "framework", "platform", "service", "cli", "extension"],
     "formType": ["DPIA", "CyberRisk", "TPRM", "IAF", "ChangeRequest", "Other"],
     "queryType": ["table", "list", "task"],
     "authority": ["draft", "local", "team", "organizational"],
@@ -195,7 +225,8 @@ def validate_frontmatter(frontmatter: dict, file_path: str) -> list[str]:
             warnings.append(f"Missing required field for {note_type}: {field}")
         elif frontmatter[field] in (None, "", "null", []):
             # Some fields can be null/empty, but warn anyway
-            if field not in ["relatedTo", "supersedes", "dependsOn", "contradicts",
+            if field not in ["relatedTo", "nodeRelationships", "entityRelationships",
+                           "supersedes", "dependsOn", "contradicts",
                            "project", "attendees", "domain", "parent-ideas"]:
                 warnings.append(f"Empty value for required field: {field}")
 
@@ -236,39 +267,63 @@ def validate_frontmatter(frontmatter: dict, file_path: str) -> list[str]:
 
     # Type-specific filename checks
     expected_prefixes = {
+        # Current ontology
         "Project": "Project - ",
         "Task": "Task - ",
-        "Adr": "ADR - ",
-        "Page": "Page - ",
+        "ADR": "ADR - ",
         "Weblink": "Weblink - ",
         "Incubator": "Incubator - ",
-        "IncubatorNote": "Incubator Note - ",
-        "FormSubmission": "Form Submission - ",
-        "Okr": "OKR - ",
-        "MOC": "MOC - ",
-        "Dashboard": "Dashboard - ",
-        "CodeSnippet": "CodeSnippet - ",
-        "Article": "Article - ",
+        "FormSubmission": "FormSubmission - ",
+        "MOC": "_MOC - ",
+        "Dashboard": "_Dashboard - ",
         "Organisation": "Organisation - ",
-        "AtomicNote": "Atomic Note - ",
         "Query": "Query - ",
-        "Course": "Course - ",
         "Policy": "Policy - ",
         "Guardrail": "Guardrail - ",
+        # New ontology types
+        "Concept": "Concept - ",
+        "Pattern": "Pattern - ",
+        "Reference": "Reference - ",
+        "Location": "Location - ",
+        "DataAsset": "DataAsset - ",
+        "Workstream": "Workstream - ",
+        "Forum": "Forum - ",
+        "ArchModel": "ArchModel - ",
+        "Email": "Email - ",
+        "Trip": "Trip - ",
+        "System": "System - ",
+        "Department": "Department - ",
+        # Person has NO prefix — lives in People/ folder as {{Name}}.md
+        # New node types
+        "Research": "Research - ",
+        "Threat": "Threat - ",
+        "Framework": "Framework - ",
+        "Tool": "Tool - ",
+        "Objective": "Objective - ",
+        "Article": "Article - ",
     }
 
     if note_type in expected_prefixes:
         prefix = expected_prefixes[note_type]
-        if not filename.startswith(prefix.rstrip(" - ")):
+        # Use removesuffix to strip " - " as a string, not individual characters
+        prefix_stem = prefix.removesuffix(" - ") if prefix.endswith(" - ") else prefix.rstrip(" ")
+        if not filename.startswith(prefix_stem):
             warnings.append(f"Filename should start with '{prefix}' for {note_type} notes")
 
     return warnings
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        sys.exit(0)
+    except Exception:
+        # Any other error during startup - exit gracefully
         sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
@@ -281,8 +336,16 @@ def main():
     if not file_path or not file_path.endswith(".md"):
         sys.exit(0)
 
+    # Only validate files inside the Obsidian vault.
+    # Hooks fire for ALL Edit/Write operations regardless of target repo.
+    # When working cross-repo (e.g. /tmp/claude/), skip silently to avoid
+    # spurious "No frontmatter found" warnings on non-vault files.
+    VAULT_ROOT = "."
+    if not file_path.startswith(VAULT_ROOT):
+        sys.exit(0)
+
     # Skip template files and special directories
-    skip_paths = ["+Templates/", ".obsidian/", "node_modules/"]
+    skip_paths = ["Templates/", ".obsidian/", "node_modules/"]
     if any(skip in file_path for skip in skip_paths):
         sys.exit(0)
 
@@ -301,11 +364,16 @@ def main():
     if frontmatter:
         all_warnings.extend(validate_frontmatter(frontmatter, file_path))
 
-    # Output warnings
+    # Output warnings using v2.1.9 additionalContext
     if all_warnings:
-        print(f"📋 Frontmatter validation for {Path(file_path).name}:")
-        for warning in all_warnings:
-            print(f"   ⚠️  {warning}")
+        warning_text = f"📋 Frontmatter validation for {Path(file_path).name}:\n"
+        warning_text += "\n".join(f"   ⚠️  {w}" for w in all_warnings)
+
+        # Return additionalContext to inform Claude about issues
+        output = {
+            "additionalContext": warning_text
+        }
+        print(json.dumps(output))
 
     # Always exit 0 - validation is non-blocking (warnings only)
     sys.exit(0)

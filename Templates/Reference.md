@@ -1,12 +1,13 @@
 ---
-type: Workstream
-title: <% tp.file.title.replace("Workstream - ", "") %>
+type: Reference
+referenceType: null # weblink | youtube | article | book
+title: null
 created: '<% tp.date.now("YYYY-MM-DD") %>'
 modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+aliases: []
+url: null
 summary: null
-project: null
-status: active # active | paused | completed
 
 # Relationships
 relatedTo: []
@@ -14,9 +15,11 @@ relatedTo: []
 
 # <% tp.file.title %>
 
-## Overview
+## Summary
 
-## Deliverables
+## Key Points
+
+-
 
 ## Related
 

@@ -1,10 +1,10 @@
 ---
 type: DataAsset
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 assetId: null
 
 # Classification
@@ -18,8 +18,8 @@ storageLocation: null
 format: null # sql | json | parquet | avro | csv | xml | binary
 
 # Ownership
-owner: null # "[[Person - X]]"
-steward: null # "[[Person - Y]]"
+owner: null # "[[X]]"
+steward: null # "[[Y]]"
 
 # Data Relationships
 producedBy: []
@@ -37,14 +37,7 @@ gdprApplicable: false
 piiFields: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
-
-# Quality
-confidence: medium
-freshness: current
-verified: false
-reviewed: null
+relatedTo: []
 ---
 
 # <% tp.file.title %>

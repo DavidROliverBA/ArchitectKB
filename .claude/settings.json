@@ -1,120 +1,41 @@
 {
-  "$schema": "https://code.claude.com/schemas/settings.json",
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": ".*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/secret-detection.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/skill-context-loader.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/file-protection.py",
-            "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/secret-file-scanner.py",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Grep",
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/graph-search-hint.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/frontmatter-validator.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/tag-taxonomy-enforcer.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/wiki-link-checker.py",
-            "timeout": 15
-          },
-          {
-            "type": "command",
-            "command": ".claude/hooks/filename-convention-checker.py",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "Read|Glob|Grep",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PermissionRequest\", \"decision\": {\"behavior\": \"allow\"}}}'"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "idle_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Claude awaiting input\" with title \"Claude Code\"'"
-          }
-        ]
-      },
-      {
-        "matcher": "permission_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Claude needs permission\" with title \"Claude Code\"'"
-          }
-        ]
-      }
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "language": "en-GB",
+  "plansDirectory": ".claude/plans",
+  "respectGitignore": true,
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": [
+      "Analysing",
+      "Synthesising",
+      "Evaluating",
+      "Indexing",
+      "Validating"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "echo \"📝 $(find . -name '*.md' -not -path './.git/*' -not -path './node_modules/*' -not -path './.obsidian/*' 2>/dev/null | wc -l | tr -d ' ') notes | ✏️ $(git status --porcelain 2>/dev/null | wc -l | tr -d ' ') | 📅 $([ -f \"Daily/$(date +%Y)/$(date +%Y-%m-%d).md\" ] && echo '✓' || echo '✗') | $(date +%H:%M)\""
   },
   "permissions": {
     "allow": [
       "Bash(node scripts/*)",
       "Bash(npm run *)",
       "Bash(python3 scripts/*)",
+      "Bash(python3 .claude/hooks/*)",
+      "Bash(sqlite3 .data/*)",
       "Bash(git status*)",
       "Bash(git diff*)",
       "Bash(git log*)",
       "Bash(git add*)",
       "Bash(git commit*)",
-      "Bash(gh *)"
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git show*)",
+      "Bash(gh *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)"
     ]
   }
 }
