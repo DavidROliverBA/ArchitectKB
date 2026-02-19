@@ -27,7 +27,7 @@ def add_aliases_to_file(filepath: Path, dry_run: bool = False) -> bool:
         return False
 
     # Extract name from filename
-    name = filepath.stem  # e.g., "Naushin Galmani"
+    name = filepath.stem  # e.g., "Jane Smith"
     first_name = get_first_name(name)
 
     # Build aliases
