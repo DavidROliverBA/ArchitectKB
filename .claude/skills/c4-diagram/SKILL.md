@@ -23,7 +23,7 @@ Use `/c4-diagram` when you need to generate C4 architecture diagrams in Mermaid 
 
 | Argument      | Required | Description                                             |
 | ------------- | -------- | ------------------------------------------------------- |
-| `system-name` | Yes      | Name of the System note (e.g., `CRM`, `ERP`, `SAP BTP`) |
+| `system-name` | Yes      | Name of the System note (e.g., `CRM`, `ERP`, `Cloud Platform`) |
 | `level`       | No       | `context` (L1, default), `container` (L2), or `both`    |
 
 ### Examples
@@ -31,7 +31,7 @@ Use `/c4-diagram` when you need to generate C4 architecture diagrams in Mermaid 
 ```
 /c4-diagram CRM
 /c4-diagram ERP container
-/c4-diagram SAP BTP both
+/c4-diagram Cloud Platform both
 ```
 
 ## Instructions

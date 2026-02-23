@@ -36,7 +36,7 @@ VALID_HIERARCHIES = {
         # Platforms & Cloud
         "aws", "azure", "sap", "btp", "ui5", "datasphere", "s4hana",
         # Data & Integration
-        "kafka", "snowflake", "mq", "api", "kong", "axway",
+        "kafka", "snowflake", "mq", "api", "kong",
         # AI & ML
         "bedrock", "langchain", "ai", "ml",
         # Databases
@@ -44,7 +44,7 @@ VALID_HIERARCHIES = {
         # Infrastructure
         "kubernetes", "docker", "terraform", "lambda",
         # Applications
-        "amos", "ews", "mro-software", "saas",
+        "ews", "mro-software", "saas",
         # Languages/Frameworks
         "python", "javascript", "typescript", "java", "go", "rust"
     ],

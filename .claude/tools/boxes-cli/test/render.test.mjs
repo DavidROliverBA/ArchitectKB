@@ -62,13 +62,13 @@ describe('renderSvg', () => {
   });
 
   it('positions NORTH port labels above port with middle anchor', async () => {
-    const svg = await renderFixture('odie-olympus.boxes.yaml');
+    const svg = await renderFixture('sample-olympus.boxes.yaml');
     const northPortPattern = /text-anchor="middle"[^>]*>Raw Data In</;
     assert.ok(northPortPattern.test(svg), 'NORTH port label should use text-anchor="middle"');
   });
 
   it('positions SOUTH port labels below port with middle anchor', async () => {
-    const svg = await renderFixture('odie-olympus.boxes.yaml');
+    const svg = await renderFixture('sample-olympus.boxes.yaml');
     const southPortPattern = /text-anchor="middle"[^>]*>Curated Out</;
     assert.ok(southPortPattern.test(svg), 'SOUTH port label should use text-anchor="middle"');
   });

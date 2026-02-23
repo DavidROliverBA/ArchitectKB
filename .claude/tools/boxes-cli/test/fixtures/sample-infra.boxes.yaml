@@ -14,11 +14,11 @@ boxes:
     style: { color: "#5DADE2", background: "#F0F7FC" }
     children:
       AWS Account:
-        label: "AWS Account: odie-production\neu-west-2 (London)"
+        label: "AWS Account: datahub-production\neu-west-2 (London)"
         style: { color: "#FF9900", background: "#FFF8EE" }
         children:
           VPC:
-            label: "VPC: odie-production-vpc"
+            label: "VPC: datahub-production-vpc"
             style: { color: "#FFB84D", background: "#FFFDF5" }
             children:
               Private Data:
@@ -26,10 +26,10 @@ boxes:
                 style: { color: "#FFB84D" }
                 children:
                   S3 Raw:
-                    label: "S3\nodie-raw-zone\n(Landing)"
+                    label: "S3\ndatahub-raw-zone\n(Landing)"
                     style: { color: "#FF9900", background: "#FFF3E0" }
                   S3 Bronze:
-                    label: "S3\nodie-bronze\n(150 TB+)"
+                    label: "S3\ndatahub-bronze\n(150 TB+)"
                     style: { color: "#FF9900", background: "#FFF3E0" }
 
               Private Compute:

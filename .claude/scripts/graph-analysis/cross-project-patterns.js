@@ -124,8 +124,8 @@ function resolveProjects(node) {
 
 /**
  * Normalise project name to a consistent slug.
- * "Project - Axia" -> "axia"
- * "Project - 777-X EIS Programme" -> "777x" (maps to tag form)
+ * "Project - Axia" -> "modernisation"
+ * "Project - 777-X EIS Programme" -> "platform-x" (maps to tag form)
  */
 function normaliseProjectName(name) {
   // Strip "Project - " prefix
@@ -133,15 +133,15 @@ function normaliseProjectName(name) {
 
   // Known mappings from full name to tag slug
   const SLUG_MAP = {
-    "777-X EIS Programme": "777x",
-    "BNextGen GBST CSCT": "777x",
-    BNextGen: "777x",
-    Axia: "axia",
-    Bravo: "axia",
-    Alpha: "caerus",
-    "DataHub Programme": "odie",
-    DataHub: "odie",
-    "SmartDispatch": "dispax-ai",
+    "777-X EIS Programme": "platform-x",
+    "BNextGen GBST CSCT": "platform-x",
+    BNextGen: "platform-x",
+    Axia: "modernisation",
+    Bravo: "modernisation",
+    Alpha: "integration",
+    "DataHub Programme": "datahub",
+    DataHub: "datahub",
+    "SmartDispatch": "ai-assistant",
     "MaintPro": "mro-pro",
     "ToolVendor Tooling - v9 Upgrade": "snapon",
     "PLM System X SaaS": "siemens-teamcenter",
