@@ -34,20 +34,20 @@ describe('Full pipeline integration', () => {
     assert.ok(svg.includes('data flow'), 'Missing edge label');
   });
 
-  it('renders ODIE.Context end-to-end', async () => {
-    const { model, svg, png } = await fullPipeline('odie-context.boxes.yaml');
-    assert.equal(model.diagram, 'ODIE.Context');
-    assert.ok(svg.includes('ODIE'), 'Missing ODIE box');
-    assert.ok(svg.includes('SAP'), 'Missing source system');
+  it('renders sample context end-to-end', async () => {
+    const { model, svg, png } = await fullPipeline('sample-context.boxes.yaml');
+    assert.equal(model.diagram, 'AlertHub.Context');
+    assert.ok(svg.includes('AlertHub'), 'Missing AlertHub box');
+    assert.ok(svg.includes('ERP'), 'Missing source system');
     assert.ok(svg.includes('A-CAP'), 'Missing consumer');
     assert.ok(png.length > 1000, 'PNG suspiciously small');
   });
 
-  it('renders ODIE.System end-to-end', async () => {
-    const { model, svg, png } = await fullPipeline('odie-system.boxes.yaml');
-    assert.equal(model.diagram, 'ODIE.System');
-    assert.ok(svg.includes('Mercury'), 'Missing Mercury container');
-    assert.ok(svg.includes('Olympus'), 'Missing Olympus container');
+  it('renders sample system end-to-end', async () => {
+    const { model, svg, png } = await fullPipeline('sample-system.boxes.yaml');
+    assert.equal(model.diagram, 'AlertHub.System');
+    assert.ok(svg.includes('StreamLine'), 'Missing StreamLine container');
+    assert.ok(svg.includes('CloudStack'), 'Missing CloudStack container');
     assert.ok(svg.includes('API Layer') || svg.includes('API_Layer'), 'Missing API Layer');
     assert.ok(png.length > 1000, 'PNG suspiciously small');
   });

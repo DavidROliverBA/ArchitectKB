@@ -72,12 +72,15 @@ if [[ "$PROMPT_LOWER" =~ /summarize ]]; then
 fi
 
 # Organisation-related queries (case-sensitive for proper nouns)
-if [[ "$PROMPT" =~ Boeing|SAP|Collins|Axway|Swiss-AS ]]; then
+# Add your organisation names here for auto-context loading
+# Example: if [[ "$PROMPT" =~ VendorA|VendorB|PartnerC ]]; then
+if [[ "$PROMPT" =~ PLACEHOLDER_ORG_PATTERN ]]; then
     queue_context "organisations.md"
 fi
 
-# Acronym detection - common BA/aviation terms (case-sensitive)
-if [[ "$PROMPT" =~ ODIE|EWS|BTP|CMS|EFB|CAMO|MRO|AMOS|AXIA ]]; then
+# Acronym detection - common domain-specific terms (case-sensitive)
+# Add your domain acronyms here for auto-context loading
+if [[ "$PROMPT" =~ PLACEHOLDER_ACRONYM_PATTERN ]]; then
     queue_context "acronyms.md"
 fi
 
