@@ -124,7 +124,7 @@ function resolveProjects(node) {
 
 /**
  * Normalise project name to a consistent slug.
- * "Project - Axia" -> "modernisation"
+ * "Project - Modernisation" -> "modernisation"
  * "Project - 777-X EIS Programme" -> "platform-x" (maps to tag form)
  */
 function normaliseProjectName(name) {
@@ -136,7 +136,7 @@ function normaliseProjectName(name) {
     "777-X EIS Programme": "platform-x",
     "BNextGen GBST CSCT": "platform-x",
     BNextGen: "platform-x",
-    Axia: "modernisation",
+    "Modernisation": "modernisation",
     Bravo: "modernisation",
     Alpha: "integration",
     "DataHub Programme": "datahub",

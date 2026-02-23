@@ -531,9 +531,9 @@ Options:
 
 Examples:
   node scripts/semantic-search.js "kafka integration patterns"
-  node scripts/semantic-search.js "dispax safety" --expand
+  node scripts/semantic-search.js "data pipeline safety" --expand
   node scripts/semantic-search.js "machine learning safety" --type Adr
-  node scripts/semantic-search.js "dispax ai" --obsidian
+  node scripts/semantic-search.js "assistant platform" --obsidian
   node scripts/semantic-search.js "data architecture" --limit 20
 
 Build neighbors index first for --expand:
