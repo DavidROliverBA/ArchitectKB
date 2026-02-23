@@ -10,6 +10,7 @@ Exit Codes:
 """
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -28,9 +29,8 @@ VALID_HIERARCHIES = {
         "platform", "identity", "analytics", "compliance", "infrastructure"
     ],
     "project": [
-        "axia", "caerus", "dispax-ai", "cyber-uplift", "odie",
-        "mro-pro", "777x", "rfid-scanners", "ecp", "snapon", "datasphere"
-        # Note: New projects can be added - this list is not exhaustive
+        # Add your project slugs here — this list is not exhaustive
+        # e.g. "my-project", "data-migration", "platform-upgrade"
     ],
     "technology": [
         # Platforms & Cloud
@@ -237,7 +237,7 @@ def main():
     # Hooks fire for ALL Edit/Write operations regardless of target repo.
     # When working cross-repo (e.g. /tmp/claude/), skip silently to avoid
     # spurious tag warnings on non-vault files.
-    VAULT_ROOT = "."
+    VAULT_ROOT = os.environ.get("CLAUDE_PROJECT_DIR", os.getcwd())
     if not file_path.startswith(VAULT_ROOT):
         sys.exit(0)
 

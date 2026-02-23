@@ -11,7 +11,7 @@ set -e
 
 # Absolute path required — hooks fire regardless of CWD, and relative paths
 # fail with "No such file or directory" during cross-repo work.
-VAULT_ROOT="."
+VAULT_ROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 CONTEXT_DIR="$VAULT_ROOT/.claude/context"
 CONTEXTS_TO_LOAD=()
 
