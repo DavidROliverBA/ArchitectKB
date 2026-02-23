@@ -106,9 +106,22 @@ def check_link_exists(link_target: str, vault_notes: set[str]) -> bool:
     if link_target in vault_notes:
         return True
 
-    # Try with common prefixes removed/added
-    prefixes = ["Project - ", "Page - ", "ADR - ", "Meeting - ", "Task - ",
-                "Weblink - ", "Person - ", "Organisation - "]
+    # Try with common prefixes removed/added (all ontology types)
+    prefixes = [
+        # Entities
+        "System - ", "Organisation - ", "DataAsset - ", "Location - ", "Department - ",
+        # Person has NO prefix (lives in People/ as {{Name}}.md)
+        # Nodes
+        "Concept - ", "Pattern - ", "Capability - ", "Theme - ", "Weblink - ",
+        "Book - ", "Research - ", "YouTube - ", "Threat - ", "Principle - ",
+        "Framework - ", "Tool - ", "Article - ", "Reference - ", "HLD - ", "LLD - ",
+        # Events
+        "Meeting - ", "Project - ", "Task - ", "ADR - ", "Email - ", "Trip - ",
+        "Daily - ", "Incubator - ", "Workstream - ", "Forum - ", "FormSubmission - ",
+        "Objective - ",
+        # Navigation
+        "_MOC - ", "_Dashboard - ", "Query - ", "ArchModel - ",
+    ]
 
     # If link has a prefix, try without
     for prefix in prefixes:
@@ -139,9 +152,15 @@ def check_link_exists(link_target: str, vault_notes: set[str]) -> bool:
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        sys.exit(0)
+    except Exception:
         sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
@@ -154,8 +173,16 @@ def main():
     if not file_path or not file_path.endswith(".md"):
         sys.exit(0)
 
+    # Only validate files inside the Obsidian vault.
+    # Hooks fire for ALL Edit/Write operations regardless of target repo.
+    # When working cross-repo (e.g. /tmp/claude/), skip silently to avoid
+    # spurious broken-link warnings on non-vault files.
+    VAULT_ROOT = os.environ.get("CLAUDE_PROJECT_DIR", os.getcwd())
+    if not file_path.startswith(VAULT_ROOT):
+        sys.exit(0)
+
     # Skip template files
-    skip_paths = ["+Templates/", ".obsidian/", "node_modules/"]
+    skip_paths = ["Templates/", ".obsidian/", "node_modules/"]
     if any(skip in file_path for skip in skip_paths):
         sys.exit(0)
 
@@ -191,23 +218,26 @@ def main():
         if not check_link_exists(link_target, vault_notes):
             warnings.append(f"Frontmatter: [[{link_target}]]")
 
-    # Output
+    # Output using additionalContext JSON format
     if broken_links or warnings:
-        print(f"🔗 Wiki-link check for {Path(file_path).name}:")
+        output_text = f"Wiki-link check for {Path(file_path).name}:\n"
 
         if broken_links:
-            print(f"   ⚠️  Broken links found ({len(broken_links)}):")
+            output_text += f"   Broken links found ({len(broken_links)}):\n"
             for link in broken_links[:5]:  # Limit output
-                print(f"      • {link}")
+                output_text += f"      - {link}\n"
             if len(broken_links) > 5:
-                print(f"      • ... and {len(broken_links) - 5} more")
+                output_text += f"      - ... and {len(broken_links) - 5} more\n"
 
         if warnings:
-            print(f"   ⚠️  Broken frontmatter links:")
+            output_text += "   Broken frontmatter links:\n"
             for warning in warnings[:3]:
-                print(f"      • {warning}")
+                output_text += f"      - {warning}\n"
 
-        print("   💡 Create missing notes or check spelling")
+        output_text += "   Create missing notes or check spelling"
+
+        output = {"additionalContext": output_text}
+        print(json.dumps(output))
 
     # Always exit 0 - validation is non-blocking
     sys.exit(0)

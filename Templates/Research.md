@@ -1,9 +1,8 @@
 ---
 type: Research
-pillar: node
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags:
   - activity/research
 aliases: []
@@ -17,18 +16,10 @@ question: null
 incubatorIdea: null # "[[Incubator - Origin Idea]]"
 researchPeriod: null
 
-# Quality Indicators
 summary: null
-confidence: medium
-freshness: current
-source: synthesis
-verified: false
-reviewed: <% tp.date.now("YYYY-MM-DD") %>
-keywords: []
+description: What is the key question this research addresses?
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
 relatedTo: []
 ---
 

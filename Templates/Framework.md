@@ -1,9 +1,8 @@
 ---
 type: Framework
-pillar: node
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 aliases: []
 
@@ -23,19 +22,10 @@ whenToUse: null
 limitations: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 relatedFrameworks: []
 
-# Quality
-description: null
 summary: null
-confidence: high
-freshness: current
-source: secondary
-verified: false
-reviewed: null
-keywords: []
 ---
 
 # <% tp.file.title %>

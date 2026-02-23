@@ -1,9 +1,8 @@
 ---
 type: Project
-pillar: event
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 status: active # active | paused | completed
 priority: medium # high | medium | low
@@ -16,15 +15,9 @@ transformationScope: null # enterprise | department | team | application
 aiInvolved: false
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality
 summary: null
-confidence: medium
-freshness: current
-verified: false
-reviewed: null
 ---
 
 # <% tp.file.title %>

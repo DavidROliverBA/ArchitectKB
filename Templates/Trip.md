@@ -1,10 +1,10 @@
 ---
 type: Trip
-pillar: event
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 status: idea # idea | planning | booked | completed | cancelled
 tripType: null # holiday | city-break | adventure | family-visit | business
 destination: null
@@ -14,8 +14,7 @@ endDate: null
 travellers: []
 budget: null
 currency: GBP # GBP | EUR | USD
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 ---
 
 # <% tp.file.title %>

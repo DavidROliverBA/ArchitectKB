@@ -1,25 +1,16 @@
 ---
 type: Concept
-pillar: node
+conceptType: null # concept | principle | capability | theme
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
-description: null
 aliases: []
-keywords: []
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 
-# Quality
 summary: null
-confidence: medium
-freshness: current
-source: primary # primary | secondary | synthesis | external
-verified: false
-reviewed: null
 ---
 
 # <% tp.file.title %>

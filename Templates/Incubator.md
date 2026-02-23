@@ -1,26 +1,20 @@
-<%\*
-const title = await tp.system.prompt("Idea title");
-await tp.file.move("Incubator/Incubator - " + title);
-\_%>
-
 ---
-
 type: Incubator
-pillar: event
-title: <% title %>
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
-tags: []
+title: null
+description: What problem or opportunity does this idea address?
 status: seed # seed | exploring | validated | accepted | rejected
 domain: []
 outcome: null
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
+tags:
+  - activity/research
+summary: null
 spawnedNodes: []
-nodeRelationships: []
-entityRelationships: []
-
+relatedTo: []
 ---
 
-# <% title %>
+# <% tp.file.title %>
 
 ## Problem Statement
 
@@ -42,6 +36,8 @@ Early thinking, hypotheses, or directions to explore.
 
 ## Related
 
-- ***
+-
 
-  _See [[Incubator - MOC]] for all ideas | [[+Incubator/README|Incubator Guide]]_
+---
+
+*See [[_MOC - Incubator]] for all ideas | [[Pattern - Incubator Guide]]*

@@ -1,23 +1,22 @@
 ---
 type: Department
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 aliases: []
 
 # Structure
 parentDepartment: null # "[[Department - Parent]]"
-leader: null # "[[Person - Head]]"
+leader: null # "[[Head]]"
 functions: []
-organisation: null # "[[Organisation - X]]"
+organisation: null # "[[Organisation - BA]]"
 headcount: null
 location: null # "[[Location - X]]"
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 ---
 
 # <% tp.file.title %>

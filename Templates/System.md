@@ -1,17 +1,18 @@
 ---
 type: System
-pillar: entity
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+description: Brief description of what this system does, its purpose in the enterprise, and key characteristics.
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: [type/system]
+summary: null
 
 # System Identity
 systemId: null
 aliases: []
 apmNumber: null # APM0001234
 systemType: null # application | platform | database | middleware | saas | infrastructure | interface
-owner: null # "[[Person - X]]"
+owner: null # "[[X]]"
 status: null # active | planned | deprecated | retired
 criticality: null # critical | high | medium | low
 hosting: null # on-prem | aws | azure | saas | external | hybrid
@@ -36,17 +37,10 @@ gdprApplicable: false
 piiHandled: false
 
 # Integrations
-connectsTo: [] # ["[[System - Y]]"]
+connectsTo: ["[[System - Y]]"]
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
-
-# Quality Indicators
-confidence: null # high | medium | low
-freshness: null # current | recent | stale
-verified: false
-reviewed: null
+relatedTo: []
 
 # C4 Architecture Data (populate to enable /c4-diagram generation)
 c4:

@@ -1,9 +1,9 @@
 ---
 type: ArchModel
-pillar: view
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+description: Describe the purpose of this diagram view - what questions does it answer?
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 
 # View Definition
 viewType: context # context | container | landscape | data-flow
@@ -38,15 +38,10 @@ lastGenerated: null
 generatedBy: null
 diagramHash: null
 
-# Quality Indicators
-confidence: medium
-freshness: current
-verified: false
-reviewed: null
-
 tags:
   - type/diagram
   - activity/architecture
+summary: null
 ---
 
 # <% tp.file.title %>

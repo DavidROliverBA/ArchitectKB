@@ -15,8 +15,15 @@ import json
 import re
 import sys
 
-# Secret patterns - same as secret-detection.py for consistency
+# Secret patterns - synced with secret-detection.py
 SECRET_PATTERNS = [
+    # Explicit key-value patterns
+    (r"(?i)\b(password|passwd|pwd)\s*[:=]\s*\S+", "password"),
+    (r"(?i)\b(secret|api_?secret)\s*[:=]\s*\S+", "secret"),
+    (r"(?i)\b(api_?key|apikey)\s*[:=]\s*\S+", "API key"),
+    (r"(?i)\b(token|auth_?token|access_?token)\s*[:=]\s*\S+", "token"),
+    (r"(?i)\b(private_?key)\s*[:=]\s*\S+", "private key"),
+
     # Common API key formats
     (r"sk-[a-zA-Z0-9]{20,}", "OpenAI API key"),
     (r"sk-ant-[a-zA-Z0-9-]{20,}", "Anthropic API key"),
@@ -24,12 +31,16 @@ SECRET_PATTERNS = [
     (r"gho_[a-zA-Z0-9]{36}", "GitHub OAuth token"),
     (r"ghs_[a-zA-Z0-9]{36}", "GitHub server token"),
     (r"AKIA[0-9A-Z]{16}", "AWS access key ID"),
+    (r"(?i)aws_secret_access_key\s*[:=]\s*\S+", "AWS secret key"),
 
     # Notion tokens
     (r"ntn_[a-zA-Z0-9]{40,}", "Notion integration token"),
     (r"secret_[a-zA-Z0-9]{40,}", "Notion internal token"),
 
     # Atlassian tokens
+    (r"(?i)atlassian[-_]?token\s*[:=]\s*\S+", "Atlassian token"),
+    (r"(?i)confluence[-_]?token\s*[:=]\s*\S+", "Confluence token"),
+    (r"(?i)jira[-_]?token\s*[:=]\s*\S+", "Jira token"),
     (r"ATATT[a-zA-Z0-9]{20,}", "Atlassian API token"),
 
     # Slack tokens
@@ -38,9 +49,18 @@ SECRET_PATTERNS = [
     # Google API keys
     (r"AIza[0-9A-Za-z\-_]{35}", "Google API key"),
 
+    # Bearer tokens
+    (r"(?i)bearer\s+[a-zA-Z0-9\-_\.]{20,}", "Bearer token"),
+
+    # Connection strings
+    (r"(?i)(mongodb|postgres|mysql|redis)://[^\s]+:[^\s]+@", "database connection string"),
+
     # Private keys (PEM format headers)
     (r"-----BEGIN\s+(RSA\s+)?PRIVATE\s+KEY-----", "private key (PEM)"),
     (r"-----BEGIN\s+OPENSSH\s+PRIVATE\s+KEY-----", "SSH private key"),
+
+    # Generic high-entropy credentials
+    (r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"]?[A-Za-z0-9+/=]{32,}['\"]?", "high-entropy credential"),
 ]
 
 # Files to skip scanning (legitimate security tool files, documentation, etc.)
@@ -54,6 +74,8 @@ SKIP_PATTERNS = [
     r"vault-conventions\.md$",
     r"\.claude/rules/.*\.md$",  # Rule documentation
     r"\.claude/skills/.*\.md$",  # Skill documentation
+    r"docs/plans/.*\.md$",  # Implementation plans contain code examples, not secrets
+    r"Pattern - NFR Sample.*\.md$",  # NFR samples reference AWS Secrets Manager, not actual secrets
 ]
 
 
@@ -76,11 +98,16 @@ def check_content_for_secrets(content: str) -> list[tuple[str, int]]:
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
-        print("Failed to parse input JSON", file=sys.stderr)
-        sys.exit(1)
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        sys.exit(0)
+    except Exception:
+        sys.exit(0)
 
     tool_name = input_data.get("tool_name", "")
     tool_input = input_data.get("tool_input", {})

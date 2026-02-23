@@ -1,10 +1,10 @@
 ---
-type: Book
-pillar: node
+type: Reference
+referenceType: book
 title: null
 aliases: []
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
 
 # Book Metadata
@@ -38,16 +38,9 @@ amazonUrl: null
 attachedPdf: null
 
 # Relationships
-nodeRelationships: []
-entityRelationships: []
+relatedTo: []
 relatedBooks: []
 recommendedBy: null
-
-# Quality
-confidence: medium
-freshness: current
-verified: false
-reviewed: null
 ---
 
 # <% tp.file.title %>

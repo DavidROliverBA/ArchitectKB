@@ -118,7 +118,7 @@ See **[[Concept - Vault Ontology]]** for the full model.
 
 **Example:**
 
-- ❌ Bad: "Create ADRs following the Acme Corp ADR process with Tom Phillips as approver"
+- ❌ Bad: "Create ADRs following the Acme Corp ADR process with John Smith as approver"
 - ✅ Good: "Create ADRs following your organisation's governance process, adding your required approvers"
 
 ## Directory Structure

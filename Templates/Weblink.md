@@ -1,16 +1,16 @@
 ---
-type: Weblink
-pillar: node
+type: Reference
+referenceType: weblink
 title: null
-created: <% tp.date.now("YYYY-MM-DD") %>
-modified: <% tp.date.now("YYYY-MM-DD") %>
+created: '<% tp.date.now("YYYY-MM-DD") %>'
+modified: '<% tp.date.now("YYYY-MM-DD") %>'
 tags: []
+summary: null
 url: null
 domain: null
 createdAt: null
-description: null
-nodeRelationships: []
-entityRelationships: []
+description: "- URL:"
+relatedTo: []
 ---
 
 # <% tp.file.title %>

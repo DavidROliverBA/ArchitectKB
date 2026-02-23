@@ -76,15 +76,27 @@ def check_for_secrets(prompt: str) -> list[tuple[str, str]]:
 
 
 def main():
+    # Startup guard: exit gracefully if no valid input
+    # Always output {} to avoid grey box in Claude Code UI
     try:
-        input_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
-        print("Failed to parse input JSON", file=sys.stderr)
-        sys.exit(1)
+        raw_input = sys.stdin.read()
+        if not raw_input or not raw_input.strip():
+            print('{}')
+            sys.exit(0)
+        input_data = json.loads(raw_input)
+    except (json.JSONDecodeError, ValueError, EOFError):
+        # Exit gracefully during startup or invalid input
+        print('{}')
+        sys.exit(0)
+    except Exception:
+        # Any other error - exit gracefully
+        print('{}')
+        sys.exit(0)
 
     prompt = input_data.get("userPrompt", "")
 
     if not prompt:
+        print('{}')
         sys.exit(0)
 
     findings = check_for_secrets(prompt)
@@ -103,6 +115,7 @@ def main():
         sys.exit(0)
 
     # No secrets found - allow the prompt
+    print('{}')
     sys.exit(0)
 
 
