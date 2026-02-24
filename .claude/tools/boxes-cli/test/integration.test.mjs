@@ -39,7 +39,7 @@ describe('Full pipeline integration', () => {
     assert.equal(model.diagram, 'AlertHub.Context');
     assert.ok(svg.includes('AlertHub'), 'Missing AlertHub box');
     assert.ok(svg.includes('ERP'), 'Missing source system');
-    assert.ok(svg.includes('A-CAP'), 'Missing consumer');
+    assert.ok(svg.includes('AnalyticsCap'), 'Missing consumer');
     assert.ok(png.length > 1000, 'PNG suspiciously small');
   });
 
