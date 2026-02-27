@@ -1,3 +1,12 @@
+---
+name: canvas
+context: fork
+skill: canvas
+model: opus
+description: Create and edit Obsidian Canvas files for architecture visualization
+tags: [activity/architecture, domain/tooling, type/diagram]
+---
+
 # /canvas Skill
 
 Create and edit Obsidian Canvas files (.canvas JSON format) for architecture visualization.
@@ -171,12 +180,12 @@ Use `text` property for all node content. Use `label` property for edge labels o
 
 All of these use correct JSON Canvas format:
 
-- `[[Canvas - C4 Context Diagram]]` - 9 nodes, 9 edges
-- `[[Canvas - System Landscape]]` - 18 nodes, 14 edges
-- `[[Canvas - Data Flow Diagram]]` - 22 nodes, 18 edges
-- `[[Canvas - AWS Architecture]]` - 24 nodes, 11 edges
-- `[[Canvas - Scenario Comparison]]` - 19 nodes, 2 edges
-- `[[Canvas - DataPlatform Data Flow]]` - 38 nodes, 68 edges
+- `Canvas - C4 Context Diagram` - 9 nodes, 9 edges
+- `Canvas - System Landscape` - 18 nodes, 14 edges
+- `Canvas - Data Flow Diagram` - 22 nodes, 18 edges
+- `Canvas - AWS Architecture` - 24 nodes, 11 edges
+- `Canvas - Scenario Comparison` - 19 nodes, 2 edges
+- `Canvas - Data Platform Data Flow` - 38 nodes, 68 edges
 
 All use `text` property for node content and `label` property for edge labels.
 

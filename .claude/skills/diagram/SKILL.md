@@ -1,3 +1,12 @@
+---
+name: diagram
+context: fork
+skill: diagram
+model: opus
+description: Generate architecture diagrams using Python diagrams library
+tags: [activity/architecture, domain/tooling, type/diagram]
+---
+
 # /diagram Skill
 
 Generate architecture diagrams in multiple formats (C4, System Landscape, Data Flow, AWS).
@@ -55,8 +64,14 @@ When invoked, the skill asks:
    - Icon set: simple, detailed, minimalist
    - Default: classic, simple
 
-5. **Output location** (optional)
-   - Save diagram in Canvas, Page, or embed in Note?
+5. **Output format** (optional)
+   - `python` — PNG via Python `diagrams` library (default for AWS/landscape types)
+   - `mermaid` — Inline Mermaid (default for C4 types; renders natively in Obsidian)
+   - `plantuml` — C4-PlantUML with directional hints (for complex C4 layouts, >15 elements)
+   - For C4 types (c4-context, c4-container, c4-component), suggest Mermaid or PlantUML and cross-reference `/c4-diagram` for data-driven generation from System note frontmatter
+
+6. **Output location** (optional)
+   - Save diagram in Canvas, Concept note, or embed in Note?
    - Default: Create standalone file
 
 ### Phase 2: Generate Diagram
@@ -75,34 +90,149 @@ with Diagram("System Landscape", show=False, direction="TB"):
     # Your architecture here
 ```
 
+#### Layout Science (Mermaid/PlantUML formats)
+
+When generating Mermaid or PlantUML output (not Python):
+
+- **Declaration order matters** — declare elements in reading order (left-to-right or top-to-bottom). The Dagre/Sugiyama algorithm positions elements based on declaration sequence.
+- **Tier-based ordering** — Actors → Presentation → API → Services → Data → External
+- **Edge crossing targets** — <5 for complex diagrams, 0 for simple ones. Crossings are the strongest predictor of comprehension difficulty (Purchase et al.).
+- **Use subgraphs/boundaries** to group related elements (Gestalt proximity principle).
+
+For C4-specific layout guidance including iterative refinement and PlantUML directional hints, see the `/c4-diagram` skill.
+
 ### Phase 3: Render and Save
 
 The skill:
 1. Executes the Python script
 2. Generates PNG image
 3. Creates markdown note with embedded diagram
-4. Saves to vault as Canvas or Page
+4. Saves to vault as Canvas or Concept note
 5. Links to related System/Integration notes
+
+### Phase 4: Validation Gate
+
+After rendering, assess the diagram against each criterion and output a structured validation table with concrete results:
+
+```markdown
+## Diagram Validation
+
+| Criterion | Target | Result | Status |
+|-----------|--------|--------|--------|
+| Edge crossings | <5 complex, 0 simple | {count} | {PASS/FAIL} |
+| Visual hierarchy | Boundary most prominent | {assessment} | {PASS/FAIL} |
+| Grouping | Related elements proximate | {assessment} | {PASS/FAIL} |
+| Flow direction | Consistent L-to-R or T-to-B | {direction} | {PASS/FAIL} |
+| Traceability | Can follow each line | {assessment} | {PASS/FAIL} |
+| Abstraction | One level per diagram | {level} | {PASS/FAIL} |
+```
+
+Replace `{count}`, `{assessment}`, `{direction}`, and `{level}` with the actual findings for the generated diagram. Every `/diagram` invocation must include this table in its output.
+
+#### How to Assess Each Criterion
+
+**CRITICAL: You must read the rendered PNG back using the Read tool and visually inspect it.** Do not assess criteria from the Python/Mermaid source alone — valid code frequently produces poor layouts.
+
+| Criterion                     | How to Check (from the rendered PNG)                                         |
+| ----------------------------- | ---------------------------------------------------------------------------- |
+| **Edge crossings**            | Trace each relationship path visually — do any lines cross confusingly?      |
+| **Visual hierarchy**          | Is the `Cluster` boundary immediately identifiable as the primary element?   |
+| **Grouping**                  | Do elements within the same `Cluster` appear as distinct tiers/layers?       |
+| **Flow direction**            | Does data flow follow the declared `direction` parameter (TB or LR)?         |
+| **Relationship traceability** | Can each `Edge` be followed from source to destination without confusion?    |
+| **Abstraction level**         | Does the diagram mix levels (e.g., database tables on a container diagram)?  |
+| **Edge label readability**    | Are all edge labels readable at normal zoom? Max ~30 characters per line.    |
+| **Path distinguishability**   | If multiple data flow paths exist, can you tell them apart at a glance?      |
+| **Node placement**            | Are related nodes close together? Are any nodes orphaned or visually adrift? |
+
+#### Iterative Refinement (Visual Review Loop)
+
+After rendering, **read the PNG back** using the Read tool and assess against every criterion above. If any criterion fails, revise and re-render. Repeat until all pass. Do not present to the user until the loop completes with all-PASS.
+
+Apply one or more of the following techniques for the Python `diagrams` library:
+
+- **Edge crossings / Traceability** — Reorder node declarations to match the tier hierarchy (Actors → Presentation → Services → Data → External). The Graphviz engine positions nodes based on declaration order, so aligning code order with visual order reduces crossings.
+- **Visual hierarchy / Grouping** — Add or restructure `Cluster` blocks to group related elements by tier or domain. Nested clusters create visual nesting that reinforces boundaries.
+- **Flow direction** — Change the `direction` parameter (`"TB"`, `"LR"`) or restructure `Edge` connections so the primary data flow follows a single consistent direction.
+- **Abstraction** — If mixed levels are detected, split the diagram into separate scripts at different abstraction levels (e.g., one context-level diagram and one container-level diagram).
+- **Edge label readability** — Shorten labels to ~30 chars per line max. Use 2-3 short lines rather than one long line. Increase `fontsize` on Edge styles if labels look small in the rendered PNG.
+- **Orphaned nodes** — If a node looks visually adrift, move it into a nearby Cluster or reposition it closer to its connected nodes.
+- **Path distinguishability** — When a diagram has 2+ distinct data flow paths, assign each a different `Edge` colour and `penwidth`. Use a legend or consistent naming (Path 1, Path 2) so the reader can follow each flow independently.
+
+### Design Rules
+
+These rules prevent common layout mistakes. Apply them **before** generating the first render:
+
+#### Box vs Label: What Deserves a Node?
+
+At **C4 context level**, only these should be boxes (nodes):
+- **Systems** (software systems, external services, SaaS platforms)
+- **Actors** (people, roles, user groups)
+- **Devices** (laptops, endpoints, physical hardware)
+
+These should be **edge labels or annotations**, NOT boxes:
+- Authentication mechanisms (IAM roles, OAuth flows, MFA)
+- Network paths (VPC endpoints, NAT gateways at context level, load balancers)
+- Protocols (HTTPS, SMB, SFTP)
+- Policies (firewall rules, SCPs, bucket policies)
+
+**Rule of thumb:** If you can't send it a request or log into it, it's probably a label.
+
+At **C4 container level**, network components (VPC endpoints, load balancers) and IAM roles may become boxes — the abstraction level determines what's a node.
+
+#### Choosing TB vs LR Direction
+
+| Layout pattern | Use `TB` (top-to-bottom) | Use `LR` (left-to-right) |
+|---------------|--------------------------|--------------------------|
+| Single linear flow | Yes | — |
+| Hierarchical (org chart, decision tree) | Yes | — |
+| Two+ parallel output paths | — | Yes — paths branch vertically |
+| Wide system landscape (many peers) | — | Yes |
+| Timeline or sequence | — | Yes |
+
+**Default remains TB**, but switch to LR when the diagram has branching paths — a tall narrow diagram with 10+ vertical nodes is hard to read.
+
+#### Cluster Nesting
+
+- **C4 context level:** Maximum 1 level of clusters (cloud boundaries). No nested sub-clusters — they add visual noise.
+- **C4 container level:** Up to 2 levels (cloud boundary → service group).
+- **C4 component level:** Up to 3 levels if needed.
+
+**Anti-pattern:** Don't create clusters for logical groupings that aren't real boundaries (e.g., "Path 1: Vendor Upload" is a data flow, not a deployment boundary).
+
+For Mermaid/PlantUML formats: reorder declarations to match data flow, add directional hints (`Rel_Down`, `Lay_Right`). See `/c4-diagram` skill for detailed refinement guidance.
+
+## Format Selection Guide
+
+| Scenario                               | Format         | Reason                                              |
+| -------------------------------------- | -------------- | --------------------------------------------------- |
+| AWS infrastructure, cloud icons        | `python`       | Rich icon library, professional PNG output           |
+| System landscape, presentations        | `python`       | Best for standalone images and Confluence            |
+| Quick C4 diagram in Obsidian           | `mermaid`      | Native rendering, Git-friendly, fast iteration       |
+| C4 from System note frontmatter        | `mermaid`      | Use `/c4-diagram` for data-driven generation         |
+| Complex C4 with persistent crossings   | `plantuml`     | Directional hints fix crossings Mermaid cannot       |
+| >15 elements in a C4 diagram           | `plantuml`     | Layout control prevents chaos at scale               |
+| Formal documentation, PDF export       | `plantuml`     | Automatic legends, consistent server-side rendering  |
 
 ## Examples
 
-### Example 1: C4 Context Diagram for DataPlatform
+### Example 1: C4 Context Diagram for Data Platform
 
 ```
 /diagram c4-context
 
-Scope: DataPlatform (Data Integration Platform)
-Systems: SAP, Kafka, Snowflake, Kong
+Scope: Data Platform (Data Integration Platform)
+Systems: ERP System, Kafka, Data Warehouse, API Gateway
 Color scheme: classic
-Output: Canvas - DataPlatform C4 Context.md
+Output: Canvas - Data Platform C4 Context.md
 ```
 
-**Result:** Creates `Canvas - DataPlatform C4 Context.md` with C4 Level 1 diagram showing:
+**Result:** Creates `Canvas - Data Platform C4 Context.md` with C4 Level 1 diagram showing:
 - External actors (users, partners)
-- DataPlatform as central system
-- SAP (source)
-- Snowflake (destination)
-- Kong (API access)
+- Data Platform as central system
+- ERP System (source)
+- Data Warehouse (destination)
+- API Gateway (API access)
 - Data flows between components
 
 ### Example 2: Data Flow Diagram for Real-time Integration
@@ -110,17 +240,17 @@ Output: Canvas - DataPlatform C4 Context.md
 ```
 /diagram data-flow
 
-Scope: SAP to Snowflake Real-time Integration
-Systems: SAP, Kafka, DataPlatform, Snowflake
+Scope: ERP to Data Warehouse Real-time Integration
+Systems: ERP System, Kafka, Data Platform, Data Warehouse
 Styling: vibrant
-Output: Page - SAP to Snowflake Real-time Flow.md
+Output: Concept - ERP to Data Warehouse Real-time Flow.md
 ```
 
-**Result:** Creates `Page - SAP to Snowflake Real-time Flow.md` showing:
-- SAP transaction generation
+**Result:** Creates `Concept - ERP to Data Warehouse Real-time Flow.md` showing:
+- ERP transaction generation
 - Kafka event publishing
-- DataPlatform stream processing
-- Snowflake real-time table updates
+- Data Platform stream processing
+- Data Warehouse real-time table updates
 - Data quality checks at each stage
 - Error handling paths
 
@@ -244,7 +374,7 @@ The skill generates:
    title: "System Landscape"
    diagramType: system-landscape
    scope: Enterprise
-   systems: [SAP, DataPlatform, Snowflake, Kong, AWS]
+   systems: [ERP, DataPlatform, DataWarehouse, APIGateway, AWS]
    latencyTarget: null
    refreshedDate: 2026-01-14
    ```
@@ -302,11 +432,11 @@ If diagram generation fails:
 
 These Canvas files were generated using the `/diagram` skill:
 
-- `[[Canvas - System Landscape]]` - All enterprise systems
-- `[[Canvas - C4 Context Diagram]]` - DataPlatform context
-- `[[Canvas - Data Flow Diagram]]` - SAP to Snowflake flow
-- `[[Canvas - AWS Architecture]]` - Production infrastructure
-- `[[Canvas - Scenario Comparison]]` - Scenario alternatives
+- `Canvas - System Landscape` - All enterprise systems
+- `Canvas - C4 Context Diagram` - Data Platform context
+- `Canvas - Data Flow Diagram` - ERP to Data Warehouse flow
+- `Canvas - AWS Architecture` - Production infrastructure
+- `Canvas - Scenario Comparison` - Scenario alternatives
 
 ## Next Steps
 
@@ -320,11 +450,18 @@ After creating a diagram:
 
 ## Related Skills
 
+- `/c4-diagram` - Data-driven C4 diagram generation from System note frontmatter (Mermaid, flowchart, or PlantUML)
+- `/diagram-review` - Analyse existing diagrams for readability and architecture quality
 - `/scenario-compare` - Compare diagrams for different scenarios
-- `/impact-analysis` - Analyze impacts of changes shown in diagram
+- `/impact-analysis` - Analyse impacts of changes shown in diagram
 - `/architecture-report` - Generate report with diagrams
 - `/system-landscape` - Alternative skill specifically for system maps
 - `/dependency-graph` - Focus on dependencies and risks
+
+## Further Reading
+
+- **`.claude/prompts/c4-mermaid-diagrams.md`** — Graph drawing theory, C4 templates, and Mermaid best practices
+- **`Reference - C4 Diagrams with AI`** — Research-backed guide to readable C4 diagrams
 
 ---
 
